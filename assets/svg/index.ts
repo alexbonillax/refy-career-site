@@ -11,3 +11,4 @@ export { default as job_item } from "./job-item.svg";
 export { default as social_referrals } from "./social-referrals.svg";
 export { default as es } from "./es.svg";
 export { default as en } from "./en.svg";
+export { default as refy_logo } from "./refy-logo.svg";

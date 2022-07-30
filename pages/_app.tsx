@@ -17,7 +17,6 @@ interface MyAppProps extends AppProps {
 
 function RefyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
   return (
     <CacheProvider value={emotionCache}>
       <Layout>

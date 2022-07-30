@@ -1,39 +1,211 @@
-$primary: #FE6680;
-$blue: #133273;
-$grey: #434F59;
-$grey-blue: #f5f6fa;
+$refy-black: #000;
+$refy-white: #fff;
+$refy-blue: #133273;
+$refy-grey: #929FAD;
+$refy-text-grey: #93939A;
+$refy-text-contrast-grey: #576064;
+$refy-text-soft-grey: #B3B3B8;
+$refy-grey-1000: #212121;
+$refy-grey-900: #3b3b3b;
+$refy-grey-800: #939FAD;
+$refy-grey-400: #a8adb3;
+$refy-grey-300: #93939A;
+$refy-grey-200: #cbcbcb;
+$refy-grey-100: #eeeef0;
+$refy-grey-50: #F3F3F5;
+$refy-grey-0: #FAFAFA;
+$refy-grey-blue: #f5f6fa;
 
-$black-100: #000000CC;
-$white: #fff;
+$refy-red-800-primary: #da0c1f;
+$refy-orange-800-primary: #ff9b00;
+$refy-green-800-primary: #64a844;
+$refy-grey-200-tertiary: #dfe2e6;
 
-.border {
+$refy-red: #F44336;
+$refy-orange: #FFAE37;
+$refy-green: #00AE64;
 
-  &-primary {
-    border-color: $primary;
+$refy-gold: #FFCA28;
+
+$refy-color-primary: #FE6680;
+$refy-color-secondary: #64B5F6;
+$refy-color-tertiary: lighten($refy-color-primary, 50%);
+$refy-color-primary-disabled: #df7894;
+$refy-color-danger: $refy-red-800-primary;
+$refy-color-caution: $refy-orange-800-primary;
+$refy-color-success: $refy-green-800-primary;
+$refy-color-disabled: $refy-grey-200-tertiary;
+
+$linkedin-color: #0e76a8;
+$twitter-color: #1DA1F2;
+$instagram-color: #833AB4;
+$facebook-color: #4267B2;
+$whatsapp-color: #25D366;
+$slack-color: #E01E5A;
+$microsoft-color: #00A1F1;
+
+.background-color {
+  &--primary {
+    background-color: $refy-color-primary;
+
+    &-important {
+      background-color: $refy-color-primary !important;
+    }
+
+    &-disabled {
+      /*background-color: $refy-color-primary-disabled;*/
+    }
   }
 
-}
+  &--secondary {
+    background-color: $refy-color-secondary;
 
-.bg {
-
-  &-primary {
-    background-color: $primary;
+    &-important {
+      background-color: $refy-color-secondary !important;
+    }
   }
 
-  &-grey-blue {
-    background-color: $grey-blue;
+  &--blur {
+    background-color: rgba($refy-white, 0.85);
+    backdrop-filter: blur(5px);
   }
 
-}
-
-.color {
-
-  &-primary {
-    color: $primary !important;
+  &--white {
+    background-color: $refy-white;
   }
 
-  &-white {
-    color: $white !important;
+  &--green {
+    background-color: $refy-green;
   }
+
+  &--blurr-green {
+    background-color: rgba($refy-green, 0.1);
+  }
+
+  &--orange {
+    background-color: $refy-orange;
+  }
+
+  &--blurr-orange {
+    background-color: rgba($refy-orange, 0.25);
+  }
+
+  &--red {
+    background-color: $refy-red;
+  }
+
+  &--blurr-red {
+    background-color: rgba($refy-red, 0.15);
+  }
+
+  &--grey {
+    background-color: $refy-grey;
+
+    &--0 {
+      background-color: $refy-grey-0 !important;
+    }
+
+    &--50 {
+      background-color: $refy-grey-50 !important;
+    }
+
+    &--100 {
+      background-color: $refy-grey-100;
+    }
+
+    &--blue {
+      background-color: $refy-grey-blue;
+    }
+  }
+
+  &--grey-hover {
+    &:hover {
+      background-color: $refy-grey-100;
+
+    }
+  }
+
+  &--dark {
+    background-color: $refy-grey-1000;
+  }
+
+  &--blurr-dark {
+    background-color: rgba($refy-grey-1000, 0.50);
+  }
+
+  &--blurr-soft-dark {
+    background-color: rgba($refy-grey-1000, 0.10);
+  }
+
+  &--social {
+
+    &-linkedin {
+      background-color: $linkedin-color;
+    }
+
+  }
+
+  &--status {
+
+    &--1 {
+      background-color: $refy-orange;
+
+      &-blurr {
+        background-color: rgba($refy-orange, 0.2);
+      }
+    }
+
+    &--2 {
+      background-color: $refy-color-primary;
+
+      &-blurr {
+        background-color: rgba($refy-color-primary, 0.2);
+      }
+    }
+
+    &--3 {
+      background-color: $refy-grey;
+
+      &-blurr {
+        background-color: rgba($refy-grey, 0.2);
+      }
+    }
+
+    &--4 {
+      background-color: $refy-green;
+
+      &-blurr {
+        background-color: rgba($refy-green, 0.2);
+      }
+    }
+
+    &--5 {
+      background-color: $refy-red;
+
+      &-blurr {
+        background-color: rgba($refy-red, 0.2);
+      }
+    }
+
+  }
+
+  &--gradient {
+
+    &-dark {
+      background: $refy-grey-1000;
+      background: linear-gradient(180deg, rgba($refy-grey-1000, 0) 0%, rgba($refy-grey-1000, 0.25) 70%, rgba($refy-grey-1000, 0.5) 85%, rgba($refy-grey-1000, 0.75) 100%);
+    }
+
+    &-secondary {
+      background: $refy-color-secondary;
+      background: linear-gradient(180deg, rgba($refy-color-secondary, 0) 0%, rgba($refy-color-secondary, 0.25) 70%, rgba($refy-color-secondary, 0.5) 85%, rgba($refy-color-secondary, 0.75) 100%);
+    }
+
+    &-red {
+      background: $refy-red;
+      background: linear-gradient(180deg, rgba($refy-red, 0) 0%, rgba($refy-red, 0.25) 70%, rgba($refy-red, 0.5) 85%, rgba($refy-red, 0.75) 100%);
+    }
+  }
+
 
 }

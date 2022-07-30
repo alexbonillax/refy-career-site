@@ -1,128 +1,660 @@
-.font {
-  white-space: pre-line;
+@import './fonts';
+@import './colors';
+@import './sizings';
 
-  &-big-title {
-    @extend .font;
-    font-family: $refy-nexa-font;
-    font-size: 2.875rem;
-    font-weight: bold;
-    line-height: 3.5rem;
-    color: $blue;
+$refy-font: NexaText;
+$refy-public-font: FiraSans;
+
+.underline {
+  text-decoration: underline;
+}
+
+.font {
+
+  &-public {
+    * {
+      font-family: $refy-public-font !important;
+    }
   }
 
-  &-big-title--mini {
-    @extend .font;
-    font-family: $refy-nexa-font;
-    font-size: 1.625rem;
-    font-weight: bold;
-    line-height: 2rem;
-    color: $blue;
+  &-bold {
+    font-weight: $font-bold !important;
+  }
+
+  &-normal {
+    font-weight: $font-normal !important;
+  }
+
+  &-line-through {
+    text-decoration: line-through;
+  }
+
+  &-shadow {
+    text-shadow: 1px 1px 2px $refy-grey-900;
+  }
+
+  &-big-title {
+    font-weight: $font-bold;
+    font-size: 32px;
+    line-height: 3rem;
+    color: $refy-blue;
+
+    &--46 {
+      font-size: 46px;
+      line-height: 3.5rem;
+    }
+
+    &--40 {
+      font-size: 40px;
+    }
+
+    &--26 {
+      font-size: 26px;
+      line-height: 2.25rem;
+    }
   }
 
   &-title {
-    @extend .font;
-    font-family: $refy-nexa-font;
-    font-size: 2.25rem;
-    line-height: 3rem;
-    font-weight: bold;
-    color: $blue;
+    font-weight: $font-medium;
+    font-size: 20px;
+    line-height: 2rem;
+    color: $refy-blue;
+
+    &--breadcrumb {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.5rem;
+      color: $refy-grey-1000;
+    }
+
+    &--tab {
+      font-size: 16px;
+      color: $refy-grey-1000;
+    }
+
+    &--menu-panel {
+      font-size: 15px;
+      font-weight: bold;
+      color: $refy-text-contrast-grey;
+    }
+
+  }
+
+  &-small-title {
+    font-weight: $font-medium;
+    font-size: 18px;
+    line-height: 2rem;
+    color: $refy-blue;
+  }
+
+  &-table {
+
+    &--title {
+      font-size: 16px;
+      font-weight: normal;
+      color: $refy-blue;
+    }
+
+    &--subtitle {
+      font-size: 15px;
+      font-weight: normal;
+      color: $refy-grey-1000;
+    }
+
   }
 
   &-subtitle {
-    @extend .font;
-    font-family: $refy-firasans-font;
-    font-weight: normal;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    color: $black-100;
-
-    span {
-      font-weight: bold;
-    }
-  }
-
-  &-text {
-    @extend .font;
-    font-family: $refy-firasans-font;
-    font-weight: normal;
-    font-size: 1.125rem;
+    font-weight: $font-medium;
+    font-size: 18px;
     line-height: 2rem;
-    color: $black-100;
+    color: $refy-text-grey;
 
-    span {
-      font-weight: bold;
+    &--light {
+      color: $refy-white;
+    }
+
+    &--breadcrumb {
+      font-weight: $font-medium;
+      font-size: 15px;
+      color: $refy-text-grey;
     }
   }
 
-  &-hint {
-    @extend .font;
-    font-family: $refy-firasans-font;
-    font-weight: normal;
-    font-size: 1rem;
+  &-header {
+    font-weight: $font-medium;
+    font-size: 16px;
     line-height: 1.5rem;
-    color: $grey;
-
-    &--small {
-      @extend .font;
-      font-size: 0.8rem;
-    }
-  }
-
-  &-navbar {
-    @extend .font;
-    font-family: $refy-firasans-font;
-    font-weight: bold;
-    font-size: 1rem;
-    line-height: 1.1875rem;
-    color: $black-100;
+    color: $refy-grey-900;
   }
 
   &-button {
-    &-toggle {
-      @extend .font;
-      font-family: $refy-firasans-font;
-      font-size: 1.125rem;
-      line-height: 3rem;
-      font-weight: normal;
-      color: $black-100;
+    font-family: $refy-font;
+  }
 
-      &-active {
-        color: $white;
-        font-weight: bold;
-      }
+  &-filter {
+    font-family: $refy-font;
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: $refy-text-grey;
+  }
+
+  &-hint {
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: $refy-text-grey;
+
+    &--error {
+      color: $refy-color-danger;
     }
   }
 
-  &-item {
-    @extend .font;
-    font-family: $refy-firasans-font;
-    color: $black-100;
+  &-value {
+    font-size: 13px;
+    line-height: 1rem;
+    color: $refy-text-grey;
+  }
 
-    &-big-title {
-      font-family: $refy-nexa-font;
-      font-size: 1.75rem;
-      line-height: 2.25rem;
-      font-weight: bold;
-      color: $blue;
+  &-multiline {
+    font-size: 15px;
+    line-height: 1.5rem;
+    color: $refy-text-grey;
+    overflow-wrap: break-word;
+    white-space: break-spaces;
+
+    &--2 {
+      min-height: 1.5rem * 2;
     }
+
+    span {
+      color: $refy-blue;
+      font-weight: $font-bold;
+    }
+  }
+
+  &-prose {
+    font-size: 20px;
+    line-height: 2rem;
+    font-weight: $font-normal;
+    color: $refy-grey-900;
+    overflow-wrap: break-word;
+    white-space: normal;
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      font-size: 24px;
+      line-height: 2.5rem;
+      color: $refy-grey-1000;
+      font-weight: $font-bold;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.625rem;
+      margin-block-start: 0;
+      margin-block-end: 0;
+
+      li {
+        padding-left: 0.375rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+
+        &:last-of-type {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 19px;
+
+      strong {
+        font-size: 22px;
+      }
+
+    }
+
+    &--condensed {
+      font-size: 16px;
+
+      strong {
+        font-size: 18px;
+      }
+
+    }
+
+  }
+
+  &-badge {
+    font-weight: $font-medium;
+    font-size: 14px;
+    line-height: 1.5rem;
+
+    &--condensed {
+      font-size: 12px;
+      line-height: 1.25rem;
+    }
+
+    &--primary {
+      color: $refy-color-primary;
+    }
+
+    &--white {
+      color: $refy-white;
+    }
+
+    &--black {
+      color: $refy-black;
+    }
+
+    &--dark {
+      color: $refy-grey-1000;
+    }
+
+    &--grey {
+      color: $refy-grey;
+    }
+
+    &--contrast-grey {
+      color: $refy-text-contrast-grey;
+    }
+
+    &--red {
+      color: $refy-red;
+    }
+  }
+
+  &-nav {
 
     &-title {
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-      font-weight: bold;
+
+      @media (max-width: $mobile-breakpoint) {
+        font-size: 10px;
+        line-height: 1.25rem;
+        color: $refy-grey;
+        transition: color 300ms ease-in-out;
+
+        &--active {
+          font-weight: $font-medium;
+          color: $refy-grey-1000;
+        }
+      }
+
+      @media (min-width: $mobile-breakpoint) {
+        font-size: 15px;
+        font-weight: $font-normal;
+        color: $refy-grey;
+
+        &--active {
+          color: $refy-white;
+        }
+      }
     }
 
-    &-text {
-      font-size: 1rem;
+    &-section {
+      font-size: 13px;
       line-height: 1.5rem;
+      font-weight: $font-medium;
+      color: $refy-grey;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
 
-      span, b {
-        font-weight: bold;
+  }
+
+  &-footer {
+
+    &-title {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 2.25rem;
+      color: $refy-grey-1000;
+    }
+
+    &-link {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 2.25rem;
+      color: $refy-text-contrast-grey !important;
+      cursor: pointer;
+
+      &:hover, &:active {
+        text-decoration: underline;
       }
     }
   }
 
-  &-icon {
+  &-app-logo {
+    font-size: 24px;
+    font-weight: $font-medium;
+    color: $refy-color-primary;
+  }
+
+  &--white {
+    color: $refy-white;
+  }
+
+  &--black {
+    color: $refy-black;
+  }
+
+  &--dark {
+    color: $refy-grey-1000;
+  }
+
+  &--grey {
+    color: $refy-grey-300;
+  }
+
+  &--red {
+    color: $refy-red;
+  }
+
+  &--ellipsis {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+
+    * {
+      white-space: inherit !important;
+      overflow: inherit !important;
+      text-overflow: inherit !important;
+    }
+  }
+
+}
+
+.icon-font {
+  font-size: 1rem;
+  color: $refy-grey-1000;
+
+  &--breadcrumb {
     font-size: 1rem;
+
+    &-white {
+      color: $refy-white;
+    }
+
+    &-filled-heart {
+      color: $refy-color-primary !important;
+
+      &:not(.prevent-animation) {
+        animation: bounce-in 300ms ease;
+      }
+    }
+
+    &-empty-heart {
+      &:not(.prevent-animation) {
+        animation: bounce-out 300ms ease;
+      }
+    }
+
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0.8);
+      }
+      80% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bounce-out {
+      0% {
+        transform: scale(0.8);
+      }
+      80% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &--breadcrumb-button {
+    font-size: 1rem;
+    color: $refy-grey-300;
+  }
+
+  &--bottom-sheet-header {
+    font-size: 1rem;
+  }
+
+  &--social {
+    color: $refy-grey;
+    font-size: 2rem;
+
+    &-small {
+      color: $refy-grey;
+      font-size: 1.25rem;
+    }
+  }
+
+  &--candidate-navbar {
+    font-size: 1.25rem;
+  }
+
+  &--navbar {
+    color: $refy-grey;
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 1.25rem;
+      height: 1.5rem;
+      align-items: flex-end;
+      transition: color 300ms ease-in-out;
+
+      &--active {
+        color: $refy-color-primary;
+      }
+    }
+
+    @media (min-width: $mobile-breakpoint) {
+      font-size: 1.25rem;
+      height: 1.5rem;
+
+      &--active {
+        color: $refy-white;
+      }
+    }
+
+  }
+
+  &--field-button {
+    font-size: 1rem;
+    color: $refy-grey;
+
+    &--big {
+      font-size: 1.25rem;
+    }
+  }
+
+  &--logo-company {
+    font-size: 1rem;
+    color: $refy-white;
+  }
+
+  &--verified {
+    font-size: 0.7rem;
+    color: $refy-white;
+  }
+
+  &--tiny {
+    font-size: 0.5rem;
+  }
+
+  &--check {
+    font-size: 2.5rem;
+    color: $refy-white;
+  }
+
+  &--score {
+    font-size: 1rem;
+    color: $refy-gold;
+  }
+
+  &--social {
+    font-size: 1.75rem;
+    color: $refy-grey;
+  }
+
+  &--searchbar-find {
+    font-size: 1.25rem;
+    color: $refy-blue;
+  }
+
+  &--job-searchbar {
+    font-size: 0.85rem;
+  }
+
+  &--empty-list {
+    font-size: 3rem;
+    color: $refy-grey;
+  }
+
+  &--help-column {
+    font-size: 2rem;
+    color: $refy-color-primary;
+  }
+
+  &--light {
+    color: $refy-white;
+  }
+
+  &--green {
+    color: $refy-green;
+  }
+
+  &--red {
+    color: $refy-red;
+  }
+
+  &--orange {
+    color: $refy-orange;
+  }
+
+  &--grey-300 {
+    color: $refy-grey-300;
+  }
+
+  &--grey {
+    color: $refy-grey;
+  }
+
+  &--blue {
+    color: $refy-blue;
+  }
+
+  &--plus {
+    font-size: 0.9rem;
+    color: $refy-grey;
+  }
+
+  &--option {
+    font-size: 1.25rem;
+  }
+
+  &--primary {
+    color: $refy-color-primary;
+  }
+
+  &--social {
+
+    &-linkedin {
+      color: $linkedin-color;
+    }
+
+    &-twitter {
+      color: $twitter-color;
+    }
+
+    &-instagram {
+      color: $instagram-color;
+    }
+
+    &-facebook {
+      color: $facebook-color;
+    }
+
+    &-whatsapp {
+      color: $whatsapp-color;
+    }
+
+    &-slack {
+      color: $slack-color;
+    }
+
+    &-microsoft {
+      color: $microsoft-color;
+    }
+
+  }
+
+}
+
+.button {
+  &-font--20 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &-font--18 {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  &-font--17 {
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  &-font--15 {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  &-font--13 {
+    font-size: 13px;
+  }
+
+  &--primary {
+    color: $refy-color-primary;
+  }
+
+  &--light {
+    color: $refy-white;
+  }
+
+  &--grey {
+    color: $refy-text-grey;
+  }
+
+  &--dark-grey {
+    color: $refy-text-contrast-grey;
+  }
+
+  &--dark {
+    color: $refy-grey-1000;
+  }
+
+  &--green {
+    color: $refy-green;
+  }
+
+  &--danger {
+    color: $refy-red;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  &:not(.font-selectable) {
+    /*-webkit-user-select: none; /* Safari */
+    /*-moz-user-select: none; /* Firefox */
+    /*-ms-user-select: none; /* IE10+/Edge */
+    /*user-select: none; /* Standard */
   }
 }

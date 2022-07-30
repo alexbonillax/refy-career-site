@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 @import './fonts';
+@import './components';
 @import './colors';
 @import './typography';
-
-@import './components/buttons';
+@import './resets';
+@import './spacings';
+@import './utils';
+@import './grid';
+@import './animations';
+@import './components';
 
 
 html,

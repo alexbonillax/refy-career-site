@@ -6,6 +6,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  images: {
+    domains: ["https://refy.s3-eu-west-1.amazonaws.com/images/xl"]
+  },
   i18n,
 }
 

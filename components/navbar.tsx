@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../assets/svg/logo-primary.svg";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/pro-solid-svg-icons";
 import { SwipeableDrawer } from "@material-ui/core";
 import React from "react";
+import { bucketM } from "../services/urls";
+import { logo } from "../assets/svg";
 
-const Navbar = () => {
+const Navbar = ({logoUrl}: {logoUrl: string}) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
@@ -41,26 +42,23 @@ const Navbar = () => {
   const LinksList = () => (
     <div className="flex items-center justify-between flex-1">
       <div className="flex items-center space-x-14">
-        <Link href="/#product">
-          <a className="font-navbar">{t("navbar.product")}</a>
+        <Link href="/teams">
+          <a className="font-navbar">{t("navbar.teams")}</a>
         </Link>
-        <Link href="/pricing">
-          <a className="font-navbar">{t("navbar.prices")}</a>
+        <Link href="/locations">
+          <a className="font-navbar">{t("navbar.locations")}</a>
         </Link>
-        <Link href="https://refy.substack.com">
-          <a className="font-navbar" target="_blank">{t("navbar.blog")}</a>
+        <Link href="/stories">
+          <a className="font-navbar">{t("navbar.stories")}</a>
+        </Link>
+        <Link href="/jobs">
+          <a className="font-navbar">{t("navbar.jobs")}</a>
         </Link>
       </div>
 
       <div className="flex items-center space-x-8">
-        <Link href="https://share-eu1.hsforms.com/1NRZaU4WaSm2oZo4-oEUVvwffi2u">
-          <a className="font-navbar" target="_blank">{t("navbar.demo")}</a>
-        </Link>
-        <a href="https://refyapp.com/signup-company" target="_blank" rel="noreferrer">
-          <button className="button-primary">{t("navbar.try")}</button>
-        </a>
-        <Link href="https://refyapp.com">
-          <a className="font-navbar">{t("navbar.login")}</a>
+        <Link href="/">
+          <a className="font-navbar" target="_blank">{t("navbar.company-site")}</a>
         </Link>
       </div>
     </div>
@@ -73,42 +71,35 @@ const Navbar = () => {
           <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.home")}</a>
         </Link>
         <div className="h-px w-full bg-gray-100"></div>
-        <Link href="/#product">
-          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.product")}</a>
+        <Link href="/teams">
+          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.teams")}</a>
         </Link>
         <div className="h-px w-full bg-gray-100"></div>
-        <Link href="/pricing">
-          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.prices")}</a>
+        <Link href="/locations">
+          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.locations")}</a>
         </Link>
         <div className="h-px w-full bg-gray-100"></div>
-        <Link href="https://refy.substack.com">
-          <a className="font-navbar" target="_blank" onClick={toggleDrawer("navbar", false)}>{t("navbar.blog")}</a>
+        <Link href="stories">
+          <a className="font-navbar" target="_blank" onClick={toggleDrawer("navbar", false)}>{t("navbar.stories")}</a>
+        </Link>
+        <Link href="Jobs">
+          <a className="font-navbar" target="_blank" onClick={toggleDrawer("navbar", false)}>{t("navbar.jobs")}</a>
         </Link>
       </div>
       <div className="flex w-full flex-col items-center space-y-5">
-        <Link href="https://share-eu1.hsforms.com/1NRZaU4WaSm2oZo4-oEUVvwffi2u">
-          <a className="font-navbar" target="_blank">{t("navbar.demo")}</a>
-        </Link>
-        <div className="h-px w-full bg-gray-100"></div>
-        <a href="https://refyapp.com/signup-company" target="_blank" rel="noreferrer">
-          <button className="button-primary">{t("navbar.try")}</button>
-        </a>
-        <div className="h-px w-full bg-gray-100"></div>
-        <Link href="https://refyapp.com">
-          <a className="font-navbar">{t("navbar.login")}</a>
+        <Link href="/">
+          <a className="font-navbar" target="_blank">{t("navbar.company-site")}</a>
         </Link>
       </div>
     </div>
   );
-
+  const srcLogo = logoUrl ? bucketM+logoUrl : logo;
   return (
-    <nav className={"fixed top-0 left-0 right-0 w-full bg-white z-20" + (boxShadow ? " drop-shadow-sm" : "")}>
-      <div className="max-w-7xl mx-auto flex h-20 items-center px-5 mobile:justify-between">
-        <div className="w-20 mr-16 h-full flex items-center">
-          <Link href="/">
-            <Image className="cursor-pointer" src={logo} alt="Refy Logo"></Image>
-          </Link>
-        </div>
+    <nav className={"fixed top-0 left-0 right-0 w-full bg-white z-20 background-color--white box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
+      <div className="max-w-7xl mx-auto flex h-9 items-center px-5 mobile:justify-between">
+        <Link href="/">
+            <a className="w-20 mr-16 h-full flex items-center" style={{ backgroundImage: srcLogo ? `url(${srcLogo}})` : srcLogo }}></a>
+        </Link>
 
         <div className="flex w-full mobile:hidden">
           <LinksList></LinksList>
