@@ -1,0 +1,281 @@
+@import './sizings';
+@import './colors';
+@import './mixins';
+
+$box-shadow-container: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+$box-shadow-container-soft: rgb(0 0 0 / 12%) 0px 6px 16px;
+
+.top-bar {
+  border-top: 1px solid $refy-grey-100;
+}
+
+.bottom-bar {
+  border-bottom: 1px solid $refy-grey-100;
+}
+
+.box-shadow-container {
+  box-shadow: $box-shadow-container;
+
+  &--soft {
+    box-shadow: $box-shadow-container-soft;
+  }
+
+  &--elevated {
+    box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+  }
+
+  &--card {
+    background-color: $refy-white;
+    border: 1px solid $refy-grey-100;
+    /*box-shadow: 0 1px 2px rgb(0 0 0 / 20%);*/
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+  }
+
+  &--paper {
+    background-color: $refy-white;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+  }
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+
+  &-none {
+    cursor: none;
+  }
+
+  &-not-allowed {
+    cursor: not-allowed;
+  }
+}
+
+.pointer-events {
+
+  &-none {
+    pointer-events: none;
+  }
+
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+.overflow {
+  &-scroll {
+    overflow: scroll;
+  }
+
+  &-none {
+    overflow: hidden;
+  }
+
+  &-auto {
+    overflow: auto;
+  }
+
+  &-hidden {
+    overflow: hidden;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.border {
+  border: 1px solid;
+
+  &--dashed {
+    border: 1px dashed;
+  }
+
+  &--right {
+    border-right: 1px solid;
+  }
+
+  &--2 {
+    border-width: 2px;
+  }
+
+  &--3 {
+    border-width: 3px;
+  }
+
+  &--primary {
+    border-color: $refy-color-primary;
+  }
+
+  &--grey-100 {
+    border-color: $refy-grey-100;
+  }
+
+  &--grey-200 {
+    border-color: $refy-grey-200;
+  }
+
+  &--grey {
+    border-color: $refy-grey;
+  }
+
+  &--green {
+    border-color: $refy-green;
+  }
+
+  &--red {
+    border-color: $refy-red;
+  }
+
+  &--orange {
+    border-color: $refy-orange;
+  }
+
+  &--white {
+    border-color: $refy-white;
+  }
+
+}
+
+.display {
+
+  &--none {
+    display: none;
+  }
+
+}
+
+.visibility {
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+}
+
+.left {
+
+  &-50 {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+/* background */
+
+.background {
+  &-center {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+/* border-radius */
+@include generate(br, border-radius);
+@include generate(btlr, border-top-left-radius);
+@include generate(btrr, border-top-right-radius);
+@include generate(bblr, border-bottom-left-radius);
+@include generate(bbrr, border-bottom-right-radius);
+
+.br-50 {
+  border-radius: 50%;
+}
+
+.h {
+
+  &-25 {
+    max-width: 100%;
+    height: 12.5rem;
+  }
+
+  &-30 {
+    max-width: 100%;
+    height: 15rem;
+  }
+
+  &-35 {
+    max-width: 100%;
+    height: 17.5rem;
+  }
+
+  &-40 {
+    max-width: 100%;
+    height: 20rem;
+  }
+
+  &-60 {
+    max-width: 100%;
+    height: 30rem;
+  }
+
+}
+
+.transition {
+
+  &-simple {
+
+    &--all {
+      transition: all 300ms ease;
+    }
+
+    &--background-color {
+      transition: background-color 300ms ease;
+    }
+
+  }
+
+}
+
+.object-fit {
+
+  &--cover {
+    object-fit: cover;
+  }
+}
+
+.active {
+
+  &--child {
+    transition: background-color 300ms ease-in-out;
+  }
+
+  &--light {
+
+    &:active {
+
+      .active--child {
+        background-color: rgba($refy-white, 0.40);
+      }
+
+    }
+
+  }
+
+}
+
+.aspect-ratio {
+
+  &-3-2 {
+    aspect-ratio: 3 / 2;
+  }
+
+}
+
+.prevent-animations {
+  animation-duration: 0s !important;
+  transition: all 0s !important;
+}

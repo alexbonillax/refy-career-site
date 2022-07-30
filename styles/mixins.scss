@@ -1,0 +1,72 @@
+@mixin generate($prefix, $property) {
+  // List of sizes to generate for each
+  $sizes: [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+  // Spacing to multiply the sizes by
+  $spacing: 1rem;
+
+  // Loop through all of the sizes(we use @for rather than @each, as we want access to the index)
+  @for $i from 1 through length($sizes) {
+    // Get the size for the current index
+    $size: nth($sizes, $i);
+
+    // Create the rule
+    .#{$prefix}-#{$i - 1} {
+      #{$property}: $spacing * $size;
+    }
+  }
+}
+
+@mixin generateDouble($prefix, $property1, $property2) {
+  // List of sizes to generate for each
+  $sizes: [0, .5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+  // Spacing to multiply the sizes by
+  $spacing: 1rem;
+
+  // Loop through all of the sizes(we use @for rather than @each, as we want access to the index)
+  @for $i from 1 through length($sizes) {
+    // Get the size for the current index
+    $size: nth($sizes, $i);
+
+    // Create the rule
+    .#{$prefix}-#{$i - 1} {
+      #{$property1}: $spacing * $size;
+      #{$property2}: $spacing * $size;
+    }
+  }
+}
+
+@mixin generateTransform($prefix, $property) {
+  // List of sizes to generate for each
+  $sizes: [0, .5, 1, 1.5, 2, 2.5, 3];
+  // Spacing to multiply the sizes by
+  $spacing: 1rem;
+
+  // Loop through all of the sizes(we use @for rather than @each, as we want access to the index)
+  @for $i from 1 through length($sizes) {
+    // Get the size for the current index
+    $size: nth($sizes, $i);
+
+    // Create the rule
+    .#{$prefix}-#{$i - 1} {
+      transform: #{$property}($spacing * $size);
+    }
+  }
+}
+
+@mixin generateResponsive($prefix, $property, $minWidth) {
+  // List of sizes to generate for each
+  $sizes: [0.25,0.5,0.75,1,1.5,2,2.5,3,3.333,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10];
+
+  // Loop through all of the sizes(we use @for rather than @each, as we want access to the index)
+  @for $i from 1 through length($sizes) {
+    // Get the size for the current index
+    $size: nth($sizes, $i);
+
+    // Create the rule
+    .#{$prefix}--#{round($size*10)} {
+      @media (min-width: $minWidth) {
+        #{$property}: $size*10%;
+      }
+    }
+  }
+}

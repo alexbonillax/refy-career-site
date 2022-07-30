@@ -1,0 +1,26 @@
+@import './colors';
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+p {
+  -webkit-margin-before: 0;
+  margin-block-start: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
+}
+
+a:link, a:visited,  a:hover, a:active
+{
+  color: $refy-black;
+  text-decoration: none;
+}
+
+.ng-fa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

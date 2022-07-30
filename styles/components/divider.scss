@@ -1,0 +1,47 @@
+@import './colors';
+
+.divider-wrapper {
+  position: relative;
+  min-height: 1px;
+
+  &--type {
+
+    &-default {
+
+    }
+
+    &-list {
+
+      .divider-line {
+         height: 0.25rem !important;
+        border-top-width: 0.25rem !important;
+      }
+
+    }
+
+  }
+
+  .divider-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    box-sizing: content-box;
+    border-top: 1px solid $refy-grey-100;
+  }
+
+  .divider-title-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    .divider-title {
+      background-color: $refy-white;
+      border: 1px solid $refy-grey-100;
+    }
+
+  }
+}
