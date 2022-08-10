@@ -1,4 +1,5 @@
-import { createTheme } from "@material-ui/core";
+import { createTheme } from "@mui/material";
+
 
 const MaterialUiTheme = createTheme({
   typography: {

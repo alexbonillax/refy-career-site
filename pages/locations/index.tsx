@@ -1,13 +1,12 @@
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Head from "next/head";
 import { AboutCompany, Divider } from "../../components";
+import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
 import { getCompanyInfo } from "../../services";
 import { Company } from "../../services/models";
-import { stripHtmlTags } from "../../utils";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("workplaces");
@@ -22,17 +21,17 @@ export const Workplaces = (companyInfo: Company) => (
         {
           companyInfo.workplaces.map((workplace, i) => (
             <div key={i}>
-            <div className="flex-align-center pt-3 mobile:flex-col mobile:text-center mobile:pb-1 desktop:flex desktop:pb-3">
-              <div className="flex-col full-width">
-                <p className="font-prose font-bold">{workplace.attributes.name}</p>
-                <p className="font-prose mt-1">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
-                <p className="font-hint">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
-              </div>
-              <div className="flex py-2">
+              <div className="flex-align-center pt-3 mobile:flex-col mobile:text-center mobile:pb-1 desktop:flex desktop:pb-3">
+                <div className="flex-col full-width">
+                  <p className="font-prose font-bold">{workplace.attributes.name}</p>
+                  <p className="font-prose mt-1">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
+                  <p className="font-hint">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
+                </div>
+                <div className="flex py-2">
                   <Button>{Translate('candidate.jobs.view')}</Button>
+                </div>
               </div>
-            </div>
-                  { i+1 !== companyInfo.workplaces.length && <div><Divider title={""} /></div> }
+              {i + 1 !== companyInfo.workplaces.length && <div><Divider title={""} /></div>}
             </div>
           ))
         }
@@ -44,15 +43,11 @@ export const Workplaces = (companyInfo: Company) => (
 
 const Locations: NextPage = ({ pageProps }: any) => (
   <>
-    <Head>
-      <title>{"Refy - " + Translate("banner.title")}</title>
-      <meta property="og:title" content={"Refy - " + Translate("banner.title")} />
-      <meta property="og:description" content={stripHtmlTags(Translate("banner.subtitle"))} />
-    </Head>
+    <Header name={pageProps.companyInfo.attributes.name} />
     <div className="pt-9">
-      <Navbar {...pageProps.companyInfo.attributes.logo}/>
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <Workplaces {...pageProps.companyInfo} />
-      <AboutCompany {...pageProps.companyInfo}/>
+      <AboutCompany {...pageProps.companyInfo} />
     </div>
   </>
 );

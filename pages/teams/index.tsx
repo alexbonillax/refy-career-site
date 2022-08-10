@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Head from "next/head";
 import { AboutCompany } from "../../components";
+import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
 import { getCompanyInfo } from "../../services";
 import { Company, Department } from "../../services/models";
 import { bucketXL } from "../../services/urls";
-import { stripHtmlTags } from "../../utils";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("home");
@@ -22,12 +21,12 @@ export const Areas = (companyInfo: Company) => (
       </div>
       <div className="w-d--60 mobile:flex-col flex flex-wrap">
         {companyInfo.departments?.map((department, i) => (
-          <DepartmentCard key={i} {...department}/>
+          <DepartmentCard key={i} {...department} />
         ))
         }
         <div className="flex flex-align-justify-center w-m--100 mt-2">
-            <button className="button-outline--primary">Mierda</button>
-            {/* <app-button-basic
+          <button className="button-outline--primary">Mierda</button>
+          {/* <app-button-basic
               (click)="goToDepartments()"
               [size]="ButtonSize.NORMAL"
               [classes]="'button--light background-color--primary button-hover--size'"
@@ -42,28 +41,24 @@ export const Areas = (companyInfo: Company) => (
 )
 
 const DepartmentCard = (department: Department) => {
-  const picUrl = department.attributes.picture ? bucketXL+department.attributes.picture : false;
+  const picUrl = department.attributes.picture ? bucketXL + department.attributes.picture : false;
   return (<div className="w-m--100 w-d--50 p-1">
-  <div className="flex h-30 box-shadow-container--card background-center br-1 overflow-hidden cursor-pointer" style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
-    <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
-      <p className="font-big-title font--white">{department.attributes.name}</p>
-      <p className="font-hint font--white">{department.attributes.availableJobs} {Translate('candidate.departments.jobs')}</p>
+    <div className="flex h-30 box-shadow-container--card background-center br-1 overflow-hidden cursor-pointer" style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
+      <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
+        <p className="font-big-title font--white">{department.attributes.name}</p>
+        <p className="font-hint font--white">{department.attributes.availableJobs} {Translate('candidate.departments.jobs')}</p>
+      </div>
     </div>
-  </div>
-</div>)
+  </div>)
 }
 
 const Teams: NextPage = ({ pageProps }: any) => (
   <>
-    <Head>
-      <title>{"Refy - " + Translate("banner.title")}</title>
-      <meta property="og:title" content={"Refy - " + Translate("banner.title")} />
-      <meta property="og:description" content={stripHtmlTags(Translate("banner.subtitle"))} />
-    </Head>
+    <Header name={pageProps.companyInfo.attributes.name} />
     <div className="pt-9">
-      <Navbar {...pageProps.companyInfo.attributes.logo}/>
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <Areas {...pageProps.companyInfo} />
-      <AboutCompany {...pageProps.companyInfo}/>
+      <AboutCompany {...pageProps.companyInfo} />
     </div>
   </>
 );

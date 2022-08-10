@@ -1,3 +1,4 @@
+import { Department } from "./department";
 import { Profile } from "./profile";
 import { Workplace } from "./workplace";
 
@@ -39,5 +40,11 @@ export interface Job {
     headcount: number;
     createdAt: Date;
     atsPartnerCode: string;
-  }
+  };
+  department: Department;
+  workplaces: Workplace[];
+  candidateQuestions: Question[];
+  referrerQuestions: Question[];
+  referrerUser: Profile;
+  supervisorUser: Profile;
 }

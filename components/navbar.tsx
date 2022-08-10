@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/pro-solid-svg-icons";
-import { SwipeableDrawer } from "@material-ui/core";
+import { SwipeableDrawer } from "@mui/material";
 import React from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
@@ -80,10 +80,10 @@ const Navbar = ({logoUrl}: {logoUrl: string}) => {
         </Link>
         <div className="h-px w-full bg-gray-100"></div>
         <Link href="stories">
-          <a className="font-navbar" target="_blank" onClick={toggleDrawer("navbar", false)}>{t("navbar.stories")}</a>
+          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.stories")}</a>
         </Link>
-        <Link href="Jobs">
-          <a className="font-navbar" target="_blank" onClick={toggleDrawer("navbar", false)}>{t("navbar.jobs")}</a>
+        <Link href="jobs">
+          <a className="font-navbar" onClick={toggleDrawer("navbar", false)}>{t("navbar.jobs")}</a>
         </Link>
       </div>
       <div className="flex w-full flex-col items-center space-y-5">
@@ -98,7 +98,9 @@ const Navbar = ({logoUrl}: {logoUrl: string}) => {
     <nav className={"fixed top-0 left-0 right-0 w-full bg-white z-20 background-color--white box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
       <div className="max-w-7xl mx-auto flex h-9 items-center px-5 mobile:justify-between">
         <Link href="/">
-            <a className="w-20 mr-16 h-full flex items-center" style={{ backgroundImage: srcLogo ? `url(${srcLogo}})` : srcLogo }}></a>
+              <a className="w-20 h-full flex items-center align-center">
+                <div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div>
+              </a>
         </Link>
 
         <div className="flex w-full mobile:hidden">

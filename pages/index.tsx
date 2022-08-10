@@ -1,16 +1,15 @@
-import Head from "next/head";
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Company, Department } from "../services/models";
 import { AboutCompany } from "../components/about";
 import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";
-import { stripHtmlTags } from "../utils";
 import { Workplaces } from "./locations";
 import { useTranslation } from "next-i18next";
 import Navbar from "../components/navbar";
 import { bucketXXL } from "../services/urls";
 import { Areas } from "./teams";
+import { Header } from "../components/header";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("home");
@@ -35,13 +34,9 @@ const Banner = (companyInfo: Company) => {
 
 const Home: NextPage = ({ pageProps }: any) => (
   <>
-    <Head>
-      <title>{"Refy - " + Translate("banner.title")}</title>
-      <meta property="og:title" content={"Refy - " + Translate("banner.title")} />
-      <meta property="og:description" content={stripHtmlTags(Translate("banner.subtitle"))} />
-    </Head>
+    <Header name={pageProps.companyInfo.attributes.name} />
     <div className="pt-9">
-      <Navbar {...pageProps.companyInfo.attributes.logo}/>
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo}/>
       <Banner {...pageProps.companyInfo} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces {...pageProps.companyInfo} />

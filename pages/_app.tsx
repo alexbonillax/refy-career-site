@@ -5,8 +5,9 @@ import Layout from "../layout/layout";
 import nextI18NextConfig from "../next-i18next.config.js";
 import createEmotionCache from "../components/material-ui/createEmotionCache";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import { CssBaseline } from "@material-ui/core";
+
 import Script from "next/script";
+import { CssBaseline } from "@mui/material";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
