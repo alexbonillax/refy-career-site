@@ -24,10 +24,13 @@
     "@material-ui/styles": "latest",
     "@mui/material": "^5.6.1",
     "dayjs": "^1.11.4",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.34",
     "next": "12.1.4",
     "next-i18next": "^11.0.0",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-phone-number-input": "^3.2.7"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
