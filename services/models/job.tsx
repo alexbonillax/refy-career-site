@@ -1,8 +1,8 @@
-import { Department } from "./department";
-import { Profile } from "./profile";
-import { Workplace } from "./workplace";
-
-export interface Job {
+import Department from "./department";
+import Profile from "./profile";
+import Question from "./question";
+import Workplace from "./workplace";
+export default interface Job {
   id: number;
   type: string;
   overview: {

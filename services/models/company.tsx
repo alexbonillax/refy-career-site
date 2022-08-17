@@ -1,8 +1,6 @@
-
-import {Department} from './department';
-import {Workplace} from './workplace';
-
-export interface Company {
+import Department from "./department";
+import Workplace from "./workplace";
+export default interface Company {
   id: number;
   attributes: {
     name: string;

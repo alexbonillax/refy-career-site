@@ -5,7 +5,8 @@ import { AboutCompany } from "../../components";
 import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
 import { getCompanyInfo } from "../../services";
-import { Company, Department } from "../../services/models";
+import Company from "../../services/models/company";
+import Department from "../../services/models/department";
 import { bucketXL } from "../../services/urls";
 
 export const Translate = (text: string, array?: boolean): string => {

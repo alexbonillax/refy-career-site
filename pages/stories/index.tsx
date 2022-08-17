@@ -4,16 +4,17 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { useState } from "react";
 import { AboutCompany, Divider } from "../../components";
 import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
+import { ReadMore } from "../../components/read-more";
 import { getCompanyInfo } from "../../services";
 import { PostType } from "../../services/enum/post-type";
 import { getPosts } from "../../services/getPosts";
-import { Company, Page } from "../../services/models";
-import { Post } from "../../services/models/post";
-import { bucketL, bucketM, bucketXXL } from "../../services/urls";
+import Company from "../../services/models/company";
+import Page from "../../services/models/page";
+import Post from "../../services/models/post";
+import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 
@@ -123,36 +124,6 @@ const Badge = ({ text }: { text: string }) => (
     <p className="flex flex-align-center font-badge font-badge--condensed font-badge--contrast-grey px-1">{text}</p>
   </div>
 )
-
-const ReadMore = ({ text }: { text: string }) => {
-  const maxCharacters = 300;
-  const [isReadMore, setIsReadMore] = useState(true);
-  const toggleReadMore = () => {
-    setIsReadMore(!isReadMore);
-  };
-  const reducedText = isReadMore ? text.slice(0, maxCharacters) : text;
-  const label = isReadMore ? "...read more" : " show less";
-  return (
-    <div className="relative font-multiline overflow-hidden">
-      {
-        text.length < maxCharacters ?
-          (<p className="font--dark">{text}</p>)
-          :
-          (
-            <p className="font--dark">
-              {reducedText}
-              {text.length > maxCharacters &&
-                <span onClick={toggleReadMore} className="expansion-prose-trigger font--grey background-color--white cursor-pointer">
-                  {label}
-                </span>
-              }
-            </p>
-          )
-      }
-    </div>
-
-  )
-};
 
 export const PostLink = ({ post }: { post: Post }) => (
   <Link href={post.attributes.url}>

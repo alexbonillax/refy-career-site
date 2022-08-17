@@ -3,3 +3,4 @@ export enum PostType {
   Image = 2,
   Text = 3,
 }
+export {};

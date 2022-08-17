@@ -5,7 +5,7 @@ import { Header } from '../../../components/header';
 import Navbar from '../../../components/navbar';
 import { AboutCompany, Divider } from '../../../components';
 import { getJobDetails } from '../../../services/getJobDetails';
-import { Job } from '../../../services/models';
+import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

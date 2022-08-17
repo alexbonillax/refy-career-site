@@ -1,6 +1,6 @@
 import { faSeedling } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Company } from "../services/models";
+import Company from "../services/models/company";
 import { Divider } from "./divider";
 
 export const AboutCompany = (companyInfo: Company) => (

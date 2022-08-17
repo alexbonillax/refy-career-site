@@ -1,4 +1,4 @@
-export interface PostOverview {
+export default interface PostOverview {
   id: number;
   firstName: string;
   lastName: string;

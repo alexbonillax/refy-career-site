@@ -6,7 +6,7 @@ import { AboutCompany, Divider } from "../../components";
 import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
 import { getCompanyInfo } from "../../services";
-import { Company } from "../../services/models";
+import Company from "../../services/models/company";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("workplaces");

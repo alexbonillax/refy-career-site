@@ -1,7 +1,8 @@
-import { Phone } from "./phone";
-import { Question } from "./question";
+import Phone from "./phone";
+import Question from "./question";
 
-export interface CandidateApplicationDTO {
+
+export default interface CandidateApplicationDTO {
   jobId: number;
   jobCode: string;
   firstName?: string;

@@ -1,8 +1,7 @@
 import { PostType } from "../enum/post-type";
-import { PostOverview } from "./post-overview";
-import { Profile } from "./profile";
-
-export interface Post {
+import PostOverview from "./post-overview";
+import Profile from "./profile";
+export default interface Post {
   id: number;
   attributes: {
     type: PostType;

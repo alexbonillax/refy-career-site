@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Company, Department } from "../services/models";
+import Company from "../services/models/company";
+import Department from "../services/models/department";
 import { AboutCompany } from "../components/about";
 import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";

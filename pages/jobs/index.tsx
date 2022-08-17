@@ -9,9 +9,9 @@ import { AboutCompany } from "../../components/about";
 import { Header } from "../../components/header";
 import Navbar from "../../components/navbar";
 import { getCompanyInfo, getRecentJobs } from "../../services";
-import { Job, Page } from "../../services/models";
+import Job from "../../services/models/job";
+import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
-
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("jobs");

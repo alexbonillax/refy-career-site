@@ -1,6 +1,5 @@
-import {Profile} from './profile';
-
-export interface Department {
+import Profile from "./profile";
+export default interface Department {
   id?: number;
   attributes: {
     atsPartnerCode: string;

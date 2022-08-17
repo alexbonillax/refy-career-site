@@ -1,4 +1,4 @@
-export interface Workplace {
+export default interface Workplace {
   id?: number;
   areaName: string;
   attributes: {
