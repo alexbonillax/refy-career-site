@@ -1,0 +1,32 @@
+@import './colors';
+
+.badge {
+  display: flex;
+  border-radius: 0.5rem;
+
+  &-reward {
+    background-color: $refy-orange;
+  }
+
+  &-shared {
+    background-color: $refy-orange;
+  }
+
+  &-points {
+    background-color: $refy-gold;
+  }
+
+  &-condensed {
+    background-color: rgba($refy-grey, 0.25);
+  }
+
+  &-button {
+    padding: 0 0.375rem;
+    transform: translateX(0.4rem) translateY(-0.6rem);
+
+    fa-icon {
+      margin-right: 0.25rem;
+    }
+  }
+
+}

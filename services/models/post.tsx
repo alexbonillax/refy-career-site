@@ -1,0 +1,26 @@
+import { PostType } from "../enum/post-type";
+import { PostOverview } from "./post-overview";
+import { Profile } from "./profile";
+
+export interface Post {
+  id: number;
+  attributes: {
+    type: PostType;
+    title: string;
+    comment: string;
+    pictures: string[];
+    url: string;
+    urlPicture: string;
+    hashtags: string[];
+    linkedinCode: string;
+    startsAt: Date;
+    endsAt: Date;
+    createdAt: Date;
+  };
+  overview: {
+    user: PostOverview;
+    posted: boolean;
+  };
+  sharedBy: PostOverview[];
+  author: Profile;
+}
