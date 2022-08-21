@@ -1,0 +1,14 @@
+@import './colors';
+
+.button {
+  padding: 0 0.75rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 15px;
+
+  &-basic {
+    background-color: $refy-color-primary;
+    color: $refy-white;
+  }
+}

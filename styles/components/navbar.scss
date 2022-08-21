@@ -1,0 +1,21 @@
+.navbar-item {
+  transition: opacity 300ms ease-in-out;
+
+  &-underline {
+    transition: opacity 300ms ease-in-out;
+  }
+
+  &:not(.active) {
+    opacity: 0.6;
+
+    .navbar-item-underline {
+      opacity: 0;
+    }
+
+    &:hover, &:active {
+      .navbar-item-underline {
+        opacity: 1;
+      }
+    }
+  }
+}
