@@ -4,9 +4,9 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { AboutCompany, Divider } from "../../components";
+import { AboutCompany, Divider, Navbar } from "../../components";
 import { Header } from "../../components/header";
-import Navbar from "../../components/navbar";
+import { Logo } from "../../components/logo";
 import { ReadMore } from "../../components/read-more";
 import { getCompanyInfo } from "../../services";
 import { PostType } from "../../services/enum/post-type";
@@ -19,7 +19,7 @@ import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 
 export const Translate = (text: string, array?: boolean): string => {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("common");
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
@@ -50,10 +50,10 @@ export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyIn
 )
 
 const HeaderUserPost = (post: Post) => {
-  const userPicUrl = post.overview.user.avatar ? bucketM + post.overview.user.avatar : false;
+  const userPicUrl = post.overview.user.avatar ? bucketM + post.overview.user.avatar : '';
   return (
     <>
-      <div className="w-6 h-6 rounded-lg bg-cover bg-center" style={{ backgroundImage: userPicUrl ? `url(${userPicUrl})` : '' }}></div>
+      <Logo imgSrc={userPicUrl} />
       <div className="flex-column pl-1 pr-2">
         <p className="font-header">{post.overview.user.firstName} {post.overview.user.lastName}</p>
         <p className="flex flex-align-center font-value">
@@ -65,10 +65,10 @@ const HeaderUserPost = (post: Post) => {
 };
 
 const HeaderCompanyPost = ({ post, companyInfo }: { post: Post, companyInfo: Company }) => {
-  const companyPicUrl = companyInfo.attributes?.logo ? bucketM + companyInfo.attributes.logo : false;
+  const companyPicUrl = companyInfo.attributes?.logo ? bucketM + companyInfo.attributes.logo : '';
   return (
     <>
-      <div className="w-6 h-6 rounded-lg bg-cover bg-center" style={{ backgroundImage: companyPicUrl ? `url(${companyPicUrl})` : '' }}></div>
+      <Logo imgSrc={companyPicUrl} />
       <div className="flex-column pl-1 pr-2">
         <p className="font-header">{companyInfo.attributes?.name}</p>
         <p className="flex flex-align-center font-value">
@@ -233,7 +233,7 @@ const Stories: NextPage = ({ pageProps }: any) => (
 );
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
-  const translations = await serverSideTranslations(locale, ["common", "home"]);
+  const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   const stories = await getPosts(companyInfo.id);
   return {

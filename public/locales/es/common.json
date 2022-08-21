@@ -1,23 +1,20 @@
 {
-  "navbar": {
     "home": "Inicio",
-    "prices": "Precios",
-    "product": "Producto",
-    "blog": "Blog",
-    "demo": "Solicita una demo",
-    "login": "Iniciar sesión",
-    "integrations": "Integraciones",
-    "successful-cases": "Casos de éxito",
-    "english": "Inglés",
-    "spanish": "Español",
-    "try": "Pruébalo gratis"
-  },
-
-  "footer": {
-    "title": "© 2022 Refy Inc. Todos los derechos reservados.",
-    "terms": "Términos",
-    "privacy": "Privacidad",
-    "cookies": "Cookies",
-    "contact": "Contáctanos"
-  }
+    "teams": "Equipos",
+    "locations": "Localizaciones",
+    "stories": "Publicaciones",
+    "jobs": "Empleos",
+    "company-site": "Sitio web",
+    "offer": "oferta",
+    "offers": "ofertas",
+    "teams.departments.view": "Ver todos los equipos",
+    "size": "Empleados",
+    "about.workers": "(1)[Menos de 10 empleados];(2)[Entre 10 y 50 empleados];(3)[Entre 50 y 200 empleados];(4)[Más de 200 empleados];",
+    "powered-by": "Desarrollado por",
+    "jobs.available": "Últimas posiciones",
+    "jobs.find": "Encuentra tu próximo trabajo en {{company}}",
+    "about.company": "Sobre {{company}}",
+    "workplaces.title": "Nuestras oficinas",
+    "workplaces.jobs.button": "Ver posiciones",
+    "stories.latest": "Nuestras historias recientes"
 }

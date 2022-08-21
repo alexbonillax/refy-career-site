@@ -1,4 +1,8 @@
-export const Divider = ({ title }: { title: string}) => (
+interface DividerProps {
+  title?: string;
+}
+
+export const Divider = ({ title }: DividerProps) => (
   <div className="divider-wrapper">
   <div className="divider-line"></div>
   <div className="divider-title-wrapper flex flex-align-justify-center">

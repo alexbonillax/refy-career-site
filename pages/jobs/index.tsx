@@ -1,44 +1,38 @@
 import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "@mui/material";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { Navbar } from "../../components";
 import { AboutCompany } from "../../components/about";
 import { Header } from "../../components/header";
-import Navbar from "../../components/navbar";
+
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
 
-export const Translate = (text: string, array?: boolean): string => {
-  const { t } = useTranslation("jobs");
-  return array ? t(text, { returnObjects: true }) : t(text);
-}
-
-export const RecentJobs = (recentJobsList: Page<Job>) => (
-  <section id="department-jobs" className="bg-white">
-    <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-      <p className="font-big-title text-center desktop:font-big-title--40">{Translate('candidate.jobs.available')}</p>
-      <p className="font-subtitle text-center mt-1">{Translate('candidate.jobs.find')}</p>
-      <div className="flex flex-wrap flex-align-justify-center mt-5">
-        {
-          recentJobsList.content.map((job, i) => (
-            <div className="p-1 w-m--100 w-d--33" key={i}>
-              <JobCard {...job} />
-            </div>
-          ))
-        }
-
+export const RecentJobs = (recentJobsList: Page<Job>) => {
+  const { t } = useTranslation("common");
+  return (
+    <section id="department-jobs" className="bg-white">
+      <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
+        <p className="font-big-title text-center desktop:font-big-title--40">{t('jobs.available')}</p>
+        <p className="font-subtitle text-center mt-1">{t('jobs.find', { company: 'Refy' })}</p>
+        <div className="flex flex-wrap flex-align-justify-center mt-5">
+          {
+            recentJobsList.content.map((job, i) => (
+              <div className="p-1 w-m--100 w-d--33" key={i}>
+                <JobCard {...job} />
+              </div>
+            ))
+          }
+        </div>
       </div>
-      <div className="flex flex-align-justify-center w-m--100 mt-2">
-        <Button>{Translate('candidate.jobs.view')}</Button>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  )
+};
 
 const JobCard = (job: Job) => {
   const picUrl = job.attributes.picture ? bucketL + job.attributes.picture : false;
@@ -87,7 +81,7 @@ const Jobs: NextPage = ({ pageProps }: any) => (
 
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
-  const translations = await serverSideTranslations(locale, ["common", "home"]);
+  const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   const recentJobsList = await getRecentJobs(companyInfo.id);
   return {

@@ -2,8 +2,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getCompanyInfo } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
-import Navbar from '../../../components/navbar';
-import { AboutCompany, Divider } from '../../../components';
+
+import { AboutCompany, Divider, Navbar } from '../../../components';
 import { getJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';

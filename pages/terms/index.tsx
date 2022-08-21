@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import Container from "../../layout/container";
+import Container from "../../components/material-ui/layout/container";
 
 function TranslateCommon(text: string, array?: boolean): string {
   const {t} = useTranslation("common");

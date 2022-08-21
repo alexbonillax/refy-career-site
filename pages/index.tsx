@@ -7,13 +7,14 @@ import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";
 import { Workplaces } from "./locations";
 import { useTranslation } from "next-i18next";
-import Navbar from "../components/navbar";
+
 import { bucketXXL } from "../services/urls";
 import { Areas } from "./teams";
 import { Header } from "../components/header";
+import { Navbar } from "../components";
 
 export const Translate = (text: string, array?: boolean): string => {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("common");
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
@@ -49,7 +50,7 @@ const Home: NextPage = ({ pageProps }: any) => (
 
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
-  const translations = await serverSideTranslations(locale, ["common", "home"]);
+  const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   const recentJobsList = await getRecentJobs(companyInfo.id);
   return {
