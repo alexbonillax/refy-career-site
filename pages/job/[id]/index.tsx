@@ -10,10 +10,15 @@ import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
-import dayjs from 'dayjs';
 import { faCoin, faStopwatch } from '@fortawesome/pro-light-svg-icons';
+import { DateToTimeLeftReduced } from '../../../utils/dateToTimeLeftReduced';
 
-const Banner = (jobDetails: Job) => {
+interface BannerProps {
+  jobDetails: Job,
+  companyName: string
+}
+
+const Banner = ({jobDetails, companyName}: BannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
   return (
     <section id="cover"
@@ -21,7 +26,7 @@ const Banner = (jobDetails: Job) => {
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 py-20 text-center">
-          <p className="font-title font--white">{jobDetails.attributes.title}</p>
+          <p className="font-title font--white">{companyName}</p>
           <p className="font-big-title font--white mt-3 mb-3 mobile:font-big-title--40 desktop:font-big-title--46">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap flex-justify-center">
             {
@@ -42,7 +47,7 @@ const Banner = (jobDetails: Job) => {
               jobDetails.attributes.createdAt &&
               <p className="flex flex-align-center font-hint font--white">
                 <FontAwesomeIcon icon={faCalendarAlt} className="mr-1" />
-                {dayjs(jobDetails.attributes.createdAt, 'DD/MM/YYYY').toString()}
+                {DateToTimeLeftReduced(jobDetails.attributes.createdAt)}
               </p>
             }
 
@@ -128,12 +133,10 @@ const Details = (jobDetails: Job) => (
 const Job: NextPage = ({ pageProps }: any) => (
   <>
     <Header name={pageProps.companyInfo.attributes.name} />
-    <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
-      <Banner {...pageProps.jobDetails} />
-      <Details {...pageProps.jobDetails} />
-      <AboutCompany {...pageProps.companyInfo} />
-    </div>
+    <Navbar logoUrl={pageProps.companyInfo.attributes.logo} transparent={true} />
+    <Banner jobDetails={pageProps.jobDetails} companyName={pageProps.companyInfo.attributes.name}  />
+    <Details {...pageProps.jobDetails} />
+    <AboutCompany {...pageProps.companyInfo} />
   </>
 );
 

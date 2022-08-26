@@ -26,7 +26,7 @@ export const Translate = (text: string, array?: boolean): string => {
 export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyInfo: Company }) => (
   <section id="department-posts" className="py-10 px-2 background-color--grey--0">
     <div className="mobile-container--responsive">
-      <p className="font-big-title text-center mobile:font-big-title--40">{'candidate.stories.latest'}</p>
+      <p className="font-big-title text-center mobile:font-big-title--40">{Translate('stories.latest')}</p>
     </div>
     <div className="mobile-container flex-column pt-5 ">
       {

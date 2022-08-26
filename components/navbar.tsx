@@ -9,7 +9,12 @@ import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 
-export const Navbar = ({ logoUrl }: { logoUrl: string }) => {
+interface NavbarProps {
+  logoUrl: string;
+  transparent?: boolean;
+}
+
+export const Navbar = (props : NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
@@ -97,10 +102,10 @@ export const Navbar = ({ logoUrl }: { logoUrl: string }) => {
       </div>
     </div>
   );
-  const srcLogo = logoUrl ? bucketM + logoUrl : logo;
+  const srcLogo = props.logoUrl ? bucketM + props.logoUrl : logo;
   return (
-    <nav className={"fixed top-0 left-0 right-0 w-full bg-white z-20 background-color--white box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
-      <div className="mobile:mobile-container desktop:mobile-container--responsive flex h-9 items-center mobile:justify-between">
+    <nav className={"fixed top-0 left-0 right-0 w-full "+ (props.transparent ? "bg-transparent" : "bg-white") +" z-20 box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
+      <div className="mobile-container mx-auto flex h-9 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex">
           <FontAwesomeIcon icon={faBars} style={{ fontSize: "1.3rem" }} onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
         </div>
