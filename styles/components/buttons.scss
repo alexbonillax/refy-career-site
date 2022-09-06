@@ -6,7 +6,8 @@
   border-radius: 0.5rem;
   font-weight: bold;
   font-size: 15px;
-
+  white-space: nowrap;
+  
   &-basic {
     background-color: $refy-color-primary;
     color: $refy-white;
