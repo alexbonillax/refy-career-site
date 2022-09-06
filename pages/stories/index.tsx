@@ -4,7 +4,8 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { AboutCompany, Divider, Navbar } from "../../components";
+import { Divider, Navbar } from "../../components";
+import AboutCompany from "../../components/about";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
 import { ReadMore } from "../../components/read-more";
@@ -25,7 +26,7 @@ export const Translate = (text: string, array?: boolean): string => {
 
 export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyInfo: Company }) => (
   <section id="department-posts" className="py-10 px-2 background-color--grey--0">
-    <div className="mobile-container--responsive">
+    <div className="mobile-container">
       <p className="font-big-title text-center mobile:font-big-title--40">{Translate('stories.latest')}</p>
     </div>
     <div className="mobile-container flex-column pt-5 ">
@@ -223,7 +224,7 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
 
 const Stories: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('stories')}/>
     <div className="pt-9">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <Posts stories={pageProps.stories} companyInfo={pageProps.companyInfo} />

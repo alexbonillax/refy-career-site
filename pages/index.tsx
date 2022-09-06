@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Company from "../services/models/company";
 import Department from "../services/models/department";
-import { AboutCompany } from "../components/about";
+
 import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";
 import { Workplaces } from "./locations";
@@ -12,6 +12,7 @@ import { bucketXXL } from "../services/urls";
 import { Areas } from "./teams";
 import { Header } from "../components/header";
 import { Navbar } from "../components";
+import AboutCompany from "../components/about";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -36,7 +37,7 @@ const Banner = (companyInfo: Company) => {
 
 const Home: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('home')}  />
     <div className="pt-9">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo}/>
       <Banner {...pageProps.companyInfo} />

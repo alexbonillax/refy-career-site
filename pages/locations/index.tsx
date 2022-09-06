@@ -1,9 +1,10 @@
-import { Button } from "@mui/material";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { AboutCompany, Divider, Navbar } from "../../components";
+import { Divider, Navbar } from "../../components";
+import AboutCompany from "../../components/about";
+
 import { ButtonBasic } from "../../components/buttons/button-basic";
 import { Header } from "../../components/header";
 
@@ -49,7 +50,7 @@ export const Workplaces = (companyInfo: Company) => (
 
 const Locations: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('locations')}/>
     <div className="pt-9">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <Workplaces {...pageProps.companyInfo} />

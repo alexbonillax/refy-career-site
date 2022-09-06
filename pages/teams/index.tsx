@@ -2,7 +2,8 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { AboutCompany, Navbar } from "../../components";
+import { Navbar } from "../../components";
+import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
 import { Header } from "../../components/header";
 
@@ -53,7 +54,7 @@ const DepartmentCard = (department: Department) => {
 
 const Teams: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('teams')} />
     <div className="pt-9">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <Areas {...pageProps.companyInfo} />

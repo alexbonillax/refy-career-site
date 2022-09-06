@@ -5,13 +5,15 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { Navbar } from "../../components";
-import { AboutCompany } from "../../components/about";
+import AboutCompany from "../../components/about";
+
 import { Header } from "../../components/header";
 
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
+import { Translate } from "../locations";
 
 export const RecentJobs = (recentJobsList: Page<Job>) => {
   const { t } = useTranslation("common");
@@ -70,7 +72,7 @@ const JobCard = (job: Job) => {
 
 const Jobs: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')} />
     <div className="pt-9">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
       <RecentJobs {...pageProps.recentJobsList} />

@@ -106,7 +106,7 @@ export const Navbar = (props : NavbarProps) => {
   return (
     <nav className={"fixed top-0 left-0 right-0 w-full "+ (props.transparent ? "bg-transparent" : "bg-white") +" z-20 box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
       <div className="mobile-container mx-auto flex h-9 items-center justify-between">
-        <div className="hidden cursor-pointer mobile:flex">
+        <div className="hidden cursor-pointer mobile:flex justify-center w-8">
           <FontAwesomeIcon icon={faBars} style={{ fontSize: "1.3rem" }} onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
         </div>
 
@@ -114,7 +114,7 @@ export const Navbar = (props : NavbarProps) => {
           <a> <div className="w-5 h-5 rounded-md bg-contain desktop:mr-14" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
         </Link>
 
-        <div></div>
+        <div className="w-8"></div>
 
         <div className="flex w-full mobile:hidden">
           <LinksList></LinksList>

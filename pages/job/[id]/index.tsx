@@ -3,7 +3,7 @@ import { getCompanyInfo } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
 
-import { AboutCompany, Divider, Navbar } from '../../../components';
+import { Divider, Navbar } from '../../../components';
 import { getJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
 import { faCoin, faStopwatch } from '@fortawesome/pro-light-svg-icons';
 import { DateToTimeLeftReduced } from '../../../utils/dateToTimeLeftReduced';
+import { Translate } from '../../locations';
+import AboutCompany from '../../../components/about';
 
 interface BannerProps {
   jobDetails: Job,
@@ -132,7 +134,7 @@ const Details = (jobDetails: Job) => (
 
 const Job: NextPage = ({ pageProps }: any) => (
   <>
-    <Header name={pageProps.companyInfo.attributes.name} />
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')}/>
     <Navbar logoUrl={pageProps.companyInfo.attributes.logo} transparent={true} />
     <Banner jobDetails={pageProps.jobDetails} companyName={pageProps.companyInfo.attributes.name}  />
     <Details {...pageProps.jobDetails} />
@@ -142,7 +144,7 @@ const Job: NextPage = ({ pageProps }: any) => (
 
 export const getServerSideProps = async ({ locale, params }: { locale: string, params: any }) => {
   const jobId = params.id;
-  const translations = await serverSideTranslations(locale, ["common", "home"]);
+  const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   const jobDetails = await getJobDetails(jobId);
   return {
