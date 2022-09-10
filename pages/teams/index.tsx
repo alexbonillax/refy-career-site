@@ -28,13 +28,6 @@ export const Areas = (companyInfo: Company) => (
           <DepartmentCard key={i} {...department} />
         ))
         }
-        <div className="flex flex-align-justify-center w-m--100 mt-2">
-          <Link href={'/locations'}>
-            <a>
-              <ButtonBasic>{Translate('teams.departments.view')}</ButtonBasic>
-            </a>
-          </Link>
-        </div>
       </div>
     </div>
   </section>
@@ -42,21 +35,25 @@ export const Areas = (companyInfo: Company) => (
 
 const DepartmentCard = (department: Department) => {
   const picUrl = department.attributes.picture ? bucketXL + department.attributes.picture : false;
-  return (<div className="w-m--100 w-d--50 p-1">
-    <div className="flex h-30 box-shadow-container--card background-center br-1 overflow-hidden cursor-pointer" style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
-      <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
-        <p className="font-big-title font--white">{department.attributes.name}</p>
-        <p className="font-hint font--white">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
-      </div>
-    </div>
-  </div>)
+  return (
+    <Link href={{ pathname: `/teams/${department.id}` }}>
+      <a className="w-m--100 w-d--50 p-1">
+        <div className="flex h-30 box-shadow-container--card background-center br-1 overflow-hidden cursor-pointer" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
+          <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
+            <p className="font-big-title font--white">{department.attributes.name}</p>
+            <p className="font-hint font--white">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
+          </div>
+        </div>
+      </a>
+    </Link>
+  )
 }
 
 const Teams: NextPage = ({ pageProps }: any) => (
   <>
     <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('teams')} />
     <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='teams' />
       <Areas {...pageProps.companyInfo} />
       <AboutCompany {...pageProps.companyInfo} />
     </div>

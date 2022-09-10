@@ -15,8 +15,17 @@ import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
 import { Translate } from "../locations";
 
-export const RecentJobs = (recentJobsList: Page<Job>) => {
+interface RecentJobsProps {
+  recentJobsList: Page<Job>;
+  workplace?: number;
+}
+
+export const RecentJobs = ({recentJobsList, workplace}: RecentJobsProps) => {
   const { t } = useTranslation("common");
+  let jobs = recentJobsList?.content;
+  if (workplace) {
+    jobs = recentJobsList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+  }
   return (
     <section id="department-jobs" className="bg-white">
       <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
@@ -24,11 +33,17 @@ export const RecentJobs = (recentJobsList: Page<Job>) => {
         <p className="font-subtitle text-center mt-1">{t('jobs.find', { company: 'Refy' })}</p>
         <div className="flex flex-wrap flex-align-justify-center mt-5">
           {
-            recentJobsList.content.map((job, i) => (
+            jobs && jobs.map((job, i) => (
               <div className="p-1 w-m--100 w-d--33" key={i}>
                 <JobCard {...job} />
               </div>
             ))
+          }
+          {
+            //TODO
+            (!jobs || jobs.length == 0) && 
+            <h1>There's actually not jobs in this area =(</h1>
+            
           }
         </div>
       </div>
@@ -42,7 +57,7 @@ const JobCard = (job: Job) => {
     <Link href={"/job/" + job.id}>
       <a>
         <div className="flex-column text-center box-shadow-container--card br-1 overflow-hidden flex-align-center background-color--white cursor-pointer">
-          <div className="flex h-30 full-width background-center" style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
+          <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})`} : {}}>
             <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
           </div>
           <div className="flex-column py-2 px-3">
@@ -74,15 +89,16 @@ const Jobs: NextPage = ({ pageProps }: any) => (
   <>
     <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')} />
     <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
-      <RecentJobs {...pageProps.recentJobsList} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='jobs'/>
+      <RecentJobs recentJobsList={pageProps.recentJobsList} workplace={pageProps.workplaceId} />
       <AboutCompany {...pageProps.companyInfo} />
     </div>
   </>
 );
 
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale, query }: { locale: string, query: any }) => {
+  const workplaceId = query?.workplace ? query.workplace : null;
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   const recentJobsList = await getRecentJobs(companyInfo.id);
@@ -92,6 +108,7 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
       pageProps: {
         companyInfo,
         recentJobsList,
+        workplaceId,
       }
     }
   };

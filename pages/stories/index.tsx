@@ -226,7 +226,7 @@ const Stories: NextPage = ({ pageProps }: any) => (
   <>
     <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('stories')}/>
     <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories'/>
       <Posts stories={pageProps.stories} companyInfo={pageProps.companyInfo} />
       <AboutCompany {...pageProps.companyInfo} />
     </div>

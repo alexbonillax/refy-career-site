@@ -16,13 +16,18 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-export const Workplaces = (companyInfo: Company) => (
-  <section id="workplaces" className="py-10 background-color--grey--0">
+interface WorkplacesProps {
+ companyInfo: Company;
+ classes?: string;
+}
+
+export const Workplaces = (props: WorkplacesProps) => (
+  <section id="workplaces" className={`py-10 ${props.classes}`}>
     <div className="flex-col flex-align-center mobile-container px-2">
       <p className="font-big-title text-center desktop:font-big-title--40">{Translate('workplaces.title')}</p>
       <div className="flex-col full-width mt-5">
         {
-          companyInfo.workplaces.map((workplace, i) => (
+          props.companyInfo.workplaces.map((workplace, i) => (
             <div key={i}>
               <div className="flex-align-center pt-3 mobile:flex-col mobile:text-center mobile:pb-1 desktop:flex desktop:pb-3">
                 <div className="flex-col full-width">
@@ -31,14 +36,14 @@ export const Workplaces = (companyInfo: Company) => (
                   <p className="font-hint">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
                 </div>
                 <div className="flex justify-center py-2">
-                  <Link href={'/jobs'}>
+                  <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
                     <a>
                       <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
                     </a>
                   </Link>
                 </div>
               </div>
-              {i + 1 !== companyInfo.workplaces.length && <div><Divider /></div>}
+              {i + 1 !== props.companyInfo.workplaces.length && <div><Divider /></div>}
             </div>
           ))
         }
@@ -52,8 +57,8 @@ const Locations: NextPage = ({ pageProps }: any) => (
   <>
     <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('locations')}/>
     <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} />
-      <Workplaces {...pageProps.companyInfo} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='locations'/>
+      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
       <AboutCompany {...pageProps.companyInfo} />
     </div>
   </>

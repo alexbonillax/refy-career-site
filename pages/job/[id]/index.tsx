@@ -27,7 +27,7 @@ const Banner = ({jobDetails, companyName}: BannerProps) => {
       className="background-color--dark background-center"
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
-        <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 py-20 text-center">
+        <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 py-60 text-center">
           <p className="font-title font--white">{companyName}</p>
           <p className="font-big-title font--white mt-3 mb-3 mobile:font-big-title--40 desktop:font-big-title--46">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap flex-justify-center">
@@ -135,7 +135,7 @@ const Details = (jobDetails: Job) => (
 const Job: NextPage = ({ pageProps }: any) => (
   <>
     <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')}/>
-    <Navbar logoUrl={pageProps.companyInfo.attributes.logo} transparent={true} />
+    <Navbar logoUrl={pageProps.companyInfo.attributes.logo} transparent={true} url='jobs'/>
     <Banner jobDetails={pageProps.jobDetails} companyName={pageProps.companyInfo.attributes.name}  />
     <Details {...pageProps.jobDetails} />
     <AboutCompany {...pageProps.companyInfo} />

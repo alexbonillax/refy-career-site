@@ -12,14 +12,15 @@ import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 interface NavbarProps {
   logoUrl: string;
   transparent?: boolean;
+  url: string;
 }
 
-export const Navbar = (props : NavbarProps) => {
+export const Navbar = (props: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
-
-  const [boxShadow, setBoxShadow] = React.useState(false);
+  const linkList = ['teams', 'locations', 'stories', 'jobs'];
+  const [scrolled, setScrolling] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +32,7 @@ export const Navbar = (props : NavbarProps) => {
   };
 
   React.useEffect(() => {
-    setBoxShadow(+clientWindowHeight > 0);
+    setScrolling(+clientWindowHeight > 0);
   }, [clientWindowHeight]);
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -47,19 +48,14 @@ export const Navbar = (props : NavbarProps) => {
   };
   const LinksList = () => (
     <div className="flex items-center justify-between flex-1">
-      <div className="flex items-center space-x-14">
-        <Link href="/teams">
-          <a className="navbar-item">{t("teams")}</a>
-        </Link>
-        <Link href="/locations">
-          <a className="navbar-item">{t("locations")}</a>
-        </Link>
-        <Link href="/stories">
-          <a className="navbar-item">{t("stories")}</a>
-        </Link>
-        <Link href="/jobs">
-          <a className="navbar-item">{t("jobs")}</a>
-        </Link>
+      <div className={`flex items-center space-x-14`} >
+        {
+          linkList.map((link, i) => (
+            <Link key={i} href={`/${link}`}>
+              <a className={`navbar-item ${(scrolled && props.transparent ? "font--black" : "font--white")} ${(props.url === link) && 'active font-bold'}`}>{t(link)}</a>
+            </Link>
+          ))
+        }
       </div>
 
       <div className="flex items-center space-x-8">
@@ -83,28 +79,20 @@ export const Navbar = (props : NavbarProps) => {
             </a>
           </Link>
         </div>
-
-        <Link href="/teams">
-          <a className="navbar-item" onClick={toggleDrawer("navbar", false)}>{t("teams")}</a>
-        </Link>
-
-        <Link href="/locations">
-          <a className="navbar-item" onClick={toggleDrawer("navbar", false)}>{t("locations")}</a>
-        </Link>
-
-        <Link href="stories">
-          <a className="navbar-item" onClick={toggleDrawer("navbar", false)}>{t("stories")}</a>
-        </Link>
-
-        <Link href="jobs">
-          <a className="navbar-item" onClick={toggleDrawer("navbar", false)}>{t("jobs")}</a>
-        </Link>
+        {
+          linkList.map((link, i) =>
+            <Link key={i} href={`/${link}`}>
+              <a className={`navbar-item ${props.url?.includes(link) && 'font-bold'}`} onClick={toggleDrawer("navbar", false)}>{t(link)}</a>
+            </Link>
+          )
+        }
       </div>
     </div>
   );
+
   const srcLogo = props.logoUrl ? bucketM + props.logoUrl : logo;
   return (
-    <nav className={"fixed top-0 left-0 right-0 w-full "+ (props.transparent ? "bg-transparent" : "bg-white") +" z-20 box-shadow-container" + (boxShadow ? " drop-shadow-sm" : "")}>
+    <nav className={`fixed top-0 left-0 right-0 w-full z-20 box-shadow-container transition-all ${(scrolled && props.transparent ? "bg-white" : "bg-transparent")}`}>
       <div className="mobile-container mx-auto flex h-9 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center w-8">
           <FontAwesomeIcon icon={faBars} style={{ fontSize: "1.3rem" }} onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
