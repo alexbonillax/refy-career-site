@@ -20,15 +20,13 @@ export const Translate = (text: string, array?: boolean): string => {
 
 const Home: NextPage = ({ pageProps }: any) => (
   <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('home')}  />
-    <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo}/>
-      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={pageProps.companyInfo.attributes.name}/>
-      <Areas {...pageProps.companyInfo} />
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
-      <RecentJobs {...pageProps.recentJobsList} />
-      <AboutCompany {...pageProps.companyInfo}/>
-    </div>
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('home')} />
+    <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} />
+    <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={pageProps.companyInfo.attributes.name} />
+    <Areas {...pageProps.companyInfo} />
+    <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
+    <RecentJobs {...pageProps.recentJobsList} />
+    <AboutCompany {...pageProps.companyInfo} />
   </>
 );
 

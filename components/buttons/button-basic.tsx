@@ -1,11 +1,13 @@
 export const ButtonBasic = ({
   children,
+  onClick,
   bgColor = "FE6680",
   classes,
 }: {
   children: React.ReactNode;
+  onClick: () => void;
   bgColor?: string;
   classes?: string;
 }) => (
-  <button className={`button button-basic ${classes}`} style={{backgroundColor: bgColor}}>{children}</button>
+  <button onClick={onClick} className={`button button-basic ${classes}`} style={{ backgroundColor: bgColor }}>{children}</button>
 )

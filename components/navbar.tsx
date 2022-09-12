@@ -15,7 +15,7 @@ interface NavbarProps {
   url: string;
 }
 
-export const Navbar = (props: NavbarProps) => {
+export const Navbar = ({ logoUrl, transparent = false, url }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
@@ -52,7 +52,11 @@ export const Navbar = (props: NavbarProps) => {
         {
           linkList.map((link, i) => (
             <Link key={i} href={`/${link}`}>
-              <a className={`navbar-item ${(scrolled && props.transparent ? "font--black" : "font--white")} ${(props.url === link) && 'active font-bold'}`}>{t(link)}</a>
+              <a className={`
+              navbar-item 
+              ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")} 
+              ${(url === link) && 'active font-bold'}`}
+              >{transparent}{t(link)}</a>
             </Link>
           ))
         }
@@ -82,7 +86,7 @@ export const Navbar = (props: NavbarProps) => {
         {
           linkList.map((link, i) =>
             <Link key={i} href={`/${link}`}>
-              <a className={`navbar-item ${props.url?.includes(link) && 'font-bold'}`} onClick={toggleDrawer("navbar", false)}>{t(link)}</a>
+              <a className={`navbar-item ${url?.includes(link) && 'font-bold'}`} onClick={toggleDrawer("navbar", false)}>{t(link)}</a>
             </Link>
           )
         }
@@ -90,12 +94,18 @@ export const Navbar = (props: NavbarProps) => {
     </div>
   );
 
-  const srcLogo = props.logoUrl ? bucketM + props.logoUrl : logo;
+  const srcLogo = logoUrl ? bucketM + logoUrl : logo;
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-20 box-shadow-container transition-all ${(scrolled && props.transparent ? "bg-white" : "bg-transparent")}`}>
-      <div className="mobile-container mx-auto flex h-9 items-center justify-between">
+    <nav className={`fixed top-0 left-0 right-0 w-full z-20  transition-all 
+    ${((scrolled && transparent) || (!transparent) ? "bg-white" : "bg-transparent")}
+    ${scrolled ? 'box-shadow-container' : ''}
+    `}>
+      <div className="mobile-container mx-auto flex h-8 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center w-8">
-          <FontAwesomeIcon icon={faBars} style={{ fontSize: "1.3rem" }} onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
+          <FontAwesomeIcon 
+            icon={faBars} style={{ fontSize: "1.3rem"}}
+            className={`${((scrolled && transparent) || (!transparent) ? "" : "icon-font--light")}`}
+            onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
         </div>
 
         <Link href="/">

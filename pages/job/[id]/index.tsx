@@ -1,35 +1,44 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getCompanyInfo } from '../../../services'
+import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
 
 import { Divider, Navbar } from '../../../components';
-import { getJobDetails } from '../../../services/getJobDetails';
+import { getJobDetails, getReferredJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
-import { faCoin, faStopwatch } from '@fortawesome/pro-light-svg-icons';
+import { faArrowDown, faCoin, faStopwatch } from '@fortawesome/pro-light-svg-icons';
 import { DateToTimeLeftReduced } from '../../../utils/dateToTimeLeftReduced';
-import { Translate } from '../../locations';
 import AboutCompany from '../../../components/about';
+import { useTranslation } from 'next-i18next';
+import Company from '../../../services/models/company';
+import { ButtonBasic } from '../../../components/buttons/button-basic';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FloatingContainer } from '../../../components/floating-container';
 
 interface BannerProps {
   jobDetails: Job,
-  companyName: string
+  companyName: string;
+  canApply: boolean;
+  referralCode: string;
 }
 
-const Banner = ({jobDetails, companyName}: BannerProps) => {
+const Banner = ({ jobDetails, companyName, canApply, referralCode }: BannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
+  const { t } = useTranslation("common");
+
   return (
     <section id="cover"
       className="background-color--dark background-center"
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
-        <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 py-60 text-center">
+        <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-44 desktop:py-60 text-center">
           <p className="font-title font--white">{companyName}</p>
-          <p className="font-big-title font--white mt-3 mb-3 mobile:font-big-title--40 desktop:font-big-title--46">{jobDetails.attributes.title}</p>
+          <p className="font-big-title mobile:text-4xl desktop:text-5xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap flex-justify-center">
             {
               jobDetails.department &&
@@ -55,105 +64,135 @@ const Banner = ({jobDetails, companyName}: BannerProps) => {
 
           </div>
           <div className="mt-4">
-            {/* <app-button-basic
-          [classes]="'button--light background-color--primary button-hover--size'"
-          (click)="goToApplyJob()"
-          [backgroundColor]="company.attributes.primaryColor"
-        >
-          {{ 'candidate-job.apply-for-job' | transloco }}
-          <fa-icon *ngIf="currentJobLink$ | async" [icon]="faArrowUpRightFromSquare" className="ml-1"></fa-icon>
-        </app - button - basic > */}
+            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(referralCode) : notify(t('toast.apply.warning'))}>Inscríbete a esta posición</ButtonBasic>
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
-          <div>
-            {/* <app-button-basic
-          [size]="buttonSizeSmall"
-      [classes]="'no-p button-hover--underline button-hover--underline-white'"
-      (click)="scrollToSection('job-details')"
-        >
-      <p className="button-font--15 button--light">{{ 'scroll-down' | transloco }}</p>
-      <fa-icon [icon]="faArrowDown" className="font--white ml-1"></fa-icon>
-  </app-button-basic> */}
-          </div >
+          <div className='flex items-center cursor-pointer'>
+            <p className='cursor-pointer font--white font-black button-hover--underline button-hover--underline-white'>Ir abajo</p>
+            <FontAwesomeIcon className="font--white ml-1" icon={faArrowDown} />
+          </div>
         </div >
       </div >
     </section >
   )
 }
 
-const Details = (jobDetails: Job) => (
-  <section id="job-details" className="py-10">
-    <div className="flex-column mobile-container px-3">
-      <div className="font-prose" dangerouslySetInnerHTML={{ __html: jobDetails.attributes.description }}></div>
-      <Divider title='' />
-      {
-        (jobDetails.attributes.employmentType || jobDetails.attributes.maxSalary) &&
-        <div className="flex-column">
-          <p className="font-subtitle mb-1">{'job.edit.step-title'}</p>
+const applyJob = (referralCode: string) => {
+  const tenantCode = getTenantCode();
+  window.location.assign(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${referralCode}`);
+}
+
+const notify = (text: string) => toast.warn(text);
+
+interface JobDetailsProps {
+  job: Job;
+}
+
+const Details = ({ job }: JobDetailsProps) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <section id="job-details" className="py-10">
+      <div className="flex-column mobile-container px-3">
+        <div className="font-prose mb-3" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
+        <Divider />
+        {
+          (job.attributes.employmentType || job.attributes.maxSalary) &&
           <div className="flex-column">
-            {
-              jobDetails.attributes.employmentType &&
-              <div className="flex flex-align-center">
-                <FontAwesomeIcon icon={faHandshake} className="mr-1" />
-                <div className="flex flex-align-center flex-justify-between full-width">
-                  <p className="font-multiline font--dark">{'manage.edit-job.employment-type.title'}</p>
-                  <p
-                    className="font-multiline">{'manage.edit-job.employment-type'}</p>
+            <p className="font-subtitle mt-3 mb-1">{t('job.conditions.title')}</p>
+            <div className="flex-column space-y-3">
+              {
+                job.attributes.employmentType &&
+                <div className="flex flex-align-center">
+                  <FontAwesomeIcon icon={faHandshake} className="mr-1" />
+                  <div className="flex flex-align-center flex-justify-between full-width">
+                    <p className="font-multiline font--dark">{t('job.type')}</p>
+                    <p
+                      className="font-multiline">{t('job.type', { count: job.attributes.employmentType })}</p>
+                  </div>
                 </div>
-              </div>
-            }
-            {
-              jobDetails.attributes.maxSalary &&
-              <div className="flex flex-align-center">
-                <FontAwesomeIcon icon={faCoin} className="w-6 h-6 mr-1 icon-font" />
-                <div className="flex flex-align-center flex-justify-between full-width">
-                  <p className="font-multiline font--dark">{'jobs.job-details.salary-range'}</p>
-                  <p className="font-multiline">{jobDetails.attributes.minSalary} - {jobDetails.attributes.maxSalary} {jobDetails.attributes.salaryCurrencyId}</p>
+              }
+              {
+                job.attributes.maxSalary &&
+                <div className="flex flex-align-center">
+                  <FontAwesomeIcon icon={faCoin} className="mr-1" />
+                  <div className="flex flex-align-center flex-justify-between full-width">
+                    <p className="font-multiline font--dark">{'jobs.job-details.salary-range'}</p>
+                    <p className="font-multiline">{job.attributes.minSalary} - {job.attributes.maxSalary} {job.attributes.salaryCurrencyId}</p>
+                  </div>
                 </div>
-              </div>
-            }
-            {
-              jobDetails.attributes.salaryFrequency &&
-              <div className="flex flex-align-center">
-                <FontAwesomeIcon icon={faStopwatch} className="w-6 h-6 mr-1 icon-font" />
-                <div className="flex flex-align-center flex-justify-between full-width">
-                  <p className="font-multiline font--dark">{'manage.edit-job.frequency'}</p>
-                  <p
-                    className="font-multiline">{'manage.edit-job.pay-frequency'}</p>
+              }
+              {/* { LO HE VISTO ESCONDIDO EN LA CAREER ASÍ QUE LO COMENTO
+                jobDetails.attributes.salaryFrequency &&
+                <div className="flex flex-align-center">
+                  <FontAwesomeIcon icon={faStopwatch} className="mr-1" />
+                  <div className="flex flex-align-center flex-justify-between full-width">
+                    <p className="font-multiline font--dark">{t('job.pay-frequency')}</p>
+                    <p className="font-multiline">{jobDetails.attributes.salaryFrequency}</p>
+                  </div>
                 </div>
-              </div>
-            }
+              } */}
+            </div>
           </div>
+        }
+
+      </div>
+    </section>
+  )
+}
+
+interface JobProps {
+  companyInfo: Company;
+  jobDetails: Job;
+  canApply: boolean;
+  jobId: string;
+}
+
+const Job: NextPage<JobProps> = ({ companyInfo, jobDetails, canApply, jobId }: JobProps) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <>
+      {
+        jobDetails.attributes &&
+        <>
+          <Header companyName={companyInfo.attributes.name} title={jobDetails.attributes.title} />
+          <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='jobs' />
+          <Banner jobDetails={jobDetails} companyName={companyInfo.attributes.name} canApply={canApply} referralCode={jobId} />
+          <Details job={jobDetails} />
+          <AboutCompany {...companyInfo} />
+          <FloatingContainer>
+            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))}>Inscríbete a esta posición</ButtonBasic>
+          </FloatingContainer>
+          <ToastContainer position='bottom-center' />
+        </>
+      }
+
+      {
+        !jobDetails.attributes &&
+        <div className='flex items-center justify-center'>
+          <h1>WRONG REFERRAL CODE</h1>
         </div>
       }
 
-    </div>
-  </section>
-)
-
-const Job: NextPage = ({ pageProps }: any) => (
-  <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')}/>
-    <Navbar logoUrl={pageProps.companyInfo.attributes.logo} transparent={true} url='jobs'/>
-    <Banner jobDetails={pageProps.jobDetails} companyName={pageProps.companyInfo.attributes.name}  />
-    <Details {...pageProps.jobDetails} />
-    <AboutCompany {...pageProps.companyInfo} />
-  </>
-);
+    </>
+  )
+};
 
 export const getServerSideProps = async ({ locale, params }: { locale: string, params: any }) => {
   const jobId = params.id;
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
-  const jobDetails = await getJobDetails(jobId);
+  const jobDetails = (/[a-zA-Z]/.test(jobId)) ? await getReferredJobDetails(jobId) : await getJobDetails(jobId);
+  const canApply = !!jobDetails.referrerUser?.id;
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-        jobDetails
-      }
+      companyInfo,
+      jobDetails,
+      canApply,
+      jobId
     }
   };
 };
