@@ -13,9 +13,10 @@ interface NavbarProps {
   logoUrl: string;
   transparent?: boolean;
   url: string;
+  companyUrl: string;
 }
 
-export const Navbar = ({ logoUrl, transparent = false, url }: NavbarProps) => {
+export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
@@ -63,7 +64,7 @@ export const Navbar = ({ logoUrl, transparent = false, url }: NavbarProps) => {
       </div>
 
       <div className="flex items-center space-x-8">
-        <Link href="/">
+        <Link href={companyUrl}>
           <a target="_blank">
             <ButtonBasic>{t("company-site")}</ButtonBasic>
           </a>
@@ -101,11 +102,11 @@ export const Navbar = ({ logoUrl, transparent = false, url }: NavbarProps) => {
     ${scrolled ? 'box-shadow-container' : ''}
     `}>
       <div className="mobile-container mx-auto flex h-8 items-center justify-between">
-        <div className="hidden cursor-pointer mobile:flex justify-center w-8">
-          <FontAwesomeIcon 
-            icon={faBars} style={{ fontSize: "1.3rem"}}
+        <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
+          <FontAwesomeIcon
+            icon={faBars} style={{ fontSize: "1.3rem" }}
             className={`${((scrolled && transparent) || (!transparent) ? "" : "icon-font--light")}`}
-            onClick={toggleDrawer("navbar", true)}></FontAwesomeIcon>
+          ></FontAwesomeIcon>
         </div>
 
         <Link href="/">
@@ -117,8 +118,6 @@ export const Navbar = ({ logoUrl, transparent = false, url }: NavbarProps) => {
         <div className="flex w-full mobile:hidden">
           <LinksList></LinksList>
         </div>
-
-
 
         <SwipeableDrawer
           anchor={"left"}

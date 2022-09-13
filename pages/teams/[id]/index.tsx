@@ -11,6 +11,7 @@ import Page from "../../../services/models/page";
 import Job from "../../../services/models/job";
 
 import { RecentJobs } from "../../jobs";
+import Footer from "../../../components/footer";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -26,10 +27,11 @@ interface TeamJobsProps {
 const TeamJobs: NextPage<TeamJobsProps> = ({ companyInfo, recentJobsList, teamName }: TeamJobsProps) => (
   <>
     <Header companyName={companyInfo.attributes.name} title={Translate('jobs')} />
-    <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' />
+    <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' companyUrl={companyInfo.attributes.site} />
     <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={teamName} />
     <RecentJobs recentJobsList={recentJobsList} />
     <AboutCompany {...companyInfo} />
+    <Footer />
   </>
 );
 

@@ -8,7 +8,6 @@ export const post = async (url: string, body: any): Promise<any> => {
     headers: {
       'Content-Type': 'application/json'
     },
-    mode: "no-cors",
     cache: "no-cache"
   });
   return res.json();

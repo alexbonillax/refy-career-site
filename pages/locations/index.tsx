@@ -6,19 +6,20 @@ import { Divider, Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 
 import { ButtonBasic } from "../../components/buttons/button-basic";
+import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
 
-export const Translate = (text: string, array?: boolean): string => {
+const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
 interface WorkplacesProps {
- companyInfo: Company;
- classes?: string;
+  companyInfo: Company;
+  classes?: string;
 }
 
 export const Workplaces = (props: WorkplacesProps) => (
@@ -55,11 +56,12 @@ export const Workplaces = (props: WorkplacesProps) => (
 
 const Locations: NextPage = ({ pageProps }: any) => (
   <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('locations')}/>
-    <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='locations'/>
+    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('locations')} />
+    <div className="pt-8">
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='locations' companyUrl={pageProps.companyInfo.attributes.site} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
       <AboutCompany {...pageProps.companyInfo} />
+      <Footer />
     </div>
   </>
 );

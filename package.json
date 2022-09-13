@@ -24,6 +24,7 @@
     "@material-ui/styles": "latest",
     "@mui/material": "^5.6.1",
     "dayjs": "^1.11.4",
+    "i18next-http-backend": "^1.4.1",
     "i18next-intervalplural-postprocessor": "^3.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.34",

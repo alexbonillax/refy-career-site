@@ -1,4 +1,3 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
@@ -19,6 +18,9 @@ import { ButtonBasic } from '../../../components/buttons/button-basic';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FloatingContainer } from '../../../components/floating-container';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Footer from '../../../components/footer';
 
 interface BannerProps {
   jobDetails: Job,
@@ -64,12 +66,12 @@ const Banner = ({ jobDetails, companyName, canApply, referralCode }: BannerProps
 
           </div>
           <div className="mt-4">
-            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(referralCode) : notify(t('toast.apply.warning'))}>Inscríbete a esta posición</ButtonBasic>
+            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(referralCode) : notify(t('toast.apply.warning'))}>{t('job.apply.button')}</ButtonBasic>
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
           <div className='flex items-center cursor-pointer'>
-            <p className='cursor-pointer font--white font-black button-hover--underline button-hover--underline-white'>Ir abajo</p>
+            <p className='cursor-pointer font--white font-black button-hover--underline button-hover--underline-white'>{t('job.go-down')}</p>
             <FontAwesomeIcon className="font--white ml-1" icon={faArrowDown} />
           </div>
         </div >
@@ -146,68 +148,62 @@ interface JobProps {
   companyInfo: Company;
   jobDetails: Job;
   canApply: boolean;
-  jobId: string;
 }
 
-const Job: NextPage<JobProps> = ({ companyInfo, jobDetails, canApply, jobId }: JobProps) => {
+const Job: NextPage<JobProps> = () => {
   const { t } = useTranslation("common");
+  const [data, setData] = useState<JobProps>({ companyInfo: null, jobDetails: null, canApply: null });
+  const [isLoading, setLoading] = useState(true);
+  const jobId: any = useRouter().query?.id as any
+
+
+  useEffect(() => {
+    async function getJobsData() {
+      const companyInfo = await getCompanyInfo();
+      const jobDetails = (/[a-zA-Z]/.test(jobId)) ? await getReferredJobDetails(jobId) : await getJobDetails(jobId);
+      const canApply = !!jobDetails.referrerUser?.id;
+      setData({ companyInfo, jobDetails, canApply });
+      setLoading(false);
+    }
+    getJobsData();
+  }, [])
 
   return (
     <>
-      {
-        jobDetails.attributes &&
+      {(!isLoading) &&
         <>
-          <Header companyName={companyInfo.attributes.name} title={jobDetails.attributes.title} />
-          <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='jobs' />
-          <Banner jobDetails={jobDetails} companyName={companyInfo.attributes.name} canApply={canApply} referralCode={jobId} />
-          <Details job={jobDetails} />
-          <AboutCompany {...companyInfo} />
-          <FloatingContainer>
-            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))}>Inscríbete a esta posición</ButtonBasic>
-          </FloatingContainer>
-          <ToastContainer position='bottom-center' />
+          {
+            data.jobDetails.attributes &&
+            <>
+              <Header companyName={data.companyInfo.attributes.name} title={data.jobDetails.attributes.title} />
+              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} />
+              <Banner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} canApply={data.canApply} referralCode={jobId} />
+              <Details job={data.jobDetails} />
+              <AboutCompany {...data.companyInfo} />
+              <Footer />
+              <FloatingContainer>
+                <ButtonBasic classes='button-title' onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))}>{t('job.apply.button')}</ButtonBasic>
+              </FloatingContainer>
+              <ToastContainer position='bottom-center' />
+            </>
+          }
+
+          {
+            !data.jobDetails.attributes &&
+            <div className='flex items-center justify-center'>
+              <h1>WRONG REFERRAL CODE</h1>
+            </div>
+          }
+
         </>
       }
-
       {
-        !jobDetails.attributes &&
-        <div className='flex items-center justify-center'>
-          <h1>WRONG REFERRAL CODE</h1>
-        </div>
+        (isLoading) &&
+        <h2>Loading</h2>
       }
-
     </>
+
   )
 };
-
-export const getServerSideProps = async ({ locale, params }: { locale: string, params: any }) => {
-  const jobId = params.id;
-  const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo();
-  const jobDetails = (/[a-zA-Z]/.test(jobId)) ? await getReferredJobDetails(jobId) : await getJobDetails(jobId);
-  const canApply = !!jobDetails.referrerUser?.id;
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      companyInfo,
-      jobDetails,
-      canApply,
-      jobId
-    }
-  };
-};
-
-// NOTE: In case that we want to make individual JOB pages static we need this method.
-
-// export const getStaticPaths = async () => {
-//   const companyInfo = await getCompanyInfo();
-//   const recentJobsList = await getRecentJobs(companyInfo.id);
-//   return {
-//     paths: recentJobsList.content.map(({ id }) => `/job/${id}`) ?? [],
-//     fallback: true
-//   }
-// };
-
-
 
 export default Job

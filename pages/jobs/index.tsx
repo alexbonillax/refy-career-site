@@ -2,25 +2,26 @@ import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
+import Footer from "../../components/footer";
 
 import { Header } from "../../components/header";
-
 import { getCompanyInfo, getRecentJobs } from "../../services";
+import Company from "../../services/models/company";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
-import { Translate } from "../locations";
 
 interface RecentJobsProps {
   recentJobsList: Page<Job>;
   workplace?: number;
 }
 
-export const RecentJobs = ({recentJobsList, workplace}: RecentJobsProps) => {
+export const RecentJobs = ({ recentJobsList, workplace }: RecentJobsProps) => {
   const { t } = useTranslation("common");
   let jobs = recentJobsList?.content;
   if (workplace) {
@@ -41,9 +42,8 @@ export const RecentJobs = ({recentJobsList, workplace}: RecentJobsProps) => {
           }
           {
             //TODO
-            (!jobs || jobs.length == 0) && 
-            <h1>There's actually not jobs in this area =(</h1>
-            
+            (!jobs || jobs.length == 0) &&
+            <h1>{`Theres actually not jobs in this area 😢`}</h1>
           }
         </div>
       </div>
@@ -57,7 +57,7 @@ const JobCard = (job: Job) => {
     <Link href={"/job/" + job.id}>
       <a>
         <div className="flex-column text-center box-shadow-container--card br-1 overflow-hidden flex-align-center background-color--white cursor-pointer">
-          <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})`} : {}}>
+          <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
             <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
           </div>
           <div className="flex-column py-2 px-3">
@@ -85,33 +85,46 @@ const JobCard = (job: Job) => {
   )
 }
 
-const Jobs: NextPage = ({ pageProps }: any) => (
-  <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('jobs')} />
-    <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='jobs'/>
-      <RecentJobs recentJobsList={pageProps.recentJobsList} workplace={pageProps.workplaceId} />
-      <AboutCompany {...pageProps.companyInfo} />
-    </div>
-  </>
-);
+interface JobsProps {
+  companyInfo: Company,
+  recentJobsList: Page<Job>,
+}
 
-
-export const getServerSideProps = async ({ locale, query }: { locale: string, query: any }) => {
-  const workplaceId = query?.workplace ? query.workplace : null;
-  const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo();
-  const recentJobsList = await getRecentJobs(companyInfo.id);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-        recentJobsList,
-        workplaceId,
-      }
+const Jobs: NextPage = () => {
+  const { t } = useTranslation("common");
+  const workplaceId = +useRouter().query?.workplace;
+  const [data, setData] = useState<JobsProps>({ companyInfo: null, recentJobsList: null })
+  const [isLoading, setLoading] = useState(true)
+  useEffect(() => {
+    async function getJobsData() {
+      const companyInfo = await getCompanyInfo();
+      const recentJobsList = await getRecentJobs(companyInfo.id);
+      setData({ companyInfo, recentJobsList });
+      setLoading(false);
     }
-  };
+    getJobsData();
+  }, [])
+
+
+  return (
+    <>
+      {(!isLoading) &&
+        <>
+          <Header companyName={data.companyInfo.attributes.name} title={t('jobs')} />
+          <div className="pt-8">
+            <Navbar logoUrl={data.companyInfo.attributes.logo} url='jobs' companyUrl={data.companyInfo.attributes.site} />
+            <RecentJobs recentJobsList={data.recentJobsList} workplace={workplaceId} />
+            <AboutCompany {...data.companyInfo} />
+            <Footer />
+          </div>
+        </>
+      }
+      {
+        (isLoading) &&
+        <h2>Loading</h2>
+      }
+    </>
+  )
 };
 
 export default Jobs;

@@ -5,7 +5,7 @@ export const ButtonBasic = ({
   classes,
 }: {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   bgColor?: string;
   classes?: string;
 }) => (

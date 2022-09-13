@@ -33,5 +33,7 @@
     "job.type_five": "Aprendizaje",
     "job.type_six": "Prácticas",
     "job.type_seven": "Voluntario",
-    "toast.apply.warning": "No puedes aplicar a esta oferta sin un referido. Pregunta por algún referidor para que pueda mandarte un enlace válido!"
+    "toast.apply.warning": "No puedes aplicar a esta oferta sin un referido. Pregunta por algún referidor para que pueda mandarte un enlace válido!",
+    "job.apply.button": "Inscríbete a esta posición",
+    "job.go-down": "Ir abajo"
 }

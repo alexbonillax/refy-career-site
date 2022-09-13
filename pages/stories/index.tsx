@@ -2,10 +2,11 @@ import { faCalendar, faShareNodes } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Divider, Navbar } from "../../components";
 import AboutCompany from "../../components/about";
+import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
 import { ReadMore } from "../../components/read-more";
@@ -19,36 +20,34 @@ import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 
-export const Translate = (text: string, array?: boolean): string => {
+export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyInfo: Company }) => {
   const { t } = useTranslation("common");
-  return array ? t(text, { returnObjects: true }) : t(text);
-}
+  return (
+    <section id="department-posts" className="py-10 px-2 background-color--grey--0">
+      <div className="mobile-container">
+        <p className="font-big-title text-center mobile:font-big-title--40">{t('stories.latest')}</p>
+      </div>
+      <div className="mobile-container flex-column pt-5 ">
+        {
+          stories.content?.map((post, i) => (
+            <PostItem key={i} post={post} companyInfo={companyInfo} />
+          ))
+        }
 
-export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyInfo: Company }) => (
-  <section id="department-posts" className="py-10 px-2 background-color--grey--0">
-    <div className="mobile-container">
-      <p className="font-big-title text-center mobile:font-big-title--40">{Translate('stories.latest')}</p>
-    </div>
-    <div className="mobile-container flex-column pt-5 ">
-      {
-        stories.content?.map((post, i) => (
-          <PostItem key={i} post={post} companyInfo={companyInfo} />
-        ))
-      }
-
-      {/* <ng-container *ngIf="(loading$ | async) || (posts$ | async)?.hasMorePages">
+        {/* <ng-container *ngIf="(loading$ | async) || (posts$ | async)?.hasMorePages">
         <ng-container *ngFor="let i of loadingsPerPage; let last = last">
           <app-post-loading [displayAsCard]="true"></app-post-loading>
         </ng-container>
       </ng-container> */}
 
-      {stories.content.length <= 0 &&
-        <p className="font-prose text-center">{'candidate.stories.empty'}</p>
-      }
+        {stories.content.length <= 0 &&
+          <p className="font-prose text-center">{'candidate.stories.empty'}</p>
+        }
 
-    </div>
-  </section>
-)
+      </div>
+    </section>
+  )
+};
 
 const HeaderUserPost = (post: Post) => {
   const userPicUrl = post.overview.user.avatar ? bucketM + post.overview.user.avatar : '';
@@ -222,30 +221,43 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
   )
 };
 
-const Stories: NextPage = ({ pageProps }: any) => (
-  <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('stories')}/>
-    <div className="pt-9">
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories'/>
-      <Posts stories={pageProps.stories} companyInfo={pageProps.companyInfo} />
-      <AboutCompany {...pageProps.companyInfo} />
-    </div>
-  </>
-);
+interface StoriesProps {
+  companyInfo: Company;
+  stories: Page<Post>
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
-  const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo();
-  const stories = await getPosts(companyInfo.id);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-        stories,
-      }
+const Stories: NextPage = () => {
+  const { t, ready } = useTranslation('common')
+  const [data, setData] = useState<StoriesProps>({ companyInfo: null, stories: null })
+  const [isLoading, setLoading] = useState(true)
+  useEffect(() => {
+    async function getJobsData() {
+      const companyInfo = await getCompanyInfo();
+      const stories = await getPosts(companyInfo.id);
+      setData({ companyInfo, stories });
+      setLoading(false);
     }
-  };
+    getJobsData();
+  }, [])
+  return (
+    <>
+      {(!isLoading) &&
+        <>
+          <Header companyName={data.companyInfo.attributes.name} title={t('stories')} />
+          <div className="pt-8">
+            <Navbar logoUrl={data.companyInfo.attributes.logo} url='stories' companyUrl={data.companyInfo.attributes.site} />
+            <Posts stories={data.stories} companyInfo={data.companyInfo} />
+            <AboutCompany {...data.companyInfo} />
+            <Footer />
+          </div>
+        </>
+      }
+      {
+        (isLoading) &&
+        <h2>Loading</h2>
+      }
+    </>
+  )
 };
 
 export default Stories;
