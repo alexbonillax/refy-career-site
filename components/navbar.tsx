@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/pro-solid-svg-icons";
+import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
 import { SwipeableDrawer } from "@mui/material";
 import React from "react";
 import { bucketM } from "../services/urls";
@@ -64,25 +64,28 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
       </div>
 
       <div className="flex items-center space-x-8">
-        <Link href={companyUrl}>
-          <a target="_blank">
-            <ButtonBasic>{t("company-site")}</ButtonBasic>
-          </a>
-        </Link>
+        <CompanyWebsiteButton />
       </div>
     </div>
   );
 
+  const CompanyWebsiteButton = () => (
+    <Link href={companyUrl}>
+      <a target="_blank">
+        <ButtonBasic>
+          {t("company-site")}
+          <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
+        </ButtonBasic>
+      </a>
+    </Link>
+  )
+
   const SideBarLinks = () => (
-    <div className="w-64 h-full flex flex-col items-center justify-between py-2 px-3">
+    <div className="w-72 h-full flex flex-col items-center justify-between py-2 px-3">
       <div className="flex w-full flex-col space-y-10">
         <div className="flex justify-between items-center">
           <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font--candidate-navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
-          <Link href="/">
-            <a target="_blank">
-              <ButtonBasic>{t("company-site")}</ButtonBasic>
-            </a>
-          </Link>
+          <CompanyWebsiteButton />
         </div>
         {
           linkList.map((link, i) =>
@@ -97,11 +100,10 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
 
   const srcLogo = logoUrl ? bucketM + logoUrl : logo;
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-20  transition-all 
-    ${((scrolled && transparent) || (!transparent) ? "bg-white" : "bg-transparent")}
-    ${scrolled ? 'box-shadow-container' : ''}
+    <nav className={`fixed top-0 left-0 right-0 w-full z-20  transition-all box-shadow-container
+    ${((scrolled && transparent) || (!transparent) ? "bg-white" : "background-color--blurr-soft-dark")}
     `}>
-      <div className="mobile-container mx-auto flex h-8 items-center justify-between">
+      <div className="flex desktop:max-w-6xl mobile:max-w-3xl mx-auto desktop:h-20 mobile:h-16 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
           <FontAwesomeIcon
             icon={faBars} style={{ fontSize: "1.3rem" }}

@@ -26,7 +26,7 @@ interface TeamJobsProps {
 
 const TeamJobs: NextPage<TeamJobsProps> = ({ companyInfo, recentJobsList, teamName }: TeamJobsProps) => (
   <>
-    <Header companyName={companyInfo.attributes.name} title={Translate('jobs')} />
+    <Header company={companyInfo} title={Translate('teams')} />
     <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' companyUrl={companyInfo.attributes.site} />
     <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={teamName} />
     <RecentJobs recentJobsList={recentJobsList} />

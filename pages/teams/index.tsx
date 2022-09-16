@@ -19,11 +19,9 @@ export const Translate = (text: string, array?: boolean): string => {
 
 export const Areas = (companyInfo: Company) => (
   <section id="teams" className="py-10 bg-white">
-    <div className="mobile-container--responsive m-auto px-2 flex mobile:flex-col">
-      <div className="flex-col w-d--40 pb-2">
-        <p className="font-big-title mobile:text-center font-big-title--40">{Translate('teams')} </p>
-      </div>
-      <div className="w-d--60 mobile:flex-col flex flex-wrap">
+    <div className="mobile-container--responsive m-auto px-2 flex flex-col">
+      <h1 className="font-big-title text-center font-big-title--40 mb-5">{Translate('teams')} </h1>
+      <div className="mobile:flex-col flex flex-wrap">
         {companyInfo.departments?.map((department, i) => (
           <DepartmentCard key={i} {...department} />
         ))
@@ -51,7 +49,7 @@ const DepartmentCard = (department: Department) => {
 
 const Teams: NextPage = ({ pageProps }: any) => (
   <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('teams')} />
+    <Header company={pageProps.companyInfo} title={Translate('teams')} />
     <div className="pt-8">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='teams' companyUrl={pageProps.companyInfo.attributes.site} />
       <Areas {...pageProps.companyInfo} />

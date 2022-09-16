@@ -241,9 +241,9 @@ const Stories: NextPage = () => {
   }, [])
   return (
     <>
-      {(!isLoading) &&
+      {(!isLoading && ready) &&
         <>
-          <Header companyName={data.companyInfo.attributes.name} title={t('stories')} />
+          <Header company={data.companyInfo} title={t('stories')} />
           <div className="pt-8">
             <Navbar logoUrl={data.companyInfo.attributes.logo} url='stories' companyUrl={data.companyInfo.attributes.site} />
             <Posts stories={data.stories} companyInfo={data.companyInfo} />
@@ -253,7 +253,7 @@ const Stories: NextPage = () => {
         </>
       }
       {
-        (isLoading) &&
+        (isLoading || !ready) &&
         <h2>Loading</h2>
       }
     </>

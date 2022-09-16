@@ -56,7 +56,7 @@ export const Workplaces = (props: WorkplacesProps) => (
 
 const Locations: NextPage = ({ pageProps }: any) => (
   <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('locations')} />
+    <Header company={pageProps.companyInfo} title={Translate('locations')} />
     <div className="pt-8">
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='locations' companyUrl={pageProps.companyInfo.attributes.site} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />

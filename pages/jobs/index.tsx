@@ -110,7 +110,7 @@ const Jobs: NextPage = () => {
     <>
       {(!isLoading) &&
         <>
-          <Header companyName={data.companyInfo.attributes.name} title={t('jobs')} />
+          <Header company={data.companyInfo} title={t('jobs')} />
           <div className="pt-8">
             <Navbar logoUrl={data.companyInfo.attributes.logo} url='jobs' companyUrl={data.companyInfo.attributes.site} />
             <RecentJobs recentJobsList={data.recentJobsList} workplace={workplaceId} />

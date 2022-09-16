@@ -19,7 +19,7 @@ export const Translate = (text: string, array?: boolean): string => {
 
 const Home: NextPage = ({ pageProps }: any) => (
   <>
-    <Header companyName={pageProps.companyInfo.attributes.name} title={Translate('home')} />
+    <Header company={pageProps.companyInfo} title={Translate('home')} />
     <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes.site} />
     <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={pageProps.companyInfo.attributes.name} />
     <Areas {...pageProps.companyInfo} />
