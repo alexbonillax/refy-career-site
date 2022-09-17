@@ -13,12 +13,8 @@ import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 
-export const Translate = (text: string, array?: boolean): string => {
-  const { t } = useTranslation("common");
-  return array ? t(text, { returnObjects: true }) : t(text);
-}
-
 const Home: NextPage = ({ pageProps }: any) => {
+  const { t } = useTranslation("common");
   const [data, setData] = useState({ recentJobsList: null });
   const [isLoading, setLoading] = useState(true);
 
@@ -36,19 +32,12 @@ const Home: NextPage = ({ pageProps }: any) => {
 
   return (
     <>
-      <Header company={pageProps.companyInfo} title={Translate('home')} />
+      <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes.site} />
-      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={pageProps.companyInfo.attributes.name} />
+      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
-      {
-        !isLoading &&
-        <RecentJobs recentJobsList={data.recentJobsList} />
-      }
-      {
-        isLoading &&
-        <p>Loading</p>
-      }
+      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

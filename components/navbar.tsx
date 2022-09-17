@@ -8,20 +8,12 @@ import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
-import Router, { useRouter } from "next/router";
-import { start } from "repl";
 
 interface NavbarProps {
   logoUrl: string;
   transparent?: boolean;
   url: string;
   companyUrl: string;
-}
-
-enum ProgressBarStatus {
-  Stop,
-  Start,
-  Done,
 }
 
 export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: NavbarProps) => {
@@ -115,7 +107,7 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     <nav className={`fixed top-0 left-0 right-0 w-full z-20  transition-all box-shadow-container
     ${((scrolled && transparent) || (!transparent) ? "bg-white" : "background-color--blurr-soft-dark")}
     `}>
-      <div className="flex desktop:max-w-6xl mobile:max-w-3xl mx-auto desktop:h-20 mobile:h-16 items-center justify-between">
+      <div className="flex mobile-container--responsive mx-auto desktop:h-20 mobile:h-16 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
           <FontAwesomeIcon
             icon={faBars} style={{ fontSize: "1.3rem" }}

@@ -145,6 +145,7 @@ const Job: NextPage<JobProps> = () => {
 
 
   useEffect(() => {
+    if (!jobId) { return; }
     async function getJobsData() {
       const companyInfo = await getCompanyInfo();
       const jobDetails = await getJobDetails(jobId);
@@ -152,7 +153,7 @@ const Job: NextPage<JobProps> = () => {
       setLoading(false);
     }
     getJobsData();
-  }, [])
+  }, [jobId])
 
   return (
     <>
@@ -174,7 +175,7 @@ const Job: NextPage<JobProps> = () => {
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
                 </ButtonBasic>
               </FloatingContainer>
-              <ToastContainer position='bottom-center' />
+              <ToastContainer className="font-public font-title w-72" position='bottom-center' style={{ width: "700px" }} />
             </>
           }
 
@@ -189,7 +190,7 @@ const Job: NextPage<JobProps> = () => {
       }
       {
         (isLoading) &&
-        <h2>Loading</h2>
+        <h2>isLoading</h2>
       }
     </>
 

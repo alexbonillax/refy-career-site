@@ -80,13 +80,15 @@ const HeaderCompanyPost = ({ post, companyInfo }: { post: Post, companyInfo: Com
 const PicPost = (pictures: string[]) => {
   const pics = Object.values(pictures);
   return (
-    <div className={"flex-column" + (pics.length > 1 && "border border--white")}>
+    <div className={`flex-column rounded-b-md ${pics.length > 1 && "border border--white"}`}>
       <div className="flex">
         {
           pics.slice(0, 2).map((pic, i) => {
             const picturePostUrl = bucketXXL + pic;
             return (
-              <div key={i} className={"flex full-width h-60 overflow-hidden background-center " + (pics.length > 1 ? "border border--white" : "bg-cover")} style={{ backgroundImage: picturePostUrl ? `url(${picturePostUrl})` : '' }}>
+              <div key={i}
+                className={`flex full-width h-60 overflow-hidden background-center rounded-b-md	 ${pics.length > 1 ? "border border--white" : "bg-cover"}`}
+                style={{ backgroundImage: picturePostUrl ? `url(${picturePostUrl})` : '' }}>
                 <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
               </div>
             )
@@ -98,7 +100,7 @@ const PicPost = (pictures: string[]) => {
           pics.slice(2, pics.length > 5 ? 4 : 5).map((pic, i) => {
             const picturePostUrl = bucketXXL + pic;
             return (
-              <div key={i} className="flex full-width h-20 overflow-hidden background-center border border--white" style={{ backgroundImage: picturePostUrl ? `url(${picturePostUrl})` : '' }} >
+              <div key={i} className="flex full-width h-20 overflow-hidden background-center border border--white rounded-b-md" style={{ backgroundImage: picturePostUrl ? `url(${picturePostUrl})` : '' }} >
                 <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
               </div>
             )
@@ -126,7 +128,7 @@ const Badge = ({ text }: { text: string }) => (
 export const PostLink = ({ post }: { post: Post }) => (
   <Link href={post.attributes.url}>
     <a target="_blank">
-      <div className="flex-column border border--grey-100 overflow-hidden cursor-pointer">
+      <div className="flex-column border border--grey-100 overflow-hidden cursor-pointer rounded-b-md">
         <div className="flex h-30 overflow-hidden background-center" style={{ backgroundImage: post.attributes.urlPicture ? `url(${post.attributes.urlPicture})` : '' }}>
           <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
         </div>
