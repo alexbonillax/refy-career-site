@@ -1,9 +1,9 @@
-import { getCompanyInfo, getTenantCode } from '../../../services'
+import { getCompanyInfo } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
 
 import { Divider, Navbar } from '../../../components';
-import { getJobDetails, getReferredJobDetails } from '../../../services/getJobDetails';
+import { getJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,14 +22,14 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 
-interface BannerProps {
+interface JobBannerProps {
   jobDetails: Job,
   companyName: string;
-  canApply: boolean;
   referralCode: string;
+  onClick?: () => void;
 }
 
-const Banner = ({ jobDetails, companyName, canApply, referralCode }: BannerProps) => {
+export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
   const { t } = useTranslation("common");
 
@@ -66,7 +66,7 @@ const Banner = ({ jobDetails, companyName, canApply, referralCode }: BannerProps
 
           </div>
           <div className="mt-4">
-            <ButtonBasic classes='button-title' onClick={() => canApply ? applyJob(referralCode) : notify(t('toast.apply.warning'))}>{t('job.apply.button')}</ButtonBasic>
+            <ButtonBasic classes='button-title' onClick={() => onClick()}>{t('job.apply.button')}</ButtonBasic>
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
@@ -80,20 +80,16 @@ const Banner = ({ jobDetails, companyName, canApply, referralCode }: BannerProps
   )
 }
 
-const scrollToDescription = (): void => window.scrollTo({ top: 650, behavior: 'smooth' });
+const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
-const applyJob = (referralCode: string) => {
-  const tenantCode = getTenantCode();
-  window.location.assign(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${referralCode}`);
-}
 
-const notify = (text: string) => toast.warn(text);
+export const notify = (text: string) => toast.warn(text);
 
 interface JobDetailsProps {
   job: Job;
 }
 
-const Details = ({ job }: JobDetailsProps) => {
+export const JobDetails = ({ job }: JobDetailsProps) => {
   const { t } = useTranslation("common");
 
   return (
@@ -127,16 +123,6 @@ const Details = ({ job }: JobDetailsProps) => {
                   </div>
                 </div>
               }
-              {/* { LO HE VISTO ESCONDIDO EN LA CAREER ASÍ QUE LO COMENTO
-                jobDetails.attributes.salaryFrequency &&
-                <div className="flex flex-align-center">
-                  <FontAwesomeIcon icon={faStopwatch} className="mr-1" />
-                  <div className="flex flex-align-center flex-justify-between full-width">
-                    <p className="font-multiline font--dark">{t('job.pay-frequency')}</p>
-                    <p className="font-multiline">{jobDetails.attributes.salaryFrequency}</p>
-                  </div>
-                </div>
-              } */}
             </div>
           </div>
         }
@@ -146,15 +132,14 @@ const Details = ({ job }: JobDetailsProps) => {
   )
 }
 
-interface JobProps {
+export interface JobProps {
   companyInfo: Company;
   jobDetails: Job;
-  canApply: boolean;
 }
 
 const Job: NextPage<JobProps> = () => {
   const { t } = useTranslation("common");
-  const [data, setData] = useState<JobProps>({ companyInfo: null, jobDetails: null, canApply: null });
+  const [data, setData] = useState<JobProps>({ companyInfo: null, jobDetails: null });
   const [isLoading, setLoading] = useState(true);
   const jobId: any = useRouter().query?.id as any
 
@@ -162,9 +147,8 @@ const Job: NextPage<JobProps> = () => {
   useEffect(() => {
     async function getJobsData() {
       const companyInfo = await getCompanyInfo();
-      const jobDetails = (/[a-zA-Z]/.test(jobId)) ? await getReferredJobDetails(jobId) : await getJobDetails(jobId);
-      const canApply = !!jobDetails.referrerUser?.id;
-      setData({ companyInfo, jobDetails, canApply });
+      const jobDetails = await getJobDetails(jobId);
+      setData({ companyInfo, jobDetails });
       setLoading(false);
     }
     getJobsData();
@@ -179,13 +163,13 @@ const Job: NextPage<JobProps> = () => {
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} />
-              <Banner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} canApply={data.canApply} referralCode={jobId} />
-              <Details job={data.jobDetails} />
+              <JobBanner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
+              <JobDetails job={data.jobDetails} />
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>
                 <ButtonBasic classes='button-title box-shadow-container--elevated'
-                  onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))}>
+                  onClick={() => notify(t('toast.apply.warning'))}>
                   {t('job.apply.button')}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
                 </ButtonBasic>

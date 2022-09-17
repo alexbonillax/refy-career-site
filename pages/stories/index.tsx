@@ -2,6 +2,7 @@ import { faCalendar, faShareNodes } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Divider, Navbar } from "../../components";
@@ -20,7 +21,7 @@ import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 
-export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyInfo: Company }) => {
+export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
   const { t } = useTranslation("common");
   return (
     <section id="department-posts" className="py-10 px-2 background-color--grey--0">
@@ -29,20 +30,17 @@ export const Posts = ({ stories, companyInfo }: { stories: Page<Post>, companyIn
       </div>
       <div className="mobile-container flex-column pt-5 ">
         {
-          stories.content?.map((post, i) => (
+          !loading && stories.content?.map((post, i) => (
             <PostItem key={i} post={post} companyInfo={companyInfo} />
           ))
         }
 
-        {/* <ng-container *ngIf="(loading$ | async) || (posts$ | async)?.hasMorePages">
-        <ng-container *ngFor="let i of loadingsPerPage; let last = last">
-          <app-post-loading [displayAsCard]="true"></app-post-loading>
-        </ng-container>
-      </ng-container> */}
-
-        {stories.content.length <= 0 &&
+        {
+          !loading && stories.content.length <= 0 &&
           <p className="font-prose text-center">{'candidate.stories.empty'}</p>
         }
+
+        {loading && Array.from(Array(3)).map(_ => <PostItemLoading />)}
 
       </div>
     </section>
@@ -183,81 +181,77 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
         post.attributes.type === PostType.Image &&
         <PicPost {...post.attributes.pictures} />
       }
-
-      {
-        post.sharedBy &&
-        <div className="flex flex-align-center flex-justify-between py-1 px-2 h-5">
-          <div className="flex">
-            {/* <ng-container *ngFor="let user of post.sharedBy.slice(0, 5)">
-        <app-logo [size]="LogoSizes.S" [overlap]="true" [rounded]="true" [logoType]="LogoType.Profile" [firstLetter]="user.firstName" [url]="user.avatar"
-          matTooltip="{{ user.firstName }} {{ user.lastName }}"
-          matTooltipPosition="above"></app-logo>
-      </ng-container> */}
-          </div>
-          <p className="flex flex-align-center font-value font--ellipsis">
-            <FontAwesomeIcon icon={faShareNodes} className="mr-1" />
-            {post.sharedBy.length}</p >
-        </div >
-      }
-
-
-      {/* <ng-container *ngIf="buttons">
-    <div className="flex flex-justify-end pt-1 pb-2 px-2">
-      <div *ngIf="company.referralProgram.createPosts && post.overview.user?.id === me?.id" className="mid-width pr-1">
-         <app-button-basic
-          (click)="openEditPost()"
-          [size]="ButtonSize.SMALL"
-          [classes]="'button--dark-grey button-border--grey button-hover button-hover--dark'">
-          <fa-icon className="mr-1" [icon]="faPenToSquare"></fa-icon>
-          {{ 'manage.edit-post.edit-post' | transloco }}
-        </app-button-basic> 
-      </div>
-      <div className="mid-width pl-1">
-        <app-button-post (click)="onShare()" [posted]="post.overview.posted" [tokens]="company.referralProgram.sharedPost" [token]="company.referralProgram.token"></app-button-post>
-      </div>
-    </div>
-  </ng-container> */}
     </div >
   )
 };
 
+export const PostItemLoading = () => {
+  return (
+    <div className="flex-column box-shadow-container--card br-1 my-1">
+      <div className="flex-column">
+        <div className="flex flex-align-center flex-justify-between p-2">
+          <div className="flex flex-align-center">
+            <div className="h-5 w-5 background-loading-gradient background-loading-gradient--rounded"></div>
+            <div className="flex-column px-2">
+              <div className="flex h-3">
+                <div className="h-2 w-15 background-loading-gradient"></div>
+              </div>
+              <div className="h-2 w-5 background-loading-gradient"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Divider />
+      <div className="h-30 flex-column flex-justify-between py-2 px-2 background-loading-gradient background-loading-gradient--rect"></div>
+      <div className="flex flex-align-center flex-justify-between py-1 px-2 h-5">
+        <div className="h-2 w-2 background-loading-gradient"></div>
+        <div className="h-2 w-3 background-loading-gradient ml-1"></div>
+      </div>
+    </div >
+  )
+};
+
+
 interface StoriesProps {
-  companyInfo: Company;
   stories: Page<Post>
 };
 
-const Stories: NextPage = () => {
+const Stories: NextPage = ({ pageProps }: any) => {
   const { t, ready } = useTranslation('common')
-  const [data, setData] = useState<StoriesProps>({ companyInfo: null, stories: null })
+  const [data, setData] = useState<StoriesProps>({ stories: null })
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo();
-      const stories = await getPosts(companyInfo.id);
-      setData({ companyInfo, stories });
+      const stories = await getPosts(pageProps.companyInfo.id);
+      setData({ stories });
       setLoading(false);
     }
     getJobsData();
   }, [])
   return (
     <>
-      {(!isLoading && ready) &&
-        <>
-          <Header company={data.companyInfo} title={t('stories')} />
-          <div className="pt-8">
-            <Navbar logoUrl={data.companyInfo.attributes.logo} url='stories' companyUrl={data.companyInfo.attributes.site} />
-            <Posts stories={data.stories} companyInfo={data.companyInfo} />
-            <AboutCompany {...data.companyInfo} />
-            <Footer />
-          </div>
-        </>
-      }
-      {
-        (isLoading || !ready) &&
-        <h2>Loading</h2>
-      }
+      <Header company={pageProps.companyInfo} title={t('stories')} />
+      <div className="pt-8">
+        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} />
+        <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
+        <AboutCompany {...pageProps.companyInfo} />
+        <Footer />
+      </div>
     </>
   )
+};
+
+export const getStaticProps = async ({ locale }: { locale: string }) => {
+  const translations = await serverSideTranslations(locale, ["common"]);
+  const companyInfo = await getCompanyInfo();
+  return {
+    props: {
+      _nextI18Next: translations._nextI18Next,
+      pageProps: {
+        companyInfo,
+      }
+    }
+  };
 };
 
 export default Stories;

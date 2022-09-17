@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
 import { SwipeableDrawer } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
+import Router, { useRouter } from "next/router";
+import { start } from "repl";
 
 interface NavbarProps {
   logoUrl: string;
@@ -16,14 +18,20 @@ interface NavbarProps {
   companyUrl: string;
 }
 
+enum ProgressBarStatus {
+  Stop,
+  Start,
+  Done,
+}
+
 export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
-  const linkList = ['teams', 'locations', 'stories', 'jobs'];
+  const linkList = ['teams', 'people', 'locations', 'stories', 'jobs'];
   const [scrolled, setScrolling] = React.useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   });
@@ -32,7 +40,7 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     setClientWindowHeight((window.scrollY).toString());
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setScrolling(+clientWindowHeight > 0);
   }, [clientWindowHeight]);
 
@@ -57,7 +65,7 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
               navbar-item 
               ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")} 
               ${(url === link) && 'active font-bold'}`}
-              >{transparent}{t(link)}</a>
+              >{t(link)}</a>
             </Link>
           ))
         }
@@ -69,16 +77,20 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     </div>
   );
 
-  const CompanyWebsiteButton = () => (
-    <Link href={companyUrl}>
-      <a target="_blank">
-        <ButtonBasic>
-          {t("company-site")}
-          <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
-        </ButtonBasic>
-      </a>
-    </Link>
-  )
+  const CompanyWebsiteButton = () => {
+    const { t } = useTranslation("common");
+
+    return (
+      <Link href={companyUrl}>
+        <a target="_blank">
+          <ButtonBasic>
+            {t("company-site")}
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
+          </ButtonBasic>
+        </a>
+      </Link>
+    )
+  }
 
   const SideBarLinks = () => (
     <div className="w-72 h-full flex flex-col items-center justify-between py-2 px-3">

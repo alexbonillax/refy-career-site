@@ -12,6 +12,8 @@ import Job from "../../../services/models/job";
 
 import { RecentJobs } from "../../jobs";
 import Footer from "../../../components/footer";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -19,36 +21,44 @@ export const Translate = (text: string, array?: boolean): string => {
 }
 
 interface TeamJobsProps {
-  companyInfo: Company;
   recentJobsList: Page<Job>;
   teamName: string;
 }
 
-const TeamJobs: NextPage<TeamJobsProps> = ({ companyInfo, recentJobsList, teamName }: TeamJobsProps) => (
-  <>
-    <Header company={companyInfo} title={Translate('teams')} />
-    <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' companyUrl={companyInfo.attributes.site} />
-    <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={teamName} />
-    <RecentJobs recentJobsList={recentJobsList} />
-    <AboutCompany {...companyInfo} />
-    <Footer />
-  </>
-);
+const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { companyInfo: Company }) => {
+  const departmentId = +useRouter().query?.id;
+  const [data, setData] = useState<TeamJobsProps>({ recentJobsList: null, teamName: null })
+  const [isLoading, setLoading] = useState(true)
+  useEffect(() => {
+    if (!departmentId) { return; }
+    async function getJobsData() {
+      const recentJobsList = await getRecentJobs(companyInfo.id, departmentId);
+      const teamName = companyInfo.departments.find(department => department.id === +departmentId)?.attributes.name;
+      setData({ recentJobsList, teamName });
+      setLoading(false);
+    }
+    getJobsData();
+  }, [])
+  return (
+    <>
+      <Header company={companyInfo} title={Translate('teams')} />
+      <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' companyUrl={companyInfo.attributes.site} />
+      <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={data.teamName} />
+      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
+      <AboutCompany {...companyInfo} />
+      <Footer />
+    </>
+  )
+};
 
 
-export const getServerSideProps = async ({ locale, params }: { locale: string, params: any }) => {
-  const departmentId = params.id;
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
-  const recentJobsList = await getRecentJobs(companyInfo.id, departmentId);
-  const teamName = companyInfo.departments.find(department => department.id === +departmentId)?.attributes.name;
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
       companyInfo,
-      recentJobsList,
-      departmentId,
-      teamName
     }
   };
 };

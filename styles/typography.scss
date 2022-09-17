@@ -13,16 +13,16 @@ $refy-public-font: FiraSans;
 
   &-public {
     * {
-      font-family: $refy-public-font !important;
+      font-family: $refy-public-font  !important;
     }
   }
 
   &-bold {
-    font-weight: $font-bold !important;
+    font-weight: $font-bold  !important;
   }
 
   &-normal {
-    font-weight: $font-normal !important;
+    font-weight: $font-normal  !important;
   }
 
   &-line-through {
@@ -43,6 +43,11 @@ $refy-public-font: FiraSans;
       font-size: 26px;
       line-height: 2.25rem;
     }
+
+    &--40 {
+      font-size: 40px;
+    }
+
   }
 
   &-title {
@@ -308,10 +313,11 @@ $refy-public-font: FiraSans;
       font-weight: normal;
       font-size: 14px;
       line-height: 2.25rem;
-      color: $refy-text-contrast-grey !important;
+      color: $refy-text-contrast-grey  !important;
       cursor: pointer;
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
         text-decoration: underline;
       }
     }
@@ -369,7 +375,7 @@ $refy-public-font: FiraSans;
     }
 
     &-filled-heart {
-      color: $refy-color-primary !important;
+      color: $refy-color-primary  !important;
 
       &:not(.prevent-animation) {
         animation: bounce-in 300ms ease;
@@ -386,9 +392,11 @@ $refy-public-font: FiraSans;
       0% {
         transform: scale(0.8);
       }
+
       80% {
         transform: scale(1.1);
       }
+
       100% {
         transform: scale(1);
       }
@@ -398,9 +406,11 @@ $refy-public-font: FiraSans;
       0% {
         transform: scale(0.8);
       }
+
       80% {
         transform: scale(1.1);
       }
+
       100% {
         transform: scale(1);
       }
@@ -641,7 +651,13 @@ $refy-public-font: FiraSans;
   }
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   &:not(.font-selectable) {
     /*-webkit-user-select: none; /* Safari */
     /*-moz-user-select: none; /* Firefox */

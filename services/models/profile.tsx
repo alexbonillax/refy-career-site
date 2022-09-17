@@ -6,5 +6,6 @@ export default interface Profile {
     firstName: string;
     lastName: string;
     avatar: string;
+    linkedinVanityName: string;
   }
 }

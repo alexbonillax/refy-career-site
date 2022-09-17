@@ -7,6 +7,7 @@
     "company-site": "Ir a web de empresa",
     "offer": "oferta",
     "offers": "ofertas",
+    "people": "Personas",
     "teams.departments.view": "Ver todos los equipos",
     "size": "Empleados",
     "about.workers": "(1)[Menos de 10 empleados];(2)[Entre 10 y 50 empleados];(3)[Entre 50 y 200 empleados];(4)[Más de 200 empleados];",
@@ -35,5 +36,6 @@
     "job.type_seven": "Voluntario",
     "toast.apply.warning": "No puedes aplicar a esta oferta sin un referido. Pregunta por algún referidor para que pueda mandarte un enlace válido!",
     "job.apply.button": "Inscríbete a esta posición",
+    "job.apply.refier.title": "Your Refier at {{company}}",
     "job.go-down": "Ir abajo"
 }

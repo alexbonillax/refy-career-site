@@ -1,4 +1,5 @@
 import Department from "./department";
+import Profile from "./profile";
 import Workplace from "./workplace";
 export default interface Company {
   id: number;
@@ -25,4 +26,5 @@ export default interface Company {
   type: string;
   departments: Department[];
   workplaces: Workplace[];
+
 }
