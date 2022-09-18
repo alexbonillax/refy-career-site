@@ -25,14 +25,14 @@ interface WorkplacesProps {
 export const Workplaces = (props: WorkplacesProps) => (
   <section id="workplaces" className={`py-10 ${props.classes}`}>
     <div className="flex-col flex-align-center mobile-container px-2">
-      <p className="font-big-title text-center desktop:font-big-title--40">{Translate('workplaces.title')}</p>
+      <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('workplaces.title')}</p>
       <div className="flex-col full-width mt-5">
         {
           props.companyInfo.workplaces.map((workplace, i) => (
             <div key={i}>
               <div className="flex-align-center pt-3 mobile:flex-col mobile:text-center mobile:pb-1 desktop:flex desktop:pb-3">
                 <div className="flex-col full-width">
-                  <p className="font-prose font-bold">{workplace.attributes.name}</p>
+                  <p className="font-big-title desktop:text-4xl mobile:text-3xl font-bold">{workplace.attributes.name}</p>
                   <p className="font-prose mt-1">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
                   <p className="font-hint">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
                 </div>

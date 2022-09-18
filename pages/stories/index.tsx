@@ -26,7 +26,7 @@ export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<
   return (
     <section id="department-posts" className="py-10 px-2 background-color--grey--0">
       <div className="mobile-container">
-        <p className="font-big-title text-center mobile:font-big-title--40">{t('stories.latest')}</p>
+        <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('stories.latest')}</p>
       </div>
       <div className="mobile-container flex-column pt-5 ">
         {

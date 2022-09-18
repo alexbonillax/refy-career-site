@@ -27,7 +27,7 @@ export const PeopleSection = ({ departments }: { departments: Department[] }) =>
           department.employees.length > 0 &&
           <section key={i} id={department.attributes.name} className="py-10">
             <div className="mobile-container px-3">
-              <h1 className="font-big-title text-center font-big-title--40 mb-5">{department.attributes.name}</h1>
+              <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{department.attributes.name}</h1>
               <div className="flex flex-wrap justify-center items-center">
                 {
                   department.employees.map((employee, i) => (

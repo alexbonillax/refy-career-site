@@ -19,6 +19,12 @@ $font-bold: 900;
 @font-face {
   font-family: "FiraSans";
   font-weight: bold;
+  src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-weight: medium;
   src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-SemiBold.ttf");
 }
 

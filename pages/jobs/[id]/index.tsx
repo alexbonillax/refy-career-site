@@ -46,7 +46,7 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-40 desktop:h-screen text-center">
           <p className="font-title font--white">{companyName}</p>
-          <p className="font-big-title mobile:text-4xl desktop:text-5xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
+          <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap flex-justify-center">
             {
               jobDetails.department &&

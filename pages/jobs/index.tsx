@@ -31,7 +31,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true }: Recent
   return (
     <section id="department-jobs" className="bg-white">
       <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-        <h1 className="font-big-title text-center desktop:font-big-title--40">{t('jobs.available')}</h1>
+        <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('jobs.available')}</h1>
         <h2 className="font-subtitle text-center mt-1">{t('jobs.find', { company: 'Refy' })}</h2>
         <div className="flex flex-wrap flex-align-justify-center mt-5">
           {

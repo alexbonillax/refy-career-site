@@ -63,7 +63,7 @@ export const ReferrerSection = ({ jobDetails, company }: { jobDetails: Job, comp
   return (
     <section id="about-company" className="py-10 background-color--grey--0">
       <div className="mobile-container px-3">
-        <h1 className="font-big-title text-center desktop:font-big-title--40 mb-5">{t('job.apply.refier.title', { company })}</h1>
+        <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('job.apply.refier.title', { company })}</h1>
         <RefierCard {...jobDetails.referrerUser} />
       </div>
     </section>

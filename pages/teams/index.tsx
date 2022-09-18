@@ -38,7 +38,7 @@ const DepartmentCard = (department: Department) => {
       <a className="w-m--100 w-d--50 p-1">
         <div className="flex h-30 box-shadow-container--card background-center br-1 overflow-hidden cursor-pointer" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
           <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
-            <p className="font-big-title font--white">{department.attributes.name}</p>
+            <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white">{department.attributes.name}</p>
             <p className="font-hint font--white">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
           </div>
         </div>
