@@ -31,11 +31,9 @@ export const PeopleSection = ({ departments }: { departments: Department[] }) =>
               <div className="flex flex-wrap justify-center items-center">
                 {
                   department.employees.map((employee, i) => (
-                    <>
-                      <div className="px-3">
-                        <RefierCard key={i} {...employee} />
-                      </div>
-                    </>
+                    <div className="px-3" key={i}>
+                      <RefierCard {...employee} />
+                    </div>
                   ))
                 }
               </div>

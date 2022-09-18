@@ -40,7 +40,7 @@ export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<
           <p className="font-prose text-center">{'candidate.stories.empty'}</p>
         }
 
-        {loading && Array.from(Array(3)).map(_ => <PostItemLoading />)}
+        {loading && Array.from(Array(3)).map((_, i) => <PostItemLoading key={i} />)}
 
       </div>
     </section>

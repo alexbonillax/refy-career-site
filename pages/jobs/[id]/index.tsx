@@ -182,7 +182,7 @@ const Job: NextPage<JobProps> = () => {
           {
             !data.jobDetails.attributes &&
             <div className='flex items-center justify-center shado'>
-              <h1>WRONG REFERRAL CODE</h1>
+              <h1>WRONG JOB CODE</h1>
             </div>
           }
 
