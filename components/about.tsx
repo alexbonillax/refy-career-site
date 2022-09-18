@@ -16,7 +16,9 @@ const AboutCompany = (companyInfo: Company) => {
         <Divider />
         <div className="flex-column py-4">
           <div className="flex flex-align-center">
-            <FontAwesomeIcon icon={faSeedling} className="mr-3 icon-font"></FontAwesomeIcon>
+            <div className='w-2 h-2 flex items-center justify-center mr-3'>
+              <FontAwesomeIcon icon={faSeedling} className="icon-font"></FontAwesomeIcon>
+            </div>
             <div className="flex flex-align-center flex-justify-between full-width">
               <p className="font-multiline font--dark">{t('size')}</p>
               <div className="flex flex-align-center">

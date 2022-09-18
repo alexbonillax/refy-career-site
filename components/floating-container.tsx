@@ -23,7 +23,7 @@ export const FloatingContainer = ({ children }: FloatingContainerProps) => {
   }, [clientWindowHeight]);
 
   return (
-    <div className={`floating-container--bottom w-100 fixed right-0 left-0 text-center ${scrolled ? 'visible' : 'hidden'}`}>
+    <div className={`floating-container--bottom w-100 fixed justify-center right-0 left-0 ${scrolled ? 'visible flex' : 'hidden'}`}>
       {children}
     </div>
   )

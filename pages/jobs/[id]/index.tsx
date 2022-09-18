@@ -8,8 +8,9 @@ import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers, faArrowUpRightFromSquare } from '@fortawesome/pro-regular-svg-icons';
-import { faArrowDown, faCoin } from '@fortawesome/pro-light-svg-icons';
+import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
+import { faArrowUpRightFromSquare } from "@fortawesome/pro-solid-svg-icons";
+import { faArrowDown, faClock, faCoin } from '@fortawesome/pro-light-svg-icons';
 import { DateToTimeLeftReduced } from '../../../utils/dateToTimeLeftReduced';
 import AboutCompany from '../../../components/about';
 import { useTranslation } from 'next-i18next';
@@ -21,7 +22,6 @@ import { FloatingContainer } from '../../../components/floating-container';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
-import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface JobBannerProps {
@@ -46,29 +46,36 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
           <div className="flex flex-wrap flex-justify-center">
             {
               jobDetails.department &&
-              <p className="flex flex-align-center font-hint font--white mr-3">
-                <FontAwesomeIcon icon={faScreenUsers} className="mr-1" />
-                {jobDetails.department.attributes.name}
-              </p>
+              <>
+                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
+                <p className="flex flex-align-center font-hint font--white mr-3">
+                  {jobDetails.department.attributes.name}
+                </p>
+              </>
             }
             {
               jobDetails.workplaces[0] &&
-              <p className="flex flex-align-center font-hint font--white mr-3">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1" />
-                {jobDetails.workplaces[0].attributes.areaName}
-              </p>
+              <>
+                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faMapMarkerAlt} /> </div>
+                <p className="flex flex-align-center font-hint font--white mr-3">
+                  {jobDetails.workplaces[0].attributes.areaName}
+                </p>
+              </>
             }
             {
               jobDetails.attributes.createdAt &&
-              <p className="flex flex-align-center font-hint font--white">
-                <FontAwesomeIcon icon={faCalendarAlt} className="mr-1" />
-                {DateToTimeLeftReduced(jobDetails.attributes.createdAt)}
-              </p>
+              <>
+                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faCalendarAlt} /> </div>
+                <p className="flex flex-align-center font-hint font--white whitespace-nowrap">
+                  {DateToTimeLeftReduced(jobDetails.attributes.createdAt)}
+                </p>
+              </>
+
             }
 
           </div>
           <div className="mt-4">
-            <ButtonBasic classes='button-title' onClick={() => onClick()}>{t('job.apply.button')}</ButtonBasic>
+            <ApplyButton />
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
@@ -93,9 +100,9 @@ interface JobDetailsProps {
 
 const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
-    <p className='flex flex-align-center font-hint'>
-      <FontAwesomeIcon icon={icon} className="mr-1" />
-    </p>
+    <div className='w-2 h-2 flex items-center justify-center mr-1'>
+      <FontAwesomeIcon icon={icon} />
+    </div>
     <div className="flex flex-align-center flex-justify-between full-width">
       <p className="font-multiline font--dark">{title}</p>
       <p className="font-multiline">{value}</p>
@@ -126,7 +133,7 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
               }
               {
                 job.attributes.salaryFrequency &&
-                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency', { count: job.attributes.salaryFrequency })} icon={faCoin} />
+                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency', { count: job.attributes.salaryFrequency })} icon={faClock} />
               }
             </div>
           </div>
@@ -140,6 +147,20 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
 export interface JobProps {
   companyInfo: Company;
   jobDetails: Job;
+}
+
+const ApplyButton = () => {
+  const { t } = useTranslation("common");
+
+  return (
+    <ButtonBasic classes='button-title box-shadow-container--elevated'
+      onClick={() => notify(t('toast.apply.warning'))}>
+      {t('job.apply.button')}
+      <div className='w-3 h-3 flex items-center justify-center ml-1'>
+        <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
+      </div>
+    </ButtonBasic>
+  )
 }
 
 const Job: NextPage<JobProps> = () => {
@@ -174,11 +195,7 @@ const Job: NextPage<JobProps> = () => {
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ButtonBasic classes='button-title box-shadow-container--elevated'
-                  onClick={() => notify(t('toast.apply.warning'))}>
-                  {t('job.apply.button')}
-                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
-                </ButtonBasic>
+                <ApplyButton />
               </FloatingContainer>
               <ToastContainer className="font-public font-title w-72" position='bottom-center' style={{ width: "700px" }} />
             </>
