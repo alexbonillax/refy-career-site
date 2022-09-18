@@ -24,6 +24,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Logo, LogoTypes } from '../../../../components/logo';
 import { bucketL } from '../../../../services/urls';
 import Profile from '../../../../services/models/profile';
+import { LoadingPage } from '../../../../components/loading-page';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode();
@@ -97,13 +98,13 @@ const Referral: NextPage<JobProps> = () => {
 
   return (
     <>
-      {(!isLoading) &&
+      {!isLoading &&
         <>
           {
             data.jobDetails.attributes &&
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} />
+              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={data.companyInfo.attributes.primaryColor} />
               <JobBanner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={data.companyInfo.attributes.name} />
@@ -130,8 +131,8 @@ const Referral: NextPage<JobProps> = () => {
         </>
       }
       {
-        (isLoading) &&
-        <h2>Loading</h2>
+        isLoading &&
+        <LoadingPage />
       }
     </>
 

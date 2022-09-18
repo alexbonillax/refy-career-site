@@ -33,7 +33,7 @@ const Home: NextPage = ({ pageProps }: any) => {
   return (
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes.site} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
       <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />

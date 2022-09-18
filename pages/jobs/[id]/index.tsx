@@ -158,7 +158,7 @@ const ApplyButton = () => {
     <ButtonBasic classes='button-title box-shadow-container--elevated'
       onClick={() => notify(t('toast.apply.warning'))}>
       {t('job.apply.button')}
-      <div className='w-3 h-3 flex items-center justify-center ml-1'>
+      <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
       </div>
     </ButtonBasic>
@@ -191,7 +191,7 @@ const Job: NextPage<JobProps> = () => {
             data.jobDetails.attributes &&
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} />
+              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
               <JobBanner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <AboutCompany {...data.companyInfo} />

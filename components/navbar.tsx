@@ -14,9 +14,10 @@ interface NavbarProps {
   transparent?: boolean;
   url: string;
   companyUrl: string;
+  color: string;
 }
 
-export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: NavbarProps) => {
+export const Navbar = ({ logoUrl, transparent = false, url, companyUrl, color }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = React.useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = React.useState("");
@@ -49,16 +50,15 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
   };
   const LinksList = () => (
     <div className="flex items-center justify-between flex-1">
-      <div className={`flex items-center space-x-14`} >
+      <div className={`flex items-center`} >
         {
           linkList.map((link, i) => (
-            <Link key={i} href={`/${link}`}>
-              <a className={`
-              navbar-item 
-              ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")} 
-              ${(url === link) && 'active font-bold'}`}
-              >{t(link)}</a>
-            </Link>
+            <div key={i} className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link) && 'active font-bold'}`}>
+              <Link href={`/${link}`}>
+                <a className={` ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")}`}>{t(link)}</a>
+              </Link>
+              <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: color }}></div>
+            </div>
           ))
         }
       </div>
@@ -86,10 +86,18 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     )
   }
 
+  const NavbarItem = ({ link }: { link: string }) => (
+    <div className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link) ? 'active font-bold' : ''}`}>
+      <Link href={`/${link}`}><a>{t(link)}</a></Link>
+      <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: color }}></div>
+    </div>
+
+  )
+
   const SideBarLinks = () => (
-    <div className="w-72 h-full flex flex-col items-center justify-between py-2 px-3">
-      <div className="flex w-full flex-col space-y-10">
-        <div className="flex justify-between items-center">
+    <div className="w-72 h-full flex flex-col items-center justify-between py-2">
+      <div className="flex w-full flex-col space-y-3">
+        <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
             <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font--candidate-navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
@@ -97,9 +105,9 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
         </div>
         {
           linkList.map((link, i) =>
-            <Link key={i} href={`/${link}`}>
-              <a className={`navbar-item ${url?.includes(link) && 'font-bold'}`} onClick={toggleDrawer("navbar", false)}>{t(link)}</a>
-            </Link>
+            <div key={i} className="flex py-1">
+              <NavbarItem link={link} />
+            </div>
           )
         }
       </div>

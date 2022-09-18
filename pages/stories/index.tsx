@@ -146,7 +146,7 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
   return (
     <div className="flex-column box-shadow-container--card br-1 my-1">
       <div className="flex-column">
-        <div className="flex flex-align-center flex-justify-between py-1 px-2">
+        <div className="flex flex-align-center flex-justify-between py-2 px-2">
           <div className="flex flex-align-center font--ellipsis">
             {
               post.overview.user && post &&
@@ -234,7 +234,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('stories')} />
       <div className="pt-8">
-        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} />
+        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
         <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />

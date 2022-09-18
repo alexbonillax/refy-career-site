@@ -140,7 +140,7 @@ const Jobs: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('jobs')} />
       <div className="pt-8">
-        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='jobs' companyUrl={pageProps.companyInfo.attributes.site} />
+        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='jobs' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
         <RecentJobs recentJobsList={data.recentJobsList} workplace={workplaceId} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />

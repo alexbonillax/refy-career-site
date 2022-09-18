@@ -49,7 +49,7 @@ const People: NextPage = ({ pageProps }: any) => {
   return (
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')} />
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='people' companyUrl={pageProps.companyInfo.attributes.site} />
+      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='people' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
       <PeopleSection departments={pageProps.companyInfo.departments} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
