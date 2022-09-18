@@ -191,7 +191,7 @@ const Job: NextPage<JobProps> = () => {
             data.jobDetails.attributes &&
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
+              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={data.companyInfo.attributes.primaryColor} />
               <JobBanner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <AboutCompany {...data.companyInfo} />
