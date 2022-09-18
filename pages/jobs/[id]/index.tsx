@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { LoadingPage } from '../../../components/loading-page';
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
@@ -213,7 +214,7 @@ const Job: NextPage<JobProps> = () => {
       }
       {
         (isLoading) &&
-        <h2>isLoading</h2>
+        <LoadingPage />
       }
     </>
 
