@@ -70,7 +70,7 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
-          <div className='flex items-center cursor-pointer' onClick={scrollToDescription}>
+          <div className='flex items-center cursor-pointer whitespace-nowrap' onClick={scrollToDescription}>
             <p className='cursor-pointer font--white font-black button-hover--underline button-hover--underline-white'>{t('job.go-down')}</p>
             <FontAwesomeIcon className="font--white ml-1" icon={faArrowDown} />
           </div>

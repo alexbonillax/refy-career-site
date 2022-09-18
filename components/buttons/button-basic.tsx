@@ -2,7 +2,7 @@ export const ButtonBasic = ({
   children,
   onClick,
   bgColor = "FE6680",
-  classes,
+  classes = null,
 }: {
   children: React.ReactNode;
   onClick?: () => void;

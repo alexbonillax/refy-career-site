@@ -77,7 +77,7 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
         <a target="_blank">
           <ButtonBasic>
             {t("company-site")}
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="font--white ml-1"></FontAwesomeIcon>
           </ButtonBasic>
         </a>
       </Link>
