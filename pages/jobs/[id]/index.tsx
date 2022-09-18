@@ -21,6 +21,8 @@ import { FloatingContainer } from '../../../components/floating-container';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
+import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface JobBannerProps {
   jobDetails: Job,
@@ -89,6 +91,18 @@ interface JobDetailsProps {
   job: Job;
 }
 
+const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
+  <div className="flex flex-align-center">
+    <p className='flex flex-align-center font-hint'>
+      <FontAwesomeIcon icon={icon} className="mr-1" />
+    </p>
+    <div className="flex flex-align-center flex-justify-between full-width">
+      <p className="font-multiline font--dark">{title}</p>
+      <p className="font-multiline">{value}</p>
+    </div>
+  </div>
+)
+
 export const JobDetails = ({ job }: JobDetailsProps) => {
   const { t } = useTranslation("common");
 
@@ -104,24 +118,15 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
             <div className="flex-column space-y-3">
               {
                 job.attributes.employmentType &&
-                <div className="flex flex-align-center">
-                  <FontAwesomeIcon icon={faHandshake} className="mr-1" />
-                  <div className="flex flex-align-center flex-justify-between full-width">
-                    <p className="font-multiline font--dark">{t('job.type')}</p>
-                    <p
-                      className="font-multiline">{t('job.type', { count: job.attributes.employmentType })}</p>
-                  </div>
-                </div>
+                <SectionJobDetails title={t('job.type.title')} value={t('job.type', { count: job.attributes.employmentType })} icon={faHandshake} />
               }
               {
                 job.attributes.maxSalary &&
-                <div className="flex flex-align-center">
-                  <FontAwesomeIcon icon={faCoin} className="mr-1" />
-                  <div className="flex flex-align-center flex-justify-between full-width">
-                    <p className="font-multiline font--dark">{'jobs.job-details.salary-range'}</p>
-                    <p className="font-multiline">{job.attributes.minSalary} - {job.attributes.maxSalary} {job.attributes.salaryCurrencyId}</p>
-                  </div>
-                </div>
+                <SectionJobDetails title={t('job.salary.title')} value={`${job.attributes.minSalary} - ${job.attributes.maxSalary} ${t('job.salary', { count: job.attributes.salaryCurrencyId })}`} icon={faCoin} />
+              }
+              {
+                job.attributes.salaryFrequency &&
+                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency', { count: job.attributes.salaryFrequency })} icon={faCoin} />
               }
             </div>
           </div>
