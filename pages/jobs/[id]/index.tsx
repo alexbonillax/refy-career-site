@@ -24,6 +24,10 @@ import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
+const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
+
+export const notify = (text: string) => toast.warn(text);
+
 interface JobBannerProps {
   jobDetails: Job,
   companyName: string;
@@ -89,10 +93,7 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
   )
 }
 
-const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
-
-export const notify = (text: string) => toast.warn(text);
 
 interface JobDetailsProps {
   job: Job;

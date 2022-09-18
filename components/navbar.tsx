@@ -77,7 +77,7 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
         <a target="_blank">
           <ButtonBasic>
             {t('company-site')}
-            <div className='w-3 h-3 flex items-center justify-center ml-1'>
+            <div className='w-2 h-2 flex items-center justify-center ml-1'>
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </div>
           </ButtonBasic>
@@ -90,7 +90,9 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     <div className="w-72 h-full flex flex-col items-center justify-between py-2 px-3">
       <div className="flex w-full flex-col space-y-10">
         <div className="flex justify-between items-center">
-          <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font--candidate-navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+          <div className='w-2 h-2 flex items-center justify-center'>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font--candidate-navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+          </div>
           <CompanyWebsiteButton />
         </div>
         {
@@ -111,10 +113,12 @@ export const Navbar = ({ logoUrl, transparent = false, url, companyUrl }: Navbar
     `}>
       <div className="flex mobile-container--responsive mx-auto desktop:h-20 mobile:h-16 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
-          <FontAwesomeIcon
-            icon={faBars} style={{ fontSize: "1.3rem" }}
-            className={`${((scrolled && transparent) || (!transparent) ? "" : "icon-font--light")}`}
-          ></FontAwesomeIcon>
+          <div className="w-2 h-2">
+            <FontAwesomeIcon
+              icon={faBars} style={{ fontSize: "1.3rem" }}
+              className={`${((scrolled && transparent) || (!transparent) ? "" : "icon-font--light")}`}
+            ></FontAwesomeIcon>
+          </div>
         </div>
 
         <Link href="/">
