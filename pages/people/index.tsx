@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-
 import { useTranslation } from "next-i18next";
-
-import { useEffect, useState } from "react";
 import { Header } from "../../components/header";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
@@ -57,7 +53,7 @@ const People: NextPage = ({ pageProps }: any) => {
   )
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   return {

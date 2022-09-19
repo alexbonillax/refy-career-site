@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Divider, Navbar } from "../../components";
+import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 
@@ -149,7 +149,7 @@ const Jobs: NextPage = ({ pageProps }: any) => {
   )
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   return {

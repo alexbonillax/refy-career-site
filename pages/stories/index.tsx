@@ -1,4 +1,4 @@
-import { faCalendar, faShareNodes } from "@fortawesome/pro-regular-svg-icons";
+import { faCalendar } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
@@ -243,7 +243,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
   )
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const companyInfo = await getCompanyInfo();
   return {
