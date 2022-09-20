@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { Context } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
@@ -59,9 +60,9 @@ const Teams: NextPage = ({ pageProps }: any) => (
   </>
 );
 
-export const getServerSideProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale, context }: { locale: string, context: any }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo();
+  const companyInfo = await getCompanyInfo(context.req.headers.host);
   return {
     props: {
       _nextI18Next: translations._nextI18Next,

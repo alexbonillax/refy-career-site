@@ -27,7 +27,7 @@ import Profile from '../../../../services/models/profile';
 import { LoadingPage } from '../../../../components/loading-page';
 
 const applyJob = (referralCode: string) => {
-  const tenantCode = getTenantCode();
+  const tenantCode = getTenantCode(window.location.hostname);
   window.location.assign(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${referralCode}`);
 }
 
@@ -87,7 +87,7 @@ const Referral: NextPage<JobProps> = () => {
     if (!jobId) { return }
 
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo();
+      const companyInfo = await getCompanyInfo(window.location.hostname);
       const jobDetails = await getReferredJobDetails(jobId);
       const canApply = !!jobDetails.referrerUser?.id;
       setData({ companyInfo, jobDetails, canApply });

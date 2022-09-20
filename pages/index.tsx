@@ -44,9 +44,9 @@ const Home: NextPage = ({ pageProps }: any) => {
   )
 };
 
-export const getServerSideProps = async ({ locale }: { locale: string }) => {
+export const getServerSideProps = async ({ locale, context }: { locale: string, context: any }) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo();
+  const companyInfo = await getCompanyInfo(context.req.headers.host);
   return {
     props: {
       _nextI18Next: translations._nextI18Next,

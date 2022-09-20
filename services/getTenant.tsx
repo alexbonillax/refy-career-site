@@ -1,10 +1,10 @@
-export const getTenantCode = (): string => {
-  if (process.env.NODE_ENV !== 'development' && typeof window !== undefined && !window.location.href.includes('localhost')) {
-    if (window.location.href.includes('//')) {
-      return window.location.href.split('//')[1].split('.')[0];
+export const getTenantCode = (url: string): string => {
+  if (process.env.NODE_ENV !== 'development' && url && url.includes('refy.careers') && !url.includes('localhost')) {
+    if (url.includes('//')) {
+      return url.split('//')[1].split('.')[0];
     } else {
-      return window.location.href.split('.')[0];
+      return url.split('.')[0];
     }
   }
-  return 'refy';
+  return 'tropicfeel';
 }
