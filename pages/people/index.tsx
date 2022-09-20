@@ -8,6 +8,7 @@ import Footer from "../../components/footer";
 import { getCompanyInfo } from "../../services";
 import { RefierCard } from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
+import { DEFAULT_WILDCARD } from "../../constants/urls";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -55,7 +56,7 @@ const People: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : 'refy';
+  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
