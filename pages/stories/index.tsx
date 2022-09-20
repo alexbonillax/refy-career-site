@@ -235,7 +235,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('stories')} />
       <div className="pt-8">
-        {/* <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} /> */}
+        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
         <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />
