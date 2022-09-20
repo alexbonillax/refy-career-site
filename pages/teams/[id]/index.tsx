@@ -52,9 +52,9 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
 };
 
 
-export const getServerSideProps = async ({ locale, context }: { locale: string, context: any }) => {
+export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo(context.req.headers.host)
+  const companyInfo = await getCompanyInfo(req.headers.host)
   return {
     props: {
       _nextI18Next: translations._nextI18Next,

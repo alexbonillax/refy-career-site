@@ -175,7 +175,7 @@ const Job: NextPage<JobProps> = () => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo();
+      const companyInfo = await getCompanyInfo(window.location.hostname);
       const jobDetails = await getJobDetails(jobId);
       setData({ companyInfo, jobDetails });
       setLoading(false);
