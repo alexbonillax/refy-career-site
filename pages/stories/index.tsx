@@ -227,6 +227,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
       const stories = await getPosts(pageProps.companyInfo.id);
       setData({ stories });
       setLoading(false);
+      console.log(pageProps.wildcard);
     }
     getJobsData();
   }, [])
@@ -234,7 +235,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('stories')} />
       <div className="pt-8">
-        <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
+        {/* <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='stories' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} /> */}
         <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />
@@ -245,13 +246,14 @@ const Stories: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : 'refy';
+  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : 'refy';
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
       pageProps: {
         companyInfo,
+        wildcard
       }
     }
   };
