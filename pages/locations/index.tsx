@@ -8,6 +8,7 @@ import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
+import { DEFAULT_WILDCARD } from "../../constants";
 
 
 import { getCompanyInfo } from "../../services";
@@ -70,7 +71,7 @@ const Locations: NextPage = ({ pageProps }: any) => (
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : 'tropicfeel';
+  const wildcard = (process.env.NODE_ENV != "development") ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {

@@ -11,6 +11,7 @@ import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
 import { ReadMore } from "../../components/read-more";
+import { DEFAULT_WILDCARD } from "../../constants";
 import { getCompanyInfo } from "../../services";
 import { PostType } from "../../services/enum/post-type";
 import { getPosts } from "../../services/getPosts";
@@ -247,7 +248,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : 'tropicfeel';
+  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
