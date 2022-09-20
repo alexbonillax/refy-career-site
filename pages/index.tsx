@@ -46,7 +46,13 @@ const Home: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const companyInfo = await getCompanyInfo(req.headers.host);
+  let companyInfo;
+  if (process.env.NODE_ENV != "development" && req.header.host.includes('refy.careers')) {
+    let wildcard = req.headers.host.split(".")[0];
+    companyInfo = await getCompanyInfo(wildcard);
+  } else {
+    companyInfo = await getCompanyInfo('refy');
+  }
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
