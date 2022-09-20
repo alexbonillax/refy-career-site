@@ -12,7 +12,8 @@ import { Banner, Navbar, randomPic } from "../components";
 import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { DEFAULT_WILDCARD } from "../constants/urls";
+import { DEFAULT_WILDCARD } from "../constants";
+
 
 const Home: NextPage = ({ pageProps }: any) => {
   const { t } = useTranslation("common");

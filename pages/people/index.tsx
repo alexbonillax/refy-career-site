@@ -8,7 +8,7 @@ import Footer from "../../components/footer";
 import { getCompanyInfo } from "../../services";
 import { RefierCard } from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
-import { DEFAULT_WILDCARD } from "../../constants/urls";
+import { DEFAULT_WILDCARD } from "../../constants";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");

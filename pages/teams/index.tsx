@@ -6,7 +6,7 @@ import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
-import { DEFAULT_WILDCARD } from "../../constants/urls";
+import { DEFAULT_WILDCARD } from "../../constants";
 
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";

@@ -8,7 +8,7 @@ import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
-import { DEFAULT_WILDCARD } from "../../constants/urls";
+import { DEFAULT_WILDCARD } from "../../constants";
 
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";

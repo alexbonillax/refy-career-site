@@ -11,7 +11,7 @@ import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 
 import { Header } from "../../components/header";
-import { DEFAULT_WILDCARD } from "../../constants/urls";
+import { DEFAULT_WILDCARD } from "../../constants";
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";

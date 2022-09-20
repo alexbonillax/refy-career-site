@@ -20,7 +20,7 @@ import Post from "../../services/models/post";
 import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
-import { DEFAULT_WILDCARD } from "../../constants/urls";
+import { DEFAULT_WILDCARD } from "../../constants";
 
 export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
   const { t } = useTranslation("common");
