@@ -12,7 +12,6 @@ import { Banner, Navbar, randomPic } from "../components";
 import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { DEFAULT_WILDCARD } from "../constants";
 
 
 const Home: NextPage = ({ pageProps }: any) => {
@@ -48,7 +47,7 @@ const Home: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : 'tropicfeel';
   const companyInfo = await getCompanyInfo(wildcard);
 
   return {

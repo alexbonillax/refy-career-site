@@ -20,7 +20,7 @@ import Post from "../../services/models/post";
 import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
-import { DEFAULT_WILDCARD } from "../../constants";
+
 
 export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
   const { t } = useTranslation("common");
@@ -247,7 +247,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : 'tropicfeel';
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
