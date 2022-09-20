@@ -1,4 +1,4 @@
-import { getCompanyInfo } from '../../../services'
+import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
 
@@ -175,7 +175,7 @@ const Job: NextPage<JobProps> = () => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo(window.location.hostname);
+      const companyInfo = await getCompanyInfo(getTenantCode(window.location.hostname));
       const jobDetails = await getJobDetails(jobId);
       setData({ companyInfo, jobDetails });
       setLoading(false);

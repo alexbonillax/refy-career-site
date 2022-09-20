@@ -1,3 +1,5 @@
+import { DEFAULT_WILDCARD } from "../constants";
+
 export const getTenantCode = (url: string): string => {
   if (process.env.NODE_ENV !== 'development' && url && url.includes('refy.careers') && !url.includes('localhost')) {
     if (url.includes('//')) {
@@ -6,5 +8,5 @@ export const getTenantCode = (url: string): string => {
       return url.split('.')[0];
     }
   }
-  return 'tropicfeel';
+  return DEFAULT_WILDCARD;
 }

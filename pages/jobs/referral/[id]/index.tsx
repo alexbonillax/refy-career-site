@@ -87,7 +87,7 @@ const Referral: NextPage<JobProps> = () => {
     if (!jobId) { return }
 
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo(window.location.hostname);
+      const companyInfo = await getCompanyInfo(getTenantCode(window.location.hostname));
       const jobDetails = await getReferredJobDetails(jobId);
       const canApply = !!jobDetails.referrerUser?.id;
       setData({ companyInfo, jobDetails, canApply });
