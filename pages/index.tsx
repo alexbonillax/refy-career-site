@@ -34,7 +34,7 @@ const Home: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
-      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.wildcard} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
+      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
@@ -46,19 +46,14 @@ const Home: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  let companyInfo;
-  let wildcard = req.headers.host.split(".")[0];
-  if (process.env.NODE_ENV != "development" && req.headers.host.includes('refy.careers')) {
-    companyInfo = await getCompanyInfo(wildcard);
-  } else {
-    companyInfo = await getCompanyInfo('refy');
-  }
+  const wildcard = (process.env.NODE_ENV != "development" && req.headers.host.includes(process.env.WEBSITE_URL)) ? req.headers.host.split(".")[0] : 'refy';
+  const companyInfo = await getCompanyInfo(wildcard);
+
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
       pageProps: {
         companyInfo,
-        wildcard,
       }
     }
   };
