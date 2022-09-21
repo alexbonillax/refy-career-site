@@ -16,8 +16,7 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-export const PeopleSection = ({ departments }: { departments: Department[] }) => {
-  const { t } = useTranslation("common");
+export const PeopleSection = ({ departments, color }: { departments: Department[], color: string }) => {
   return (
     <div className="pt-8 background-color--white">
       {
@@ -30,7 +29,7 @@ export const PeopleSection = ({ departments }: { departments: Department[] }) =>
                 {
                   department.employees.map((employee, i) => (
                     <div className="px-3" key={i}>
-                      <RefierCard {...employee} />
+                      <RefierCard user={employee} color={color} />
                     </div>
                   ))
                 }
@@ -48,7 +47,7 @@ const People: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')} />
       <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='people' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
-      <PeopleSection departments={pageProps.companyInfo.departments} />
+      <PeopleSection departments={pageProps.companyInfo.departments} color={pageProps.companyInfo.attributes.primaryColor} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>
