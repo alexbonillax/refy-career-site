@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useState } from "react";
 
 export const ReadMore = ({ text }: { text: string }) => {
@@ -7,7 +8,8 @@ export const ReadMore = ({ text }: { text: string }) => {
     setIsReadMore(!isReadMore);
   };
   const reducedText = isReadMore ? text.slice(0, maxCharacters) : text;
-  const label = isReadMore ? "...read more" : " show less";
+  const { t } = useTranslation("common");
+  const label = isReadMore ? t('read-more') : t('read-less');
   return (
     <div className="relative font-multiline overflow-hidden">
       {
@@ -18,7 +20,7 @@ export const ReadMore = ({ text }: { text: string }) => {
             <p className="font--dark">
               {reducedText}
               {text.length > maxCharacters &&
-                <span onClick={toggleReadMore} className="expansion-prose-trigger font--grey background-color--white cursor-pointer">
+                <span onClick={toggleReadMore} className="expansion-prose-trigger font--grey background-color--white cursor-pointer ml-1">
                   {label}
                 </span>
               }

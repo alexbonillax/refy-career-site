@@ -46,7 +46,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true }: Recent
           {
             //TODO
             (!jobs || jobs.length == 0) && !loading &&
-            <h1>{`Theres actually not jobs in this area 😢`}</h1>
+            <h1>{t('job.empty')}</h1>
           }
           {
             loading && Array.from(Array(6)).map((_, i) =>
@@ -95,7 +95,7 @@ const JobCard = (job: Job) => {
             <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
           </div>
           <div className="flex-column py-2 px-3">
-            <p className="flex h-8 font-title">{job.attributes.title}</p>
+            <p className="flex h-8 font-title font--ellipsis-2">{job.attributes.title}</p>
             <div className="flex flex-wrap flex-justify-center h-3 mb-1">
               {
                 job.overview?.department &&

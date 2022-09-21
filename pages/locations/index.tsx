@@ -41,7 +41,7 @@ export const Workplaces = (props: WorkplacesProps) => (
                 <div className="flex justify-center py-2">
                   <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
                     <a>
-                      <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
+                      <ButtonBasic bgColor={props.companyInfo.attributes.primaryColor}>{Translate('workplaces.jobs.button')}</ButtonBasic>
                     </a>
                   </Link>
                 </div>

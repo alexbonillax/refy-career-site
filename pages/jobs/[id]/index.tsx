@@ -31,12 +31,12 @@ export const notify = (text: string) => toast.warn(text);
 
 interface JobBannerProps {
   jobDetails: Job,
-  companyName: string;
+  company: Company;
   referralCode: string;
   onClick?: () => void;
 }
 
-export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) => {
+export const JobBanner = ({ jobDetails, company }: JobBannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
   const { t } = useTranslation("common");
 
@@ -46,7 +46,7 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-40 desktop:h-screen text-center">
-          <p className="font-title font--white">{companyName}</p>
+          <p className="font-title font--white">{company.attributes.name}</p>
           <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap flex-justify-center">
             {
@@ -80,11 +80,11 @@ export const JobBanner = ({ jobDetails, companyName, onClick }: JobBannerProps) 
 
           </div>
           <div className="mt-4">
-            <ApplyButton />
+            <ApplyButton color={company.attributes.primaryColor} />
           </div >
         </div >
-        <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center py-2">
-          <div className='flex items-center cursor-pointer whitespace-nowrap' onClick={scrollToDescription}>
+        <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
+          <div className='relative button--underline button--underline-white size-small flex items-center cursor-pointer whitespace-nowrap' onClick={scrollToDescription}>
             <p className='cursor-pointer font--white font-black button-hover--underline button-hover--underline-white'>{t('job.go-down')}</p>
             <FontAwesomeIcon className="font--white ml-1" icon={faArrowDown} />
           </div>
@@ -151,12 +151,11 @@ export interface JobProps {
   jobDetails: Job;
 }
 
-const ApplyButton = () => {
+const ApplyButton = ({ color }: { color: string }) => {
   const { t } = useTranslation("common");
 
   return (
-    <ButtonBasic classes='button-title box-shadow-container--elevated'
-      onClick={() => notify(t('toast.apply.warning'))}>
+    <ButtonBasic classes='button-title box-shadow-container--elevated' bgColor={color} onClick={() => notify(t('toast.apply.warning'))}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
@@ -192,12 +191,12 @@ const Job: NextPage<JobProps> = () => {
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={data.companyInfo.attributes.primaryColor} />
-              <JobBanner jobDetails={data.jobDetails} companyName={data.companyInfo.attributes.name} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
+              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton />
+                <ApplyButton color={data.companyInfo.attributes.primaryColor} />
               </FloatingContainer>
               <ToastContainer className="font-public font-title w-72" position='bottom-center' style={{ width: "700px" }} />
             </>

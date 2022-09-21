@@ -47,5 +47,8 @@
     "job.frequency_three": "Semanal",
     "job.frequency_four": "Diaria",
     "job.frequency_five": "Horaria",
-    "job.salary_two": "$"
+    "job.salary_two": "$",
+    "job.empty": "No existen puestos de trabajo en este area todavía",
+    "read-more": "Mostrar más",
+    "read-less": "Mostrar menos"
 }

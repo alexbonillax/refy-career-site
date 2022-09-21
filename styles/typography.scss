@@ -369,6 +369,15 @@ $refy-public-font: FiraSans;
     }
   }
 
+  &--ellipsis-2 {
+    -webkit-line-clamp: 2;
+    display: -webkit-box !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+
 }
 
 .icon-font {

@@ -7,7 +7,7 @@
   font-weight: bold;
   font-size: 15px;
   white-space: nowrap;
-  
+
   &-basic {
     background-color: $refy-color-primary;
     color: $refy-white;
@@ -16,5 +16,46 @@
   &-title {
     font-size: 18px;
     line-height: 56px;
+  }
+
+  &--underline {
+    background-color: transparent;
+    border-radius: unset;
+
+    ::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+      width: 0;
+      height: 3px;
+      background-color: $refy-color-primary;
+      transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &-white {
+
+      ::before {
+        background-color: $refy-white;
+      }
+
+    }
+
+    :active::before {
+      left: 0;
+      right: auto;
+      width: 100%;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+
+      :hover::before {
+        left: 0;
+        right: auto;
+        width: 100%;
+      }
+
+    }
+
   }
 }
