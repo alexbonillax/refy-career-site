@@ -1,13 +1,11 @@
 import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
-
 import { Divider, Navbar } from '../../../components';
 import { getJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-solid-svg-icons";
 import { faArrowDown, faClock, faCoin } from '@fortawesome/pro-light-svg-icons';
@@ -27,7 +25,6 @@ import { LoadingPage } from '../../../components/loading-page';
 import i18next from 'i18next';
 import intervalPlural from 'i18next-intervalplural-postprocessor';
 import { numberWithCommas } from '../../../utils';
-
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
@@ -97,8 +94,6 @@ export const JobBanner = ({ jobDetails, company }: JobBannerProps) => {
     </section >
   )
 }
-
-
 
 interface JobDetailsProps {
   job: Job;
@@ -175,7 +170,6 @@ const Job: NextPage<JobProps> = () => {
   const [isLoading, setLoading] = useState(true);
   const jobId: any = useRouter().query?.id as any
 
-
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
@@ -203,10 +197,9 @@ const Job: NextPage<JobProps> = () => {
               <FloatingContainer>
                 <ApplyButton color={data.companyInfo.attributes.primaryColor} />
               </FloatingContainer>
-              <ToastContainer className="font-public font-title w-72" position='bottom-center' style={{ width: "700px" }} />
+              <ToastContainer className="font-public w-72" position='bottom-center' style={{ width: "700px" }} />
             </>
           }
-
           {
             !data.jobDetails.attributes &&
             <div className='flex items-center justify-center shado'>
@@ -216,10 +209,7 @@ const Job: NextPage<JobProps> = () => {
 
         </>
       }
-      {
-        (isLoading) &&
-        <LoadingPage />
-      }
+      { (isLoading) && <LoadingPage />}
     </>
 
   )

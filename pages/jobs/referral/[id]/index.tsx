@@ -23,6 +23,7 @@ import { Logo, LogoTypes } from '../../../../components/logo';
 import { bucketL } from '../../../../services/urls';
 import Profile from '../../../../services/models/profile';
 import { LoadingPage } from '../../../../components/loading-page';
+import { Coworkers } from '../../../people';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -106,6 +107,7 @@ const Referral: NextPage<JobProps> = () => {
               <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={data.companyInfo.attributes.name} color={data.companyInfo.attributes.primaryColor} />
+              <Coworkers employees={data.jobDetails.department?.employees} color={data.companyInfo.attributes.primaryColor} />
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>

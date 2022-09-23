@@ -9,11 +9,34 @@ import { getCompanyInfo } from "../../services";
 import { RefierCard } from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
 import { DEFAULT_WILDCARD } from "../../constants";
+import Profile from "../../services/models/profile";
 
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
   return array ? t(text, { returnObjects: true }) : t(text);
+}
+
+export const Coworkers = ({ employees, color }: { employees: Profile[], color: string }) => {
+  const { t } = useTranslation("common");
+  return (
+    employees &&
+    <section className="pt-8 background-color--white">
+      <div className="mobile-container px-3">
+        <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>
+        <h2 className="font-subtitle text-center mt-1">{t('coworkers.description')}</h2>
+        <div className="flex flex-wrap justify-center items-center">
+          {
+            employees.map((employee, i) => (
+              <div className="px-3" key={i}>
+                <RefierCard user={employee} color={color} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export const PeopleSection = ({ departments, color }: { departments: Department[], color: string }) => {
