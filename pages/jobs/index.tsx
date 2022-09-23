@@ -106,7 +106,7 @@ const JobCard = (job: Job) => {
               {
                 job.overview?.workplaces.length > 0 &&
                 <div className="flex flex-align-justify-center font-hint mr-3">
-                  <div className="flex items-center w-2.5 h-2.5 font-icon color-primary">
+                  <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
                   </div>
                   <p>{job.overview.workplaces[0].areaName || ''}</p>
