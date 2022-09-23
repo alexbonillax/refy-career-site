@@ -7,7 +7,7 @@ import i18next from 'i18next';
 import intervalPlural from 'i18next-intervalplural-postprocessor';
 const AboutCompany = (companyInfo: Company) => {
   i18next.use(intervalPlural);
-  const { t } = useTranslation("common");
+  const { t, ready } = useTranslation("common");
 
   return (
     <section id="about-company" className="py-10 background-color--grey--0">
@@ -16,7 +16,7 @@ const AboutCompany = (companyInfo: Company) => {
         <div className="font-subtitle text-center mt-2">{companyInfo.attributes.tagline}</div>
         <div className="font-prose py-3 mobile:text-center">{companyInfo.attributes.description}</div>
         {
-          companyInfo.attributes.size &&
+          (companyInfo.attributes.size && ready) &&
           <>
             <Divider />
             <div className="flex-column py-4">
