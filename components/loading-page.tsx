@@ -7,7 +7,7 @@ interface LoadingPageProps {
 
 export const LoadingPage = ({ fill = '#fe6680', width = 40, viewBox = '0 0 120 30' }: LoadingPageProps) => (
     <div className="w-full h-screen flex items-center justify-center">
-        <div className="w-10 h-10">
+        <div className="w-5 h-5">
             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" fill={fill} width={width} height={width} viewBox={viewBox}>
                 <circle cx="15" cy="15" r="15">
                     <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
