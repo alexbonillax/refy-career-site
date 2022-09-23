@@ -35,5 +35,5 @@
     "read-more": "Mostrar más",
     "read-less": "Mostrar menos",
     "coworkers": "Compañeros de equipo",
-    "coworkers.description": "Sabemos que {{coworker}} te está ayudando pero, ¿qué te parece si contactas con algún miembro del equipo para que te ayuden a resolver cualquier pregunta que tengas?\nSeguro que estarán contentos de ayudarte"
+    "coworkers.description": "Sabemos que {{referrer}} te está ayudando pero, ¿qué te parece si contactas con algún miembro del equipo para que te ayuden a resolver cualquier pregunta que tengas?\nSeguro que estarán contentos de ayudarte"
 }

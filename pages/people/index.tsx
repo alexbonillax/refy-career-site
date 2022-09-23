@@ -17,14 +17,14 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-export const Coworkers = ({ employees, color }: { employees: Profile[], color: string }) => {
+export const Coworkers = ({ referrer, employees, color }: { referrer: string, employees: Profile[], color: string }) => {
   const { t } = useTranslation("common");
   return (
     employees &&
     <section className="pt-8 background-color--white">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>
-        <h2 className="font-subtitle text-center mt-1">{t('coworkers.description')}</h2>
+        <h2 className="font-subtitle text-center mt-1">{t('coworkers.description', {referrer})}</h2>
         <div className="flex flex-wrap justify-center items-center">
           {
             employees.map((employee, i) => (

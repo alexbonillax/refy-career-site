@@ -107,7 +107,7 @@ const Referral: NextPage<JobProps> = () => {
               <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={data.companyInfo.attributes.name} color={data.companyInfo.attributes.primaryColor} />
-              <Coworkers employees={data.jobDetails.department?.employees} color={data.companyInfo.attributes.primaryColor} />
+              <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={data.companyInfo.attributes.primaryColor} />
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>

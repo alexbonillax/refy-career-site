@@ -18,6 +18,7 @@
     "stories.latest": "Nuestras historias recientes",
     "job.type.title": "Tipo de empleo",
     "job.conditions.title": "Condiciones para el candidato",
+    "job.pay-frequency": "",
     "about.workers_interval": "(1)[Menos de 10 empleados];(2)[Entre 10 y 50 empleados];(3)[Entre 50 y 200 empleados];(4)[Más de 200 empleados];",
     "job.frequency_interval": "(1)[Anual];(2)[Mensual];(3)[Semanal];(4)[Diaria];(5)[Horaria];",
     "job.type_interval": "(1)[Tiempo completo];(2)[Tiempo parcial];(3)[Contrato];(4)[Temporal];(5)[Aprendizaje];(6)[Prácticas];(7)[Voluntario];",
@@ -32,5 +33,7 @@
     "job.frequency.title": "Frecuencia de pago",
     "job.empty": "No existen puestos de trabajo en este area todavía",
     "read-more": "Mostrar más",
-    "read-less": "Mostrar menos"
+    "read-less": "Mostrar menos",
+    "coworkers": "Compañeros de equipo",
+    "coworkers.description": "Sabemos que {{referrer}} te está ayudando pero, ¿qué te parece si contactas con algún miembro del equipo para que te ayuden a resolver cualquier pregunta que tengas?\nSeguro que estarán contentos de ayudarte"
 }
