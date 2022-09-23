@@ -24,6 +24,10 @@ import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { LoadingPage } from '../../../components/loading-page';
+import i18next from 'i18next';
+import intervalPlural from 'i18next-intervalplural-postprocessor';
+import { numberWithCommas } from '../../../utils';
+
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
@@ -113,6 +117,7 @@ const SectionJobDetails = ({ title, value, icon }: { title: string, value: strin
 )
 
 export const JobDetails = ({ job }: JobDetailsProps) => {
+  i18next.use(intervalPlural);
   const { t } = useTranslation("common");
 
   return (
@@ -127,15 +132,15 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
             <div className="flex-column space-y-3">
               {
                 job.attributes.employmentType &&
-                <SectionJobDetails title={t('job.type.title')} value={t('job.type', { count: job.attributes.employmentType })} icon={faHandshake} />
+                <SectionJobDetails title={t('job.type.title')} value={t('job.type_interval', { postProcess: 'interval', count: job.attributes.employmentType })} icon={faHandshake} />
               }
               {
                 job.attributes.maxSalary &&
-                <SectionJobDetails title={t('job.salary.title')} value={`${job.attributes.minSalary} - ${job.attributes.maxSalary} ${t('job.salary', { count: job.attributes.salaryCurrencyId })}`} icon={faCoin} />
+                <SectionJobDetails title={t('job.salary.title')} value={`${numberWithCommas(job.attributes.minSalary)} - ${numberWithCommas(job.attributes.maxSalary)} ${t('job.salary_interval', { postProcess: 'interval', count: job.attributes.salaryCurrencyId })}`} icon={faCoin} />
               }
               {
                 job.attributes.salaryFrequency &&
-                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency', { count: job.attributes.salaryFrequency })} icon={faClock} />
+                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency_interval', { postProcess: 'interval', count: job.attributes.salaryFrequency })} icon={faClock} />
               }
             </div>
           </div>

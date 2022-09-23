@@ -1,6 +1,5 @@
 import { stripHtmlTags } from "../utils";
 import Head from "next/head";
-import { useTranslation } from "next-i18next";
 import Company from "../services/models/company";
 import { bucketM } from "../services/urls";
 

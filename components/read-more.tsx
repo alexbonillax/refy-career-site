@@ -18,7 +18,7 @@ export const ReadMore = ({ text }: { text: string }) => {
           :
           (
             <p className="font--dark">
-              {reducedText}
+              {reducedText}{isReadMore && '...'}
               {text.length > maxCharacters &&
                 <span onClick={toggleReadMore} className="expansion-prose-trigger font--grey background-color--white cursor-pointer ml-1">
                   {label}

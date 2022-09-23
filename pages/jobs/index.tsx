@@ -9,10 +9,8 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
-
 import { Header } from "../../components/header";
 import { DEFAULT_WILDCARD } from "../../constants";
-
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
@@ -54,7 +52,6 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true }: Recent
                 <JobCardLoading />
               </div>
             )
-
           }
         </div>
       </div>
@@ -99,17 +96,21 @@ const JobCard = (job: Job) => {
             <div className="flex flex-wrap flex-justify-center h-3 mb-1">
               {
                 job.overview?.department &&
-                <p className="flex flex-align-center font-hint mr-3">
-                  <FontAwesomeIcon icon={faScreenUsers} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
-                  {job.overview.department.name}
-                </p>
+                <div className="flex flex-align-justify-enter font-hint mr-3">
+                  <div className="w-2 h-2 mr-1 font-icon color-primary">
+                    <FontAwesomeIcon icon={faScreenUsers} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
+                  </div>
+                  <p>{job.overview.department.name}</p>
+                </div>
               }
               {
                 job.overview?.workplaces.length > 0 &&
-                <p className="flex flex-align-center font-hint mr-3">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
-                  {job.overview.workplaces[0].areaName || ''}
-                </p>
+                <div className="flex flex-align-justify-enter font-hint mr-3">
+                  <div className="w-2 h-2 font-icon color-primary">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
+                  </div>
+                  <p>{job.overview.workplaces[0].areaName || ''}</p>
+                </div>
               }
             </div>
           </div>

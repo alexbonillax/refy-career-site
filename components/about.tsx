@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "next-i18next";
 import Company from "../services/models/company";
 import { Divider } from "./divider";
-
+import i18next from 'i18next';
+import intervalPlural from 'i18next-intervalplural-postprocessor';
 const AboutCompany = (companyInfo: Company) => {
+  i18next.use(intervalPlural);
   const { t } = useTranslation("common");
 
   return (
@@ -25,7 +27,7 @@ const AboutCompany = (companyInfo: Company) => {
                 <div className="flex flex-align-center flex-justify-between full-width">
                   <p className="font-multiline font--dark">{t('size')}</p>
                   <div className="flex flex-align-center">
-                    <p className="font-multiline font--ellipsis ml-1">{t('about.workers', { count: companyInfo.attributes.size })}</p>
+                    <p className="font-multiline font--ellipsis ml-1">{t('about.workers_interval', { postProcess: 'interval', count: +companyInfo.attributes.size })}</p>
                   </div>
                 </div>
               </div>
