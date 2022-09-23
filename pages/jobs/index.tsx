@@ -96,8 +96,8 @@ const JobCard = (job: Job) => {
             <div className="flex flex-wrap flex-justify-center h-3 mb-1">
               {
                 job.overview?.department &&
-                <div className="flex flex-align-justify-enter font-hint mr-3">
-                  <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
+                <div className="flex flex-align-justify-center font-hint mr-3">
+                  <div className="flex items-center w-2.5 h-2.5 font-icon color-primary">
                     <FontAwesomeIcon icon={faScreenUsers} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
                   </div>
                   <p>{job.overview.department.name}</p>
@@ -105,9 +105,9 @@ const JobCard = (job: Job) => {
               }
               {
                 job.overview?.workplaces.length > 0 &&
-                <div className="flex flex-align-justify-enter font-hint mr-3">
+                <div className="flex flex-align-justify-center font-hint mr-3">
                   <div className="flex items-center w-2.5 h-2.5 font-icon color-primary">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
                   </div>
                   <p>{job.overview.workplaces[0].areaName || ''}</p>
                 </div>
