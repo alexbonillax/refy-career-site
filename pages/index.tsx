@@ -16,7 +16,7 @@ import { DEFAULT_WILDCARD } from "../constants";
 
 
 const Home: NextPage = ({ pageProps }: any) => {
-  const { t } = useTranslation("common");
+  const { t, ready } = useTranslation("common");
   const [data, setData] = useState({ recentJobsList: null });
   const [isLoading, setLoading] = useState(true);
 
@@ -33,9 +33,10 @@ const Home: NextPage = ({ pageProps }: any) => {
   }, [pageProps.companyInfo])
 
   return (
+    ready &&
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
-      <Navbar logoUrl={pageProps.companyInfo.attributes?.logo} url='' transparent={true} companyUrl={pageProps.companyInfo.attributes?.site} color={pageProps.companyInfo.attributes?.primaryColor} />
+      <Navbar company={pageProps.companyInfo} url='' transparent={true} />
       <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />

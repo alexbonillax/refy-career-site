@@ -21,7 +21,7 @@ export const Coworkers = ({ referrer, employees, color }: { referrer: string, em
   const { t } = useTranslation("common");
   return (
     employees &&
-    <section className="pt-8 background-color--white">
+    <section className="py-8 background-color--white">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>
         <h2 className="font-subtitle text-center mt-1">{t('coworkers.description', {referrer})}</h2>
@@ -69,7 +69,7 @@ const People: NextPage = ({ pageProps }: any) => {
   return (
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')} />
-      <Navbar logoUrl={pageProps.companyInfo.attributes.logo} url='people' companyUrl={pageProps.companyInfo.attributes.site} color={pageProps.companyInfo.attributes.primaryColor} />
+      <Navbar url='people' company={pageProps.companyInfo} />
       <PeopleSection departments={pageProps.companyInfo.departments} color={pageProps.companyInfo.attributes.primaryColor} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />

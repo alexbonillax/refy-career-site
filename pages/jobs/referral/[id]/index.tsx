@@ -8,14 +8,13 @@ import { faArrowUpRightFromSquare } from '@fortawesome/pro-regular-svg-icons';
 import AboutCompany from '../../../../components/about';
 import { useTranslation } from 'next-i18next';
 import { ButtonBasic } from '../../../../components/buttons/button-basic';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FloatingContainer } from '../../../../components/floating-container';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../../components/footer';
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { JobBanner, JobDetails, JobProps, notify } from '../../[id]';
+import { JobBanner, JobDetails, JobProps } from '../../[id]';
 import Company from '../../../../services/models/company';
 import Job from '../../../../services/models/job';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -24,6 +23,7 @@ import { bucketL } from '../../../../services/urls';
 import Profile from '../../../../services/models/profile';
 import { LoadingPage } from '../../../../components/loading-page';
 import { Coworkers } from '../../../people';
+import { BottomSnackbar } from '../../../../components/snackbar';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -81,6 +81,7 @@ const Referral: NextPage<JobProps> = () => {
   const [data, setData] = useState<ReferralProps>({ companyInfo: null, jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
   const jobId = useRouter().query?.id as any
+  const snackbarRef = useRef(null);
 
   useEffect(() => {
     if (!jobId) { return }
@@ -103,8 +104,8 @@ const Referral: NextPage<JobProps> = () => {
             data.jobDetails.attributes &&
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={data.companyInfo.attributes.primaryColor} />
-              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))} referralCode={jobId} />
+              <Navbar transparent={true} url='jobs' company={data.companyInfo} />
+              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={data.companyInfo.attributes.name} color={data.companyInfo.attributes.primaryColor} />
               <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={data.companyInfo.attributes.primaryColor} />
@@ -113,12 +114,12 @@ const Referral: NextPage<JobProps> = () => {
               <FloatingContainer>
                 <ButtonBasic classes='button-title box-shadow-container--elevated'
                   bgColor={data.companyInfo.attributes.primaryColor}
-                  onClick={() => data.canApply ? applyJob(jobId) : notify(t('toast.apply.warning'))}>
+                  onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()}>
                   {t('job.apply.button')}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
                 </ButtonBasic>
               </FloatingContainer>
-              <ToastContainer position='bottom-center' />
+              <BottomSnackbar ref={snackbarRef} />
             </>
           }
 

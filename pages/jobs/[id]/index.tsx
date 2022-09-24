@@ -14,10 +14,9 @@ import AboutCompany from '../../../components/about';
 import { useTranslation } from 'next-i18next';
 import Company from '../../../services/models/company';
 import { ButtonBasic } from '../../../components/buttons/button-basic';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FloatingContainer } from '../../../components/floating-container';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -25,10 +24,10 @@ import { LoadingPage } from '../../../components/loading-page';
 import i18next from 'i18next';
 import intervalPlural from 'i18next-intervalplural-postprocessor';
 import { numberWithCommas } from '../../../utils';
+import { BottomSnackbar } from '../../../components/snackbar';
+
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
-
-export const notify = (text: string) => toast.warn(text);
 
 interface JobBannerProps {
   jobDetails: Job,
@@ -37,7 +36,7 @@ interface JobBannerProps {
   onClick?: () => void;
 }
 
-export const JobBanner = ({ jobDetails, company }: JobBannerProps) => {
+export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
   const { t } = useTranslation("common");
 
@@ -81,7 +80,7 @@ export const JobBanner = ({ jobDetails, company }: JobBannerProps) => {
 
           </div>
           <div className="mt-4">
-            <ApplyButton color={company.attributes.primaryColor} />
+            <ApplyButton color={company.attributes.primaryColor} onClick={onClick} />
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
@@ -151,11 +150,11 @@ export interface JobProps {
   jobDetails: Job;
 }
 
-const ApplyButton = ({ color }: { color: string }) => {
+const ApplyButton = ({ color, onClick }: { color: string, onClick:() => void }) => {
   const { t } = useTranslation("common");
 
   return (
-    <ButtonBasic classes='button-title box-shadow-container--elevated' bgColor={color} onClick={() => notify(t('toast.apply.warning'))}>
+    <ButtonBasic classes='button-title box-shadow-container--elevated' bgColor={color} onClick={onClick}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
@@ -168,6 +167,7 @@ const Job: NextPage<JobProps> = () => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ companyInfo: null, jobDetails: null });
   const [isLoading, setLoading] = useState(true);
+  const snackbarRef = useRef(null);
   const jobId: any = useRouter().query?.id as any
 
   useEffect(() => {
@@ -189,15 +189,15 @@ const Job: NextPage<JobProps> = () => {
             data.jobDetails.attributes &&
             <>
               <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar logoUrl={data.companyInfo.attributes.logo} transparent={true} url='jobs' companyUrl={data.companyInfo.attributes.site} color={data.companyInfo.attributes.primaryColor} />
-              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => notify(t('toast.apply.warning'))} referralCode={jobId} />
+              <Navbar transparent={true} url='jobs' company={data.companyInfo} />
+              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => snackbarRef.current.handleClick()} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <AboutCompany {...data.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton color={data.companyInfo.attributes.primaryColor} />
+                <ApplyButton color={data.companyInfo.attributes.primaryColor} onClick={() => snackbarRef.current.handleClick()} />
               </FloatingContainer>
-              <ToastContainer className="font-public w-72" position='bottom-center' style={{ width: "700px" }} />
+              <BottomSnackbar ref={snackbarRef} />
             </>
           }
           {
@@ -209,7 +209,7 @@ const Job: NextPage<JobProps> = () => {
 
         </>
       }
-      { (isLoading) && <LoadingPage />}
+      {(isLoading) && <LoadingPage />}
     </>
 
   )

@@ -43,7 +43,7 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
   return (
     <>
       <Header company={companyInfo} title={Translate('teams')} />
-      <Navbar logoUrl={companyInfo.attributes.logo} transparent={true} url='teams' companyUrl={companyInfo.attributes.site} color={companyInfo.attributes.primaryColor} />
+      <Navbar company={companyInfo} transparent={true} url='teams' />
       <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={data.teamName} />
       <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
       <AboutCompany {...companyInfo} />
