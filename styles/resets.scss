@@ -1,5 +1,9 @@
 @import './colors';
 
+html {
+  -webkit-font-smoothing: unset !important;
+}
+
 * {
   box-sizing: border-box;
   outline: none;

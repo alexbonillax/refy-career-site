@@ -2,7 +2,6 @@
 @import './colors';
 @import './sizings';
 
-$refy-font: NexaText;
 $refy-public-font: FiraSans;
 
 .underline {
@@ -10,12 +9,6 @@ $refy-public-font: FiraSans;
 }
 
 .font {
-
-  &-public {
-    * {
-      font-family: $refy-public-font  !important;
-    }
-  }
 
   &-bold {
     font-weight: $font-bold  !important;
@@ -116,17 +109,6 @@ $refy-public-font: FiraSans;
     font-size: 16px;
     line-height: 1.5rem;
     color: $refy-grey-900;
-  }
-
-  &-button {
-    font-family: $refy-font;
-  }
-
-  &-filter {
-    font-family: $refy-font;
-    font-size: 14px;
-    line-height: 1.5rem;
-    color: $refy-text-grey;
   }
 
   &-hint {
