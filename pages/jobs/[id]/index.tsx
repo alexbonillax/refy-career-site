@@ -40,6 +40,17 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
   const picUrl = jobDetails.attributes.picture ? bucketXL + jobDetails.attributes.picture : false;
   const { t } = useTranslation("common");
 
+  const JobSection = ({ text, icon }: { text: string, icon: IconProp }) => (
+    <>
+      <div className='flex items-center justify-center w-2 h-2 mr-1 text-white'>
+        <FontAwesomeIcon icon={icon} />
+      </div>
+      <p className="flex flex-align-center font-hint font--white mr-3">
+        {text}
+      </p>
+    </>
+  )
+
   return (
     <section id="cover"
       className="background-color--dark background-center"
@@ -48,34 +59,18 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-40 desktop:h-screen text-center">
           <p className="font-title font--white">{company.attributes.name}</p>
           <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
-          <div className="flex flex-wrap flex-justify-center">
+          <div className="flex flex-wrap items-center justify-center">
             {
               jobDetails.department &&
-              <>
-                <div className='flex items-center w-2 h-3 mr-1.5 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
-                <p className="flex flex-align-center font-hint font--white mr-3">
-                  {jobDetails.department.attributes.name}
-                </p>
-              </>
+              <JobSection text={jobDetails.department.attributes.name} icon={faScreenUsers} />
             }
             {
               jobDetails.workplaces[0] &&
-              <>
-                <div className='flex items-center w-2 h-3 mr-1 font--white'> <FontAwesomeIcon icon={faMapMarkerAlt} /> </div>
-                <p className="flex flex-align-center font-hint font--white mr-3">
-                  {jobDetails.workplaces[0].attributes.areaName}
-                </p>
-              </>
+              <JobSection text={jobDetails.workplaces[0].attributes.areaName} icon={faMapMarkerAlt} />
             }
             {
               jobDetails.attributes.createdAt &&
-              <>
-                <div className='flex items-center w-2 h-3 mr-1 font--white'> <FontAwesomeIcon icon={faCalendarAlt} /> </div>
-                <p className="flex flex-align-center font-hint font--white whitespace-nowrap">
-                  {DateToTimeLeftReduced(jobDetails.attributes.createdAt)}
-                </p>
-              </>
-
+              <JobSection text={DateToTimeLeftReduced(jobDetails.attributes.createdAt)} icon={faCalendarAlt} />
             }
 
           </div>
@@ -150,7 +145,7 @@ export interface JobProps {
   jobDetails: Job;
 }
 
-const ApplyButton = ({ color, onClick }: { color: string, onClick:() => void }) => {
+const ApplyButton = ({ color, onClick }: { color: string, onClick: () => void }) => {
   const { t } = useTranslation("common");
 
   return (
