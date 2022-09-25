@@ -52,7 +52,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
             {
               jobDetails.department &&
               <>
-                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
+                <div className='flex items-center w-2 h-3 mr-2 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
                 <p className="flex flex-align-center font-hint font--white mr-3">
                   {jobDetails.department.attributes.name}
                 </p>
@@ -61,7 +61,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
             {
               jobDetails.workplaces[0] &&
               <>
-                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faMapMarkerAlt} /> </div>
+                <div className='flex items-center w-2 h-3 mr-1 font--white'> <FontAwesomeIcon icon={faMapMarkerAlt} /> </div>
                 <p className="flex flex-align-center font-hint font--white mr-3">
                   {jobDetails.workplaces[0].attributes.areaName}
                 </p>
@@ -70,7 +70,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
             {
               jobDetails.attributes.createdAt &&
               <>
-                <div className='w-2 h-2 mr-1 font--white'> <FontAwesomeIcon icon={faCalendarAlt} /> </div>
+                <div className='flex items-center w-2 h-3 mr-1 font--white'> <FontAwesomeIcon icon={faCalendarAlt} /> </div>
                 <p className="flex flex-align-center font-hint font--white whitespace-nowrap">
                   {DateToTimeLeftReduced(jobDetails.attributes.createdAt)}
                 </p>

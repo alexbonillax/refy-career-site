@@ -15,14 +15,13 @@ const AboutCompany = (companyInfo: Company) => {
   }, []);
 
   return (
-    !isLoading &&
     <section id="about-company" className="py-10 background-color--grey--0">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('about.company', { company: companyInfo.attributes.name })}</h1>
         <div className="font-subtitle text-center mt-2">{companyInfo.attributes.tagline}</div>
         <div className="font-prose py-3 mobile:text-center">{companyInfo.attributes.description}</div>
         {
-          companyInfo.attributes.size &&
+          (!isLoading && companyInfo.attributes.size) &&
           <>
             <Divider />
             <div className="flex-column py-4">
