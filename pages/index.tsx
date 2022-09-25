@@ -1,18 +1,15 @@
 import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
 import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";
 import { Workplaces } from "./locations";
 import { useTranslation } from "next-i18next";
-
 import { Areas } from "./teams";
 import { Header } from "../components/header";
 import { Banner, Navbar, randomPic } from "../components";
 import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import { DEFAULT_WILDCARD } from "../constants";
 import getWildcardCode from "../utils/wildcard";
 
 

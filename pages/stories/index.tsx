@@ -11,7 +11,7 @@ import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
 import { ReadMore } from "../../components/read-more";
-import { DEFAULT_WILDCARD } from "../../constants";
+
 import { getCompanyInfo } from "../../services";
 import { PostType } from "../../services/enum/post-type";
 import { getPosts } from "../../services/getPosts";
@@ -21,6 +21,7 @@ import Post from "../../services/models/post";
 import { bucketM, bucketXXL } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
+import getWildcardCode from "../../utils/wildcard";
 
 
 export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
@@ -229,7 +230,6 @@ const Stories: NextPage = ({ pageProps }: any) => {
       const stories = await getPosts(pageProps.companyInfo.id);
       setData({ stories });
       setLoading(false);
-      console.log(pageProps.wildcard);
     }
     getJobsData();
   }, [])
@@ -248,14 +248,13 @@ const Stories: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && !!req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
       _nextI18Next: translations._nextI18Next,
       pageProps: {
         companyInfo,
-        wildcard
       }
     }
   };
