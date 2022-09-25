@@ -1,4 +1,4 @@
-import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-solid-svg-icons";
+import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
