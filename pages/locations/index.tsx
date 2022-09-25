@@ -13,6 +13,7 @@ import { DEFAULT_WILDCARD } from "../../constants";
 
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
+import getWildcardCode from "../../utils/wildcard";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -71,7 +72,7 @@ const Locations: NextPage = ({ pageProps }: any) => (
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development") ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {

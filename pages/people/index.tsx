@@ -10,6 +10,7 @@ import { RefierCard } from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
 import { DEFAULT_WILDCARD } from "../../constants";
 import Profile from "../../services/models/profile";
+import getWildcardCode from "../../utils/wildcard";
 
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -79,7 +80,7 @@ const People: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development") ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {

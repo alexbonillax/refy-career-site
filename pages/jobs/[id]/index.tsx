@@ -52,7 +52,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
             {
               jobDetails.department &&
               <>
-                <div className='flex items-center w-2 h-3 mr-2 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
+                <div className='flex items-center w-2 h-3 mr-1.5 font--white'> <FontAwesomeIcon icon={faScreenUsers} /> </div>
                 <p className="flex flex-align-center font-hint font--white mr-3">
                   {jobDetails.department.attributes.name}
                 </p>

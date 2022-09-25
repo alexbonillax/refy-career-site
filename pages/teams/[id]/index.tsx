@@ -15,6 +15,7 @@ import Footer from "../../../components/footer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DEFAULT_WILDCARD } from "../../../constants";
+import getWildcardCode from "../../../utils/wildcard";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -55,7 +56,7 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development") ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {

@@ -248,7 +248,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
-  const wildcard = (process.env.NODE_ENV != "development" && !req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
+  const wildcard = (process.env.NODE_ENV != "development" && !!req.headers.host.includes('localhost')) ? req.headers.host.split(".")[0] : DEFAULT_WILDCARD;
   const companyInfo = await getCompanyInfo(wildcard);
   return {
     props: {
