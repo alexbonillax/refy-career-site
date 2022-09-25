@@ -37,23 +37,10 @@ $refy-public-font: FiraSans;
     font-weight: $font-bold;
     line-height: 3rem;
     color: $refy-blue;
+    font-size: 40px;
 
-    &--26 {
-      font-size: 26px;
-      line-height: 2.25rem;
-    }
-
-    &--32 {
-      font-size: 26px;
-      line-height: 2.25rem;
-    }
-
-    &--40 {
-      font-size: 40px;
-    }
-
-    &--46 {
-      font-size: 46px;
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 32px;
     }
 
   }

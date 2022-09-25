@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Banner, Navbar, randomPic } from "../../../components";
+import { Banner, BannerHeight, Navbar, randomPic } from "../../../components";
 import AboutCompany from "../../../components/about";
 import { Header } from "../../../components/header";
 import { getCompanyInfo, getRecentJobs } from "../../../services";
@@ -31,6 +31,7 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
   const departmentId = +useRouter().query?.id;
   const [data, setData] = useState<TeamJobsProps>({ recentJobsList: null, teamName: null })
   const [isLoading, setLoading] = useState(true)
+  const department = companyInfo.departments.find(dept => dept.id === departmentId);
   useEffect(() => {
     if (!departmentId) { return; }
     async function getJobsData() {
@@ -45,7 +46,7 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
     <>
       <Header company={companyInfo} title={Translate('teams')} />
       <Navbar company={companyInfo} transparent={true} url='teams' />
-      <Banner picture={randomPic(companyInfo.departments)} tagline={Translate('teams')} title={data.teamName} />
+      <Banner picture={department.attributes.picture} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
       <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
       <AboutCompany {...companyInfo} />
       <Footer />

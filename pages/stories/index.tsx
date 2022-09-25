@@ -123,7 +123,7 @@ const PicPost = (pictures: string[]) => {
 }
 
 const Badge = ({ text }: { text: string }) => (
-  <div className="badge badge-condensed">
+  <div className="badge badge-condensed mb-1 mr-1">
     <p className="flex flex-align-center font-badge font-badge--condensed font-badge--contrast-grey px-1">{text}</p>
   </div>
 )
@@ -167,7 +167,7 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
         </div>
         {
           post.attributes.hashtags?.length &&
-          <div className="flex flex-wrap py-1 space-x-2 px-2">
+          <div className="flex flex-wrap py-1 px-2">
             {
               post.attributes.hashtags.map((hashtag, i) => (
                 <Badge key={i} text={`#${hashtag}`} />
@@ -222,7 +222,7 @@ interface StoriesProps {
 };
 
 const Stories: NextPage = ({ pageProps }: any) => {
-  const { t, ready } = useTranslation('common')
+  const { t } = useTranslation('common')
   const [data, setData] = useState<StoriesProps>({ stories: null })
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {

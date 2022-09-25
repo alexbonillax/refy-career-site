@@ -6,7 +6,7 @@ import { Workplaces } from "./locations";
 import { useTranslation } from "next-i18next";
 import { Areas } from "./teams";
 import { Header } from "../components/header";
-import { Banner, Navbar, randomPic } from "../components";
+import { Banner, BannerHeight, Navbar, randomPic } from "../components";
 import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const Home: NextPage = ({ pageProps }: any) => {
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent={true} />
-      <Banner picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
+      <Banner height={BannerHeight.bigScreen} picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas {...pageProps.companyInfo} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
