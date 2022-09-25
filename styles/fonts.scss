@@ -3,36 +3,22 @@ $font-normal: 400;
 $font-medium: 600;
 $font-bold: 900;
 
-
-@font-face {
-  font-family: "Nexa";
-  font-weight: normal;
-  src: local("Nexa"), url("../assets/fonts/Nexa/Nexa-Regular.ttf");
-}
-
-@font-face {
-  font-family: "Nexa";
-  font-weight: bold;
-  src: local("Nexa"), url("../assets/fonts/Nexa/Nexa-Bold.otf");
-}
-
 @font-face {
   font-family: "FiraSans";
-  font-weight: bold;
-  src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-Bold.ttf");
-}
-
-@font-face {
-  font-family: "FiraSans";
-  font-weight: medium;
-  src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-SemiBold.ttf");
-}
-
-@font-face {
-  font-family: "FiraSans";
-  font-weight: normal;
+  font-weight: $font-normal;
   src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-Regular.ttf");
 }
 
-$refy-nexa-font: Nexa;
+@font-face {
+  font-family: "FiraSans";
+  font-weight: $font-medium;
+  src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-weight: $font-bold;
+  src: local("FiraSans"), url("../assets/fonts/FiraSans/FiraSans-SemiBold.ttf");
+}
+
 $refy-firasans-font: FiraSans;
