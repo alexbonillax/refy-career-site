@@ -9,8 +9,8 @@ interface BannerProps {
 }
 
 export enum BannerHeight {
-  fullScreen = 'h-screen',
-  bigScreen = 'py-80',
+  fullScreen = 'desktop:h-screen mobile:py-40',
+  bigScreen = 'desktop:py-80 mobile:py-40',
   mediumScreen = 'py-40',
 }
 
@@ -19,7 +19,7 @@ export const randomPic = (departments: Department[]): string => departments.find
 export const Banner = ({ picture, tagline, title, height }: BannerProps) => {
   const picUrl = picture ? bucketXXL + picture : false;
   return (
-    <section id="home-banner" className={`background-color--dark background-center ${height === BannerHeight.fullScreen ? height : ''}`} style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
+    <section id="home-banner" className={`background-color--dark background-center`} style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className={`relative flex-col flex justify-center items-center background-color--blurr-dark ${height}`}>
         <div className="mobile-container flex-col flex justify-center items-center px-3 text-center">
           <h2 className="font-subtitle font--white">{tagline}</h2>

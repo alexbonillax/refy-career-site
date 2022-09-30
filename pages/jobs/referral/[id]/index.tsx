@@ -24,6 +24,8 @@ import Profile from '../../../../services/models/profile';
 import { LoadingPage } from '../../../../components/loading-page';
 import { Coworkers } from '../../../people';
 import { BottomSnackbar } from '../../../../components/snackbar';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import getWildcardCode from '../../../../utils/wildcard';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -70,27 +72,24 @@ export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Jo
   )
 }
 
-interface ReferralProps extends JobProps {
-  companyInfo: Company;
+interface ReferralProps {
   jobDetails: Job;
   canApply?: boolean;
 }
 
-const Referral: NextPage<JobProps> = () => {
+const Referral: NextPage = ({ pageProps }: any) => {
   const { t } = useTranslation("common");
-  const [data, setData] = useState<ReferralProps>({ companyInfo: null, jobDetails: null, canApply: false });
+  const [data, setData] = useState<ReferralProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
   const jobId = useRouter().query?.id as any
   const snackbarRef = useRef(null);
 
   useEffect(() => {
     if (!jobId) { return }
-
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo(getTenantCode(window.location.hostname));
-      const jobDetails = await getReferredJobDetails(jobId, companyInfo.id);
+      const jobDetails = await getReferredJobDetails(jobId, pageProps.companyInfo.id);
       const canApply = !!jobDetails.referrerUser?.id;
-      setData({ companyInfo, jobDetails, canApply });
+      setData({ jobDetails, canApply });
       setLoading(false);
     }
     getJobsData();
@@ -103,17 +102,17 @@ const Referral: NextPage<JobProps> = () => {
           {
             data.jobDetails.attributes &&
             <>
-              <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar transparent={true} url='jobs' company={data.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()} referralCode={jobId} />
+              <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
+              <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
+              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
-              <ReferrerSection jobDetails={data.jobDetails} company={data.companyInfo.attributes.name} color={data.companyInfo.attributes.primaryColor} />
-              <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={data.companyInfo.attributes.primaryColor} />
-              <AboutCompany {...data.companyInfo} />
+              <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
+              <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={pageProps.companyInfo.attributes.primaryColor} />
+              <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
                 <ButtonBasic classes='button-title box-shadow-container--elevated'
-                  bgColor={data.companyInfo.attributes.primaryColor}
+                  bgColor={pageProps.companyInfo.attributes.primaryColor}
                   onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()}>
                   {t('job.apply.button')}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
@@ -139,6 +138,20 @@ const Referral: NextPage<JobProps> = () => {
     </>
 
   )
+};
+
+export const getServerSideProps = async ({ locale, req }: any) => {
+  const translations = await serverSideTranslations(locale, ["common"]);
+  const wildcard = getWildcardCode(req.headers.host);
+  const companyInfo = await getCompanyInfo(wildcard);
+  return {
+    props: {
+      _nextI18Next: translations._nextI18Next,
+      pageProps: {
+        companyInfo,
+      }
+    }
+  };
 };
 
 export default Referral

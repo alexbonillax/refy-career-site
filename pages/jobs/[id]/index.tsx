@@ -25,6 +25,8 @@ import i18next from 'i18next';
 import intervalPlural from 'i18next-intervalplural-postprocessor';
 import { numberWithCommas } from '../../../utils';
 import { BottomSnackbar } from '../../../components/snackbar';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import getWildcardCode from '../../../utils/wildcard';
 
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
@@ -141,7 +143,6 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
 }
 
 export interface JobProps {
-  companyInfo: Company;
   jobDetails: Job;
 }
 
@@ -158,9 +159,9 @@ const ApplyButton = ({ color, onClick }: { color: string, onClick: () => void })
   )
 }
 
-const Job: NextPage<JobProps> = () => {
+const Job: NextPage = ({ pageProps }: any) => {
   const { t } = useTranslation("common");
-  const [data, setData] = useState<JobProps>({ companyInfo: null, jobDetails: null });
+  const [data, setData] = useState<JobProps>({ jobDetails: null });
   const [isLoading, setLoading] = useState(true);
   const snackbarRef = useRef(null);
   const jobId: any = useRouter().query?.id as any
@@ -168,9 +169,8 @@ const Job: NextPage<JobProps> = () => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      const companyInfo = await getCompanyInfo(getTenantCode(window.location.hostname));
-      const jobDetails = await getJobDetails(jobId, companyInfo.id);
-      setData({ companyInfo, jobDetails });
+      const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
+      setData({ jobDetails });
       setLoading(false);
     }
     getJobsData();
@@ -181,16 +181,16 @@ const Job: NextPage<JobProps> = () => {
       {(!isLoading) &&
         <>
           {
-            data.jobDetails.attributes &&
+            (data.jobDetails.attributes && pageProps.companyInfo) &&
             <>
-              <Header company={data.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar transparent={true} url='jobs' company={data.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={data.companyInfo} onClick={() => snackbarRef.current.handleClick()} referralCode={jobId} />
+              <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
+              <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
+              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => snackbarRef.current.handleClick()} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
-              <AboutCompany {...data.companyInfo} />
+              <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton color={data.companyInfo.attributes.primaryColor} onClick={() => snackbarRef.current.handleClick()} />
+                <ApplyButton color={pageProps.companyInfo.attributes?.primaryColor} onClick={() => snackbarRef.current.handleClick()} />
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />
             </>
@@ -208,6 +208,20 @@ const Job: NextPage<JobProps> = () => {
     </>
 
   )
+};
+
+export const getServerSideProps = async ({ locale, req }: any) => {
+  const translations = await serverSideTranslations(locale, ["common"]);
+  const wildcard = getWildcardCode(req.headers.host);
+  const companyInfo = await getCompanyInfo(wildcard);
+  return {
+    props: {
+      _nextI18Next: translations._nextI18Next,
+      pageProps: {
+        companyInfo,
+      }
+    }
+  };
 };
 
 export default Job
