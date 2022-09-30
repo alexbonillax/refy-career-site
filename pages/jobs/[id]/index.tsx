@@ -169,7 +169,7 @@ const Job: NextPage<JobProps> = () => {
     if (!jobId) { return; }
     async function getJobsData() {
       const companyInfo = await getCompanyInfo(getTenantCode(window.location.hostname));
-      const jobDetails = await getJobDetails(jobId);
+      const jobDetails = await getJobDetails(jobId, companyInfo.id);
       setData({ companyInfo, jobDetails });
       setLoading(false);
     }

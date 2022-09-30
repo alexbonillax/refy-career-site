@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
 import { SwipeableDrawer } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
+import { LoadingBar } from "./loading-bar";
 
 interface NavbarProps {
   transparent?: boolean;
@@ -18,15 +19,10 @@ interface NavbarProps {
 
 export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const { t } = useTranslation("common");
-  const [state, setState] = React.useState({ navbar: false });
-  const [clientWindowHeight, setClientWindowHeight] = React.useState("");
+  const [state, setState] = useState({ navbar: false });
+  const [clientWindowHeight, setClientWindowHeight] = useState("");
   const linkList = ['teams', 'people', 'locations', 'stories', 'jobs'];
-  const [scrolled, setScrolling] = React.useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
+  const [scrolled, setScrolling] = useState(false);
 
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
@@ -115,9 +111,13 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
 
   const srcLogo = company.attributes?.logo ? bucketM + company.attributes?.logo : logo;
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-20  transition-all box-shadow-container
+    <nav className={`fixed top-0 left-0 right-0 w-full z-20 transition-all box-shadow-container
     ${((scrolled && transparent) || (!transparent) ? "bg-white" : "background-color--blurr-soft-dark")}
     `}>
+      {
+        !state.navbar &&
+        <LoadingBar color={company.attributes.primaryColor} />
+      }
       <div className="flex mobile-container--responsive mx-auto desktop:h-20.5 mobile:h-16 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
           <div className="w-2 h-2">
@@ -144,6 +144,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           onClose={toggleDrawer("navbar", false)}
           onOpen={toggleDrawer("navbar", true)}
         >
+          <LoadingBar color={company.attributes.primaryColor} />
           <SideBarLinks></SideBarLinks>
         </SwipeableDrawer>
       </div>

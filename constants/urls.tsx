@@ -1,2 +1,2 @@
 export const DOMAIN = 'refy.careers';
-export const DEFAULT_WILDCARD = 'fresh-people';
+export const DEFAULT_WILDCARD = 'refy';

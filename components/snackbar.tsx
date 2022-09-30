@@ -34,7 +34,6 @@ export const BottomSnackbar = forwardRef((props, ref) => {
 
   return (
     <Snackbar
-      className='font-family'
       anchorOrigin={{ vertical, horizontal }}
       open={open}
       autoHideDuration={6000}

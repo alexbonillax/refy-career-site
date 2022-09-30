@@ -95,6 +95,9 @@
     }
 
   }
+  &--loading-bar {
+    transition: width 5000ms ease-in-out;
+  }
 
 }
 
