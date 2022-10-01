@@ -24,6 +24,11 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const linkList = ['teams', 'people', 'locations', 'stories', 'jobs'];
   const [scrolled, setScrolling] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
   };
