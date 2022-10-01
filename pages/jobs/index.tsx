@@ -10,7 +10,6 @@ import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
-import { DEFAULT_WILDCARD } from "../../constants";
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
@@ -70,7 +69,7 @@ const JobCardLoading = () => (
       </div>
     </div>
 
-    <div className="flex flex-col flex-align-center flex-justify-between pt-1 pb-2 px-2 h-9">
+    <div className="flex flex-align-justify-center space-x-8 pt-1 pb-2 px-2 h-9">
       <div className="flex">
         <div className="h-2 w-2 background-loading-gradient"></div>
         <div className="h-2 w-10 background-loading-gradient ml-1"></div>
@@ -98,15 +97,15 @@ const JobCard = (job: Job) => {
               {
                 job.overview?.department &&
                 <div className="flex flex-align-justify-center font-hint mr-3">
-                  <div className="flex items-center w-2.5 h-2.5 font-icon color-primary">
-                    <FontAwesomeIcon icon={faScreenUsers} className="mr-1 font-icon color-primary"></FontAwesomeIcon>
+                  <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
+                    <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
                   </div>
                   <p>{job.overview.department.name}</p>
                 </div>
               }
               {
                 job.overview?.workplaces.length > 0 &&
-                <div className="flex flex-align-justify-center font-hint mr-3">
+                <div className="flex flex-align-justify-center font-hint">
                   <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
                   </div>

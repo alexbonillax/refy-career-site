@@ -96,7 +96,15 @@
 
   }
   &--loading-bar {
-    transition: width 2500ms ease-in-out;
+    &__start {
+      transition: width 0ms ease-in-out;
+    }
+    &__loading {
+      transition: width 3000ms ease-in-out;
+    }
+    &__done {
+      transition: width 0ms ease-in-out;
+    }
   }
 
 }
