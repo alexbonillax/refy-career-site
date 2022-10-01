@@ -1,4 +1,4 @@
-import { getCompanyInfo, getTenantCode } from '../../../services'
+import { getCompanyInfo } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
 import { Divider, Navbar } from '../../../components';
@@ -6,9 +6,9 @@ import { getJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
 import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faHandshake, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
+import { faCalendarAlt, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-solid-svg-icons";
-import { faArrowDown, faClock, faCoin } from '@fortawesome/pro-light-svg-icons';
+import { faArrowDown, faClock, faCoin, faHandshake } from '@fortawesome/pro-light-svg-icons';
 import { DateToTimeLeftReduced } from '../../../utils/dateToTimeLeftReduced';
 import AboutCompany from '../../../components/about';
 import { useTranslation } from 'next-i18next';
@@ -119,8 +119,8 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
         {
           (job.attributes.employmentType || job.attributes.maxSalary) &&
           <div className="flex-column">
-            <p className="font-subtitle mt-3 mb-1">{t('job.conditions.title')}</p>
-            <div className="flex-column space-y-3">
+            <p className="font-subtitle mt-3 mb-2">{t('job.conditions.title')}</p>
+            <div className="flex-column space-y-6">
               {
                 job.attributes.employmentType &&
                 <SectionJobDetails title={t('job.type.title')} value={t('job.type_interval', { postProcess: 'interval', count: job.attributes.employmentType })} icon={faHandshake} />
