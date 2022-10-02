@@ -21,9 +21,12 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = useState("");
-  let linkList = ['teams'];
-  (company.careers?.referrers) && linkList.push('people');
-  linkList = linkList.concat(['locations', 'stories', 'jobs']) 
+  let linkList: string[] = [];
+  (company.departments.length > 0) && linkList.push('teams');
+  (company.careers?.referrers && company.departments.length > 0) && linkList.push('people');
+  (company.workplaces.length > 0) && linkList.push('locations');
+  (company.referralProgram.accessPosts) && linkList.push('stories');
+  linkList = linkList.concat(['jobs']) 
   const [scrolled, setScrolling] = useState(false);
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
@@ -133,7 +136,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         </div>
 
         <Link href="/">
-          <a> <div className="w-5 h-5 rounded-md bg-contain desktop:mr-14" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
+          <a><div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
         </Link>
 
         <div className="w-8"></div>

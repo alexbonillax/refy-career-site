@@ -1,20 +1,17 @@
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-import { Banner, BannerHeight, Navbar, randomPic } from "../../../components";
+import { Banner, BannerHeight, Navbar } from "../../../components";
 import AboutCompany from "../../../components/about";
 import { Header } from "../../../components/header";
 import { getCompanyInfo, getRecentJobs } from "../../../services";
 import Company from "../../../services/models/company";
 import Page from "../../../services/models/page";
 import Job from "../../../services/models/job";
-
 import { RecentJobs } from "../../jobs";
 import Footer from "../../../components/footer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { DEFAULT_WILDCARD } from "../../../constants";
 import getWildcardCode from "../../../utils/wildcard";
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -59,12 +56,24 @@ export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      companyInfo,
+
+  if (companyInfo.departments.length > 0) {
+    return {
+      props: {
+        _nextI18Next: translations._nextI18Next,
+        pageProps: {
+          companyInfo,
+        }
+      }
+    };
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
-  };
+  }
 };
 
 export default TeamJobs;

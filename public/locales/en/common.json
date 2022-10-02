@@ -31,9 +31,10 @@
     "banner.subtitle": "Encuentra tu próximo trabajo en {{company}}",
     "job.salary.title": "Rango salarial",
     "job.frequency.title": "Frecuencia de pago",
-    "job.empty": "No existen puestos de trabajo en este area todavía",
-    "read-more": "Mostrar más",
-    "read-less": "Mostrar menos",
+    "job.empty": "No hay posiciones por ahora",
+    "stories.empty": "No hay historias por ahora",
+    "read-more": "ver más",
+    "read-less": "ver menos",
     "coworkers": "Compañeros de equipo",
     "coworkers.description": "Sabemos que {{referrer}} te está ayudando pero, ¿qué te parece si contactas con algún miembro del equipo para que te ayuden a resolver cualquier pregunta que tengas?\nSeguro que estarán contentos de ayudarte"
 }

@@ -40,7 +40,7 @@ export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<
 
         {
           !loading && stories.content.length <= 0 &&
-          <p className="font-prose text-center">{'candidate.stories.empty'}</p>
+          <p className="font-prose text-center">{'stories.empty'}</p>
         }
 
         {loading && Array.from(Array(3)).map((_, i) => <PostItemLoading key={i} />)}
@@ -250,14 +250,24 @@ export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
+
+  if (companyInfo.referralProgram.accessPosts) {
+    return {
+      props: {
+        _nextI18Next: translations._nextI18Next,
+        pageProps: {
+          companyInfo,
+        }
       }
+    };
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
-  };
+  }
 };
 
 export default Stories;

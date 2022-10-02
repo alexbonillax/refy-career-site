@@ -6,9 +6,6 @@ import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
-import { DEFAULT_WILDCARD } from "../../constants";
-
-
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
 import Department from "../../services/models/department";
@@ -21,17 +18,21 @@ export const Translate = (text: string, array?: boolean): string => {
 }
 
 export const Areas = (companyInfo: Company) => (
-  <section id="teams" className="py-10 bg-white">
-    <div className="mobile-container--responsive m-auto px-2 flex flex-col">
-      <h1 className="font-big-title text-center font-big-title--40 mb-5">{Translate('teams')} </h1>
-      <div className="mobile:flex-col flex flex-wrap">
-        {companyInfo.departments?.map((department, i) => (
-          <DepartmentCard key={i} {...department} />
-        ))
-        }
-      </div>
-    </div>
-  </section>
+  <>
+    {companyInfo.departments.length > 0 &&
+      <section id="teams" className="py-10 bg-white">
+        <div className="mobile-container--responsive m-auto px-2 flex flex-col">
+          <h1 className="font-big-title text-center font-big-title--40 mb-5">{Translate('teams')} </h1>
+          <div className="mobile:flex-col flex flex-wrap">
+            {companyInfo.departments?.map((department, i) => (
+              <DepartmentCard key={i} {...department} />
+            ))
+            }
+          </div>
+        </div>
+      </section>
+    }
+  </>
 )
 
 const DepartmentCard = (department: Department) => {
@@ -66,14 +67,24 @@ export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
+
+  if (companyInfo.departments.length > 0) {
+    return {
+      props: {
+        _nextI18Next: translations._nextI18Next,
+        pageProps: {
+          companyInfo,
+        }
       }
+    };
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
-  };
+  }
 };
 
 export default Teams;
