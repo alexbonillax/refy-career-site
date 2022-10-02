@@ -5,11 +5,12 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
+import BottomSnackbar from "../../components/snackbar";
 import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
@@ -126,9 +127,11 @@ interface JobsProps {
 
 const Jobs: NextPage = ({ pageProps }: any) => {
   const { t } = useTranslation("common");
+  const snackbarRef = useRef(null);
   const workplaceId = +useRouter().query?.workplace;
   const [data, setData] = useState<JobsProps>({ recentJobsList: null })
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true);
+  ('unknown' in useRouter().query) && snackbarRef.current?.handleClick(t('job.not-exist'));
   useEffect(() => {
     async function getJobsData() {
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
@@ -147,6 +150,7 @@ const Jobs: NextPage = ({ pageProps }: any) => {
         <RecentJobs recentJobsList={data.recentJobsList} workplace={workplaceId} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />
+        <BottomSnackbar ref={snackbarRef} />
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 export interface State extends SnackbarOrigin {
   open: boolean;
+  message: string;
   onClick?: () => void;
 
 }
@@ -16,16 +17,16 @@ export const BottomSnackbar = forwardRef((props, ref) => {
     open: false,
     vertical: 'top',
     horizontal: 'center',
+    message: '',
   });
-  const { vertical, horizontal, open } = state;
+  const { vertical, horizontal, open, message } = state;
 
   const close = () => {setState({ ...state, open: false });}
 
-
   useImperativeHandle(ref, () => ({
 
-    handleClick() {
-      setState({ open: true, vertical: 'bottom', horizontal: 'center' });
+    handleClick(message: string) {
+      setState({ open: true, vertical: 'bottom', horizontal: 'center', message });
     },
     handleClose() {
       close();
@@ -38,7 +39,7 @@ export const BottomSnackbar = forwardRef((props, ref) => {
       open={open}
       autoHideDuration={6000}
       onClose={close}
-      message={t('toast.apply.warning')}
+      message={message}
       key={vertical + horizontal}
     />
   );

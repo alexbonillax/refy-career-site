@@ -17,7 +17,7 @@ import { ButtonBasic } from '../../../components/buttons/button-basic';
 import 'react-toastify/dist/ReactToastify.css';
 import { FloatingContainer } from '../../../components/floating-container';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Footer from '../../../components/footer';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { LoadingPage } from '../../../components/loading-page';
@@ -170,8 +170,12 @@ const Job: NextPage = ({ pageProps }: any) => {
     if (!jobId) { return; }
     async function getJobsData() {
       const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
-      setData({ jobDetails });
-      setLoading(false);
+      if (!jobDetails.id) {
+        Router.push(`/jobs?unknown`);
+      } else {
+        setData({ jobDetails });
+        setLoading(false);
+      };
     }
     getJobsData();
   }, [jobId])
@@ -185,12 +189,12 @@ const Job: NextPage = ({ pageProps }: any) => {
             <>
               <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => snackbarRef.current.handleClick()} referralCode={jobId} />
+              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton color={pageProps.companyInfo.attributes?.primaryColor} onClick={() => snackbarRef.current.handleClick()} />
+                <ApplyButton color={pageProps.companyInfo.attributes?.primaryColor} onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />
             </>
@@ -204,7 +208,7 @@ const Job: NextPage = ({ pageProps }: any) => {
 
         </>
       }
-      {(isLoading) && <LoadingPage />}
+      {(isLoading) && <LoadingPage fill={pageProps.companyInfo.attributes?.primaryColor} />}
     </>
 
   )

@@ -32,6 +32,7 @@
     "job.salary.title": "Rango salarial",
     "job.frequency.title": "Frecuencia de pago",
     "job.empty": "No hay posiciones por ahora",
+    "job.not-exist": "Al parecer la posición que estabas buscando no existe o ya se ha eliminado.",
     "stories.empty": "No hay historias por ahora",
     "read-more": "ver más",
     "read-less": "ver menos",

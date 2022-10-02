@@ -11,7 +11,7 @@ import { ButtonBasic } from '../../../../components/buttons/button-basic';
 import 'react-toastify/dist/ReactToastify.css';
 import { FloatingContainer } from '../../../../components/floating-container';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Footer from '../../../../components/footer';
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { JobBanner, JobDetails } from '../../[id]';
@@ -28,7 +28,7 @@ import getWildcardCode from '../../../../utils/wildcard';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
-  window.location.assign(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${referralCode}`);
+  window.open(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${referralCode}`, '_blank');
 }
 
 const openLinkedin = (username: string): Window => window.open(`https://www.linkedin.com/in/${username}`, '_blank');
@@ -87,9 +87,13 @@ const Referral: NextPage = ({ pageProps }: any) => {
     if (!jobId) { return }
     async function getJobsData() {
       const jobDetails = await getReferredJobDetails(jobId, pageProps.companyInfo.id);
-      const canApply = !!jobDetails.referrerUser?.id;
-      setData({ jobDetails, canApply });
-      setLoading(false);
+      if (!jobDetails) {
+        Router.push(`/jobs?unknown`);
+      } else {
+        const canApply = !!jobDetails.referrerUser?.id;
+        setData({ jobDetails, canApply });
+        setLoading(false);
+      };
     }
     getJobsData();
   }, [jobId])
@@ -103,7 +107,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
             <>
               <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()} referralCode={jobId} />
+              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
               <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={pageProps.companyInfo.attributes.primaryColor} />
@@ -112,7 +116,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
               <FloatingContainer>
                 <ButtonBasic classes='button-title box-shadow-container--elevated'
                   bgColor={pageProps.companyInfo.attributes.primaryColor}
-                  onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick()}>
+                  onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))}>
                   {t('job.apply.button')}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
                 </ButtonBasic>
@@ -132,7 +136,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
       }
       {
         isLoading &&
-        <LoadingPage fill={pageProps.companyInfo.attributes.primaryColora} />
+        <LoadingPage fill={pageProps.companyInfo.attributes?.primaryColor} />
       }
     </>
 
