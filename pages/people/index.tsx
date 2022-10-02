@@ -82,14 +82,26 @@ export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
+
+  if (companyInfo.careers?.referrers?.visible){
+    return {
+      props: {
+        _nextI18Next: translations._nextI18Next,
+        pageProps: {
+          companyInfo,
+        }
       }
+    };
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
-  };
+  }
+
+
 };
 
 export default People;

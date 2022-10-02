@@ -21,20 +21,19 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = useState("");
-  const linkList = ['teams', 'people', 'locations', 'stories', 'jobs'];
+  let linkList = ['teams'];
+  (company.careers?.referrers) && linkList.push('people');
+  linkList = linkList.concat(['locations', 'stories', 'jobs']) 
   const [scrolled, setScrolling] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  });
-
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
     setScrolling(+clientWindowHeight > 0);
+    return () => window.removeEventListener("scroll", handleScroll);
+    
   }, [clientWindowHeight]);
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {

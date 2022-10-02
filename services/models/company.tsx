@@ -21,7 +21,7 @@ export default interface Company {
     accessPosts: boolean;
   };
   careers: {
-    members: boolean;
+    referrers: {visible: boolean};
   };
   type: string;
   departments: Department[];
