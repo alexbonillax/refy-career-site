@@ -18,7 +18,7 @@ import { getPosts } from "../../services/getPosts";
 import Company from "../../services/models/company";
 import Page from "../../services/models/page";
 import Post from "../../services/models/post";
-import { bucketM, bucketXXL } from "../../services/urls";
+import { bucketM, bucketXXL, videoBucketUrl } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 import getWildcardCode from "../../utils/wildcard";
@@ -128,7 +128,7 @@ const Badge = ({ text }: { text: string }) => (
   </div>
 )
 
-export const PostLink = ({ post }: { post: Post }) => (
+const PostLink = ({ post }: { post: Post }) => (
   <Link href={post.attributes.url}>
     <a target="_blank">
       <div className="flex-column border border--grey-100 overflow-hidden cursor-pointer rounded-b-md">
@@ -144,6 +144,14 @@ export const PostLink = ({ post }: { post: Post }) => (
   </Link>
 )
 
+const PostVideo = ({ post }: { post: Post }) => {
+  const videoUrl = videoBucketUrl + post.attributes.video;
+  return (
+    <video className="w-full h-30" controls>
+      <source src={videoUrl} type="video/mp4" />
+    </video>
+  )
+}
 
 export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Company }) => {
   return (
@@ -185,6 +193,11 @@ export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Compa
       {
         post.attributes.type === PostType.Image &&
         <PicPost {...post.attributes.pictures} />
+      }
+
+      {
+        post.attributes.type === PostType.Video &&
+        <PostVideo post={post} />
       }
     </div >
   )

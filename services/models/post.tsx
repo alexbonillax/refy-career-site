@@ -15,6 +15,7 @@ export default interface Post {
     startsAt: Date;
     endsAt: Date;
     createdAt: Date;
+    video?: string;
   };
   overview: {
     user: PostOverview;

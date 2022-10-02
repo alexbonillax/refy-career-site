@@ -13,6 +13,8 @@ import Footer from "../../../components/footer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import getWildcardCode from "../../../utils/wildcard";
+import Department from "../../../services/models/department";
+import Router from 'next/router';
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -24,16 +26,16 @@ interface TeamJobsProps {
   teamName: string;
 }
 
-const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { companyInfo: Company }) => {
+const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const departmentId = +useRouter().query?.id;
   const [data, setData] = useState<TeamJobsProps>({ recentJobsList: null, teamName: null })
   const [isLoading, setLoading] = useState(true)
-  const department = companyInfo.departments.find(dept => dept.id === departmentId);
+  const department = pageProps.companyInfo.departments.find((dept: Department) => dept.id === departmentId);
   useEffect(() => {
-    if (!departmentId) { return; }
+    if (!departmentId || !department) { Router.push(`/teams`) };
     async function getJobsData() {
-      const recentJobsList = await getRecentJobs(companyInfo.id, departmentId);
-      const teamName = companyInfo.departments.find(department => department.id === +departmentId)?.attributes.name;
+      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
+      const teamName = pageProps.companyInfo.departments.find((dept: Department) => dept.id === +departmentId)?.attributes.name;
       setData({ recentJobsList, teamName });
       setLoading(false);
     }
@@ -41,12 +43,16 @@ const TeamJobs: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { company
   }, [])
   return (
     <>
-      <Header company={companyInfo} title={Translate('teams')} />
-      <Navbar company={companyInfo} transparent={true} url='teams' />
-      <Banner picture={department.attributes.picture} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
-      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
-      <AboutCompany {...companyInfo} />
-      <Footer />
+      {department &&
+        <>
+          <Header company={pageProps.companyInfo} title={Translate('teams')} />
+          <Navbar company={pageProps.companyInfo} transparent={true} url='teams' />
+          <Banner picture={department.attributes.picture} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
+          <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
+          <AboutCompany {...pageProps.companyInfo} />
+          <Footer />
+        </>
+      }
     </>
   )
 };

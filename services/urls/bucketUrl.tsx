@@ -1,4 +1,5 @@
 export const bucketURL = 'https://refy.s3-eu-west-1.amazonaws.com/images/';
+export const videoBucketUrl = 'https://refy.s3-eu-west-1.amazonaws.com/videos/';
 export const bucketXXL = `${bucketURL}xxl/`;
 export const bucketXL = `${bucketURL}xl/`;
 export const bucketL = `${bucketURL}l/`;

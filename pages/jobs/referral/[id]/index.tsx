@@ -132,7 +132,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
       }
       {
         isLoading &&
-        <LoadingPage />
+        <LoadingPage fill={pageProps.companyInfo.attributes.primaryColora} />
       }
     </>
 

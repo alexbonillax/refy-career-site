@@ -1,11 +1,11 @@
 
 interface LoadingPageProps {
-    fill?: string;
+    fill: string;
     width?: 40;
     viewBox?: string;
 }
 
-export const LoadingPage = ({ fill = '#fe6680', width = 40, viewBox = '0 0 120 30' }: LoadingPageProps) => (
+export const LoadingPage = ({ fill, width = 40, viewBox = '0 0 120 30' }: LoadingPageProps) => (
     <div className="w-full h-screen flex items-center justify-center">
         <div className="w-5 h-5">
             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" fill={fill} width={width} height={width} viewBox={viewBox}>
