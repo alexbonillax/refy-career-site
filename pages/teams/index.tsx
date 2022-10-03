@@ -4,6 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
+import { ButtonBasic } from "../../components/buttons/button-basic";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { getCompanyInfo } from "../../services";
@@ -17,16 +18,34 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-export const Areas = (companyInfo: Company) => (
+interface AreasProps {
+  departments: Department[];
+  reduced?: boolean;
+  colorButton?: string;
+}
+
+export const Areas = ({ departments = [], reduced = false, colorButton }: AreasProps) => (
   <>
-    {companyInfo.departments.length > 0 &&
+    {departments.length > 0 &&
       <section id="teams" className="py-10 bg-white">
-        <div className="mobile-container--responsive m-auto px-2 flex flex-col">
-          <h1 className="font-big-title text-center font-big-title--40 mb-5">{Translate('teams')} </h1>
-          <div className="mobile:flex-col flex flex-wrap">
-            {companyInfo.departments?.map((department, i) => (
-              <DepartmentCard key={i} {...department} />
-            ))
+        <div className={`mobile-container--responsive m-auto px-2 flex ${reduced ? 'mobile:flex-col' : 'flex-col'}`}>
+          <h1 className={`font-big-title font-big-title--40 mb-5 ${reduced ? 'desktop:w-2/5 mobile:text-center' : 'text-center'} `}>{Translate('teams')} </h1>
+          <div className={`${reduced ? 'desktop:w-3/5' : ''}`}>
+            <div className='mobile:flex-col flex flex-wrap'>
+              {departments?.map((department, i) => (
+                <DepartmentCard key={i} {...department} />
+              ))
+              }
+            </div>
+            {
+              reduced &&
+              <div className="flex justify-center mt-2">
+                <Link href="/teams">
+                  <a className="">
+                    <ButtonBasic bgColor={colorButton} classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
+                  </a>
+                </Link>
+              </div>
             }
           </div>
         </div>

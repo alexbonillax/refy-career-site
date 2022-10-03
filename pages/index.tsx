@@ -11,9 +11,10 @@ import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import getWildcardCode from "../utils/wildcard";
+import Company from "../services/models/company";
 
 
-const Home: NextPage = ({ pageProps }: any) => {
+const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: {companyInfo: Company}}) => {
   const { t, ready } = useTranslation("common");
   const [data, setData] = useState({ recentJobsList: null });
   const [isLoading, setLoading] = useState(true);
@@ -23,7 +24,8 @@ const Home: NextPage = ({ pageProps }: any) => {
       return;
     }
     async function getJobsData() {
-      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
+      let recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
+      recentJobsList = {...recentJobsList, content: recentJobsList.content.slice(0,6)};
       setData({ recentJobsList });
       setLoading(false);
     }
@@ -36,9 +38,9 @@ const Home: NextPage = ({ pageProps }: any) => {
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent={true} />
       <Banner height={BannerHeight.bigScreen} picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <Areas {...pageProps.companyInfo} />
+      <Areas departments={pageProps.companyInfo.departments.slice(0,4)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
-      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
+      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} reduced buttonColor={pageProps.companyInfo.attributes.primaryColor} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

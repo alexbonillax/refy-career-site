@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
+import { ButtonBasic } from "../../components/buttons/button-basic";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import BottomSnackbar from "../../components/snackbar";
@@ -21,9 +22,11 @@ interface RecentJobsProps {
   recentJobsList: Page<Job>;
   workplace?: number;
   loading: boolean;
+  reduced?: boolean;
+  buttonColor?: string;
 }
 
-export const RecentJobs = ({ recentJobsList, workplace, loading = true }: RecentJobsProps) => {
+export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced = false, buttonColor }: RecentJobsProps) => {
   const { t } = useTranslation("common");
   let jobs = recentJobsList?.content;
   if (workplace) {
@@ -55,6 +58,16 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true }: Recent
             )
           }
         </div>
+        {
+          reduced &&
+          <div className="flex justify-center mt-2">
+            <Link href="/jobs">
+              <a className="">
+                <ButtonBasic bgColor={buttonColor} classes='!py-4 !text-lg'>{t('workplaces.jobs.button')}</ButtonBasic>
+              </a>
+            </Link>
+          </div>
+        }
       </div>
     </section>
   )
