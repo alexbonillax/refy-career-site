@@ -7,7 +7,7 @@ export const ReadMore = ({ text }: { text: string }) => {
   const toggleReadMore = () => {
     setIsReadMore(!isReadMore);
   };
-  const reducedText = isReadMore ? text.slice(0, maxCharacters) : text;
+  // const reducedText = isReadMore ? text.slice(0, maxCharacters) : text;
   const { t } = useTranslation("common");
   const label = isReadMore ? t('read-more') : t('read-less');
   return (
@@ -16,15 +16,18 @@ export const ReadMore = ({ text }: { text: string }) => {
         text.length < maxCharacters ?
           (<p className="font--dark">{text}</p>)
           :
-          (
-            <p className="font--dark">
-              {reducedText}
-              {text.length > maxCharacters &&
-                <span onClick={toggleReadMore} className="expansion-prose-trigger cursor-pointer ml-2">
-                  {isReadMore && '...'}{label}
-                </span>
-              }
+          (<>
+            <p className={`font--dark ${isReadMore ? 'font--ellipsis-2' : ''}`}>
+              {text}
             </p>
+            {text.length > maxCharacters &&
+            <div className="flex justify-end">
+              <span onClick={toggleReadMore} className="expansion-prose-trigger cursor-pointer ml-2">
+                {isReadMore && '...'}{label}
+              </span>
+            </div>
+            }
+          </>
           )
       }
     </div>
