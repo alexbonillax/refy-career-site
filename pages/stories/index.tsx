@@ -40,7 +40,7 @@ export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<
 
         {
           !loading && stories.content.length <= 0 &&
-          <p className="font-prose text-center">{'stories.empty'}</p>
+          <p className="font-prose text-center">{t('stories.empty')}</p>
         }
 
         {loading && Array.from(Array(3)).map((_, i) => <PostItemLoading key={i} />)}
