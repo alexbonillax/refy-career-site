@@ -28,7 +28,7 @@ export const Areas = ({ departments = [], reduced = false, colorButton }: AreasP
   <>
     {departments.length > 0 &&
       <section id="teams" className="py-10 bg-white">
-        <div className={`mobile-container--responsive m-auto px-2 flex ${reduced ? 'mobile:flex-col' : 'flex-col'}`}>
+        <div className={`mobile-container--responsive m-auto flex ${reduced ? 'mobile:flex-col' : 'flex-col'}`}>
           <h1 className={`font-big-title font-big-title--40 mb-5 ${reduced ? 'desktop:w-2/5 mobile:text-center' : 'text-center'} `}>{Translate('teams')} </h1>
           <div className={`${reduced ? 'desktop:w-3/5' : ''}`}>
             <div className='mobile:flex-col flex flex-wrap'>
