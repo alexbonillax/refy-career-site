@@ -10,14 +10,11 @@ interface HeaderProps {
 
 export const Header = ({ company, title }: HeaderProps) => {
   const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
-    const bodyFont = body?.name ? `family=${body.name.replace(' ', '+')}` : '';
+    let bodyFont = body?.name ? `family=${body.name.replace(' ', '+')}` : '';
     let headerFont = header?.name ? `family=${header.name.replace(' ', '+')}` : '';
     headerFont = bodyFont && headerFont ? `&${headerFont}` : headerFont;
-    if (bodyFont || headerFont) {
-      return <link href={`https://fonts.googleapis.com/css2?${bodyFont}${headerFont}`} rel="stylesheet" />
-    } else {
-      return <link href={`https://fonts.googleapis.com/css2?family=Fira+Sans`} rel="stylesheet" />
-    }
+    bodyFont = !(bodyFont || headerFont) ? 'family=Fira+Sans' : bodyFont;
+    return <link href={`https://fonts.googleapis.com/css2?${bodyFont}${headerFont}`} rel="stylesheet" />
   }
 
   const favicon = company.attributes.logo ? bucketM + company.attributes.logo : false;
