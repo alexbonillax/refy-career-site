@@ -27,6 +27,7 @@ import { numberWithCommas } from '../../../utils';
 import { BottomSnackbar } from '../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
+import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
 
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
@@ -169,6 +170,7 @@ const Job: NextPage = ({ pageProps }: any) => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
+      ApplyDynamicStyles(pageProps.companyInfo.careers.style);
       const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails.id) {
         Router.push(`/jobs?unknown`);

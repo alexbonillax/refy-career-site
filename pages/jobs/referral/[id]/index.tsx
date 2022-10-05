@@ -25,6 +25,7 @@ import { Coworkers } from '../../../people';
 import { BottomSnackbar } from '../../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../../utils/wildcard';
+import { ApplyDynamicStyles } from '../../../../utils/dynamic-styles/apply-styles';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -86,6 +87,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
   useEffect(() => {
     if (!jobId) { return }
     async function getJobsData() {
+      ApplyDynamicStyles(pageProps.companyInfo.careers.style);
       const jobDetails = await getReferredJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails) {
         Router.push(`/jobs?unknown`);

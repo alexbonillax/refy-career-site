@@ -16,6 +16,7 @@ import { getCompanyInfo, getRecentJobs } from "../../services";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
+import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 
 interface RecentJobsProps {
@@ -147,6 +148,7 @@ const Jobs: NextPage = ({ pageProps }: any) => {
   ('unknown' in useRouter().query) && snackbarRef.current?.handleClick(t('job.not-exist'));
   useEffect(() => {
     async function getJobsData() {
+      ApplyDynamicStyles(pageProps.companyInfo.careers.style); 
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
       setData({ recentJobsList });
       setLoading(false);

@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { useEffect } from "react";
 import { Divider, Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
@@ -9,6 +10,7 @@ import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
+import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 
 const Translate = (text: string, array?: boolean): string => {
@@ -53,24 +55,28 @@ export const Workplaces = (props: WorkplacesProps) => (
   </section>
 )
 
-const Locations: NextPage = ({ pageProps }: any) => (
-  <>
-    <Header company={pageProps.companyInfo} title={Translate('locations')} />
-    <div className="pt-8">
-      <Navbar url='locations' company={pageProps.companyInfo} />
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
-      <AboutCompany {...pageProps.companyInfo} />
-      <Footer />
-    </div>
-  </>
-);
-
+const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+  useEffect(() => {
+    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+  }, [])
+  return (
+    <>
+      <Header company={pageProps.companyInfo} title={Translate('locations')} />
+      <div className="pt-8">
+        <Navbar url='locations' company={pageProps.companyInfo} />
+        <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
+        <AboutCompany {...pageProps.companyInfo} />
+        <Footer />
+      </div>
+    </>
+  )
+};
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  
+
   if (companyInfo.workplaces.length > 0) {
     return {
       props: {
