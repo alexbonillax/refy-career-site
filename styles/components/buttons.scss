@@ -1,6 +1,7 @@
 @import './colors';
 
 .button {
+  font-family: var(--body-font-family);
   padding: 0 0.75rem;
   min-height: 2.5rem;
   border-radius: 0.5rem;

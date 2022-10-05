@@ -22,9 +22,18 @@ export default interface Company {
   };
   careers: {
     referrers: {visible: boolean};
+    style: {
+      header: { font: GoogleFont },
+      body: { font: GoogleFont },
+    }
   };
   type: string;
   departments: Department[];
   workplaces: Workplace[];
 
+}
+
+export interface GoogleFont {
+  code: string;
+  name: string;
 }

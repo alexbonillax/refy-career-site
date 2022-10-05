@@ -2,10 +2,12 @@
 @import './colors';
 @import './sizings';
 
-$refy-public-font: FiraSans;
-
 .underline {
   text-decoration: underline;
+}
+
+.body {
+  font-family: var(--header-font-family);
 }
 
 .font {
@@ -27,6 +29,7 @@ $refy-public-font: FiraSans;
   }
 
   &-big-title {
+    font-family: var(--title-font-family);
     font-weight: $font-bold;
     line-height: 3rem;
     color: $refy-blue;
@@ -39,72 +42,24 @@ $refy-public-font: FiraSans;
   }
 
   &-title {
+    font-family: var(--title-font-family);
     font-weight: $font-medium;
     font-size: 20px;
     line-height: 2rem;
     color: $refy-blue;
 
-    &--breadcrumb {
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 1.5rem;
-      color: $refy-grey-1000;
-    }
-
-    &--tab {
-      font-size: 16px;
-      color: $refy-grey-1000;
-    }
-
-    &--menu-panel {
-      font-size: 15px;
-      font-weight: bold;
-      color: $refy-text-contrast-grey;
-    }
-
-  }
-
-  &-small-title {
-    font-weight: $font-medium;
-    font-size: 18px;
-    line-height: 2rem;
-    color: $refy-blue;
-  }
-
-  &-table {
-
-    &--title {
-      font-size: 16px;
-      font-weight: normal;
-      color: $refy-blue;
-    }
-
-    &--subtitle {
-      font-size: 15px;
-      font-weight: normal;
-      color: $refy-grey-1000;
-    }
-
   }
 
   &-subtitle {
+    font-family: var(--title-font-family);
     font-weight: $font-medium;
     font-size: 18px;
     line-height: 2rem;
     color: $refy-text-grey;
-
-    &--light {
-      color: $refy-white;
-    }
-
-    &--breadcrumb {
-      font-weight: $font-medium;
-      font-size: 15px;
-      color: $refy-text-grey;
-    }
   }
 
   &-header {
+    font-family: var(--title-font-family);
     font-weight: $font-medium;
     font-size: 16px;
     line-height: 1.5rem;
@@ -122,12 +77,14 @@ $refy-public-font: FiraSans;
   }
 
   &-value {
+    font-family: var(--body-font-family);
     font-size: 13px;
     line-height: 1rem;
     color: $refy-text-grey;
   }
 
   &-multiline {
+    font-family: var(--body-font-family);
     font-size: 15px;
     line-height: 1.5rem;
     color: $refy-text-grey;
@@ -144,6 +101,7 @@ $refy-public-font: FiraSans;
   }
 
   &-prose {
+    font-family: var(--body-font-family);
     font-size: 20px;
     line-height: 2rem;
     font-weight: $font-normal;
@@ -208,23 +166,6 @@ $refy-public-font: FiraSans;
       font-size: 12px;
       line-height: 1.25rem;
     }
-
-    &--primary {
-      color: $refy-color-primary;
-    }
-
-    &--white {
-      color: $refy-white;
-    }
-
-    &--black {
-      color: $refy-black;
-    }
-
-    &--dark {
-      color: $refy-grey-1000;
-    }
-
     &--grey {
       color: $refy-grey;
     }
@@ -232,77 +173,6 @@ $refy-public-font: FiraSans;
     &--contrast-grey {
       color: $refy-text-contrast-grey;
     }
-
-    &--red {
-      color: $refy-red;
-    }
-  }
-
-  &-nav {
-
-    &-title {
-
-      @media (max-width: $mobile-breakpoint) {
-        font-size: 10px;
-        line-height: 1.25rem;
-        color: $refy-grey;
-        transition: color 300ms ease-in-out;
-
-        &--active {
-          font-weight: $font-medium;
-          color: $refy-grey-1000;
-        }
-      }
-
-      @media (min-width: $mobile-breakpoint) {
-        font-size: 15px;
-        font-weight: $font-normal;
-        color: $refy-grey;
-
-        &--active {
-          color: $refy-white;
-        }
-      }
-    }
-
-    &-section {
-      font-size: 13px;
-      line-height: 1.5rem;
-      font-weight: $font-medium;
-      color: $refy-grey;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-  }
-
-  &-footer {
-
-    &-title {
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 2.25rem;
-      color: $refy-grey-1000;
-    }
-
-    &-link {
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 2.25rem;
-      color: $refy-text-contrast-grey  !important;
-      cursor: pointer;
-
-      &:hover,
-      &:active {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  &-app-logo {
-    font-size: 24px;
-    font-weight: $font-medium;
-    color: $refy-color-primary;
   }
 
   &--white {
@@ -580,73 +450,4 @@ $refy-public-font: FiraSans;
 
   }
 
-}
-
-.button {
-  &-font--20 {
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-  &-font--18 {
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  &-font--17 {
-    font-weight: bold;
-    font-size: 17px;
-  }
-
-  &-font--15 {
-    font-weight: bold;
-    font-size: 15px;
-  }
-
-  &-font--13 {
-    font-size: 13px;
-  }
-
-  &--primary {
-    color: $refy-color-primary;
-  }
-
-  &--light {
-    color: $refy-white;
-  }
-
-  &--grey {
-    color: $refy-text-grey;
-  }
-
-  &--dark-grey {
-    color: $refy-text-contrast-grey;
-  }
-
-  &--dark {
-    color: $refy-grey-1000;
-  }
-
-  &--green {
-    color: $refy-green;
-  }
-
-  &--danger {
-    color: $refy-red;
-  }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  &:not(.font-selectable) {
-    /*-webkit-user-select: none; /* Safari */
-    /*-moz-user-select: none; /* Firefox */
-    /*-ms-user-select: none; /* IE10+/Edge */
-    /*user-select: none; /* Standard */
-  }
 }

@@ -1,6 +1,6 @@
 import { stripHtmlTags } from "../utils";
 import Head from "next/head";
-import Company from "../services/models/company";
+import Company, { GoogleFont } from "../services/models/company";
 import { bucketM } from "../services/urls";
 
 interface HeaderProps {
@@ -8,21 +8,32 @@ interface HeaderProps {
   title: string;
 }
 
-export const Header = (banner: HeaderProps) => {
-  const favicon = banner.company.attributes.logo ? bucketM + banner.company.attributes.logo : false;
+export const Header = ({ company, title }: HeaderProps) => {
+  const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
+    const bodyFont = body?.name ? `family=${body.name.replace(' ', '+')}` : '';
+    let headerFont = header?.name ? `family=${header.name.replace(' ', '+')}` : '';
+    headerFont = bodyFont && headerFont ? `&${headerFont}` : headerFont;
+    if (bodyFont || headerFont) {
+      return <link href={`https://fonts.googleapis.com/css2?${bodyFont}${headerFont}`} rel="stylesheet" />
+    } else {
+      return <link href={`https://fonts.googleapis.com/css2?family=Fira+Sans`} rel="stylesheet" />
+    }
+  }
+
+  const favicon = company.attributes.logo ? bucketM + company.attributes.logo : false;
   return (
     <Head>
-      <title>{`${banner.title} | ${banner.company.attributes.name}`}</title>
-      <meta property="og:title" content={`${banner.title} | ${banner.company.attributes.name}`} />
+      <title>{`${title} | ${company.attributes.name}`}</title>
+      <meta property="og:title" content={`${title} | ${company.attributes.name}`} />
       {
-        banner.company.attributes.description &&
-        <meta property="og:description" content={stripHtmlTags((banner.company.attributes.description))} />
+        company.attributes.description &&
+        <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
       }
       {
-        banner.company.attributes.primaryColor &&
+        company.attributes.primaryColor &&
         <>
-          <meta name="msapplication-TileColor" content={banner.company.attributes.primaryColor} />
-          <meta name="theme-color" content={banner.company.attributes.primaryColor} />
+          <meta name="msapplication-TileColor" content={company.attributes.primaryColor} />
+          <meta name="theme-color" content={company.attributes.primaryColor} />
         </>
       }
       {
@@ -31,6 +42,9 @@ export const Header = (banner: HeaderProps) => {
           <link id="appIcon" rel="icon" type="image/png" href={favicon} />
           <meta name="msapplication-TileImage" content={favicon} />
         </>
+      }
+      {
+        getGoogleFonts(company.careers?.style?.body?.font, company.careers?.style?.header?.font)
       }
     </Head>
   )

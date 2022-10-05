@@ -16,7 +16,7 @@
 
 html,
 body {
-  font-family: $refy-firasans-font, "Helvetica Neue", sans-serif !important;
+  font-family: var(--body-font-family);
   margin: 0;
   padding: 0;
 }

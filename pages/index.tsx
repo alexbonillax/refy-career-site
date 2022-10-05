@@ -12,6 +12,7 @@ import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import getWildcardCode from "../utils/wildcard";
 import Company from "../services/models/company";
+import { DynamicFontsVars } from "../utils/dynamic-styles/dynamic-fonts";
 
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: {companyInfo: Company}}) => {
@@ -24,6 +25,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       return;
     }
     async function getJobsData() {
+      DynamicFontsVars(pageProps.companyInfo.careers.style.body.font.name, pageProps.companyInfo.careers.style.header.font.name)
       let recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
       recentJobsList = {...recentJobsList, content: recentJobsList.content.slice(0,6)};
       setData({ recentJobsList });
