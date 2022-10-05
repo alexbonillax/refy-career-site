@@ -74,7 +74,7 @@ const DepartmentCard = (department: Department) => {
 
 const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+    ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
   }, [])
   return (
     <>

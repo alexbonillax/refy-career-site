@@ -72,7 +72,7 @@ export const PeopleSection = ({ departments, color }: { departments: Department[
 
 const People: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+    ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
   }, [])
   return (
     <>

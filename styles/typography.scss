@@ -30,7 +30,7 @@ body {
   }
 
   &-big-title {
-    font-family: var(--title-font-family);
+    font-family: var(--header-font-family);
     font-weight: $font-bold;
     line-height: 3rem;
     color: $refy-blue;
@@ -43,7 +43,7 @@ body {
   }
 
   &-title {
-    font-family: var(--title-font-family);
+    font-family: var(--header-font-family);
     font-weight: $font-medium;
     font-size: 20px;
     line-height: 2rem;
@@ -52,7 +52,7 @@ body {
   }
 
   &-subtitle {
-    font-family: var(--title-font-family);
+    font-family: var(--header-font-family);
     font-weight: $font-medium;
     font-size: 18px;
     line-height: 2rem;
@@ -60,7 +60,7 @@ body {
   }
 
   &-header {
-    font-family: var(--title-font-family);
+    font-family: var(--header-font-family);
     font-weight: $font-medium;
     font-size: 16px;
     line-height: 1.5rem;
@@ -68,6 +68,7 @@ body {
   }
 
   &-hint {
+    font-family: var(--body-font-family);
     font-size: 14px;
     line-height: 1.5rem;
     color: $refy-text-grey;

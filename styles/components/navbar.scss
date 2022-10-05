@@ -1,4 +1,5 @@
 .navbar-item {
+  font-family: var(--header-font-family);
   transition: opacity 300ms ease-in-out;
 
   &-underline {

@@ -170,7 +170,7 @@ const Job: NextPage = ({ pageProps }: any) => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+      ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
       const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails.id) {
         Router.push(`/jobs?unknown`);

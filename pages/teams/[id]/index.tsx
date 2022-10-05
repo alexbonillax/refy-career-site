@@ -34,7 +34,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
   const department = pageProps.companyInfo.departments.find((dept: Department) => dept.id === departmentId);
   useEffect(() => {
     if (!departmentId || !department) { Router.push(`/teams`) };
-    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+    ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
     async function getJobsData() {
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
       const teamName = pageProps.companyInfo.departments.find((dept: Department) => dept.id === +departmentId)?.attributes.name;
