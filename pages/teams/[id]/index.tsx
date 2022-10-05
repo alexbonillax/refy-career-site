@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import getWildcardCode from "../../../utils/wildcard";
 import Department from "../../../services/models/department";
 import Router from 'next/router';
+import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -33,6 +34,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
   const department = pageProps.companyInfo.departments.find((dept: Department) => dept.id === departmentId);
   useEffect(() => {
     if (!departmentId || !department) { Router.push(`/teams`) };
+    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
     async function getJobsData() {
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
       const teamName = pageProps.companyInfo.departments.find((dept: Department) => dept.id === +departmentId)?.attributes.name;

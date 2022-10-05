@@ -21,6 +21,7 @@ import Post from "../../services/models/post";
 import { bucketM, bucketXXL, videoBucketUrl } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
+import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 
 
@@ -240,6 +241,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {
     async function getJobsData() {
+      ApplyDynamicStyles(pageProps.companyInfo.careers.style);
       const stories = await getPosts(pageProps.companyInfo.id);
       setData({ stories });
       setLoading(false);

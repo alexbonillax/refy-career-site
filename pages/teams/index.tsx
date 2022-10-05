@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import { useEffect } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
@@ -11,6 +12,7 @@ import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
 import Department from "../../services/models/department";
 import { bucketXL } from "../../services/urls";
+import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -70,17 +72,22 @@ const DepartmentCard = (department: Department) => {
   )
 }
 
-const Teams: NextPage = ({ pageProps }: any) => (
-  <>
-    <Header company={pageProps.companyInfo} title={Translate('teams')} />
-    <div className="pt-8">
-      <Navbar company={pageProps.companyInfo} url='teams' />
-      <Areas {...pageProps.companyInfo} />
-      <AboutCompany {...pageProps.companyInfo} />
-      <Footer />
-    </div>
-  </>
-);
+const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+  useEffect(() => {
+    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+  }, [])
+  return (
+    <>
+      <Header company={pageProps.companyInfo} title={Translate('teams')} />
+      <div className="pt-8">
+        <Navbar company={pageProps.companyInfo} url='teams' />
+        <Areas {...pageProps.companyInfo} />
+        <AboutCompany {...pageProps.companyInfo} />
+        <Footer />
+      </div>
+    </>
+  )
+};
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);

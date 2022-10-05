@@ -10,6 +10,9 @@ import { RefierCard } from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
 import Profile from "../../services/models/profile";
 import getWildcardCode from "../../utils/wildcard";
+import Company from "../../services/models/company";
+import { useEffect } from "react";
+import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -67,7 +70,10 @@ export const PeopleSection = ({ departments, color }: { departments: Department[
   }
 }
 
-const People: NextPage = ({ pageProps }: any) => {
+const People: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+  useEffect(() => {
+    ApplyDynamicStyles(pageProps.companyInfo.careers.style);
+  }, [])
   return (
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')} />
@@ -78,6 +84,7 @@ const People: NextPage = ({ pageProps }: any) => {
     </>
   )
 };
+
 
 export const getServerSideProps = async ({ locale, req }: any) => {
   const translations = await serverSideTranslations(locale, ["common"]);
