@@ -12,6 +12,10 @@
   font-size: 15px;
   white-space: nowrap;
 
+  &--floating {  
+    background-color: var(--button-floating-filled);
+  }
+
   &-title {
     font-size: 18px;
     line-height: 56px;
