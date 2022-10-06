@@ -87,7 +87,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
   useEffect(() => {
     if (!jobId) { return }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
       const jobDetails = await getReferredJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails) {
         Router.push(`/jobs?unknown`);

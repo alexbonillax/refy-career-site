@@ -26,7 +26,7 @@ interface AreasProps {
   colorButton?: string;
 }
 
-export const Areas = ({ departments = [], reduced = false, colorButton }: AreasProps) => (
+export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
   <>
     {departments.length > 0 &&
       <section id="teams" className="py-10 bg-white">
@@ -44,7 +44,7 @@ export const Areas = ({ departments = [], reduced = false, colorButton }: AreasP
               <div className="flex justify-center mt-2">
                 <Link href="/teams">
                   <a className="">
-                    <ButtonBasic bgColor={colorButton} classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
+                    <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
                   </a>
                 </Link>
               </div>
@@ -74,7 +74,7 @@ const DepartmentCard = (department: Department) => {
 
 const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
+    ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
   }, [])
   return (
     <>

@@ -4,15 +4,13 @@
   font-family: var(--body-font-family);
   padding: 0 0.75rem;
   min-height: 2.5rem;
-  border-radius: 0.5rem;
+  border-radius: var(--button-roundedCorners);
+  background-color: var(--button-filled);
+  border: 1px solid var(--button-color);
+  color: var(--button-fontColor);
   font-weight: bold;
   font-size: 15px;
   white-space: nowrap;
-
-  &-basic {
-    background-color: $refy-color-primary;
-    color: $refy-white;
-  }
 
   &-title {
     font-size: 18px;

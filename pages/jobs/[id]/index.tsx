@@ -78,7 +78,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
 
           </div>
           <div className="mt-4">
-            <ApplyButton color={company.attributes.primaryColor} onClick={onClick} />
+            <ApplyButton onClick={onClick} />
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
@@ -147,11 +147,11 @@ export interface JobProps {
   jobDetails: Job;
 }
 
-const ApplyButton = ({ color, onClick }: { color: string, onClick: () => void }) => {
+const ApplyButton = ({ onClick }: { onClick: () => void }) => {
   const { t } = useTranslation("common");
 
   return (
-    <ButtonBasic classes='button-title box-shadow-container--elevated' bgColor={color} onClick={onClick}>
+    <ButtonBasic classes='button-title box-shadow-container--elevated' onClick={onClick}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
@@ -170,7 +170,7 @@ const Job: NextPage = ({ pageProps }: any) => {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
       const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails.id) {
         Router.push(`/jobs?unknown`);
@@ -196,7 +196,7 @@ const Job: NextPage = ({ pageProps }: any) => {
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton color={pageProps.companyInfo.attributes?.primaryColor} onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
+                <ApplyButton onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />
             </>

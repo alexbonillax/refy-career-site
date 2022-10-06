@@ -33,6 +33,12 @@ export default interface Company {
 export interface CareerStyles {
   header: { font: GoogleFont };
   body: { font: GoogleFont };
+  button: ButtonStyles;
+}
+
+export interface ButtonStyles {
+  filled: boolean;
+  roundedCorners: number;
 }
 
 export interface GoogleFont {

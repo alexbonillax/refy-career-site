@@ -77,7 +77,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
     return (
       <Link href={company.attributes?.site}>
         <a target="_blank">
-          <ButtonBasic bgColor={company.attributes.primaryColor}>
+          <ButtonBasic>
             {t('company-site')}
             <div className='w-2 h-2 flex items-center justify-center ml-1'>
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />

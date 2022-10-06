@@ -25,7 +25,8 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       return;
     }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+      console.log(pageProps.companyInfo);
       let recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
       recentJobsList = {...recentJobsList, content: recentJobsList.content.slice(0,6)};
       setData({ recentJobsList });
