@@ -42,7 +42,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       <Banner height={BannerHeight.bigScreen} picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas departments={pageProps.companyInfo.departments.slice(0,4)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
-      <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} reduced buttonColor={pageProps.companyInfo.attributes.primaryColor} />
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

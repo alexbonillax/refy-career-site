@@ -21,13 +21,13 @@ import getWildcardCode from "../../utils/wildcard";
 
 interface RecentJobsProps {
   recentJobsList: Page<Job>;
+  company: string;
   workplace?: number;
   loading: boolean;
   reduced?: boolean;
-  buttonColor?: string;
 }
 
-export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced = false, buttonColor }: RecentJobsProps) => {
+export const RecentJobs = ({ recentJobsList, company, workplace, loading = true, reduced = false }: RecentJobsProps) => {
   const { t } = useTranslation("common");
   let jobs = recentJobsList?.content;
   if (workplace) {
@@ -37,7 +37,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced 
     <section id="department-jobs" className="bg-white">
       <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('jobs.available')}</h1>
-        <h2 className="font-subtitle text-center mt-1">{t('jobs.find', { company: 'Refy' })}</h2>
+        <h2 className="font-subtitle text-center mt-1">{t('jobs.find', { company })}</h2>
         <div className="flex flex-wrap flex-align-justify-center mt-5">
           {
             !loading && jobs && jobs.map((job, i) => (
@@ -49,7 +49,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced 
           {
             //TODO
             (!jobs || jobs.length == 0) && !loading &&
-            <p className="font-prose">{t('job.empty')}</p>
+            <h1>{t('job.empty')}</h1>
           }
           {
             loading && Array.from(Array(6)).map((_, i) =>
@@ -75,7 +75,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced 
 };
 
 const JobCardLoading = () => (
-  <div className="w-full flex-column box-shadow-container--card br-1">
+  <div className="w-full flex-column box-shadow-container--card br-1 my-2">
     <div className="h-30 flex-column flex-justify-between py-2 px-2 background-loading-gradient background-loading-gradient--rect"></div>
 
     <div className="flex-column py-1 px-2">
@@ -162,7 +162,7 @@ const Jobs: NextPage = ({ pageProps }: any) => {
       <Header company={pageProps.companyInfo} title={t('jobs')} />
       <div className="pt-8">
         <Navbar url='jobs' company={pageProps.companyInfo} />
-        <RecentJobs recentJobsList={data.recentJobsList} workplace={workplaceId} loading={isLoading} />
+        <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} />
         <AboutCompany {...pageProps.companyInfo} />
         <Footer />
         <BottomSnackbar ref={snackbarRef} />
