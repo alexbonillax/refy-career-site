@@ -151,7 +151,7 @@ const ApplyButton = ({ onClick }: { onClick: () => void }) => {
   const { t } = useTranslation("common");
 
   return (
-    <ButtonBasic classes='button-title box-shadow-container--elevated' onClick={onClick}>
+    <ButtonBasic classes='button-title' onClick={onClick}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
