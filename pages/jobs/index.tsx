@@ -75,7 +75,7 @@ export const RecentJobs = ({ recentJobsList, company, workplace, loading = true,
 };
 
 const JobCardLoading = () => (
-  <div className="w-full flex-column box-shadow-container--card br-1 my-2">
+  <div className="w-full flex-column box-shadow-container--card br-1">
     <div className="h-30 flex-column flex-justify-between py-2 px-2 background-loading-gradient background-loading-gradient--rect"></div>
 
     <div className="flex-column py-1 px-2">

@@ -159,6 +159,7 @@ body {
   }
 
   &-badge {
+    font-family: var(--body-font-family);
     font-weight: $font-medium;
     font-size: 14px;
     line-height: 1.5rem;
