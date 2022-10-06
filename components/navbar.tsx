@@ -17,16 +17,21 @@ interface NavbarProps {
   company: Company
 }
 
-export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
-  const { t } = useTranslation("common");
-  const [state, setState] = useState({ navbar: false });
-  const [clientWindowHeight, setClientWindowHeight] = useState("");
+const setSections = (company: Company): string[] => {
   let linkList: string[] = [];
   (company.departments.length > 0) && linkList.push('teams');
   (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
   (company.workplaces.length > 0) && linkList.push('locations');
   (company.referralProgram.accessPosts) && linkList.push('stories');
   linkList = linkList.concat(['jobs']) 
+  return linkList;
+} 
+
+export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
+  const { t } = useTranslation("common");
+  const [state, setState] = useState({ navbar: false });
+  const [clientWindowHeight, setClientWindowHeight] = useState("");
+  let linkList: string[] = setSections(company);
   const [scrolled, setScrolling] = useState(false);
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
