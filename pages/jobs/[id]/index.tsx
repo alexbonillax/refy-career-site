@@ -151,7 +151,7 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
   const { t } = useTranslation("common");
 
   return (
-    <ButtonBasic classes={`button-title box-shadow-container--elevated ${classes}`} onClick={onClick}>
+    <ButtonBasic classes={`button-title ${classes}`} onClick={onClick}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
@@ -196,7 +196,7 @@ const Job: NextPage = ({ pageProps }: any) => {
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton classes='button--floating' onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
+                <ApplyButton classes='button--floating box-shadow-container--elevated' onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />
             </>
