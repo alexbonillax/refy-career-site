@@ -54,7 +54,7 @@ export const RefierCard = ({ user, color }: RefierCardProps) => {
               onClick={_ => openLinkedin(user.attributes.linkedinVanityName)}></FontAwesomeIcon>
           }
         </p>
-        <p className="font-multiline font--grey">{user.attributes.headline}</p>
+        <p className="h-3 font-multiline font--grey">{user.attributes.headline}</p>
       </div>
     </div>
   )

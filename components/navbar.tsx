@@ -23,7 +23,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const [clientWindowHeight, setClientWindowHeight] = useState("");
   let linkList: string[] = [];
   (company.departments.length > 0) && linkList.push('teams');
-  (company.careers?.referrers && company.departments.length > 0) && linkList.push('people');
+  (company.careers?.referrers.visible && company.departments.length > 0) && linkList.push('people');
   (company.workplaces.length > 0) && linkList.push('locations');
   (company.referralProgram.accessPosts) && linkList.push('stories');
   linkList = linkList.concat(['jobs']) 
