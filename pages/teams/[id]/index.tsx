@@ -50,7 +50,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
           <Header company={pageProps.companyInfo} title={Translate('teams')} />
           <Navbar company={pageProps.companyInfo} transparent={true} url='teams' />
           <Banner picture={department.attributes.picture} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
-          <RecentJobs recentJobsList={data.recentJobsList} loading={isLoading} />
+          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} />
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>
