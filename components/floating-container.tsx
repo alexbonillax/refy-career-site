@@ -24,7 +24,9 @@ export const FloatingContainer = ({ children }: FloatingContainerProps) => {
 
   return (
     <div className={`floating-container--bottom w-full fixed justify-center right-0 left-0 ${scrolled ? 'visible flex' : 'hidden'}`}>
-      {children}
+      <div className={`box-shadow-container--elevated background-color--white br-button`}>
+        {children}
+      </div>
     </div>
   )
 

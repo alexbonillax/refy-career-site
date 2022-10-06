@@ -1,4 +1,4 @@
-import { ButtonStyles } from "../../services/models";
+import {ButtonStyles} from "../../services/models";
 
 export const DynamicButtons = (primaryColor = "FE6680", styles: ButtonStyles) => {
     let bodyStyles = document.body.style;

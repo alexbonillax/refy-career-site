@@ -191,8 +191,14 @@ $box-shadow-container-soft: rgb(0 0 0 / 12%) 0px 6px 16px;
 @include generate(bblr, border-bottom-left-radius);
 @include generate(bbrr, border-bottom-right-radius);
 
-.br-50 {
-  border-radius: 50%;
+.br {
+  &-50 {
+    border-radius: 50%;
+  }
+
+  &-button {
+    border-radius: var(--button-roundedCorners);
+  }
 }
 
 .h {

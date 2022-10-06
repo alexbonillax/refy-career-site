@@ -116,7 +116,7 @@ const Referral: NextPage = ({ pageProps }: any) => {
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ButtonBasic classes='button-title box-shadow-container--elevated'
+                <ButtonBasic classes='button-title'
                   onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))}>
                   {t('job.apply.button')}
                   <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>

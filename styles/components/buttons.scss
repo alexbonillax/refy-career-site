@@ -5,8 +5,8 @@
   padding: 0 0.75rem;
   min-height: 2.5rem;
   border-radius: var(--button-roundedCorners);
-  background-color: var(--button-filled);
-  border: 1px solid var(--button-color);
+  background-color: var(--button-backgroundColor);
+  border: 1px solid var(--button-borderColor);
   color: var(--button-fontColor);
   font-weight: bold;
   font-size: 15px;
