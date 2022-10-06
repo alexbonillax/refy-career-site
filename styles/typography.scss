@@ -8,7 +8,7 @@
 
 html,
 body {
-  font-family: var(--header-font-family);
+  font-family: var(--body-font-family);
 }
 
 .font {
@@ -48,7 +48,6 @@ body {
     font-size: 20px;
     line-height: 2rem;
     color: $refy-blue;
-
   }
 
   &-subtitle {
