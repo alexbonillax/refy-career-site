@@ -26,6 +26,7 @@ import { BottomSnackbar } from '../../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../../utils/dynamic-styles/apply-styles';
+import Company from '../../../../services/models/company';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -77,7 +78,7 @@ interface ReferralProps {
   canApply?: boolean;
 }
 
-const Referral: NextPage = ({ pageProps }: any) => {
+const Referral: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<ReferralProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
@@ -112,7 +113,10 @@ const Referral: NextPage = ({ pageProps }: any) => {
               <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
-              <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={pageProps.companyInfo.attributes.primaryColor} />
+              {
+                pageProps.companyInfo.careers?.referrers?.visible &&
+                <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={pageProps.companyInfo.attributes.primaryColor} />
+              } 
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
