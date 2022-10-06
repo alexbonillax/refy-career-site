@@ -21,7 +21,7 @@ export const ReadMore = ({ text }: { text: string }) => {
               {text}
             </p>
             {text.length > maxCharacters &&
-            <div className="flex justify-end">
+            <div className="absolute bottom-0 right-0 background-color--white">
               <span onClick={toggleReadMore} className="expansion-prose-trigger cursor-pointer ml-2">
                 {isReadMore && '...'}{label}
               </span>

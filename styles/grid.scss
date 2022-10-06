@@ -8,10 +8,6 @@
   width: 50%;
 }
 
-.scroll-min-height {
-  min-height: $scroll-min-height;
-}
-
 .max-width {
 
   &--filter {
@@ -183,58 +179,24 @@
   }
 
   &--responsive {
-    max-width: $desktop-inner-width - $navbar-panel-width;
+    width: 100%;
+    margin: 0 auto;
+    max-width: $mobile-breakpoint;
 
     @media (max-width: $mobile-breakpoint) {
       max-width: $mobile-inner-width;
-
-      @media (max-width: $mobile-inner-width) {
-        width: 100%;
-      }
-
-      @media (min-width: $mobile-inner-width) {
-        margin: 0 auto;
-      }
     }
   }
 
   &--stretch {
+    max-width: $mobile-inner-stretch-width;
 
-    @media (max-width: $mobile-breakpoint) {
-      max-width: $mobile-inner-stretch-width;
-
-      @media (max-width: $mobile-inner-stretch-width) {
-        width: 100%;
-      }
-
-      @media (min-width: $mobile-inner-stretch-width) {
-        margin: 0 auto;
-      }
+    @media (max-width: $mobile-inner-stretch-width) {
+      width: 100%;
     }
-  }
-}
 
-.desktop-container {
-  margin: 0 auto;
-
-  @media (min-width: $mobile-breakpoint) {
-    width: 100%;
-  }
-
-  @media (min-width: $desktop-inner-width) {
-    width: $desktop-inner-width;
-  }
-}
-
-.desktop-paper-container {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  @media (min-width: $mobile-breakpoint) {
-    top: 1.5rem;
-    left: calc(50% - (#{$desktop-inner-width} / 2) + #{$navbar-panel-width});
-    right: calc(50% - (#{$desktop-inner-width} / 2));
+    @media (min-width: $mobile-inner-stretch-width) {
+      margin: 0 auto;
+    }
   }
 }
