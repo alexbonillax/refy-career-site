@@ -28,11 +28,11 @@ import getWildcardCode from "../../utils/wildcard";
 export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
   const { t } = useTranslation("common");
   return (
-    <section id="department-posts" className="py-10 px-2 background-color--grey--0">
+    <section className="py-10 px-2 background-color--grey--0">
       <div className="mobile-container">
         <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('stories.latest')}</p>
       </div>
-      <div className="mobile-container flex-column pt-5 ">
+      <div className="mobile-container--stretch flex-column pt-5">
         {
           !loading && stories.content?.map((post, i) => (
             <PostItem key={i} post={post} companyInfo={companyInfo} />
