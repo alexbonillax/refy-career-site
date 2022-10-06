@@ -49,7 +49,7 @@ export const RecentJobs = ({ recentJobsList, workplace, loading = true, reduced 
           {
             //TODO
             (!jobs || jobs.length == 0) && !loading &&
-            <h1>{t('job.empty')}</h1>
+            <p className="font-prose">{t('job.empty')}</p>
           }
           {
             loading && Array.from(Array(6)).map((_, i) =>
