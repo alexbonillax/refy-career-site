@@ -160,7 +160,7 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
   )
 }
 
-const Job: NextPage = ({ pageProps }: any) => {
+const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ jobDetails: null });
   const [isLoading, setLoading] = useState(true);

@@ -13,6 +13,7 @@ import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import BottomSnackbar from "../../components/snackbar";
 import { getCompanyInfo, getRecentJobs } from "../../services";
+import Company from "../../services/models/company";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
@@ -139,7 +140,7 @@ interface JobsProps {
   recentJobsList: Page<Job>,
 }
 
-const Jobs: NextPage = ({ pageProps }: any) => {
+const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const snackbarRef = useRef(null);
   const workplaceId = +useRouter().query?.workplace;
