@@ -6,7 +6,7 @@ import { Workplaces } from "./locations";
 import { useTranslation } from "next-i18next";
 import { Areas } from "./teams";
 import { Header } from "../components/header";
-import { Banner, BannerHeight, Navbar, randomPic } from "../components";
+import { Banner, BannerHeight, Navbar } from "../components";
 import AboutCompany from "../components/about";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
