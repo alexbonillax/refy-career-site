@@ -23,6 +23,8 @@ export default interface Company {
   careers: {
     referrers: {visible: boolean};
     style: CareerStyles;
+    home: HomeProps;
+    languageCode: string;
   };
   type: string;
   departments: Department[];
@@ -44,4 +46,9 @@ export interface ButtonStyles {
 export interface GoogleFont {
   code: string;
   name: string;
+}
+
+interface HomeProps {
+  title: string;
+  picture: string;
 }

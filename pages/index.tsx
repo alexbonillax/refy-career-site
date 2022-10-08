@@ -39,7 +39,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent={true} />
-      <Banner height={BannerHeight.bigScreen} picture={randomPic(pageProps.companyInfo.departments)} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
+      <Banner height={BannerHeight.bigScreen} picture={pageProps.companyInfo.careers.home.picture} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <Areas departments={pageProps.companyInfo.departments.slice(0,4)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
@@ -49,11 +49,10 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
   )
 };
 
-export const getServerSideProps = async ({ locale, req }: any) => {
-  const translations = await serverSideTranslations(locale, ["common"]);
+export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-
+  const translations = await serverSideTranslations(companyInfo.careers.languageCode, ["common"]);
   return {
     props: {
       _nextI18Next: translations._nextI18Next,

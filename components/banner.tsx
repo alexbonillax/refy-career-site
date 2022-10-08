@@ -1,4 +1,3 @@
-import Department from "../services/models/department";
 import { bucketXXL } from "../services/urls";
 
 interface BannerProps {
@@ -13,8 +12,6 @@ export enum BannerHeight {
   bigScreen = 'desktop:py-80 mobile:py-40',
   mediumScreen = 'py-40',
 }
-
-export const randomPic = (departments: Department[]): string => departments.find(department => !!department.attributes.picture)?.attributes.picture || '';
 
 export const Banner = ({ picture, tagline, title, height }: BannerProps) => {
   const picUrl = picture ? bucketXXL + picture : false;
