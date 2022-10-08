@@ -75,7 +75,7 @@ const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProp
 export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  const translations = await serverSideTranslations(companyInfo.careers.languageCode, ["common"]);
+  const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   if (companyInfo.workplaces.length > 0) {
     return {

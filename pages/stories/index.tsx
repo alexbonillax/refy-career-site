@@ -264,7 +264,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
 export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  const translations = await serverSideTranslations(companyInfo.careers.languageCode, ["common"]);
+  const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   if (companyInfo.referralProgram.accessPosts) {
     return {

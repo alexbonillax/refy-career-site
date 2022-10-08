@@ -97,7 +97,7 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }:
 export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
-  const translations = await serverSideTranslations(companyInfo.careers.languageCode, ["common"]);
+  const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
   if (companyInfo.departments.length > 0) {
     return {
       props: {
