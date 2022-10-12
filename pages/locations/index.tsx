@@ -39,7 +39,7 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
           </div>
       }
     </div>
-    <div className={`flex flex-col desktop:w-1/2 mobile:w-full px-2 py-2 justify-evenly h-60 box-shadow-container mobile:rounded-b-lg ${odd ? 'desktop:rounded-r-lg' : 'desktop:rounded-l-lg'}`}>
+    <div className={`flex flex-col desktop:w-1/2 mobile:w-full px-3 py-2 justify-evenly h-60 box-shadow-container mobile:rounded-b-lg ${odd ? 'desktop:rounded-r-lg' : 'desktop:rounded-l-lg'}`}>
       <p className="font-big-title font--ellipsis desktop:text-4xl mobile:text-3xl font-bold">{workplace.attributes.name}</p>
       <p className="font-hint font--ellipsis">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
       <p className="font-prose font--ellipsis-2">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
