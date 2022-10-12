@@ -1,2 +1,2 @@
 export const DOMAIN = 'refy.careers';
-export const DEFAULT_WILDCARD = 'tropicfeel';
+export const DEFAULT_WILDCARD = 'grupodesa';

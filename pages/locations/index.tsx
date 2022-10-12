@@ -29,7 +29,7 @@ interface WorkplacesProps {
 }
 
 const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean }) => (
-  <div className={`mobile-container--responsive ${odd ? 'flex-row-reverse' : ''} flex desktop:flex-row mobile:flex-col`}>
+  <div className={`mobile-container--responsive !mb-8 flex ${odd ? 'desktop:flex-row' : 'desktop:flex-row-reverse'} mobile:flex-col`}>
     <div className="h-60 desktop:w-1/2 mobile:w-full relative">
       {
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
