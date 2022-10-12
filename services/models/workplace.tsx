@@ -10,6 +10,8 @@ export default interface Workplace {
     locality: string;
     postalCode: string;
     streetNumber: string;
+    pictures: string[];
+    shortDescription: string;
   };
   companyId?: number;
 }

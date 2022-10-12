@@ -7,7 +7,16 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ["https://refy.s3-eu-west-1.amazonaws.com/images/xl"]
+    formats: ['image/avif', 'image/webp'],
+    domain: ['refy.s3-eu-west-1.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'refy.s3-eu-west-1.amazonaws.com',
+        port: '',
+        pathname: '/images/**',
+      },
+    ],
   },
   i18n,
 }

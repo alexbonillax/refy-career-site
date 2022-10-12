@@ -2,16 +2,21 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
-import { Divider, Navbar } from "../../components";
+import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
 import { ButtonBasic } from "../../components/buttons/button-basic";
 import Footer from "../../components/footer";
 import { Header } from "../../components/header";
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
+import Workplace from "../../services/models/workplace";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
+import { loaderBucketXL } from "../../utils/image-loader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBuilding } from "@fortawesome/pro-light-svg-icons";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -23,6 +28,30 @@ interface WorkplacesProps {
   classes?: string;
 }
 
+const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean }) => (
+  <div className={`mobile-container--responsive ${odd ? 'flex-row-reverse' : ''} flex desktop:flex-row mobile:flex-col`}>
+    <div className="h-60 desktop:w-1/2 mobile:w-full relative">
+      {
+        workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
+          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className={`flex relative object-cover mobile:rounded-t-lg ${odd ? 'desktop:rounded-l-lg' : 'desktop:rounded-r-lg'}`} />
+          : <div className={`h-full w-full flex items-center justify-center relative background-dynamic mobile:rounded-t-lg ${odd ? 'desktop:rounded-l-lg' : 'desktop:rounded-r-lg'}`}>
+            <FontAwesomeIcon icon={faBuilding} className='text-6xl font--white' ></FontAwesomeIcon>
+          </div>
+      }
+    </div>
+    <div className={`flex flex-col desktop:w-1/2 mobile:w-full px-2 py-2 justify-evenly h-60 box-shadow-container mobile:rounded-b-lg ${odd ? 'desktop:rounded-r-lg' : 'desktop:rounded-l-lg'}`}>
+      <p className="font-big-title font--ellipsis desktop:text-4xl mobile:text-3xl font-bold">{workplace.attributes.name}</p>
+      <p className="font-hint font--ellipsis">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
+      <p className="font-prose font--ellipsis-2">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
+      <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
+        <a>
+          <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
+        </a>
+      </Link>
+    </div>
+  </div>
+)
+
 export const Workplaces = (props: WorkplacesProps) => (
   <section id="workplaces" className={`py-10 ${props.classes}`}>
     <div className="flex-col flex-align-center mobile-container px-2">
@@ -30,23 +59,7 @@ export const Workplaces = (props: WorkplacesProps) => (
       <div className="flex-col full-width mt-5">
         {
           props.companyInfo.workplaces.map((workplace, i) => (
-            <div key={i}>
-              <div className="flex-align-center pt-3 mobile:flex-col mobile:text-center mobile:pb-1 desktop:flex desktop:pb-3">
-                <div className="flex-col full-width">
-                  <p className="font-big-title desktop:text-4xl mobile:text-3xl font-bold">{workplace.attributes.name}</p>
-                  <p className="font-prose mt-1">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
-                  <p className="font-hint">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
-                </div>
-                <div className="flex justify-center py-2">
-                  <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
-                    <a>
-                      <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              {i + 1 !== props.companyInfo.workplaces.length && <div><Divider /></div>}
-            </div>
+            <WorkplaceCard key={i} workplace={workplace} odd={(i % 2 == 0)} ></WorkplaceCard>
           ))
         }
 
