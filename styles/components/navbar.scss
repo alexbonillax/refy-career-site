@@ -1,23 +1,30 @@
-.navbar-item {
-  font-family: var(--body-font-family);
-  transition: opacity 300ms ease-in-out;
+.navbar {
 
-  &-underline {
-    transition: opacity 300ms ease-in-out;
-    height: 0.25rem;
+  &--stuck {
+    margin-bottom: -4.5rem;
   }
 
-  &:not(.active) {
-    opacity: 0.6;
+  &-item {
+    font-family: var(--body-font-family);
+    transition: opacity 300ms ease-in-out;
 
-    .navbar-item-underline {
-      opacity: 0;
+    &-underline {
+      transition: opacity 300ms ease-in-out;
+      height: 0.25rem;
     }
 
-    &:hover,
-    &:active {
+    &:not(.active) {
+      opacity: 0.6;
+
       .navbar-item-underline {
-        opacity: 1;
+        opacity: 0;
+      }
+
+      &:hover,
+      &:active {
+        .navbar-item-underline {
+          opacity: 1;
+        }
       }
     }
   }

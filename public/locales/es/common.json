@@ -37,5 +37,6 @@
     "coworkers": "Compañeros de equipo",
     "coworkers.description": "Sabemos que {{referrer}} te está ayudando pero, ¿qué te parece si contactas con algún miembro del equipo para que te ayuden a resolver cualquier pregunta que tengas?\nSeguro que estarán contentos de ayudarte",
     "stories.empty": "No hay historias por ahora",
-    "job.not-exist": "Al parecer la posición que estabas buscando no existe o ya se ha eliminado."
+    "job.not-exist": "Al parecer la posición que estabas buscando no existe o ya se ha eliminado.",
+    "job.apply.button.short": "Aplicar ahora"
 }

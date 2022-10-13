@@ -251,12 +251,10 @@ const Stories: NextPage = ({ pageProps }: any) => {
   return (
     <>
       <Header company={pageProps.companyInfo} title={t('stories')} />
-      <div className="pt-8">
-        <Navbar company={pageProps.companyInfo} url='stories' />
-        <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
-        <AboutCompany {...pageProps.companyInfo} />
-        <Footer />
-      </div>
+      <Navbar company={pageProps.companyInfo} url='stories' />
+      <Posts stories={data.stories} companyInfo={pageProps.companyInfo} loading={isLoading} />
+      <AboutCompany {...pageProps.companyInfo} />
+      <Footer />
     </>
   )
 };

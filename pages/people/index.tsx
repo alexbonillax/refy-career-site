@@ -45,11 +45,11 @@ export const Coworkers = ({ referrer, employees, color }: { referrer: string, em
 export const PeopleSection = ({ departments, color }: { departments: Department[], color: string }) => {
   if (departments.some(department => department.employees.length > 0)) {
     return (
-      <div className="pt-8 background-color--white">
+      <div className="py-5 background-color--white">
         {
           departments.map((department, i) => (
             department.employees.length > 0 &&
-            <section key={i} id={department.attributes.name} className="py-10">
+            <section key={i} id={department.attributes.name} className="py-5">
               <div className="mobile-container px-3">
                 <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{department.attributes.name}</h1>
                 <div className="flex flex-wrap justify-center items-center">

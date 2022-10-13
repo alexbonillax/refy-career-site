@@ -40,7 +40,7 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
           </div>
       }
     </div>
-    <div className={`flex flex-col w-full --desktop:w-1/2 --mobile:w-full p-4 justify-evenly`}>
+    <div className={`flex flex-col w-full --desktop:w-1/2 --mobile:w-full p-3 justify-evenly`}>
       <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
       <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
         href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
@@ -88,12 +88,10 @@ const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProp
   return (
     <>
       <Header company={pageProps.companyInfo} title={Translate('locations')} />
-      <div className="pt-8">
-        <Navbar url='locations' company={pageProps.companyInfo} />
-        <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
-        <AboutCompany {...pageProps.companyInfo} />
-        <Footer />
-      </div>
+      <Navbar url='locations' company={pageProps.companyInfo} />
+      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
+      <AboutCompany {...pageProps.companyInfo} />
+      <Footer />
     </>
   )
 };

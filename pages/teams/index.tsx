@@ -84,12 +84,10 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }:
   return (
     <>
       <Header company={pageProps.companyInfo} title={Translate('teams')} />
-      <div className="pt-8">
-        <Navbar company={pageProps.companyInfo} url='teams' />
-        <Areas {...pageProps.companyInfo} />
-        <AboutCompany {...pageProps.companyInfo} />
-        <Footer />
-      </div>
+      <Navbar company={pageProps.companyInfo} url='teams' />
+      <Areas {...pageProps.companyInfo} />
+      <AboutCompany {...pageProps.companyInfo} />
+      <Footer />
     </>
   )
 };

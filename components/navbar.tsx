@@ -123,14 +123,15 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
 
   const srcLogo = company.attributes?.logo ? bucketM + company.attributes?.logo : logo;
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-20 transition-all box-shadow-container
+    <nav className={`sticky top-0 left-0 right-0 w-full z-20 transition-all box-shadow-container
     ${((scrolled && transparent) || (!transparent) ? "bg-white" : "background-color--blurr-soft-dark")}
+    ${transparent && "navbar--stuck"}
     `}>
       {
         !state.navbar &&
         <LoadingBar color={company.attributes.primaryColor} />
       }
-      <div className="flex mobile-container--responsive mx-auto desktop:h-20.5 mobile:h-16 items-center justify-between">
+      <div className="flex mobile-container--responsive mx-auto h-20.5 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
           <div className="w-2 h-2">
             <FontAwesomeIcon

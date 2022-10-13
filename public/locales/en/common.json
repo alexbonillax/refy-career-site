@@ -37,5 +37,6 @@
   "coworkers": "Coworkers",
   "coworkers.description": "We know that {{referrer}} is helping you but, ¿What if you contact any other team member to solve any doubt else?\nThey will be so happy to help you",
   "stories.empty": "There are no stories actually",
-  "job.not-exist": "The position that you were searching seems taken or deleted."
+  "job.not-exist": "The position that you were searching seems taken or deleted.",
+  "job.apply.button.short": "Apply now"
 }

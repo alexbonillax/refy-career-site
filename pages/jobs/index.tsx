@@ -100,44 +100,48 @@ const JobCardLoading = () => (
 )
 
 const JobCard = (job: Job) => {
+  const { t } = useTranslation("common");
   const picUrl = job.attributes.picture ? bucketL + job.attributes.picture : false;
   return (
-    <Link href={`/jobs/${job.id}`}>
-      <a>
-        <div className="flex-column text-center box-shadow-container--card br-1 overflow-hidden flex-align-center background-color--white cursor-pointer">
-          <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
-            <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
-          </div>
-          <div className="flex-column py-2 px-3">
-            <p className="flex h-8 font-title font--ellipsis-2">{job.attributes.title}</p>
-            <div className="flex flex-wrap flex-justify-center h-3 mb-1">
-              {
-                job.overview?.department &&
-                <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
-                  <div className="flex flex-align-justify-center font-hint mr-3 font-hover--underline cursor-pointer">
-                    <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
-                      <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
-                    </div>
-                    <p>{job.overview.department.name}</p>
-                  </div>
-                </Link>
-              }
-              {
-                job.overview?.workplaces.length > 0 &&
-                <Link href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
-                  <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
-                    <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
-                    </div>
-                    <p>{job.overview.workplaces[0].areaName || ''}</p>
-                  </div>
-                </Link>
-              }
-            </div>
-          </div>
+    <div className="flex-column text-center box-shadow-container--card br-1 overflow-hidden flex-align-center background-color--white cursor-pointer">
+      <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
+        <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
+      </div>
+      <div className="flex-column p-3">
+        <p className="flex h-8 font-title font--ellipsis-2">{job.attributes.title}</p>
+        <div className="flex flex-wrap flex-justify-center h-3 mb-1">
+          {
+            job.overview?.department &&
+            <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
+              <div className="flex flex-align-justify-center font-hint mr-3 font-hover--underline cursor-pointer">
+                <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
+                  <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
+                </div>
+                <p>{job.overview.department.name}</p>
+              </div>
+            </Link>
+          }
+          {
+            job.overview?.workplaces.length > 0 &&
+            <Link href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
+              <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
+                <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
+                </div>
+                <p>{job.overview.workplaces[0].areaName || ''}</p>
+              </div>
+            </Link>
+          }
         </div>
-      </a>
-    </Link>
+        <div className="flex flex-justify-center mt-2">
+          <Link href={{ pathname: '/jobs/' + job.id }}>
+            <a>
+              <ButtonBasic>{t('job.apply.button.short')}</ButtonBasic>
+            </a>
+          </Link>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -166,13 +170,11 @@ const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
   return (
     <>
       <Header company={pageProps.companyInfo} title={t('jobs')} />
-      <div className="pt-8">
-        <Navbar url='jobs' company={pageProps.companyInfo} />
-        <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} />
-        <AboutCompany {...pageProps.companyInfo} />
-        <Footer />
-        <BottomSnackbar ref={snackbarRef} />
-      </div>
+      <Navbar url='jobs' company={pageProps.companyInfo} />
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} />
+      <AboutCompany {...pageProps.companyInfo} />
+      <Footer />
+      <BottomSnackbar ref={snackbarRef} />
     </>
   )
 };
