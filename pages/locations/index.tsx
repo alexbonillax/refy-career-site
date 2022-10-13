@@ -43,7 +43,7 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
     <div className={`flex flex-col w-full --desktop:w-1/2 --mobile:w-full p-4 justify-evenly`}>
       <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
       <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
-        href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank">
+        href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
           <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
             <FontAwesomeIcon icon={faMapLocationDot} className="font-icon color-primary"></FontAwesomeIcon>
           </div>
