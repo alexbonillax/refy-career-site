@@ -62,7 +62,7 @@ interface DepartmentCardProps {
 }
 
 const DepartmentCard = ({ department, reduced = false }: DepartmentCardProps) => {
-  const picUrl = department.attributes.picture ? bucketXL + department.attributes.picture : false;
+  const picUrl = department.attributes.pictures ? bucketXL + department.attributes.pictures[0] : false;
   return (
     <Link href={{ pathname: `/teams/${department.id}` }}>
       <a className={`mobile:w-full p-1 ${reduced ? 'desktop:w-full' : 'desktop:w-1/3'}`}>
