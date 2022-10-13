@@ -12,6 +12,7 @@ export default interface Workplace {
     streetNumber: string;
     pictures: string[];
     shortDescription: string;
+    description: string;
   };
   companyId?: number;
 }

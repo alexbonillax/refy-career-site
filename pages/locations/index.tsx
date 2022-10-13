@@ -29,20 +29,24 @@ interface WorkplacesProps {
 }
 
 const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean }) => (
-  <div className={`mobile-container--responsive !mb-8 flex ${odd ? 'desktop:flex-row' : 'desktop:flex-row-reverse'} mobile:flex-col`}>
-    <div className="h-60 desktop:w-1/2 mobile:w-full relative">
+  <div className={`box-shadow-container--card br-1 overflow-hidden my-3 flex ${odd ? 'desktop:flex-row' : 'desktop:flex-row-reverse'} mobile:flex-col`}>
+    <div className="desktop:min-h-full mobile:h-60 desktop:w-1/2 mobile:w-full relative">
       {
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
-          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className={`flex relative object-cover mobile:rounded-t-lg ${odd ? 'desktop:rounded-l-lg' : 'desktop:rounded-r-lg'}`} />
+          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover mobile:rounded-t-lg" />
           : <div className={`h-full w-full flex items-center justify-center relative background-dynamic mobile:rounded-t-lg ${odd ? 'desktop:rounded-l-lg' : 'desktop:rounded-r-lg'}`}>
             <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faBuilding} className='text-6xl font--white' /></div>
           </div>
       }
     </div>
-    <div className={`flex flex-col desktop:w-1/2 mobile:w-full px-3 py-2 justify-evenly h-60 box-shadow-container mobile:rounded-b-lg ${odd ? 'desktop:rounded-r-lg' : 'desktop:rounded-l-lg'}`}>
-      <p className="font-big-title font--ellipsis desktop:text-4xl mobile:text-3xl font-bold">{workplace.attributes.name}</p>
-      <p className="font-hint font--ellipsis">{workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
-      <p className="font-prose font--ellipsis-2">{workplace.attributes.route} {workplace.attributes.streetNumber}</p>
+    <div className={`flex flex-col desktop:w-1/2 mobile:w-full p-4 justify-evenly`}>
+      <p className="font-big-title font--ellipsis desktop:text-3xl mobile:text-2xl font-bold">{workplace.attributes.name}</p>
+      <p className="font-hint font--ellipsis mt-1 mb-2">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
+      {
+        workplace.attributes.shortDescription
+        ? <p className="font-prose font--ellipsis-3 mb-2">{workplace.attributes.shortDescription}</p>
+        : ''
+      }
       <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
         <a>
           <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
@@ -56,13 +60,14 @@ export const Workplaces = (props: WorkplacesProps) => (
   <section id="workplaces" className={`py-10 ${props.classes}`}>
     <div className="flex-col flex-align-center mobile-container px-2">
       <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('workplaces.title')}</p>
-      <div className="flex-col full-width mt-5">
-        {
-          props.companyInfo.workplaces.map((workplace, i) => (
-            <WorkplaceCard key={i} workplace={workplace} odd={(i % 2 == 0)} ></WorkplaceCard>
-          ))
-        }
-
+      <div className="mobile-container--responsive">
+        <div className="flex-col py-5">
+          {
+            props.companyInfo.workplaces.map((workplace, i) => (
+              <WorkplaceCard key={i} workplace={workplace} odd={(i % 2 == 0)} ></WorkplaceCard>
+            ))
+          }
+        </div>
       </div>
     </div>
   </section>
