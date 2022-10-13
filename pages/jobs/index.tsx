@@ -77,16 +77,16 @@ export const RecentJobs = ({ recentJobsList, company, workplace, loading = true,
 };
 
 const JobCardLoading = () => (
-  <div className="w-full flex-column box-shadow-container--card br-1">
+  <div className="w-full flex-column box-shadow-container--card br-var">
     <div className="h-30 flex-column flex-justify-between py-2 px-2 background-loading-gradient background-loading-gradient--rect"></div>
 
-    <div className="flex-column py-1 px-2">
-      <div className="h-4 flex flex-align-center">
+    <div className="flex-column p-3">
+      <div className="h-8 flex">
         <div className="h-3 full-width background-loading-gradient"></div>
       </div>
     </div>
 
-    <div className="flex flex-align-justify-center space-x-8 pt-1 pb-2 px-2 h-9">
+    <div className="flex flex-align-justify-center space-x-8 pt-1 pb-3">
       <div className="flex">
         <div className="h-2 w-2 background-loading-gradient"></div>
         <div className="h-2 w-10 background-loading-gradient ml-1"></div>
@@ -109,7 +109,7 @@ const JobCard = (job: Job) => {
       </div>
       <div className="flex-column p-3">
         <p className="flex h-8 font-title font--ellipsis-2">{job.attributes.title}</p>
-        <div className="flex flex-wrap flex-justify-center h-3 mb-1">
+        <div className="flex flex-wrap flex-justify-center h-3 mt-1">
           {
             job.overview?.department &&
             <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
