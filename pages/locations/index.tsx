@@ -68,7 +68,7 @@ export const Workplaces = (props: WorkplacesProps) => (
   <section id="workplaces" className={`${props.classes}`}>
     <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
       <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('workplaces.title')}</p>
-      <div className="flex flex-wrap mt-5">
+      <div className="flex flex-wrap flex-align-justify-center mt-5">
         {
           props.companyInfo.workplaces.map((workplace, i) => (
             <div className="p-1 w-m--100 w-d--33" key={i}>
