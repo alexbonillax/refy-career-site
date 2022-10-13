@@ -2,10 +2,6 @@
 @import './colors';
 @import './sizings';
 
-.underline {
-  text-decoration: underline;
-}
-
 html,
 body {
   font-family: var(--body-font-family);
@@ -14,15 +10,25 @@ body {
 .font {
 
   &-bold {
-    font-weight: $font-bold  !important;
+    font-weight: $font-bold !important;
   }
 
   &-normal {
-    font-weight: $font-normal  !important;
+    font-weight: $font-normal !important;
   }
 
   &-line-through {
     text-decoration: line-through;
+  }
+
+  &-underline {
+    text-decoration: underline;
+  }
+
+  &-hover {
+    &--underline:hover {
+      text-decoration: underline;
+    }
   }
 
   &-shadow {
@@ -172,6 +178,7 @@ body {
       font-size: 12px;
       line-height: 1.25rem;
     }
+
     &--grey {
       color: $refy-grey;
     }
@@ -236,7 +243,7 @@ body {
     }
 
     &-filled-heart {
-      color: $refy-color-primary  !important;
+      color: $refy-color-primary !important;
 
       &:not(.prevent-animation) {
         animation: bounce-in 300ms ease;

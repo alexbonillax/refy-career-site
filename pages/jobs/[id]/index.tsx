@@ -203,7 +203,7 @@ const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: {
           }
           {
             !data.jobDetails.attributes &&
-            <div className='flex items-center justify-center shado'>
+            <div className='flex items-center justify-center'>
               <h1>WRONG JOB CODE</h1>
             </div>
           }

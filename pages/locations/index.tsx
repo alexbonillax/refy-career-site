@@ -16,7 +16,8 @@ import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import { loaderBucketXL } from "../../utils/image-loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuilding } from "@fortawesome/pro-light-svg-icons";
+import {faBuilding} from "@fortawesome/pro-light-svg-icons";
+import {faMapLocationDot} from "@fortawesome/pro-regular-svg-icons";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -29,8 +30,8 @@ interface WorkplacesProps {
 }
 
 const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean }) => (
-  <div className={`box-shadow-container--card br-1 overflow-hidden my-3 flex ${odd ? 'desktop:flex-row' : 'desktop:flex-row-reverse'} mobile:flex-col`}>
-    <div className="desktop:min-h-full mobile:h-60 desktop:w-1/2 mobile:w-full relative">
+  <div className={`flex-col text-center box-shadow-container--card br-1 overflow-hidden my-3 flex ${odd ? '--desktop:flex-row' : '--desktop:flex-row-reverse'} --mobile:flex-col`}>
+    <div className="h-30 w-full --desktop:min-h-full --mobile:h-60 --desktop:w-1/2 --mobile:w-full relative">
       {
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
           ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover mobile:rounded-t-lg" />
@@ -39,34 +40,42 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
           </div>
       }
     </div>
-    <div className={`flex flex-col desktop:w-1/2 mobile:w-full p-4 justify-evenly`}>
-      <p className="font-big-title font--ellipsis desktop:text-3xl mobile:text-2xl font-bold">{workplace.attributes.name}</p>
-      <p className="font-hint font--ellipsis mt-1 mb-2">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
+    <div className={`flex flex-col w-full --desktop:w-1/2 --mobile:w-full p-4 justify-evenly`}>
+      <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
+      <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
+        href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank">
+          <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
+            <FontAwesomeIcon icon={faMapLocationDot} className="font-icon color-primary"></FontAwesomeIcon>
+          </div>
+          <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
+      </a>
       {
         workplace.attributes.shortDescription &&
-         <p className="font-prose font--ellipsis-3 mb-2">{workplace.attributes.shortDescription}</p>
+         <p className="font-prose font--ellipsis-3 mt-1">{workplace.attributes.shortDescription}</p>
       }
-      <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
-        <a>
-          <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
-        </a>
-      </Link>
+      <div className="flex flex-justify-center mt-2">
+        <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
+          <a>
+            <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
+          </a>
+        </Link>
+      </div>
     </div>
   </div>
 )
 
 export const Workplaces = (props: WorkplacesProps) => (
-  <section id="workplaces" className={`py-10 ${props.classes}`}>
-    <div className="flex-col flex-align-center mobile-container px-2">
+  <section id="workplaces" className={`${props.classes}`}>
+    <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
       <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('workplaces.title')}</p>
-      <div className="mobile-container--responsive">
-        <div className="flex-col py-5">
-          {
-            props.companyInfo.workplaces.map((workplace, i) => (
+      <div className="flex flex-wrap mt-5">
+        {
+          props.companyInfo.workplaces.map((workplace, i) => (
+            <div className="p-1 w-m--100 w-d--33" key={i}>
               <WorkplaceCard key={i} workplace={workplace} odd={(i % 2 == 0)} ></WorkplaceCard>
-            ))
-          }
-        </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>

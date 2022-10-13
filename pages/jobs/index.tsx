@@ -19,6 +19,7 @@ import Page from "../../services/models/page";
 import { bucketL } from "../../services/urls";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
+import {faBuilding} from "@fortawesome/pro-light-svg-icons";
 
 interface RecentJobsProps {
   recentJobsList: Page<Job>;
@@ -112,21 +113,25 @@ const JobCard = (job: Job) => {
             <div className="flex flex-wrap flex-justify-center h-3 mb-1">
               {
                 job.overview?.department &&
-                <div className="flex flex-align-justify-center font-hint mr-3">
-                  <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
-                    <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
+                <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
+                  <div className="flex flex-align-justify-center font-hint mr-3 font-hover--underline cursor-pointer">
+                    <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
+                      <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
+                    </div>
+                    <p>{job.overview.department.name}</p>
                   </div>
-                  <p>{job.overview.department.name}</p>
-                </div>
+                </Link>
               }
               {
                 job.overview?.workplaces.length > 0 &&
-                <div className="flex flex-align-justify-center font-hint">
-                  <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
+                <Link href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
+                  <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
+                    <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
+                    </div>
+                    <p>{job.overview.workplaces[0].areaName || ''}</p>
                   </div>
-                  <p>{job.overview.workplaces[0].areaName || ''}</p>
-                </div>
+                </Link>
               }
             </div>
           </div>
