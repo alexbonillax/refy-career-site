@@ -43,9 +43,8 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
       <p className="font-big-title font--ellipsis desktop:text-3xl mobile:text-2xl font-bold">{workplace.attributes.name}</p>
       <p className="font-hint font--ellipsis mt-1 mb-2">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
       {
-        workplace.attributes.shortDescription
-        ? <p className="font-prose font--ellipsis-3 mb-2">{workplace.attributes.shortDescription}</p>
-        : ''
+        workplace.attributes.shortDescription &&
+         <p className="font-prose font--ellipsis-3 mb-2">{workplace.attributes.shortDescription}</p>
       }
       <Link href={{ pathname: '/jobs', query: { workplace: workplace.id } }}>
         <a>
