@@ -34,8 +34,8 @@ const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean 
     <div className="h-30 w-full --desktop:min-h-full --mobile:h-60 --desktop:w-1/2 --mobile:w-full relative">
       {
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
-          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover mobile:rounded-t-lg" />
-          : <div className={`h-full w-full flex items-center justify-center relative background-dynamic mobile:rounded-t-lg ${odd ? 'desktop:rounded-l-lg' : 'desktop:rounded-r-lg'}`}>
+          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover --mobile:rounded-t-lg" />
+          : <div className={`h-full w-full flex items-center justify-center relative background-dynamic --mobile:rounded-t-lg ${odd ? '--desktop:rounded-l-lg' : '--desktop:rounded-r-lg'}`}>
             <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faBuilding} className='text-6xl font--white' /></div>
           </div>
       }
