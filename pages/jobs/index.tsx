@@ -103,7 +103,7 @@ const JobCard = (job: Job) => {
   const { t } = useTranslation("common");
   const picUrl = job.attributes.picture ? bucketL + job.attributes.picture : false;
   return (
-    <div className="flex-column text-center box-shadow-container--card br-1 overflow-hidden flex-align-center background-color--white cursor-pointer">
+    <div className="flex-column text-center box-shadow-container--card br-var overflow-hidden flex-align-center background-color--white cursor-pointer">
       <div className="flex h-30 full-width background-center" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
         <div className="flex-column flex-align-justify-center full-width full-height background-color--blurr-dark"></div>
       </div>
