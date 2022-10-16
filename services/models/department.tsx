@@ -5,7 +5,7 @@ export default interface Department {
   attributes: {
     atsPartnerCode: string;
     name: string;
-    pictures: string[];
+    pictures: string;
     shortDescription: string;
     description: string;
     availableJobs?: number;

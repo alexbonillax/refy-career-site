@@ -29,18 +29,18 @@ interface WorkplacesProps {
   classes?: string;
 }
 
-const WorkplaceCard = ({ workplace, odd }: { workplace: Workplace, odd: boolean }) => (
-  <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden ${odd ? '--desktop:flex-row' : '--desktop:flex-row-reverse'} --mobile:flex-col`}>
-    <div className="h-30 w-full --desktop:min-h-full --mobile:h-60 --desktop:w-1/2 --mobile:w-full relative">
+const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => (
+  <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
+    <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
       {
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
-          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover --mobile:rounded-t-lg" />
-          : <div className={`h-full w-full flex items-center justify-center relative background-dynamic --mobile:rounded-t-lg ${odd ? '--desktop:rounded-l-lg' : '--desktop:rounded-r-lg'}`}>
+          ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover" />
+          : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
             <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faBuilding} className='text-6xl font--white' /></div>
           </div>
       }
     </div>
-    <div className={`flex flex-col w-full p-3 --desktop:w-1/2 --mobile:w-full`}>
+    <div className={`flex flex-col w-full p-3 mobile:w-full`}>
       <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
       <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
         href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
@@ -72,7 +72,7 @@ export const Workplaces = (props: WorkplacesProps) => (
         {
           props.companyInfo.workplaces.map((workplace, i) => (
             <div className="p-1 w-m--100 w-d--33" key={i}>
-              <WorkplaceCard key={i} workplace={workplace} odd={(i % 2 == 0)} ></WorkplaceCard>
+              <WorkplaceCard key={i} workplace={workplace} />
             </div>
           ))
         }

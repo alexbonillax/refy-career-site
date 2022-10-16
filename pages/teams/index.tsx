@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
@@ -14,6 +15,10 @@ import Department from "../../services/models/department";
 import { bucketXL } from "../../services/urls";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPeopleGroup } from "@fortawesome/pro-light-svg-icons";
+import { loaderBucketXL } from "../../utils/image-loader";
+
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -32,13 +37,14 @@ export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
       <section id="teams" className="py-10 bg-white">
         <div className={`m-auto flex ${reduced ? 'mobile-container mobile:flex-col' : 'mobile-container--responsive flex-col'}`}>
           <h1 className={`font-big-title font-big-title--40 mb-5 ${reduced ? 'desktop:w-2/5 mobile:text-center' : 'text-center'} `}>{Translate('teams')} </h1>
-          <div className={`${reduced ? 'desktop:w-3/5' : ''}`}>
-            <div className='mobile:flex-col flex flex-wrap flex-justify-center'>
-              {departments?.map((department, i) => (
-                <DepartmentCard key={i} department={department} reduced={reduced} />
+          <div className={`flex flex-wrap desktop:flex-row ${reduced ? 'flex-col desktop:w-full justify-center' : ''}`}>
+            {
+              departments?.map((department, i) => (
+                <div className={`p-1 w-m--100 ${reduced ? '' : 'w-d--33'}`}>
+                  <DepartmentCard key={i} department={department} />
+                </div>
               ))
-              }
-            </div>
+            }
             {
               reduced &&
               <div className="flex justify-center mt-2">
@@ -58,22 +64,32 @@ export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
 
 interface DepartmentCardProps {
   department: Department;
-  reduced: boolean;
 }
 
-const DepartmentCard = ({ department, reduced = false }: DepartmentCardProps) => {
-  const picUrl = department.attributes.pictures ? bucketXL + department.attributes.pictures[0] : false;
+const DepartmentCard = ({ department }: DepartmentCardProps) => {
   return (
-    <Link href={{ pathname: `/teams/${department.id}` }}>
-      <a className={`mobile:w-full p-1 ${reduced ? 'desktop:w-full' : 'desktop:w-1/3'}`}>
-        <div className="flex h-30 box-shadow-container--card background-center br-var overflow-hidden cursor-pointer" style={picUrl ? { backgroundImage: `url(${picUrl})` } : {}}>
-          <div className="flex flex-col justify-center items-center text-center full-width full-height background-color--blurr-dark">
-            <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white">{department.attributes.name}</p>
-            <p className="font-hint font--white">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
-          </div>
+    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
+      <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
+        {
+          department.attributes.pictures
+            ? <Image loader={loaderBucketXL} src={department.attributes.pictures} alt='workplace' layout="fill" className="flex relative object-cover" />
+            : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
+              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faPeopleGroup} className='text-6xl font--white' /></div>
+            </div>
+        }
+      </div>
+      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
+        <p className="font-title font--ellipsis">{department.attributes.name}</p>
+        <p className="font-hint font--white">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
+        <div className="flex flex-justify-center mt-2">
+          <Link href={{ pathname: `/teams/${department.id}` }}>
+            <a>
+              <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
+            </a>
+          </Link>
         </div>
-      </a>
-    </Link>
+      </div>
+    </div>
   )
 }
 
