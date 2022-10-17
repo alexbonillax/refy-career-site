@@ -1,7 +1,7 @@
 import Company from "../services/models/company"
 
 export const SSRCheck = (companyInfo: Company, translations: any) => {
-  if (!companyInfo || companyInfo.careers.published) {
+  if (!companyInfo || !companyInfo.careers.published) {
     return {
       redirect: {
         destination: '/not-found',
