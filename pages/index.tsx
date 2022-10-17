@@ -40,7 +40,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent={true} />
       <Banner height={BannerHeight.bigScreen} picture={pageProps.companyInfo.careers.home.picture} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <Areas departments={pageProps.companyInfo.departments.slice(0,4)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
+      <Areas departments={pageProps.companyInfo.departments.slice(0,3)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
       <AboutCompany {...pageProps.companyInfo} />

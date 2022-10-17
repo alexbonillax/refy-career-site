@@ -12,7 +12,6 @@ import { Header } from "../../components/header";
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
 import Department from "../../services/models/department";
-import { bucketXL } from "../../services/urls";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,8 +39,8 @@ export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
           <div className={`flex flex-wrap desktop:flex-row ${reduced ? 'flex-col desktop:w-full justify-center' : ''}`}>
             {
               departments?.map((department, i) => (
-                <div className={`p-1 w-m--100 ${reduced ? '' : 'w-d--33'}`}>
-                  <DepartmentCard key={i} department={department} />
+                <div key={i} className={`p-1 w-m--100 ${reduced ? '' : 'w-d--33'}`}>
+                  <DepartmentCard department={department} />
                 </div>
               ))
             }
