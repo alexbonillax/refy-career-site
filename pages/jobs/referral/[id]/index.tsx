@@ -37,14 +37,13 @@ const applyJob = (referralCode: string) => {
 const openLinkedin = (username: string): Window => window.open(`https://www.linkedin.com/in/${username}`, '_blank');
 interface RefierCardProps {
   user: Profile,
-  color: string,
 }
-export const RefierCard = ({ user, color }: RefierCardProps) => {
+export const RefierCard = ({ user }: RefierCardProps) => {
   const picUrl = user?.attributes.avatar ? bucketL + user.attributes.avatar : '';
   return (
     <div className="flex-column text-center py-2 px-1">
       <div className="flex flex-justify-center">
-        <Logo type={LogoTypes.refierCard} imgSrc={picUrl} color={color}></Logo>
+        <Logo type={LogoTypes.refierCard} imgSrc={picUrl}></Logo>
       </div>
       <div className="flex-column full-width px-2 mt-2">
         <p className="font-title flex flex-align-justify-center">{user.attributes.firstName} {user.attributes.lastName}
@@ -68,7 +67,7 @@ export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Jo
     <section id="about-company" className="py-10 background-color--grey--0">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('job.apply.refier.title', { company })}</h1>
-        <RefierCard user={jobDetails.referrerUser} color={color} />
+        <RefierCard user={jobDetails.referrerUser}/>
       </div>
     </section>
   )
@@ -115,8 +114,8 @@ const Referral: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
               <JobDetails job={data.jobDetails} />
               <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
               {
-                pageProps.companyInfo.careers?.referrers?.visible &&
-                <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department?.employees} color={pageProps.companyInfo.attributes.primaryColor} />
+                (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees) &&
+                <Coworkers referrer={data.jobDetails.referrerUser.attributes.firstName} employees={data.jobDetails.department.employees}/>
               } 
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />

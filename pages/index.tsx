@@ -16,7 +16,7 @@ import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../utils/redirects";
 
 
-const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: {companyInfo: Company}}) => {
+const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t, ready } = useTranslation("common");
   const [data, setData] = useState({ recentJobsList: null });
   const [isLoading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
       let recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
-      recentJobsList = {...recentJobsList, content: recentJobsList.content.slice(0,6)};
+      recentJobsList = { ...recentJobsList, content: recentJobsList.content.slice(0, 6) };
       setData({ recentJobsList });
       setLoading(false);
     }
@@ -40,8 +40,12 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent={true} />
-      <Banner height={BannerHeight.bigScreen} picture={pageProps.companyInfo.careers.home.picture} tagline={pageProps.companyInfo.attributes.tagline} title={t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <Areas departments={pageProps.companyInfo.departments.slice(0,3)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor}/>
+      <Banner
+        height={BannerHeight.bigScreen}
+        picture={pageProps.companyInfo.careers.home.picture}
+        tagline={pageProps.companyInfo.attributes.tagline}
+        title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
+      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
       <AboutCompany {...pageProps.companyInfo} />

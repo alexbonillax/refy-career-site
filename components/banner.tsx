@@ -19,8 +19,8 @@ export const Banner = ({ picture, tagline, title, height }: BannerProps) => {
     <section id="home-banner" className={`background-color--dark background-center`} style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className={`relative flex-col flex justify-center items-center background-color--blurr-dark ${height}`}>
         <div className="mobile-container flex-col flex justify-center items-center px-3 text-center">
-          <h2 className="font-subtitle font--white">{tagline}</h2>
           <h1 className="font-big-title font--white">{title}</h1>
+          <h2 className="font-subtitle font--white">{tagline}</h2>
         </div>
       </div>
     </section>

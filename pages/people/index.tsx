@@ -21,19 +21,22 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-export const Coworkers = ({ referrer, employees, color }: { referrer: string, employees: Profile[], color: string }) => {
+export const Coworkers = ({ referrer, employees }: { referrer?: string, employees: Profile[] }) => {
   const { t } = useTranslation("common");
   return (
     employees &&
     <section className="py-8 background-color--white">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>
-        <h2 className="font-subtitle text-center mt-1">{t('coworkers.description', { referrer })}</h2>
+        {
+          referrer &&
+          <h2 className="font-subtitle text-center mt-1">{t('coworkers.description', { referrer })}</h2>
+        }
         <div className="flex flex-wrap justify-center items-center">
           {
             employees.map((employee, i) => (
               <div className="px-3" key={i}>
-                <RefierCard user={employee} color={color} />
+                <RefierCard user={employee} />
               </div>
             ))
           }
@@ -43,7 +46,7 @@ export const Coworkers = ({ referrer, employees, color }: { referrer: string, em
   )
 }
 
-export const PeopleSection = ({ departments, color }: { departments: Department[], color: string }) => {
+export const PeopleSection = ({ departments }: { departments: Department[] }) => {
   if (departments.some(department => department.employees.length > 0)) {
     return (
       <div className="py-5 background-color--white">
@@ -57,7 +60,7 @@ export const PeopleSection = ({ departments, color }: { departments: Department[
                   {
                     department.employees.map((employee, i) => (
                       <div className="px-3" key={i}>
-                        <RefierCard user={employee} color={color} />
+                        <RefierCard user={employee} />
                       </div>
                     ))
                   }
@@ -79,7 +82,7 @@ const People: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')} />
       <Navbar url='people' company={pageProps.companyInfo} />
-      <PeopleSection departments={pageProps.companyInfo.departments} color={pageProps.companyInfo.attributes.primaryColor} />
+      <PeopleSection departments={pageProps.companyInfo.departments} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

@@ -17,6 +17,7 @@ import Department from "../../../services/models/department";
 import Router from 'next/router';
 import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../../../utils/redirects";
+import { Coworkers } from "../../people";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -52,6 +53,10 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
           <Navbar company={pageProps.companyInfo} transparent={true} url='teams' />
           <Banner picture={department.attributes.pictures ? department.attributes.pictures[0] : null} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
           <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} />
+          {
+            (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&
+            <Coworkers employees={department.employees} />
+          }
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>
@@ -65,9 +70,9 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  
+
   let result = SSRCheck(companyInfo, translations);
-  if (companyInfo?.departments?.length == 0 || !companyInfo?.careers?.published) {
+  if (companyInfo?.departments?.length <= 0 || !companyInfo?.careers?.published) {
     result = {
       redirect: {
         destination: '/',

@@ -18,6 +18,7 @@ import { loaderBucketXL } from "../../utils/image-loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBuilding} from "@fortawesome/pro-light-svg-icons";
 import {faMapLocationDot} from "@fortawesome/pro-regular-svg-icons";
+import { SSRCheck } from "../../utils/redirects";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -100,24 +101,16 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-
-  if (companyInfo.workplaces.length > 0) {
-    return {
-      props: {
-        _nextI18Next: translations._nextI18Next,
-        pageProps: {
-          companyInfo,
-        }
-      }
-    };
-  } else {
-    return {
+  let result = SSRCheck(companyInfo, translations);
+  if (companyInfo.workplaces.length <= 0) {
+    result = {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
   }
+  return result
 };
 
 export default Locations;

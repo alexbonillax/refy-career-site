@@ -29,6 +29,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
 import { SSRCheck } from '../../../utils/redirects';
+import { Coworkers } from '../../people';
 
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
@@ -194,6 +195,10 @@ const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: {
               <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
               <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
+              {
+                (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees.length > 0) &&
+                <Coworkers employees={data.jobDetails.department.employees}/>
+              } 
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>

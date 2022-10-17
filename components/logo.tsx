@@ -5,7 +5,6 @@ interface LogoProps {
   imgSrc?: string;
   name?: string;
   type?: LogoTypes;
-  color?: string;
 }
 
 export enum LogoTypes {
@@ -15,14 +14,14 @@ export enum LogoTypes {
 
 const randomPersonIcon = [faUserCowboy, faUserAlien, faUserAstronaut, faUserRobot, faUserNurseHairLong, faUserVisor, faUserHairBuns, faUserNinja, faUserSecret, faUserBountyHunter, faUserShakespeare];
 
-export const Logo = ({ imgSrc, name, type = LogoTypes.company, color }: LogoProps) => (
-  <div className={`${type} bg-cover bg-center flex flex-align-justify-center`} style={imgSrc ? { backgroundImage: `url(${imgSrc})` } : { backgroundColor: color }}>
+export const Logo = ({ imgSrc, name, type = LogoTypes.company }: LogoProps) => (
+  <div className={`${type} bg-cover bg-center flex flex-align-justify-center ${!imgSrc ? 'background-dynamic': ''}`} style={imgSrc ? { backgroundImage: `url(${imgSrc})` } : { backgroundColor: '' }}>
     {
       (!imgSrc && name) &&
       <p className="text-m">{name[0]}</p>
     }
     {
-      (color && !imgSrc && type === LogoTypes.refierCard) &&
+      (!imgSrc && type === LogoTypes.refierCard) &&
       <FontAwesomeIcon icon={randomPersonIcon[Math.floor(Math.random() * randomPersonIcon.length)]} className="h-3/6 font-icon font--white" />
     }
   </div>
