@@ -16,6 +16,7 @@ import getWildcardCode from "../../../utils/wildcard";
 import Department from "../../../services/models/department";
 import Router from 'next/router';
 import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
+import { SSRCheck } from "../../../utils/redirects";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -64,23 +65,17 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  if (companyInfo.departments.length > 0) {
-    return {
-      props: {
-        _nextI18Next: translations._nextI18Next,
-        pageProps: {
-          companyInfo,
-        }
-      }
-    };
-  } else {
-    return {
+  
+  let result = SSRCheck(companyInfo, translations);
+  if (companyInfo?.departments?.length == 0 || !companyInfo?.careers?.published) {
+    result = {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
   }
+  return result
 };
 
 export default TeamJobs;

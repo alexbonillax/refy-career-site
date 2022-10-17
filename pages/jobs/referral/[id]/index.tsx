@@ -27,6 +27,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../../utils/dynamic-styles/apply-styles';
 import Company from '../../../../services/models/company';
+import { SSRCheck } from '../../../../utils/redirects';
 
 const applyJob = (referralCode: string) => {
   const tenantCode = getTenantCode(window.location.hostname);
@@ -152,14 +153,7 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-      }
-    }
-  };
-};
+  return SSRCheck(companyInfo, translations);
+}
 
-export default Referral
+export default Referral;

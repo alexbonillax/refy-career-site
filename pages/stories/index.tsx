@@ -22,6 +22,7 @@ import { bucketM, bucketXXL, videoBucketUrl } from "../../services/urls";
 import { BeautifyUrl } from "../../utils/beautifyUrl";
 import { DateToTimeLeftReduced } from "../../utils/dateToTimeLeftReduced";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
+import { SSRCheck } from "../../utils/redirects";
 import getWildcardCode from "../../utils/wildcard";
 
 
@@ -264,23 +265,16 @@ export const getServerSideProps = async ({ req }: any) => {
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
-  if (companyInfo.referralProgram.accessPosts) {
-    return {
-      props: {
-        _nextI18Next: translations._nextI18Next,
-        pageProps: {
-          companyInfo,
-        }
-      }
-    };
-  } else {
-    return {
+  let result = SSRCheck(companyInfo, translations);
+  if (!companyInfo?.referralProgram?.accessPosts) {
+    result = {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
   }
+  return result
 };
 
 export default Stories;

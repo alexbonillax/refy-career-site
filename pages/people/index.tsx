@@ -13,6 +13,7 @@ import getWildcardCode from "../../utils/wildcard";
 import Company from "../../services/models/company";
 import { useEffect } from "react";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
+import { SSRCheck } from "../../utils/redirects";
 
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -91,23 +92,16 @@ export const getServerSideProps = async ({ req }: any) => {
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
-  if (companyInfo.careers?.referrers?.visible) {
-    return {
-      props: {
-        _nextI18Next: translations._nextI18Next,
-        pageProps: {
-          companyInfo,
-        }
-      }
-    };
-  } else {
-    return {
+  let result = SSRCheck(companyInfo, translations);
+  if (!companyInfo.careers?.referrers?.visible) {
+    result = {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
   }
+  return result
 
 
 };

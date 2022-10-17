@@ -25,6 +25,7 @@ export default interface Company {
     style: CareerStyles;
     home: HomeProps;
     languageCode: string;
+    published: boolean;
   };
   type: string;
   departments: Department[];

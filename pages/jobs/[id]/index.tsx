@@ -28,6 +28,7 @@ import { BottomSnackbar } from '../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
+import { SSRCheck } from '../../../utils/redirects';
 
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
@@ -220,14 +221,7 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-      }
-    }
-  };
+  return SSRCheck(companyInfo, translations);
 };
 
 export default Job

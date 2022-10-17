@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import getWildcardCode from "../utils/wildcard";
 import Company from "../services/models/company";
 import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
+import { SSRCheck } from "../utils/redirects";
 
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: {companyInfo: Company}}) => {
@@ -53,14 +54,7 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  return {
-    props: {
-      _nextI18Next: translations._nextI18Next,
-      pageProps: {
-        companyInfo,
-      }
-    }
-  };
-};
+  return SSRCheck(companyInfo, translations);
+}
 
 export default Home;
