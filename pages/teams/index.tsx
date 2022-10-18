@@ -72,8 +72,8 @@ const DepartmentCard = ({ department }: DepartmentCardProps) => {
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         {
-          department.attributes.pictures
-            ? <Image loader={loaderBucketXL} src={department.attributes.pictures} alt='workplace' layout="fill" className="flex relative object-cover" />
+          department.attributes.pictures && department.attributes?.pictures?.some(pic => !!pic)
+            ? <Image loader={loaderBucketXL} src={department.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover" />
             : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
               <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faScreenUsers} className='icon-font text-6xl icon-font--light' /></div>
             </div>
