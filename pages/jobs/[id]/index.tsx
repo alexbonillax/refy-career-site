@@ -48,7 +48,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
   const JobSection = ({ text, icon }: { text: string, icon: IconProp }) => (
     <>
       <div className='flex items-center justify-center w-2 h-2 mr-1 text-white'>
-        <FontAwesomeIcon icon={icon} />
+        <FontAwesomeIcon icon={icon} className='text-rendering--optimize'/>
       </div>
       <p className="flex flex-align-center font-hint font--white mr-3">
         {text}
