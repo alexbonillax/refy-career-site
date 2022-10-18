@@ -142,10 +142,10 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         </div>
 
         <Link href="/">
-          <a><div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
+          <a className="w-10 h-10 flex flex-align-justify-center"><div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
         </Link>
 
-        <div className="w-8"></div>
+        <div className="w-10 desktop:hidden"></div>
 
         <div className="flex w-full mobile:hidden">
           <LinksList></LinksList>
