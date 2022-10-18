@@ -233,6 +233,8 @@ body {
 
 .icon-font {
   text-rendering: optimizeLegibility;
+  width: inherit;
+  height: inherit;
 
   &--normal {
     font-size: 1rem;
