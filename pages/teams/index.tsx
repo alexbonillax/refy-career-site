@@ -15,7 +15,7 @@ import Department from "../../services/models/department";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleGroup } from "@fortawesome/pro-light-svg-icons";
+import { faScreenUsers } from "@fortawesome/pro-light-svg-icons";
 import { loaderBucketXL } from "../../utils/image-loader";
 import { SSRCheck } from "../../utils/redirects";
 import {faSuitcase} from "@fortawesome/pro-regular-svg-icons";
@@ -75,7 +75,7 @@ const DepartmentCard = ({ department }: DepartmentCardProps) => {
           department.attributes.pictures
             ? <Image loader={loaderBucketXL} src={department.attributes.pictures} alt='workplace' layout="fill" className="flex relative object-cover" />
             : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
-              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faPeopleGroup} className='icon-font text-6xl icon-font--light' /></div>
+              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faScreenUsers} className='icon-font text-6xl icon-font--light' /></div>
             </div>
         }
       </div>
