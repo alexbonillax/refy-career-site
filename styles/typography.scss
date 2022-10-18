@@ -232,15 +232,18 @@ body {
 }
 
 .icon-font {
-  /*width: inherit;*/
   text-rendering: optimizeLegibility;
 
   &--normal {
     font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   &--navbar {
     font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   &--field-button {
