@@ -110,7 +110,7 @@ const JobCard = (job: Job) => {
           job.attributes.picture
             ? <Image loader={loaderBucketL} src={job.attributes.picture} alt='workplace' layout="fill" className="flex relative object-cover" />
             : <div className={`h-full w-full flex items-center justify-center relative background-dynamic mobile:rounded-t-lg`}>
-              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faSuitcase} className='text-6xl font--white' /></div>
+              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faSuitcase} className='icon-font text-6xl icon-font--light' /></div>
             </div>
         }
       </div>
@@ -121,8 +121,8 @@ const JobCard = (job: Job) => {
             job.overview?.department &&
             <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
               <div className="flex flex-align-justify-center font-hint mr-3 font-hover--underline cursor-pointer">
-                <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
-                  <FontAwesomeIcon icon={faScreenUsers} className="font-icon color-primary"></FontAwesomeIcon>
+                <div className="flex items-center w-2 h-2 mr-1">
+                  <FontAwesomeIcon icon={faScreenUsers} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
                 <p>{job.overview.department.name}</p>
               </div>
@@ -132,8 +132,8 @@ const JobCard = (job: Job) => {
             job.overview?.workplaces.length > 0 &&
             <Link href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
               <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
-                <div className="flex items-center w-0.5 h-2 mr-1 font-icon color-primary">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="font-icon color-primary"></FontAwesomeIcon>
+                <div className="flex items-center w-2 h-2 mr-1">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
                 <p>{job.overview.workplaces[0].areaName || ''}</p>
               </div>

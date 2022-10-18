@@ -31,31 +31,31 @@ interface AreasProps {
   colorButton?: string;
 }
 
-export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
+export const Areas = ({ departments = [], reduced = false}: AreasProps) => (
   <>
     {departments.length > 0 &&
-      <section id="teams" className="py-10 bg-white">
-        <div className={`m-auto flex ${reduced ? 'mobile-container mobile:flex-col' : 'mobile-container--responsive flex-col'}`}>
-          <h1 className={`font-big-title font-big-title--40 mb-5 ${reduced ? 'desktop:w-2/5 mobile:text-center' : 'text-center'} `}>{Translate('teams')} </h1>
-          <div className={`flex flex-wrap desktop:flex-row ${reduced ? 'flex-col desktop:w-full justify-center' : ''}`}>
+      <section id="teams" className="bg-white">
+        <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
+          <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('teams')}</p>
+          <div className="flex flex-wrap flex-justify-center mt-5">
             {
               departments?.map((department, i) => (
-                <div key={i} className={`p-1 w-m--100 ${reduced ? '' : 'w-d--33'}`}>
+                <div key={i} className={`p-1 w-m--100 w-d--33`}>
                   <DepartmentCard department={department} />
                 </div>
               ))
             }
-            {
-              reduced &&
-              <div className="flex justify-center mt-2">
-                <Link href="/teams">
-                  <a className="">
-                    <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
-                  </a>
-                </Link>
-              </div>
-            }
           </div>
+          {
+            reduced &&
+              <div className="flex justify-center mt-2">
+                  <Link href="/teams">
+                      <a className="">
+                          <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
+                      </a>
+                  </Link>
+              </div>
+          }
         </div>
       </section>
     }
@@ -74,7 +74,7 @@ const DepartmentCard = ({ department }: DepartmentCardProps) => {
           department.attributes.pictures
             ? <Image loader={loaderBucketXL} src={department.attributes.pictures} alt='workplace' layout="fill" className="flex relative object-cover" />
             : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
-              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faPeopleGroup} className='text-6xl font--white' /></div>
+              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faPeopleGroup} className='icon-font text-6xl icon-font--light' /></div>
             </div>
         }
       </div>

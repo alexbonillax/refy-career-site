@@ -50,7 +50,7 @@ export const RefierCard = ({ user }: RefierCardProps) => {
           {
             user.attributes.linkedinVanityName &&
             <FontAwesomeIcon
-              className='flex h-2 w-2 ml-1 icon-font icon-font--field-button cursor-pointer'
+              className='flex h-2 w-2 ml-1 icon-font icon-font--normal icon-font--field-button cursor-pointer'
               icon={faLinkedin as IconProp}
               onClick={_ => openLinkedin(user.attributes.linkedinVanityName)}></FontAwesomeIcon>
           }
@@ -123,7 +123,7 @@ const Referral: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
                 <ButtonBasic classes='button-title button--floating box-shadow-container--elevated'
                   onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))}>
                   {t('job.apply.button')}
-                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1"></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="ml-1 icon-font icon-font--normal icon-font--light"></FontAwesomeIcon>
                 </ButtonBasic>
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />

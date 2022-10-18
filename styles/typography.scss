@@ -232,162 +232,23 @@ body {
 }
 
 .icon-font {
-  font-size: 1rem;
-  color: $refy-grey-1000;
+  width: inherit;
+  text-rendering: optimizeLegibility;
 
-  &--breadcrumb {
+  &--normal {
     font-size: 1rem;
-
-    &-white {
-      color: $refy-white;
-    }
-
-    &-filled-heart {
-      color: $refy-color-primary !important;
-
-      &:not(.prevent-animation) {
-        animation: bounce-in 300ms ease;
-      }
-    }
-
-    &-empty-heart {
-      &:not(.prevent-animation) {
-        animation: bounce-out 300ms ease;
-      }
-    }
-
-    @keyframes bounce-in {
-      0% {
-        transform: scale(0.8);
-      }
-
-      80% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    @keyframes bounce-out {
-      0% {
-        transform: scale(0.8);
-      }
-
-      80% {
-        transform: scale(1.1);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-  }
-
-  &--breadcrumb-button {
-    font-size: 1rem;
-    color: $refy-grey-300;
-  }
-
-  &--bottom-sheet-header {
-    font-size: 1rem;
-  }
-
-  &--social {
-    color: $refy-grey;
-    font-size: 2rem;
-
-    &-small {
-      color: $refy-grey;
-      font-size: 1.25rem;
-    }
-  }
-
-  &--candidate-navbar {
-    font-size: 1.25rem;
   }
 
   &--navbar {
-    color: $refy-grey;
-
-    @media (max-width: $mobile-breakpoint) {
-      font-size: 1.25rem;
-      height: 1.5rem;
-      align-items: flex-end;
-      transition: color 300ms ease-in-out;
-
-      &--active {
-        color: $refy-color-primary;
-      }
-    }
-
-    @media (min-width: $mobile-breakpoint) {
-      font-size: 1.25rem;
-      height: 1.5rem;
-
-      &--active {
-        color: $refy-white;
-      }
-    }
-
+    font-size: 1.25rem;
   }
 
   &--field-button {
-    font-size: 1rem;
-    color: $refy-grey;
-
-    &--big {
-      font-size: 1.25rem;
-    }
-  }
-
-  &--logo-company {
-    font-size: 1rem;
-    color: $refy-white;
-  }
-
-  &--verified {
-    font-size: 0.7rem;
-    color: $refy-white;
-  }
-
-  &--tiny {
-    font-size: 0.5rem;
-  }
-
-  &--check {
-    font-size: 2.5rem;
-    color: $refy-white;
-  }
-
-  &--score {
-    font-size: 1rem;
-    color: $refy-gold;
-  }
-
-  &--social {
-    font-size: 1.75rem;
     color: $refy-grey;
   }
 
-  &--searchbar-find {
-    font-size: 1.25rem;
-    color: $refy-blue;
-  }
-
-  &--job-searchbar {
-    font-size: 0.85rem;
-  }
-
-  &--empty-list {
-    font-size: 3rem;
-    color: $refy-grey;
-  }
-
-  &--help-column {
-    font-size: 2rem;
-    color: $refy-color-primary;
+  &--dark {
+    color: $refy-grey-1000;
   }
 
   &--light {
@@ -416,15 +277,6 @@ body {
 
   &--blue {
     color: $refy-blue;
-  }
-
-  &--plus {
-    font-size: 0.9rem;
-    color: $refy-grey;
-  }
-
-  &--option {
-    font-size: 1.25rem;
   }
 
   &--primary {

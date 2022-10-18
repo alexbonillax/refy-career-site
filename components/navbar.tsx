@@ -85,7 +85,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           <ButtonBasic>
             {t('company-site')}
             <div className='w-2 h-2 flex items-center justify-center ml-1'>
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-font icon-font--normal" />
             </div>
           </ButtonBasic>
         </a>
@@ -106,7 +106,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       <div className="flex w-full flex-col space-y-3">
         <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
-            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font--candidate-navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--dark icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
           <CompanyWebsiteButton />
         </div>
@@ -131,12 +131,12 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         !state.navbar &&
         <LoadingBar color={company.attributes.primaryColor} />
       }
-      <div className="flex mobile-container--responsive mx-auto h-20.5 items-center justify-between">
-        <div className="hidden cursor-pointer mobile:flex justify-center items-center w-8 h-8" onClick={toggleDrawer("navbar", true)}>
+      <div className="flex mobile-container--responsive mx-auto h-10 items-center justify-between">
+        <div className="hidden cursor-pointer mobile:flex justify-center items-center w-10 h-10" onClick={toggleDrawer("navbar", true)}>
           <div className="w-2 h-2">
             <FontAwesomeIcon
-              icon={faBars} style={{ fontSize: "1.3rem" }}
-              className={`${((scrolled && transparent) || (!transparent) ? "" : "icon-font--light")}`}
+              icon={faBars}
+              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "icon-font--dark" : "icon-font--light")}`}
             ></FontAwesomeIcon>
           </div>
         </div>

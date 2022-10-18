@@ -1,4 +1,4 @@
-import { faPerson, faUserAlien, faUserAstronaut, faUserBountyHunter, faUserCowboy, faUserHairBuns, faUserNinja, faUserNurseHairLong, faUserRobot, faUserSecret, faUserShakespeare, faUserVisor } from "@fortawesome/pro-regular-svg-icons";
+import { faUserAlien, faUserAstronaut, faUserBountyHunter, faUserCowboy, faUserHairBuns, faUserNinja, faUserNurseHairLong, faUserRobot, faUserSecret, faUserShakespeare, faUserVisor } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface LogoProps {
@@ -22,7 +22,7 @@ export const Logo = ({ imgSrc, name, type = LogoTypes.company }: LogoProps) => (
     }
     {
       (!imgSrc && type === LogoTypes.refierCard) &&
-      <FontAwesomeIcon icon={randomPersonIcon[Math.floor(Math.random() * randomPersonIcon.length)]} className="h-3/6 font-icon font--white" />
+      <FontAwesomeIcon icon={randomPersonIcon[Math.floor(Math.random() * randomPersonIcon.length)]} className="h-3/6 icon-font icon-font--light" />
     }
   </div>
 )

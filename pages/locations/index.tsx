@@ -37,7 +37,7 @@ const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => (
         workplace.attributes.pictures && workplace.attributes?.pictures?.some(pic => !!pic)
           ? <Image loader={loaderBucketXL} src={workplace.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover" />
           : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
-            <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faBuilding} className='text-6xl font--white' /></div>
+            <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faBuilding} className='icon-font text-6xl icon-font--light' /></div>
           </div>
       }
     </div>
@@ -45,8 +45,8 @@ const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => (
       <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
       <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
         href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
-          <div className="flex items-center w-2.5 h-2.5 mr-1 font-icon color-primary">
-            <FontAwesomeIcon icon={faMapLocationDot} className="font-icon color-primary"></FontAwesomeIcon>
+          <div className="flex items-center w-2 h-2 mr-1">
+            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
           </div>
           <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
       </a>

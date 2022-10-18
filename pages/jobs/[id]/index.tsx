@@ -47,8 +47,8 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
 
   const JobSection = ({ text, icon }: { text: string, icon: IconProp }) => (
     <>
-      <div className='flex items-center justify-center w-2 h-2 mr-1 text-white'>
-        <FontAwesomeIcon icon={icon} className='text-rendering--optimize'/>
+      <div className='flex items-center justify-center w-2 h-2 mr-1'>
+        <FontAwesomeIcon icon={icon} className='icon-font icon-font--normal icon-font--light'/>
       </div>
       <p className="flex flex-align-center font-hint font--white mr-3">
         {text}
@@ -86,7 +86,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
           <div className='noselect relative button button--underline button--underline-white size-small flex items-center cursor-pointer whitespace-nowrap' onClick={scrollToDescription}>
             <p className='cursor-pointer font--white button-hover--underline button-hover--underline-white'>{t('job.go-down')}</p>
-            <FontAwesomeIcon className="font--white ml-1" icon={faArrowDown} />
+            <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light ml-1" icon={faArrowDown} />
           </div>
         </div >
       </div >
@@ -101,7 +101,7 @@ interface JobDetailsProps {
 const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
     <div className='w-2 h-2 flex items-center justify-center mr-1'>
-      <FontAwesomeIcon icon={icon} />
+      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--dark"/>
     </div>
     <div className="flex flex-align-center flex-justify-between full-width">
       <p className="font-multiline font--dark">{title}</p>
@@ -156,7 +156,7 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
     <ButtonBasic classes={`button-title ${classes}`} onClick={onClick}>
       {t('job.apply.button')}
       <div className='w-2 h-2 flex items-center justify-center ml-1'>
-        <FontAwesomeIcon icon={faArrowUpRightFromSquare}></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-font icon-font--normal"></FontAwesomeIcon>
       </div>
     </ButtonBasic>
   )

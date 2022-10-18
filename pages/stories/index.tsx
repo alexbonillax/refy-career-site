@@ -60,7 +60,7 @@ const HeaderUserPost = (post: Post) => {
       <div className="flex-column pl-1 pr-2">
         <p className="font-header">{post.overview.user.firstName} {post.overview.user.lastName}</p>
         <p className="flex flex-align-center font-value">
-          <FontAwesomeIcon icon={faCalendar} className="w-1-5 mr-1" />
+          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1" />
           {DateToTimeLeftReduced(post.attributes.createdAt)}</p>
       </div>
     </>
@@ -72,10 +72,10 @@ const HeaderCompanyPost = ({ post, companyInfo }: { post: Post, companyInfo: Com
   return (
     <>
       <Logo imgSrc={companyPicUrl} />
-      <div className="flex-column pl-1 pr-2">
+      <div className="flex-column px-2">
         <p className="font-header">{companyInfo.attributes?.name}</p>
         <p className="flex flex-align-center font-value">
-          <FontAwesomeIcon icon={faCalendar} className="w-1-5 mr-1" />
+          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1" />
           {DateToTimeLeftReduced(post.attributes.createdAt)}</p>
       </div>
     </>
