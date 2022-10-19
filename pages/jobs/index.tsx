@@ -1,10 +1,7 @@
-import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Navbar } from "../../components";
@@ -19,9 +16,8 @@ import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
-import { faSuitcase } from "@fortawesome/pro-light-svg-icons";
-import { loaderBucketL } from "../../utils/image-loader";
 import { SSRCheck } from "../../utils/redirects";
+import { JobCard } from "../../components/cards/job-card";
 
 interface RecentJobsProps {
   recentJobsList: Page<Job>;
@@ -100,58 +96,6 @@ const JobCardLoading = () => (
     </div>
   </div >
 )
-
-const JobCard = (job: Job) => {
-  const { t } = useTranslation("common");
-  return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
-      <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        {
-          job.attributes.picture
-            ? <Image loader={loaderBucketL} src={job.attributes.picture} alt='workplace' layout="fill" className="flex relative object-cover" />
-            : <div className={`h-full w-full flex items-center justify-center relative background-dynamic mobile:rounded-t-lg`}>
-              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faSuitcase} className='icon-font text-6xl icon-font--light' /></div>
-            </div>
-        }
-      </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
-        <p className="font-title font--ellipsis">{job.attributes.title}</p>
-        <div className="flex flex-wrap flex-justify-center h-3 mt-1">
-          {
-            job.overview?.department &&
-            <Link href={{ pathname: '/teams/' + job.overview.department.id }}>
-              <div className="flex flex-align-justify-center font-hint mr-3 font-hover--underline cursor-pointer">
-                <div className="flex items-center w-2 h-2 mr-1">
-                  <FontAwesomeIcon icon={faScreenUsers} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
-                </div>
-                <p>{job.overview.department.name}</p>
-              </div>
-            </Link>
-          }
-          {
-            job.overview?.workplaces.length > 0 &&
-            <Link href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
-              <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
-                <div className="flex items-center w-2 h-2 mr-1">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
-                </div>
-                <p>{job.overview.workplaces[0].areaName || ''}</p>
-              </div>
-            </Link>
-          }
-        </div>
-        <div className="flex flex-justify-center mt-2">
-          <Link href={{ pathname: '/jobs/' + job.id }}>
-            <a>
-              <ButtonBasic>{t('job.apply.button.short')}</ButtonBasic>
-            </a>
-          </Link>
-        </div>
-      </div>
-    </div>
-
-  )
-}
 
 interface JobsProps {
   recentJobsList: Page<Job>,

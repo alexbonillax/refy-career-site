@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect } from "react";
 import { Navbar } from "../../components";
 import AboutCompany from "../../components/about";
@@ -14,13 +13,8 @@ import Company from "../../services/models/company";
 import Department from "../../services/models/department";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faScreenUsers } from "@fortawesome/pro-light-svg-icons";
-import { loaderBucketXL } from "../../utils/image-loader";
 import { SSRCheck } from "../../utils/redirects";
-import {faSuitcase} from "@fortawesome/pro-regular-svg-icons";
-import { JobsAvailable } from "../../components/cards/job-availability";
-
+import { DepartmentCard } from "../../components/cards/department-card";
 
 export const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -33,7 +27,7 @@ interface AreasProps {
   colorButton?: string;
 }
 
-export const Areas = ({ departments = [], reduced = false}: AreasProps) => (
+export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
   <>
     {departments.length > 0 &&
       <section id="teams" className="bg-white">
@@ -50,50 +44,19 @@ export const Areas = ({ departments = [], reduced = false}: AreasProps) => (
           </div>
           {
             reduced &&
-              <div className="flex justify-center mt-2">
-                  <Link href="/teams">
-                      <a className="">
-                          <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
-                      </a>
-                  </Link>
-              </div>
+            <div className="flex justify-center mt-2">
+              <Link href="/teams">
+                <a className="">
+                  <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
+                </a>
+              </Link>
+            </div>
           }
         </div>
       </section>
     }
   </>
 )
-
-interface DepartmentCardProps {
-  department: Department;
-}
-
-const DepartmentCard = ({ department }: DepartmentCardProps) => {
-  return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
-      <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        {
-          department.attributes.pictures && department.attributes?.pictures?.some(pic => !!pic)
-            ? <Image loader={loaderBucketXL} src={department.attributes.pictures[0]} alt='workplace' layout="fill" className="flex relative object-cover" />
-            : <div className={`h-full w-full flex items-center justify-center relative background-dynamic`}>
-              <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={faScreenUsers} className='icon-font text-6xl icon-font--light' /></div>
-            </div>
-        }
-      </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
-        <p className="font-title font--ellipsis">{department.attributes.name}</p>
-        <JobsAvailable url={{pathname:'/teams/' + department.id }} availability={department.attributes.availableJobs} />
-        <div className="flex flex-justify-center mt-2">
-          <Link href={{ pathname: `/teams/${department.id}` }}>
-            <a>
-              <ButtonBasic>{Translate('workplaces.jobs.button')}</ButtonBasic>
-            </a>
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
