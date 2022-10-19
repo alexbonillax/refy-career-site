@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBuilding} from "@fortawesome/pro-light-svg-icons";
 import {faMapLocationDot} from "@fortawesome/pro-regular-svg-icons";
 import { SSRCheck } from "../../utils/redirects";
+import { JobsAvailable } from "../../components/cards/job-availability";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");
@@ -43,6 +44,7 @@ const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => (
     </div>
     <div className={`flex flex-col w-full p-3 mobile:w-full`}>
       <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
+      <JobsAvailable url={{ pathname: '/jobs', query: { workplace: workplace.id.toString() } }} availability={workplace.attributes.availableJobs} />
       <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
         href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
           <div className="flex items-center w-2 h-2 mr-1">

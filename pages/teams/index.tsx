@@ -19,6 +19,7 @@ import { faScreenUsers } from "@fortawesome/pro-light-svg-icons";
 import { loaderBucketXL } from "../../utils/image-loader";
 import { SSRCheck } from "../../utils/redirects";
 import {faSuitcase} from "@fortawesome/pro-regular-svg-icons";
+import { JobsAvailable } from "../../components/cards/job-availability";
 
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -81,16 +82,7 @@ const DepartmentCard = ({ department }: DepartmentCardProps) => {
       </div>
       <div className={`flex flex-col w-full p-3 mobile:w-full`}>
         <p className="font-title font--ellipsis">{department.attributes.name}</p>
-        <div className="flex flex-wrap flex-justify-center h-3 mt-1">
-          <Link href={{ pathname: '/teams/' + department.id }}>
-            <div className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer">
-              <div className="flex items-center w-2 h-2 mr-1">
-                <FontAwesomeIcon icon={faSuitcase} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
-              </div>
-              <p className="font--ellipsis">{department.attributes.availableJobs} {Translate(department.attributes.availableJobs !== 1 ? 'offers' : 'offer')}</p>
-            </div>
-          </Link>
-        </div>
+        <JobsAvailable url={{pathname:'/teams/' + department.id }} availability={department.attributes.availableJobs} />
         <div className="flex flex-justify-center mt-2">
           <Link href={{ pathname: `/teams/${department.id}` }}>
             <a>

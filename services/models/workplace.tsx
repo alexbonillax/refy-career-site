@@ -13,6 +13,7 @@ export default interface Workplace {
     pictures: string[];
     shortDescription: string;
     description: string;
+    availableJobs: number;
   };
   companyId?: number;
 }
