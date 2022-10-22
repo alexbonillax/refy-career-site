@@ -38,7 +38,7 @@ const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
 }
 
 const BenefitCategory = ({ benefitsCategory }: { benefitsCategory: Benefit[] }) => (
-  <div className="flex w-full mobile:flex-col desktop:h-60">
+  <div className="flex w-full mobile:flex-col desktop:h-60 mobile:h-auto">
     <div className="flex desktop:w-1/3 mobile:pb-5 mobile:items-center">
       <div className="w-6 h-6 rounded-3xl background-faded-dynamic flex items-center justify-center">
         <div className="w-3 h-3">

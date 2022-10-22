@@ -1,10 +1,10 @@
 .accordion {
     display: flex;
-	-webkit-transition: max-height 1s cubic-bezier(0, 1.05, 0, 1);
-	-moz-transition: max-height 1s cubic-bezier(0, 1.05, 0, 1);
-	transition: max-height 1s cubic-bezier(0, 1.05, 0, 1);
+    -webkit-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    -moz-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
     &--open {
-        max-height: 15rem;
+        max-height: 100rem;
     }
     &--close {
         max-height: 0px;
