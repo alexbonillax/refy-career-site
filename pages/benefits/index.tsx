@@ -51,7 +51,7 @@ const BenefitCategory = ({ benefitsCategory }: { benefitsCategory: Benefit[] }) 
       {
         benefitsCategory.map((benefit, i) => (
           <div key={i} className="flex pb-2">
-            <div className="h-2 w-2"><FontAwesomeIcon icon={faCheck} className='icon-font color-dynamic' /></div>
+            <div className="h-2 w-2 mt-0.5"><FontAwesomeIcon icon={faCheck} className='icon-font color-dynamic' /></div>
             <p className="pl-1">{benefit.attributes.name}</p>
           </div>
         ))
