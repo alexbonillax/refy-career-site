@@ -2,7 +2,8 @@ import {ButtonStyles} from "../../services/models";
 
 export const DynamicButtons = (primaryColor = "FE6680", styles: ButtonStyles) => {
   let bodyStyles = document.body.style;
-  bodyStyles.setProperty('--button-color', primaryColor);
+  bodyStyles.setProperty('--primary-color', primaryColor);
+  bodyStyles.setProperty('--primary-color--faded', `${primaryColor}2e`);
   bodyStyles.setProperty('--button-filled', styles?.filled ? primaryColor : 'transparent');
   bodyStyles.setProperty('--button-floating-filled', styles?.filled ? primaryColor : '#fff');
   bodyStyles.setProperty('--button-fontColor', styles?.filled ? '#fff' : primaryColor);

@@ -1,3 +1,11 @@
 .background-dynamic {
-  background-color: var(--button-color);
+  background-color: var(--primary-color);
+}
+
+.background-faded-dynamic {
+  background-color: var(--primary-color--faded);
+}
+
+.color-dynamic {
+  color: var(--primary-color);
 }

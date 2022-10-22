@@ -1,3 +1,4 @@
+import Benefit from "./benefit";
 import Department from "./department";
 import Profile from "./profile";
 import Workplace from "./workplace";
@@ -20,6 +21,7 @@ export default interface Company {
   referralProgram: {
     accessPosts: boolean;
   };
+  benefits: Benefit[];
   careers: {
     referrers: {visible: boolean};
     style: CareerStyles;
