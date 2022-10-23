@@ -46,10 +46,10 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
-      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
-      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0"  />
       <BenefitsArea benefits={pageProps.companyInfo.benefits} />
+      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0"/>
+      <Workplaces companyInfo={pageProps.companyInfo}/>
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced classes="background-color--grey--0"/>
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

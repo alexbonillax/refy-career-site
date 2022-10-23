@@ -1,13 +1,15 @@
 .accordion {
-    display: flex;
-    -webkit-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    -moz-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    &--open {
-        max-height: 100rem;
-    }
-    &--close {
-        max-height: 0px;
-        overflow: hidden;
-    }
+  display: flex;
+  overflow: hidden;
+  -webkit-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  -moz-transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+
+  &--open {
+    max-height: 100rem;
+  }
+
+  &--close {
+    max-height: 0;
+  }
 }

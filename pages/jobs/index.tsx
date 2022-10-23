@@ -25,16 +25,17 @@ interface RecentJobsProps {
   workplace?: number;
   loading: boolean;
   reduced?: boolean;
+  classes?: string;
 }
 
-export const RecentJobs = ({ recentJobsList, company, workplace, loading = true, reduced = false }: RecentJobsProps) => {
+export const RecentJobs = ({ recentJobsList, company, workplace, loading = true, reduced = false, classes = ''}: RecentJobsProps) => {
   const { t } = useTranslation("common");
   let jobs = recentJobsList?.content;
   if (workplace) {
     jobs = recentJobsList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
-    <section id="department-jobs" className="bg-white">
+    <section id="department-jobs" className={`bg-white ${classes}`}>
       <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('jobs.available')}</h1>
         <h2 className="font-subtitle text-center mt-1">{t('jobs.find', { company })}</h2>

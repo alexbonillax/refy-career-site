@@ -61,7 +61,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       <div className={`flex items-center`} >
         {
           linkList.map((link, i) => (
-            <div key={i} className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
+            <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
               <Link href={`/${link}`}>
                 <a className={` ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")}`}>{t(link)}</a>
               </Link>

@@ -11,10 +11,10 @@ interface BenefitAttributes {
     name: string;
 }
 
-interface BenefitCategory {
-    attributes: BenefitCategoryAttributes;
+export interface BenefitCategory {
     id: number;
     type: CategoriesType;
+    attributes: BenefitCategoryAttributes;
 }
 
 interface BenefitCategoryAttributes {
