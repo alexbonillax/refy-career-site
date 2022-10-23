@@ -18,13 +18,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from "@fortawesome/pro-regular-svg-icons";
 import { far } from "@fortawesome/pro-regular-svg-icons";
 
-const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
+export const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
+  const { t } = useTranslation("common");
   let categories: string[] = benefits.map(benefit => benefit.category.attributes.name);
   const AllCategories = categories.filter(arrayDeleteDuplicatedElements);
   library.add(far)
   return (
     <>
       <section className="background-color--white mobile-container--responsive py-3">
+        <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl pt-6 mb-5">{t('benefits')}</h1>
         {
           AllCategories.map((category, i) => (
             <Accordion key={i} title={category}>
@@ -45,14 +47,14 @@ const BenefitCategory = ({ benefitsCategory }: { benefitsCategory: Benefit[] }) 
           <FontAwesomeIcon icon={['far', benefitsCategory[0].category.attributes.icon]} className='icon-font color-dynamic' />
         </div>
       </div>
-      <h2 className="font-prose ml-2">{benefitsCategory[0].category.attributes.name}</h2>
+      <h2 className="font-prose desktop:w-3/4 ml-2">{benefitsCategory[0].category.attributes.shortDescription ?? benefitsCategory[0].category.attributes.name}</h2>
     </div>
     <div className="flex desktop:w-2/3 mobile:w-full flex-wrap flex-col ">
       {
         benefitsCategory.map((benefit, i) => (
           <div key={i} className="flex pb-2">
             <div className="h-2 w-2 mt-0.5"><FontAwesomeIcon icon={faCheck} className='icon-font color-dynamic' /></div>
-            <p className="pl-1">{benefit.attributes.name}</p>
+            <p className="pl-1 font-normal">{benefit.attributes.name}</p>
           </div>
         ))
       }

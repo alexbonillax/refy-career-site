@@ -24,13 +24,13 @@ export const Translate = (text: string, array?: boolean): string => {
 interface AreasProps {
   departments: Department[];
   reduced?: boolean;
-  colorButton?: string;
+  classes?: string;
 }
 
-export const Areas = ({ departments = [], reduced = false }: AreasProps) => (
+export const Areas = ({ departments = [], reduced = false, classes }: AreasProps) => (
   <>
     {departments.length > 0 &&
-      <section id="teams" className="bg-white">
+      <section id="teams" className={`bg-white ${classes}`}>
         <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
           <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('teams')}</p>
           <div className="flex flex-wrap flex-justify-center mt-5">

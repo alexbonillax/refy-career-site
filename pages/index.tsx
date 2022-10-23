@@ -14,6 +14,7 @@ import getWildcardCode from "../utils/wildcard";
 import Company from "../services/models/company";
 import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../utils/redirects";
+import { BenefitsArea } from "./benefits";
 
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
@@ -45,9 +46,10 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced colorButton={pageProps.companyInfo.attributes.primaryColor} />
       <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--grey--0" />
       <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced />
+      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0"  />
+      <BenefitsArea benefits={pageProps.companyInfo.benefits} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>
