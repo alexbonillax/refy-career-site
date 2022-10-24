@@ -35,18 +35,15 @@ export const Accordion = ({ first, children, title, iconName }: AccordionProps) 
             </div>
             <h1 className="font-title">{title}</h1>
           </div>
-          <div className="w-2 h-2 mr-2 flex justify-center items-center">
+          <div className="w-2 h-2 mx-2 flex justify-center items-center">
             <FontAwesomeIcon
               icon={!state ? faChevronDown : faChevronUp}
               className={`icon-font`}
             ></FontAwesomeIcon>
           </div>
         </div>
-        {
-          state &&
-            <Divider></Divider>
-        }
         <div ref={targetRef} className={`accordion accordion--${state ? 'open' : 'close'}`} style={{ maxHeight: maxHeight }}>
+          <Divider></Divider>
           {children}
         </div>
       </div>
