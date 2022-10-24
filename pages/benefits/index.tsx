@@ -68,7 +68,6 @@ const Benefits: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}
   const {t} = useTranslation("common");
   useEffect(() => {
     ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
-    console.log(pageProps.companyInfo.benefits)
   }, [])
 
   return (
