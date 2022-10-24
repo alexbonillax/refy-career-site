@@ -1,6 +1,6 @@
 import { faChevronDown, faChevronUp } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import { Divider } from "../divider";
 import {IconName} from "@fortawesome/pro-light-svg-icons";
 
@@ -12,8 +12,13 @@ interface AccordionProps {
 }
 
 export const Accordion = ({ first, children, title, iconName }: AccordionProps) => {
+  const targetRef = useRef(null);
   const [state, setState] = useState(true);
+  const [maxHeight, setMaxHeight] = useState('unset');
   const toggle = () => setState(!state);
+  useEffect(() => {
+    setMaxHeight(targetRef.current.clientHeight);
+  }, []);
   return (
     <div className="">
       {
@@ -30,18 +35,15 @@ export const Accordion = ({ first, children, title, iconName }: AccordionProps) 
             </div>
             <h1 className="font-title">{title}</h1>
           </div>
-          <div className="w-2 h-2 mr-2 flex justify-center items-center">
+          <div className="w-2 h-2 mx-2 flex justify-center items-center">
             <FontAwesomeIcon
               icon={!state ? faChevronDown : faChevronUp}
               className={`icon-font`}
             ></FontAwesomeIcon>
           </div>
         </div>
-        {
-          state &&
-            <Divider></Divider>
-        }
-        <div className={`accordion accordion--${state ? 'open' : 'close'}`}>
+        <div ref={targetRef} className={`accordion accordion--${state ? 'open' : 'close'}`} style={{ maxHeight: maxHeight }}>
+          <Divider></Divider>
           {children}
         </div>
       </div>
