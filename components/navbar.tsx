@@ -2,11 +2,12 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
-import { SwipeableDrawer } from "@mui/material";
+import { SwipeableDrawer, Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
+import { ToggleButton } from "./toggle/toggle";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
@@ -24,9 +25,9 @@ const setSections = (company: Company): string[] => {
   (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
   (company.workplaces.length > 0) && linkList.push('locations');
   (company.referralProgram.accessPosts) && linkList.push('stories');
-  linkList = linkList.concat(['jobs']) 
+  linkList = linkList.concat(['jobs'])
   return linkList;
-} 
+}
 
 export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const { t } = useTranslation("common");
@@ -42,7 +43,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
     window.addEventListener("scroll", handleScroll);
     setScrolling(+clientWindowHeight > 0);
     return () => window.removeEventListener("scroll", handleScroll);
-    
+
   }, [clientWindowHeight]);
 
   const toggleDrawer = (anchor: string, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -72,10 +73,15 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       </div>
 
       <div className="flex items-center space-x-8">
+<ToggleButton />
         <CompanyWebsiteButton />
       </div>
     </div>
   );
+
+  const changeTheme = () => {
+
+  }
 
   const CompanyWebsiteButton = () => {
     const { t } = useTranslation("common");
