@@ -13,11 +13,11 @@ interface DepartmentCardProps {
 export const DepartmentCard = ({ department }: DepartmentCardProps) => {
   const { t } = useTranslation("common");
   return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col background-theme`}>
+    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={department.attributes.pictures} icon={faScreenUsers} />
       </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
+      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
         <p className="font-title font--ellipsis">{department.attributes.name}</p>
         <JobsAvailable url={{ pathname: '/teams/' + department.id }} availability={department.attributes.availableJobs} />
         <div className="flex flex-justify-center mt-2">

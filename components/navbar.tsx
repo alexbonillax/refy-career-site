@@ -2,16 +2,16 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
-import { SwipeableDrawer, Switch } from "@mui/material";
+import { SwipeableDrawer } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
 import { ButtonBasic } from "./buttons/button-basic";
-import { ToggleButton } from "./toggle/toggle";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
 import { DynamicTheme } from "../utils/dynamic-styles/dynamic-theme";
+import { ToggleDarkTheme } from ".";
 
 interface NavbarProps {
   transparent?: boolean;
@@ -74,7 +74,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       </div>
 
       <div className="flex items-center space-x-8">
-        <ToggleButton onClick={e => DynamicTheme(e)} />
+        <ToggleDarkTheme onClick={e => DynamicTheme(e)} />
         <CompanyWebsiteButton />
       </div>
     </div>

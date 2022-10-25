@@ -23,23 +23,21 @@ export const Translate = (text: string, array?: boolean): string => {
   return array ? t(text, { returnObjects: true }) : t(text);
 }
 
-interface TeamJobsProps {
+interface WorkplaceJobsProps {
   recentJobsList: Page<Job>;
-  locationName: string;
 }
 
 const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
-  const departmentId = +useRouter().query?.id;
-  const [data, setData] = useState<TeamJobsProps>({ recentJobsList: null, locationName: null })
+  const workplaceId: any = +useRouter().query?.id;
+  const [data, setData] = useState<WorkplaceJobsProps>({ recentJobsList: null })
   const [isLoading, setLoading] = useState(true)
-  const workplace = pageProps.companyInfo.workplaces.find((dept: Workplace) => dept.id === departmentId);
+  const workplace = pageProps.companyInfo.workplaces.find((workplace: Workplace) => workplace.id === workplaceId);
   useEffect(() => {
-    if (!departmentId || !workplace) { Router.push(`/locations`) };
+    if (!workplaceId || !workplace) { Router.push(`/locations`) };
     ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
     async function getJobsData() {
-      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
-      const locationName = pageProps.companyInfo.workplaces.find((dept: Workplace) => dept.id === +departmentId)?.attributes.name;
-      setData({ recentJobsList, locationName });
+      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
+      setData({ recentJobsList });
       setLoading(false);
     }
     getJobsData();
@@ -51,7 +49,7 @@ const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageP
           <Header company={pageProps.companyInfo} title={Translate('locations')} />
           <Navbar company={pageProps.companyInfo} transparent={true} url='locations' />
           <Banner picture={workplace.attributes.pictures ? workplace.attributes.pictures[0] : null} tagline={Translate('locations')} title={workplace.attributes.name} height={BannerHeight.mediumScreen} />
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} />
+          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} />
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>

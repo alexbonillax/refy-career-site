@@ -10,11 +10,11 @@ import { ButtonBasic } from "../buttons/button-basic";
 export const JobCard = (job: Job) => {
   const { t } = useTranslation("common");
   return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col background-theme`}>
+    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={[job.attributes.picture]} icon={faSuitcase} />
       </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
+      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
         <p className="font-title font--ellipsis">{job.attributes.title}</p>
         <div className="flex flex-wrap flex-justify-center h-3 mt-1">
           {

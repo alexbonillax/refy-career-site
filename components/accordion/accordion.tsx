@@ -38,7 +38,7 @@ export const Accordion = ({ first, children, title, iconName }: AccordionProps) 
           <div className="w-2 h-2 mx-2 flex justify-center items-center">
             <FontAwesomeIcon
               icon={!state ? faChevronDown : faChevronUp}
-              className={`icon-font`}
+              className={`icon-font color-theme`}
             ></FontAwesomeIcon>
           </div>
         </div>

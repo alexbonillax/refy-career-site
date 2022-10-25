@@ -12,3 +12,4 @@ export * from './snackbar';
 export * from './cards';
 export * from './buttons';
 export * from './accordion';
+export * from './toggle';

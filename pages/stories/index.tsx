@@ -133,11 +133,11 @@ const Badge = ({ text }: { text: string }) => (
 const PostLink = ({ post }: { post: Post }) => (
   <Link href={post.attributes.url}>
     <a target="_blank">
-      <div className="flex-column border border--grey-100 overflow-hidden cursor-pointer">
+      <div className="flex-column overflow-hidden cursor-pointer">
         <div className="flex h-30 overflow-hidden background-center" style={{ backgroundImage: post.attributes.urlPicture ? `url(${post.attributes.urlPicture})` : '' }}>
           <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
         </div>
-        <div className="flex-column py-1 px-2 background-theme">
+        <div className="flex-column py-1 px-2">
           <p className="font-header">{post.attributes.title}</p>
           <p className="font-value font--ellipsis">{BeautifyUrl(post.attributes.url)}</p>
         </div>

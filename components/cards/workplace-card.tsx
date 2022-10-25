@@ -11,11 +11,11 @@ import { JobsAvailable } from "./components/job-availability";
 export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
   const { t } = useTranslation("common");
   return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col background-theme`}>
+    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={workplace.attributes.pictures} icon={faBuilding} />
       </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full`}>
+      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
         <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
         <JobsAvailable url={{ pathname: '/locations' +workplace.id.toString() }} availability={workplace.attributes.availableJobs} />
         <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
