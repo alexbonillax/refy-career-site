@@ -25,7 +25,7 @@ export const Coworkers = ({ referrer, employees }: { referrer?: string, employee
   const { t } = useTranslation("common");
   return (
     employees &&
-    <section className="py-8 background-color--white">
+    <section className="py-8 background-theme">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>
         {
@@ -49,7 +49,7 @@ export const Coworkers = ({ referrer, employees }: { referrer?: string, employee
 export const PeopleSection = ({ departments }: { departments: Department[] }) => {
   if (departments.some(department => department.employees.length > 0)) {
     return (
-      <div className="py-5 background-color--white">
+      <div className="py-5 background-theme">
         {
           departments.map((department, i) => (
             department.employees.length > 0 &&

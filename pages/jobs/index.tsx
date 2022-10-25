@@ -35,7 +35,7 @@ export const RecentJobs = ({ recentJobsList, company, workplace, loading = true,
     jobs = recentJobsList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
-    <section id="department-jobs" className={`bg-white ${classes}`}>
+    <section id="department-jobs" className={`background-theme ${classes}`}>
       <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('jobs.available')}</h1>
         <h2 className="font-subtitle text-center mt-1">{t('jobs.find', { company })}</h2>

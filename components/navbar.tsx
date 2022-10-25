@@ -11,6 +11,7 @@ import { ToggleButton } from "./toggle/toggle";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
+import { DynamicTheme } from "../utils/dynamic-styles/dynamic-theme";
 
 interface NavbarProps {
   transparent?: boolean;
@@ -64,7 +65,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           linkList.map((link, i) => (
             <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
               <Link href={`/${link}`}>
-                <a className={` ${((scrolled && transparent) || (!transparent) ? "font--black" : "font--white")}`}>{t(link)}</a>
+                <a className={` ${((scrolled && transparent) || (!transparent) ? "color-theme" : "font--white")}`}>{t(link)}</a>
               </Link>
               <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
             </div>
@@ -73,15 +74,11 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       </div>
 
       <div className="flex items-center space-x-8">
-<ToggleButton />
+        <ToggleButton onClick={e => DynamicTheme(e)} />
         <CompanyWebsiteButton />
       </div>
     </div>
   );
-
-  const changeTheme = () => {
-
-  }
 
   const CompanyWebsiteButton = () => {
     const { t } = useTranslation("common");
@@ -113,7 +110,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       <div className="flex w-full flex-col space-y-3">
         <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
-            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--dark icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-color-theme icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
           <CompanyWebsiteButton />
         </div>
@@ -131,7 +128,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const srcLogo = company.attributes?.logo ? bucketM + company.attributes?.logo : logo;
   return (
     <nav className={`sticky top-0 left-0 right-0 w-full z-20 transition-all box-shadow-container
-    ${((scrolled && transparent) || (!transparent) ? "bg-white" : "background-color--blurr-soft-dark")}
+    ${((scrolled && transparent) || (!transparent) ? "background-theme" : "background-color--blurr-soft-dark")}
     ${transparent && "navbar--stuck"}
     `}>
       {
@@ -143,7 +140,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           <div className="w-2 h-2">
             <FontAwesomeIcon
               icon={faBars}
-              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "icon-font--dark" : "icon-font--light")}`}
+              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "icon-color-theme" : "icon-font--light")}`}
             ></FontAwesomeIcon>
           </div>
         </div>

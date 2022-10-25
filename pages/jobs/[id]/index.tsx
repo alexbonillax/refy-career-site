@@ -101,10 +101,10 @@ interface JobDetailsProps {
 const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
     <div className='w-2 h-2 flex items-center justify-center mr-1'>
-      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--dark"/>
+      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-color-theme"/>
     </div>
     <div className="flex flex-align-center flex-justify-between full-width">
-      <p className="font-multiline font--dark">{title}</p>
+      <p className="font-multiline color-theme">{title}</p>
       <p className="font-multiline">{value}</p>
     </div>
   </div>
@@ -115,7 +115,7 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
   const { t } = useTranslation("common");
 
   return (
-    <section id="job-details" className="py-10">
+    <section id="job-details" className="py-10 background-theme">
       <div className="flex-column mobile-container px-3">
         <div className="font-prose mb-3" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
         <Divider />

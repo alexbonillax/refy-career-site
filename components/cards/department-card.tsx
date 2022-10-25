@@ -13,7 +13,7 @@ interface DepartmentCardProps {
 export const DepartmentCard = ({ department }: DepartmentCardProps) => {
   const { t } = useTranslation("common");
   return (
-    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
+    <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col background-theme`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={department.attributes.pictures} icon={faScreenUsers} />
       </div>

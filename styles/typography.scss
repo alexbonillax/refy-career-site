@@ -39,7 +39,7 @@ body {
     font-family: var(--header-font-family);
     font-weight: $font-bold;
     line-height: 3rem;
-    color: $refy-blue;
+    color: var(--title-color-theme);
     font-size: 40px;
 
     @media (max-width: $mobile-breakpoint) {
@@ -53,7 +53,7 @@ body {
     font-weight: $font-bold;
     font-size: 20px;
     line-height: 2rem;
-    color: $refy-blue;
+    color: var(--title-color-theme);
   }
 
   &-subtitle {
@@ -61,7 +61,7 @@ body {
     font-weight: $font-medium;
     font-size: 18px;
     line-height: 2rem;
-    color: $refy-text-grey;
+    color: var(--body-color-theme);
   }
 
   &-header {
@@ -69,14 +69,14 @@ body {
     font-weight: $font-medium;
     font-size: 16px;
     line-height: 1.5rem;
-    color: $refy-grey-900;
+    color: var(--prose-color-theme);
   }
 
   &-hint {
     font-family: var(--body-font-family);
     font-size: 14px;
     line-height: 1.5rem;
-    color: $refy-text-grey;
+    color: var(--body-color-theme);
 
     &--error {
       color: $refy-color-danger;
@@ -87,14 +87,14 @@ body {
     font-family: var(--body-font-family);
     font-size: 13px;
     line-height: 1rem;
-    color: $refy-text-grey;
+    color: var(--body-color-theme);
   }
 
   &-multiline {
     font-family: var(--body-font-family);
     font-size: 15px;
     line-height: 1.5rem;
-    color: $refy-text-grey;
+    color: var(--body-color-theme);
     overflow-wrap: break-word;
     white-space: break-spaces;
 
@@ -103,7 +103,7 @@ body {
     }
 
     span {
-      color: $refy-text-grey;
+      color: var(--body-color-theme);
     }
   }
 
@@ -112,7 +112,7 @@ body {
     font-size: 20px;
     line-height: 2rem;
     font-weight: $font-normal;
-    color: $refy-grey-900;
+    color: var(--prose-color-theme);
     overflow-wrap: break-word;
     white-space: normal;
 

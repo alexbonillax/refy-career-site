@@ -7,7 +7,7 @@ const Footer = () => {
   const { t } = useTranslation("common");
   return (
     <>
-      <footer className="pt-10 py-20 bg-white">
+      <footer className="pt-10 py-20 background-theme">
         <Link href='https://try.refyapp.com'>
         <a className="flex-column flex-align-justify-center cursor-pointer" target="_blank">
           <p className="font-hint mb-1">{t('powered-by')}</p>

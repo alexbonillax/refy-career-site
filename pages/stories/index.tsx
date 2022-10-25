@@ -29,7 +29,7 @@ import getWildcardCode from "../../utils/wildcard";
 export const Posts = ({ stories, companyInfo, loading = true }: { stories: Page<Post>, companyInfo: Company, loading: boolean }) => {
   const { t } = useTranslation("common");
   return (
-    <section className="py-10 px-2 background-color--grey--0">
+    <section className="py-10 px-2 background--grey-0-theme">
       <div className="mobile-container">
         <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('stories.latest')}</p>
       </div>
@@ -137,7 +137,7 @@ const PostLink = ({ post }: { post: Post }) => (
         <div className="flex h-30 overflow-hidden background-center" style={{ backgroundImage: post.attributes.urlPicture ? `url(${post.attributes.urlPicture})` : '' }}>
           <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
         </div>
-        <div className="flex-column py-1 px-2 background-color--grey--blue">
+        <div className="flex-column py-1 px-2 background-theme">
           <p className="font-header">{post.attributes.title}</p>
           <p className="font-value font--ellipsis">{BeautifyUrl(post.attributes.url)}</p>
         </div>
@@ -157,7 +157,7 @@ const PostVideo = ({ post }: { post: Post }) => {
 
 export const PostItem = ({ post, companyInfo }: { post: Post, companyInfo: Company }) => {
   return (
-    <div className="flex-column box-shadow-container--card br-var my-1 overflow-hidden">
+    <div className="flex-column box-shadow-container--card br-var my-1 overflow-hidden background-theme">
       <div className="flex-column">
         <div className="flex flex-align-center flex-justify-between py-2 px-2">
           <div className="flex flex-align-center font--ellipsis">

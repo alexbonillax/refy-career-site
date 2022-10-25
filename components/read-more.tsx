@@ -14,14 +14,14 @@ export const ReadMore = ({ text }: { text: string }) => {
     <div className="relative font-multiline overflow-hidden">
       {
         text.length < maxCharacters ?
-          (<p className="font--dark">{text}</p>)
+          (<p className="color-theme">{text}</p>)
           :
           (<>
-            <p className={`font--dark ${isReadMore ? 'font--ellipsis-2' : ''}`}>
+            <p className={`color-theme ${isReadMore ? 'font--ellipsis-2' : ''}`}>
               {text}
             </p>
             {text.length > maxCharacters &&
-            <div className="absolute bottom-0 right-0 background-color--white">
+            <div className="absolute bottom-0 right-0 background-theme">
               <span onClick={toggleReadMore} className="expansion-prose-trigger cursor-pointer ml-2">
                 {isReadMore && '...'}{label}
               </span>

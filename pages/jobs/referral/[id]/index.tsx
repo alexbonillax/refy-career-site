@@ -64,7 +64,7 @@ export const RefierCard = ({ user }: RefierCardProps) => {
 export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Job, company: string, color: string }) => {
   const { t } = useTranslation("common");
   return (
-    <section id="about-company" className="py-10 background-color--grey--0">
+    <section id="about-company" className="py-10 background--grey-0-theme">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('job.apply.refier.title', { company })}</h1>
         <RefierCard user={jobDetails.referrerUser}/>

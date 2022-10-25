@@ -15,7 +15,7 @@ const AboutCompany = (companyInfo: Company) => {
   }, []);
 
   return (
-    <section id="about-company" className="py-10 background-color--grey--0">
+    <section id="about-company" className="py-10 background--grey-0-theme">
       <div className="mobile-container px-3">
         <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('about.company', { company: companyInfo.attributes.name })}</h1>
         <div className="font-subtitle text-center mt-2">{companyInfo.attributes.tagline}</div>
@@ -27,10 +27,10 @@ const AboutCompany = (companyInfo: Company) => {
             <div className="flex-column py-4">
               <div className="flex flex-align-center">
                 <div className='w-2 h-2 flex items-center justify-center mr-3'>
-                  <FontAwesomeIcon icon={faSeedling} className="icon-font icon-font--normal icon-font--dark"></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faSeedling} className="icon-font icon-font--normal icon-color-theme"></FontAwesomeIcon>
                 </div>
                 <div className="flex flex-align-center flex-justify-between full-width">
-                  <p className="font-multiline font--dark">{t('size')}</p>
+                  <p className="font-multiline color-theme">{t('size')}</p>
                   <div className="flex flex-align-center">
                     <p className="font-multiline font--ellipsis ml-1">{t('about.workers_interval', { postProcess: 'interval', count: +companyInfo.attributes.size })}</p>
                   </div>

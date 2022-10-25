@@ -28,10 +28,10 @@ export const BenefitsArea = ({benefits}: { benefits: Benefit[] }) => {
   library.add(far)
   return (
     <>
-      <section className="background-color--white">
+      <section className="background-theme">
         <div className="mobile-container m-auto flex-col px-1 py-10">
           <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('benefits')}</p>
-          <div className="flex-column box-shadow-container--card br-var py-1 mx-1 mt-5">
+          <div className="flex-column box-shadow-container--card br-var py-1 mx-1 mt-5 background-theme">
             {
               categories.map((category, i) => (
                 <Accordion key={i} first={i === 0} title={category.attributes.name} iconName={category.attributes.icon}>
@@ -56,7 +56,7 @@ const BenefitCategoryItem = ({benefitsCategory}: { benefitsCategory: Benefit[] }
         benefitsCategory.map((benefit, i) => (
           <div key={i} className="flex flex-align-center py-1">
             <FontAwesomeIcon icon={faCircleCheck} className='icon-font icon-font--normal color-dynamic'/>
-            <p className="ml-2 font-multiline font--dark">{benefit.attributes.name}</p>
+            <p className="ml-2 font-multiline color-theme">{benefit.attributes.name}</p>
           </div>
         ))
       }
