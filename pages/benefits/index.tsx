@@ -18,8 +18,8 @@ import { faCircleCheck } from "@fortawesome/pro-solid-svg-icons";
 import { far } from "@fortawesome/pro-regular-svg-icons";
 
 export const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
+  const { t } = useTranslation("common");
   if (benefits.length > 0) {
-    const { t } = useTranslation("common");
     let categories: BenefitCategory[] = [];
     benefits.forEach(benefit => {
       if (!categories.find(category => category.id === benefit.category.id)) {
