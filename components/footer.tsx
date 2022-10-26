@@ -8,13 +8,13 @@ const Footer = () => {
   return (
     <>
       <footer className="pt-10 py-20 background-theme">
-        <Link href='https://try.refyapp.com'>
-        <a className="flex-column flex-align-justify-center cursor-pointer" target="_blank">
-          <p className="font-hint mb-1">{t('powered-by')}</p>
-          <div className="flex flex-align-center w-8">
-            <Image src={logo} alt={'powered by Refy'} width={65} height={32} />
+        <Link href='https://try.refyapp.com' target="_blank">
+          <div className="flex-column flex-align-justify-center cursor-pointer">
+            <p className="font-hint mb-1">{t('powered-by')}</p>
+            <div className="flex flex-align-center w-8">
+              <Image src={logo} alt={'powered by Refy'} width={65} height={32} />
+            </div>
           </div>
-        </a>
         </Link>
       </footer>
     </>

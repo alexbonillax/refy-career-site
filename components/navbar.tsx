@@ -65,7 +65,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           linkList.map((link, i) => (
             <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
               <Link href={`/${link}`}>
-                <a className={` ${((scrolled && transparent) || (!transparent) ? "color-theme" : "font--white")}`}>{t(link)}</a>
+                <span className={` ${((scrolled && transparent) || (!transparent) ? "color-theme" : "font--white")}`}>{t(link)}</span>
               </Link>
               <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
             </div>
@@ -84,22 +84,20 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
     const { t } = useTranslation("common");
 
     return (
-      <Link href={company.attributes?.site}>
-        <a target="_blank">
+      <Link href={company.attributes?.site} target="_blank">
           <ButtonBasic>
             {t('company-site')}
             <div className='w-2 h-2 flex items-center justify-center ml-1'>
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-font icon-font--normal" />
             </div>
           </ButtonBasic>
-        </a>
       </Link>
     )
   }
 
   const NavbarItem = ({ link }: { link: string }) => (
     <div className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link) ? 'active' : ''}`}>
-      <Link href={`/${link}`}><a>{t(link)}</a></Link>
+      <Link href={`/${link}`}>{t(link)}</Link>
       <div className="navbar-item-underline absolute left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
     </div>
 
@@ -146,7 +144,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         </div>
 
         <Link href="/">
-          <a className="w-10 h-10 flex flex-align-justify-center"><div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></a>
+          <span className="w-10 h-10 flex flex-align-justify-center"><div className="w-5 h-5 rounded-md bg-contain" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></span>
         </Link>
 
         <div className="w-10 desktop:hidden"></div>

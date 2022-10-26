@@ -42,9 +42,7 @@ export const JobCard = (job: Job) => {
         </div>
         <div className="flex flex-justify-center mt-2">
           <Link href={{ pathname: '/jobs/' + job.id }}>
-            <a>
               <ButtonBasic>{t('job.apply.button.short')}</ButtonBasic>
-            </a>
           </Link>
         </div>
       </div>

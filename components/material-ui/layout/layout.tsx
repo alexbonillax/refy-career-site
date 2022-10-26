@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@mui/material";
 import React from "react";
-import Footer from "../../footer";
 
 import MaterialUiTheme from "../material-ui-theme";
 

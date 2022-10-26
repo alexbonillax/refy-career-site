@@ -46,9 +46,7 @@ export const Areas = ({ departments = [], reduced = false, classes }: AreasProps
             reduced &&
             <div className="flex justify-center mt-2">
               <Link href="/teams">
-                <a className="">
                   <ButtonBasic classes='!py-4 !text-lg'>{Translate('teams.departments.view')}</ButtonBasic>
-                </a>
               </Link>
             </div>
           }

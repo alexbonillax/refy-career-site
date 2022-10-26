@@ -65,9 +65,7 @@ export const RecentJobs = ({ recentJobsList, company, workplace, loading = true,
           reduced &&
           <div className="flex justify-center mt-2">
             <Link href="/jobs">
-              <a className="">
                 <ButtonBasic classes='!py-4 !text-lg'>{t('workplaces.jobs.button')}</ButtonBasic>
-              </a>
             </Link>
           </div>
         }

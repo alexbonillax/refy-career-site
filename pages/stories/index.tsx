@@ -60,7 +60,7 @@ const HeaderUserPost = (post: Post) => {
       <div className="flex-column pl-1 pr-2">
         <p className="font-header">{post.overview.user.firstName} {post.overview.user.lastName}</p>
         <p className="flex flex-align-center font-value">
-          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1" />
+          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal color-theme w-1-5 mr-1" />
           {DateToTimeLeftReduced(post.attributes.createdAt)}</p>
       </div>
     </>
@@ -75,7 +75,7 @@ const HeaderCompanyPost = ({ post, companyInfo }: { post: Post, companyInfo: Com
       <div className="flex-column px-2">
         <p className="font-header">{companyInfo.attributes?.name}</p>
         <p className="flex flex-align-center font-value">
-          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1" />
+          <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal color-theme w-1-5 mr-1" />
           {DateToTimeLeftReduced(post.attributes.createdAt)}</p>
       </div>
     </>
@@ -131,8 +131,7 @@ const Badge = ({ text }: { text: string }) => (
 )
 
 const PostLink = ({ post }: { post: Post }) => (
-  <Link href={post.attributes.url}>
-    <a target="_blank">
+  <Link href={post.attributes.url} target="_blank">
       <div className="flex-column overflow-hidden cursor-pointer">
         <div className="flex h-30 overflow-hidden background-center" style={{ backgroundImage: post.attributes.urlPicture ? `url(${post.attributes.urlPicture})` : '' }}>
           <div className="flex-column flex-justify-between full-width full-height py-2 px-2 background-color--blurr-soft-dark"></div>
@@ -142,7 +141,6 @@ const PostLink = ({ post }: { post: Post }) => (
           <p className="font-value font--ellipsis">{BeautifyUrl(post.attributes.url)}</p>
         </div>
       </div>
-    </a>
   </Link>
 )
 
