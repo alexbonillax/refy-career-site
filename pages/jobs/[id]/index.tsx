@@ -117,7 +117,7 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
   return (
     <section id="job-details" className="py-10 background-theme">
       <div className="flex-column mobile-container px-3">
-        <div className="font-prose mb-3" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
+        <div className="font-prose mb-3 color-theme" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
         <Divider />
         {
           (job.attributes.employmentType || job.attributes.maxSalary) &&

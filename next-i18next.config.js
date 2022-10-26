@@ -10,9 +10,9 @@ module.exports = {
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "es",
-    localePath: path.resolve("./public/locales"),
-    defaultNS: "common",
-    ns: ["common"],
+    localePath: path.resolve("./public/locales"), // Warn: dev mode says warning but whitout it PROD doesnt get path on shared components
+    defaultNS: "common", // Warn: dev mode says warning but whitout it PROD doesnt get path on shared components
+    ns: ["common"],// Warn: dev mode says warning but whitout it PROD doesnt get path on shared components
   },
   backend: {
     backendOptions: [{ expirationTime: 60 * 60 * 1000 }, {}], // 1 hour
