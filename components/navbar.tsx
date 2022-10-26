@@ -10,8 +10,6 @@ import { ButtonBasic } from "./buttons/button-basic";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
-import { DynamicTheme } from "../utils/dynamic-styles/dynamic-theme";
-import { ToggleDarkTheme } from ".";
 
 interface NavbarProps {
   transparent?: boolean;
@@ -74,7 +72,6 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       </div>
 
       <div className="flex items-center space-x-8">
-        <ToggleDarkTheme onClick={e => DynamicTheme(e)} />
         <CompanyWebsiteButton />
       </div>
     </div>
@@ -104,17 +101,17 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   )
 
   const SideBarLinks = () => (
-    <div className="w-72 h-full flex flex-col items-center justify-between py-2">
+    <div className="w-72 h-full flex flex-col items-center justify-between py-2 background-theme">
       <div className="flex w-full flex-col space-y-3">
         <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
-            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-color-theme icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar color-theme" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
           <CompanyWebsiteButton />
         </div>
         {
           linkList.map((link, i) =>
-            <div key={i} className="flex py-1">
+            <div key={i} className="flex py-1 color-theme">
               <NavbarItem link={link} />
             </div>
           )
@@ -138,7 +135,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           <div className="w-2 h-2">
             <FontAwesomeIcon
               icon={faBars}
-              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "icon-color-theme" : "icon-font--light")}`}
+              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "color-theme" : "icon-font--light")}`}
             ></FontAwesomeIcon>
           </div>
         </div>
