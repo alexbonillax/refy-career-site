@@ -10,6 +10,9 @@ module.exports = {
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "es",
+    localePath: path.resolve("./public/locales"),
+    defaultNS: "common",
+    ns: ["common"],
   },
   backend: {
     backendOptions: [{ expirationTime: 60 * 60 * 1000 }, {}], // 1 hour
