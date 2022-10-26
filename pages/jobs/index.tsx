@@ -87,7 +87,7 @@ const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
   ('unknown' in useRouter().query) && snackbarRef.current?.handleClick(t('job.not-exist'));
   useEffect(() => {
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo);
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
       setData({ recentJobsList });
       setLoading(false);

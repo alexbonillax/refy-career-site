@@ -88,12 +88,14 @@ const Referral: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
   useEffect(() => {
     if (!jobId) { return }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo);
       const jobDetails = await getReferredJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails) {
         Router.push(`/jobs?unknown`);
       } else {
         const canApply = !!jobDetails.referrerUser?.id;
+        console.log(jobDetails);
+        if (canApply) { localStorage.setItem(jobDetails.id.toString(), jobId) } else { localStorage.removeItem(jobDetails.id.toString()) }
         setData({ jobDetails, canApply });
         setLoading(false);
       };

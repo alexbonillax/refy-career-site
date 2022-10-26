@@ -69,7 +69,7 @@ const BenefitCategoryItem = ({ benefitsCategory }: { benefitsCategory: Benefit[]
 const Benefits: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+    ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
 
   return (

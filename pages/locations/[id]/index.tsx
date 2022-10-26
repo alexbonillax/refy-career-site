@@ -34,7 +34,7 @@ const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageP
   const workplace = pageProps.companyInfo.workplaces.find((workplace: Workplace) => workplace.id === workplaceId);
   useEffect(() => {
     if (!workplaceId || !workplace) { Router.push(`/locations`) };
-    ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+    ApplyDynamicStyles(pageProps.companyInfo);
     async function getJobsData() {
       const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
       setData({ recentJobsList });
