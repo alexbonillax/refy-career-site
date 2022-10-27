@@ -34,12 +34,12 @@ export const Banner = ({ picture, tagline, title, height, backButton }: BannerPr
               <Link href={{ pathname: backButton.url }}>
                   <div className='noselect relative flex flex-align-center button button--underline button--underline-white'>
                       <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light mr-1" icon={faArrowLeft} />
-                      <p className='cursor-pointer font--white button-hover--underline button-hover--underline-white'>{backButton.text}</p>
+                      <p className='font--white'>{backButton.text}</p>
                   </div>
               </Link>
           </div>
           }
-          <div className={`flex-col flex justify-center items-center px-3 text-center ${height}`}>
+          <div className={`mobile-container flex-col flex justify-center items-center px-3 text-center ${height}`}>
             <h1 className="font-big-title font--white">{title}</h1>
             <h2 className="font-subtitle font--white">{tagline}</h2>
           </div>

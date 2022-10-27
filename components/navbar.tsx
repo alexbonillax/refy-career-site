@@ -130,7 +130,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         !state.navbar &&
         <LoadingBar color={company.attributes.primaryColor} />
       }
-      <div className="flex mobile-container--responsive mx-auto h-10 items-center justify-between">
+      <div className="flex mobile-container--responsive h-10 items-center justify-between">
         <div className="hidden cursor-pointer mobile:flex justify-center items-center w-10 h-10" onClick={toggleDrawer("navbar", true)}>
           <div className="w-2 h-2">
             <FontAwesomeIcon

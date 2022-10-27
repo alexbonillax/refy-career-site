@@ -11,7 +11,7 @@ import Company from "../../services/models/company";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import { SSRCheck } from "../../utils/redirects";;
-import { WorkplaceCard } from "../../components/cards/workplace-card";
+import { WorkplaceCard } from "../../components";
 
 const Translate = (text: string, array?: boolean): string => {
   const { t } = useTranslation("common");

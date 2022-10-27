@@ -84,8 +84,8 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
-          <div className='noselect relative button button--underline button--underline-white size-small flex items-center cursor-pointer whitespace-nowrap' onClick={scrollToDescription}>
-            <p className='cursor-pointer font--white button-hover--underline button-hover--underline-white'>{t('job.go-down')}</p>
+          <div className='noselect relative flex flex-align-center button button--underline button--underline-white cursor-pointer' onClick={scrollToDescription}>
+            <p className='font--white'>{t('job.go-down')}</p>
             <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light ml-1" icon={faArrowDown} />
           </div>
         </div >
