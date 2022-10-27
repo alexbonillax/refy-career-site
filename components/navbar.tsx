@@ -22,8 +22,8 @@ const setSections = (company: Company): string[] => {
   (company.departments.length > 0) && linkList.push('teams');
   (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
   (company.workplaces.length > 0) && linkList.push('locations');
-  linkList.push('jobs');
   (company.benefits.length > 0) && linkList.push('benefits');
+  linkList.push('jobs');
   (company.referralProgram.accessPosts) && linkList.push('stories');
   return linkList;
 }
