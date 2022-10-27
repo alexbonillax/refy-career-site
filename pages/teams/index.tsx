@@ -58,7 +58,7 @@ export const Areas = ({ departments = [], reduced = false, classes }: AreasProps
 
 const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+    ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
   return (
     <>

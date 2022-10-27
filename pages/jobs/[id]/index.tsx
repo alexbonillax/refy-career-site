@@ -172,7 +172,8 @@ const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: {
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+      if (localStorage.getItem(jobId)) { Router.push(`/jobs/referral/${localStorage.getItem(jobId)}`)}
+      ApplyDynamicStyles(pageProps.companyInfo);
       const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
       if (!jobDetails.id) {
         Router.push(`/jobs?unknown`);

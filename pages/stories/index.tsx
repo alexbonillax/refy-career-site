@@ -240,7 +240,7 @@ const Stories: NextPage = ({ pageProps }: any) => {
   const [isLoading, setLoading] = useState(true)
   useEffect(() => {
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+      ApplyDynamicStyles(pageProps.companyInfo);
       const stories = await getPosts(pageProps.companyInfo.id);
       setData({ stories });
       setLoading(false);

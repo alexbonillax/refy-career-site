@@ -21,7 +21,7 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
         <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
           href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
           <div className="flex items-center w-2 h-2 mr-1">
-            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button color-icon-grey-theme"></FontAwesomeIcon>
           </div>
           <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
         </a>

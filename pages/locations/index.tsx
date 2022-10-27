@@ -42,7 +42,7 @@ export const Workplaces = (props: WorkplacesProps) => (
 
 const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
-    ApplyDynamicStyles(pageProps.companyInfo.attributes.primaryColor, pageProps.companyInfo.careers?.style);
+    ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
   return (
     <>
