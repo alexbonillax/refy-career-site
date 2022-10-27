@@ -39,7 +39,7 @@ body {
     font-family: var(--header-font-family);
     font-weight: $font-bold;
     line-height: 3rem;
-    color: var(--title-color-theme);
+    color: $refy-blue;
     font-size: 40px;
 
     @media (max-width: $mobile-breakpoint) {
@@ -53,7 +53,7 @@ body {
     font-weight: $font-bold;
     font-size: 20px;
     line-height: 2rem;
-    color: var(--title-color-theme);
+    color: $refy-blue;
   }
 
   &-subtitle {
@@ -61,7 +61,7 @@ body {
     font-weight: $font-medium;
     font-size: 18px;
     line-height: 2rem;
-    color: var(--body-color-theme);
+    color: $refy-text-grey;
   }
 
   &-header {
@@ -69,14 +69,14 @@ body {
     font-weight: $font-medium;
     font-size: 16px;
     line-height: 1.5rem;
-    color: var(--prose-color-theme);
+    color: $refy-grey-900;
   }
 
   &-hint {
     font-family: var(--body-font-family);
     font-size: 14px;
     line-height: 1.5rem;
-    color: var(--body-color-theme);
+    color: $refy-text-grey;
 
     &--error {
       color: $refy-color-danger;
@@ -87,14 +87,14 @@ body {
     font-family: var(--body-font-family);
     font-size: 13px;
     line-height: 1rem;
-    color: var(--body-color-theme);
+    color: $refy-text-grey;
   }
 
   &-multiline {
     font-family: var(--body-font-family);
     font-size: 15px;
     line-height: 1.5rem;
-    color: var(--body-color-theme);
+    color: $refy-text-grey;
     overflow-wrap: break-word;
     white-space: break-spaces;
 
@@ -103,7 +103,7 @@ body {
     }
 
     span {
-      color: var(--body-color-theme);
+      color: $refy-text-grey;
     }
   }
 
@@ -112,7 +112,7 @@ body {
     font-size: 20px;
     line-height: 2rem;
     font-weight: $font-normal;
-    color: var(--prose-color-theme);
+    color: $refy-grey-900;
     overflow-wrap: break-word;
     white-space: normal;
 
@@ -197,11 +197,19 @@ body {
   }
 
   &--dark {
-    color: $refy-grey-1000;
+    color: $refy-dark;
+  }
+
+  &--light {
+    color: $refy-light;
   }
 
   &--grey {
     color: $refy-grey-300;
+
+    &-1000 {
+      color: $refy-grey-1000;
+    }
   }
 
   &--red {
@@ -249,15 +257,22 @@ body {
   }
 
   &--field-button {
-    color: var(--color-icon-grey-theme);
+    color: $refy-grey;
   }
 
-  &--dark {
-    color: $refy-grey-1000;
+  &--grey {
+
+    &-1000 {
+      color: $refy-grey-1000;
+    }
+  }
+
+  &--white {
+    color: $refy-white;
   }
 
   &--light {
-    color: $refy-white;
+    color: $refy-light;
   }
 
   &--green {

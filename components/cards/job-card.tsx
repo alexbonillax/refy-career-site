@@ -5,7 +5,7 @@ import { faSuitcase } from "@fortawesome/pro-light-svg-icons";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-regular-svg-icons";
-import { ButtonBasic } from "../buttons/button-basic";
+import { ButtonBasic } from "../buttons";
 
 export const JobCard = (job: Job) => {
   const { t } = useTranslation("common");
@@ -14,7 +14,7 @@ export const JobCard = (job: Job) => {
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={[job.attributes.picture]} icon={faSuitcase} />
       </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
+      <div className={`flex flex-col w-full p-3 mobile:w-full background-color--white`}>
         <p className="font-title font--ellipsis">{job.attributes.title}</p>
         <div className="flex flex-wrap flex-justify-center h-3 mt-1">
           {

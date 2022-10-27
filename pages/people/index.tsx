@@ -29,7 +29,7 @@ export const Coworkers = ({referrer, employees}: { referrer?: string, employees:
   const {t} = useTranslation("common");
   return (
     employees &&
-    <section className="py-8 background-theme">
+    <section className="py-8 background-color--white">
         <div className="mobile-container px-3">
             <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>{
           referrer &&
@@ -54,7 +54,7 @@ export const DepartmentsMenuItem = ({department}: { department: Department }) =>
   return (
     <div className="flex flex-align-center h-6">
       <div className='noselect relative flex flex-align-center button button--underline cursor-pointer' onClick={scrollToDepartment}>
-        <p className='color-theme'>{department.attributes.name}</p>
+        <p className='font--grey-1000'>{department.attributes.name}</p>
       </div>
     </div>
   )
@@ -63,7 +63,7 @@ export const DepartmentsMenuItem = ({department}: { department: Department }) =>
 export const PeopleSection = ({departments}: { departments: Department[] }) => {
   if (departments.some(department => department.employees.length > 0)) {
     return (
-      <div className="background-theme">
+      <div className="background-color--white">
         <div className="mobile-container--responsive flex flex-align-start">
           <div className="sticky top-2 flex-column py-10 w-1/3 mobile:hidden px-3">
             {

@@ -6,7 +6,7 @@ import { SwipeableDrawer } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
-import { ButtonBasic } from "./buttons/button-basic";
+import { ButtonBasic } from "./buttons";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
@@ -63,7 +63,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           linkList.map((link, i) => (
             <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
               <Link href={`/${link}`}>
-                <span className={` ${((scrolled && transparent) || (!transparent) ? "color-theme" : "font--white")}`}>{t(link)}</span>
+                <span className={` ${((scrolled && transparent) || (!transparent) ? "font--grey-1000" : "font--light")}`}>{t(link)}</span>
               </Link>
               <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
             </div>
@@ -71,7 +71,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
         }
       </div>
 
-      <div className="flex items-center space-x-8">
+      <div className="flex mx-2">
         <CompanyWebsiteButton />
       </div>
     </div>
@@ -101,17 +101,17 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   )
 
   const SideBarLinks = () => (
-    <div className="w-72 h-full flex flex-col items-center justify-between py-2 background-theme">
+    <div className="w-72 h-full flex flex-col items-center justify-between py-2 background-color--white">
       <div className="flex w-full flex-col space-y-3">
         <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
-            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar color-theme" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
           <CompanyWebsiteButton />
         </div>
         {
           linkList.map((link, i) =>
-            <div key={i} className="flex py-1 color-theme">
+            <div key={i} className="flex py-1">
               <NavbarItem link={link} />
             </div>
           )
@@ -123,7 +123,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const srcLogo = company.attributes?.logo ? bucketM + company.attributes?.logo : logo;
   return (
     <nav className={`sticky top-0 left-0 right-0 w-full z-20 transition-all box-shadow-container
-    ${((scrolled && transparent) || (!transparent) ? "background-theme" : "background-color--blurr-soft-dark")}
+    ${((scrolled && transparent) || (!transparent) ? "background-color--white" : "background-color--blurr-soft-dark")}
     ${transparent && "navbar--stuck"}
     `}>
       {
@@ -135,7 +135,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           <div className="w-2 h-2">
             <FontAwesomeIcon
               icon={faBars}
-              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "color-theme" : "icon-font--light")}`}
+              className={`icon-font icon-font--navbar ${((scrolled && transparent) || (!transparent) ? "icon-font--grey-1000" : "icon-font--white")}`}
             ></FontAwesomeIcon>
           </div>
         </div>

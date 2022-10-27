@@ -111,7 +111,7 @@
 
 .background-loading-gradient {
   background: #eee;
-  background: var(--background-loading-theme);
+  background: linear-gradient(110deg, var(--refy-grey-100) 8%, var(--refy-grey-50) 18%, var(--refy-grey-100) 33%);
   border-radius: 0.5rem;
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;

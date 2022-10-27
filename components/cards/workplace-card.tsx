@@ -15,13 +15,13 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
         <CardImage pictures={workplace.attributes.pictures} icon={faBuilding} />
       </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
+      <div className={`flex flex-col w-full p-3 mobile:w-full background-color--white`}>
         <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
         <JobsAvailable url={{ pathname: '/locations/' + workplace.id.toString() }} availability={workplace.attributes.availableJobs} />
         <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
           href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
           <div className="flex items-center w-2 h-2 mr-1">
-            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button color-icon-grey-theme"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
           </div>
           <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
         </a>

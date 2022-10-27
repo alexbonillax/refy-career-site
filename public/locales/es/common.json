@@ -41,5 +41,6 @@
   "job.apply.button.short": "Aplicar ahora",
   "benefits": "Beneficios",
   "back-to": "Volver a {{page}}",
-  "teams.button": "Ver equipo"
+  "teams.button": "Ver equipo",
+  "jobs.view": "Ver más ofertas"
 }

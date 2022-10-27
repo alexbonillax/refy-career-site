@@ -48,7 +48,7 @@ const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProp
     <>
       <Header company={pageProps.companyInfo} title={Translate('locations')} />
       <Navbar url='locations' company={pageProps.companyInfo} />
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-theme" />
+      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

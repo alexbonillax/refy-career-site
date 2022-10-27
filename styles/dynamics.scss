@@ -1,29 +1,11 @@
+.color-dynamic {
+  color: var(--primary-color);
+}
+
 .background-dynamic {
   background-color: var(--primary-color);
 }
 
 .background-faded-dynamic {
   background-color: var(--primary-color--faded);
-}
-
-.color-dynamic {
-  color: var(--primary-color);
-}
-
-/* THEME */
-
-.background-theme {
-  background-color: var(--background-theme);
-}
-
-.background--grey-0-theme {
-  background-color: var(--background-grey-theme);
-}
-
-.color-theme {
-  color: var(--color-theme);
-}
-
-.color-icon-grey-theme {
-  color: var(--color-icon-grey-theme);
 }

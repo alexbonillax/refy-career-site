@@ -9,7 +9,7 @@ export const JobsAvailable = ({ url, availability, light = false }: { url: Parti
   return (
     <div className="flex flex-wrap flex-justify-center h-3 mt-1">
       <Link href={url}>
-          <div className={`flex flex-align-justify-center font-hint font-hover--underline cursor-pointer ${light ? 'font--white' : ''}`}>
+          <div className={`flex flex-align-justify-center font-hint font-hover--underline cursor-pointer ${light ? 'font--light' : ''}`}>
             <div className="flex items-center w-2 h-2 mr-1">
               <FontAwesomeIcon icon={faSuitcase} className={`icon-font icon-font--normal ${light ? 'icon-font--light' : 'icon-font--field-button'}`}></FontAwesomeIcon>
             </div>

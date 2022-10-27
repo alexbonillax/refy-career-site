@@ -1,20 +1,23 @@
-$refy-black: #000;
-$refy-white: #fff;
-$refy-blue: #133273;
-$refy-grey: #929FAD;
-$refy-text-grey: #93939A;
-$refy-text-contrast-grey: #576064;
-$refy-text-soft-grey: #B3B3B8;
-$refy-grey-1000: #212121;
-$refy-grey-900: #3b3b3b;
-$refy-grey-800: #939FAD;
-$refy-grey-400: #a8adb3;
-$refy-grey-300: #93939A;
-$refy-grey-200: #cbcbcb;
-$refy-grey-100: #eeeef0;
-$refy-grey-50: #F3F3F5;
-$refy-grey-0: #FAFAFA;
-$refy-grey-blue: #f5f6fa;
+$refy-dark: #000;
+$refy-light: #FFF;
+$refy-black: var(--refy-black);
+$refy-white: var(--refy-white);
+$refy-backdrop: var(--refy-backdrop);
+$refy-blue: var(--refy-blue);
+$refy-placeholder: var(--refy-placeholder);
+$refy-grey: var(--refy-grey);
+$refy-text-grey: var(--refy-text-grey);
+$refy-text-contrast-grey: var(--refy-text-contrast-grey);
+$refy-grey-1000: var(--refy-grey-1000);
+$refy-grey-900: var(--refy-grey-900);
+$refy-grey-800: var(--refy-grey-800);
+$refy-grey-400: var(--refy-grey-400);
+$refy-grey-300: var(--refy-grey-300);
+$refy-grey-200: var(--refy-grey-200);
+$refy-grey-100: var(--refy-grey-100);
+$refy-grey-50: var(--refy-grey-50);
+$refy-grey-0: var(--refy-grey-0);
+$refy-grey-blue: var(--refy-grey-blue);
 
 $refy-red-800-primary: #da0c1f;
 $refy-orange-800-primary: #ff9b00;
@@ -24,6 +27,7 @@ $refy-grey-200-tertiary: #dfe2e6;
 $refy-red: #F44336;
 $refy-orange: #FFAE37;
 $refy-green: #00AE64;
+$refy-neutral: #929FAD;
 
 $refy-gold: #FFCA28;
 
@@ -45,68 +49,20 @@ $slack-color: #E01E5A;
 $microsoft-color: #00A1F1;
 
 .background-color {
-  &--primary {
-    background-color: $refy-color-primary;
-
-    &-important {
-      background-color: $refy-color-primary !important;
-    }
-
-    &-disabled {
-      /*background-color: $refy-color-primary-disabled;*/
-    }
-  }
-
-  &--secondary {
-    background-color: $refy-color-secondary;
-
-    &-important {
-      background-color: $refy-color-secondary !important;
-    }
-  }
-
-  &--blur {
-    background-color: rgba($refy-white, 0.85);
-    backdrop-filter: blur(5px);
-  }
 
   &--white {
     background-color: $refy-white;
-  }
-
-  &--green {
-    background-color: $refy-green;
-  }
-
-  &--blurr-green {
-    background-color: rgba($refy-green, 0.1);
-  }
-
-  &--orange {
-    background-color: $refy-orange;
-  }
-
-  &--blurr-orange {
-    background-color: rgba($refy-orange, 0.25);
-  }
-
-  &--red {
-    background-color: $refy-red;
-  }
-
-  &--blurr-red {
-    background-color: rgba($refy-red, 0.15);
   }
 
   &--grey {
     background-color: $refy-grey;
 
     &--0 {
-      background-color: $refy-grey-0 !important;
+      background-color: $refy-grey-0;
     }
 
     &--50 {
-      background-color: $refy-grey-50 !important;
+      background-color: $refy-grey-50;
     }
 
     &--100 {
@@ -118,94 +74,11 @@ $microsoft-color: #00A1F1;
     }
   }
 
-  &--grey-hover {
-    &:hover {
-      background-color: $refy-grey-100;
-
-    }
-  }
-
-  &--dark {
-    background-color: $refy-grey-1000;
-  }
-
-  &--blurr-dark {
-    background-color: rgba($refy-grey-1000, 0.50);
-  }
-
-  &--blurr-soft-dark {
-    background-color: rgba($refy-grey-1000, 0.10);
-  }
-
-  &--social {
-
-    &-linkedin {
-      background-color: $linkedin-color;
-    }
-
-  }
-
-  &--status {
-
-    &--1 {
-      background-color: $refy-orange;
-
-      &-blurr {
-        background-color: rgba($refy-orange, 0.2);
-      }
-    }
-
-    &--2 {
-      background-color: $refy-color-primary;
-
-      &-blurr {
-        background-color: rgba($refy-color-primary, 0.2);
-      }
-    }
-
-    &--3 {
-      background-color: $refy-grey;
-
-      &-blurr {
-        background-color: rgba($refy-grey, 0.2);
-      }
-    }
-
-    &--4 {
-      background-color: $refy-green;
-
-      &-blurr {
-        background-color: rgba($refy-green, 0.2);
-      }
-    }
-
-    &--5 {
-      background-color: $refy-red;
-
-      &-blurr {
-        background-color: rgba($refy-red, 0.2);
-      }
-    }
-
-  }
-
-  &--gradient {
+  &--blurr {
 
     &-dark {
-      background: $refy-grey-1000;
-      background: linear-gradient(180deg, rgba($refy-grey-1000, 0) 0%, rgba($refy-grey-1000, 0.25) 70%, rgba($refy-grey-1000, 0.5) 85%, rgba($refy-grey-1000, 0.75) 100%);
+      background-color: rgba($refy-dark, 0.44);
     }
 
-    &-secondary {
-      background: $refy-color-secondary;
-      background: linear-gradient(180deg, rgba($refy-color-secondary, 0) 0%, rgba($refy-color-secondary, 0.25) 70%, rgba($refy-color-secondary, 0.5) 85%, rgba($refy-color-secondary, 0.75) 100%);
-    }
-
-    &-red {
-      background: $refy-red;
-      background: linear-gradient(180deg, rgba($refy-red, 0) 0%, rgba($refy-red, 0.25) 70%, rgba($refy-red, 0.5) 85%, rgba($refy-red, 0.75) 100%);
-    }
   }
-
-
 }

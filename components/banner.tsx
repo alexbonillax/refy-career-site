@@ -32,16 +32,16 @@ export const Banner = ({ picture, tagline, title, height, backButton }: BannerPr
           { backButton &&
           <div className="flex flex-align-center h-8 px-3 full-width">
               <Link href={{ pathname: backButton.url }}>
-                  <div className='noselect relative flex flex-align-center button button--underline button--underline-white'>
+                  <div className='noselect relative flex flex-align-center button button--underline button--underline-light'>
                       <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light mr-1" icon={faArrowLeft} />
-                      <p className='font--white'>{backButton.text}</p>
+                      <p className='font--light'>{backButton.text}</p>
                   </div>
               </Link>
           </div>
           }
           <div className={`mobile-container flex-col flex justify-center items-center px-3 text-center ${height}`}>
-            <h1 className="font-big-title font--white">{title}</h1>
-            <h2 className="font-subtitle font--white">{tagline}</h2>
+            <h1 className="font-big-title font--light">{title}</h1>
+            <h2 className="font-subtitle font--light">{tagline}</h2>
           </div>
         </div>
       </div>

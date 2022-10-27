@@ -34,12 +34,12 @@ interface WorkplaceDescriptionProps {
 const WorkplaceDescription = ({workplace} : WorkplaceDescriptionProps) => {
   return (
     (workplace.attributes.shortDescription || workplace.attributes.description) &&
-    <section id="workplace-description" className="py-10 background-theme">
+    <section id="workplace-description" className="py-10 background-color--white">
       <div className="flex-column mobile-container px-3">
         <p className="font-subtitle my-1">{ workplace.attributes.shortDescription }</p>
         {
           workplace.attributes.description &&
-          <div className="font-prose my-1 color-theme" dangerouslySetInnerHTML={{ __html: workplace.attributes.description }}></div>
+          <div className="font-prose my-1" dangerouslySetInnerHTML={{ __html: workplace.attributes.description }}></div>
         }
       </div>
     </section>
@@ -79,7 +79,7 @@ const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageP
               backButton={{ url: '/locations', text: Translate('back-to', { page: Translate('locations')}) }}
           />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} classes="background--grey-0-theme"/>
+          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>

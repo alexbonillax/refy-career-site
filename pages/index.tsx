@@ -50,9 +50,9 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         pageProps.companyInfo.benefits.length > 0 &&
         <BenefitsArea benefits={pageProps.companyInfo.benefits} />
       }
-      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background--grey-0-theme"/>
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-theme"/>
-      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced classes="background--grey-0-theme"/>
+      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0"/>
+      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white"/>
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced classes="background-color--grey--0"/>
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

@@ -22,7 +22,7 @@ export const Logo = ({ imgSrc, name, type = LogoTypes.company }: LogoProps) => (
     }
     {
       (!imgSrc && type === LogoTypes.refierCard) &&
-      <FontAwesomeIcon icon={randomPersonIcon[Math.floor(Math.random() * randomPersonIcon.length)]} className="h-3/6 icon-font icon-font--light" />
+      <FontAwesomeIcon icon={randomPersonIcon[Math.floor(Math.random() * randomPersonIcon.length)]} className="h-3/6 icon-font icon-font--white" />
     }
   </div>
 )

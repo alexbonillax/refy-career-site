@@ -11,17 +11,17 @@ export const ReadMore = ({ text }: { text: string }) => {
   const { t } = useTranslation("common");
   const label = isReadMore ? t('read-more') : t('read-less');
   return (
-    <div className="relative font-multiline overflow-hidden">
+    <div className="relative font-multiline font--grey-1000 overflow-hidden">
       {
         text.length < maxCharacters ?
-          (<p className="color-theme">{text}</p>)
+          (<p className="">{text}</p>)
           :
           (<>
-            <p className={`color-theme ${isReadMore ? 'font--ellipsis-2' : ''}`}>
+            <p className={`${isReadMore ? 'font--ellipsis-2' : ''}`}>
               {text}
             </p>
             {text.length > maxCharacters &&
-            <div className="absolute bottom-0 right-0 background-theme">
+            <div className="absolute bottom-0 right-0 background-color--white">
               <span onClick={toggleReadMore} className="expansion-prose-trigger cursor-pointer ml-2">
                 {isReadMore && '...'}{label}
               </span>

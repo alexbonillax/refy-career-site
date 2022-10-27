@@ -1,5 +1,5 @@
 export const JobCardLoading = () => (
-    <div className="w-full flex-column box-shadow-container--card br-var background-theme">
+    <div className="w-full flex-column box-shadow-container--card br-var background-color--white">
       <div className="h-30 flex-column flex-justify-between py-2 px-2 background-loading-gradient br-var"></div>
   
       <div className="flex-column p-3">

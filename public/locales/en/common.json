@@ -41,5 +41,6 @@
   "job.apply.button.short": "Apply now",
   "benefits": "Benefits",
   "back-to": "Back to {{page}}",
-  "teams.button": "View team"
+  "teams.button": "View team",
+  "jobs.view": "View more jobs"
 }

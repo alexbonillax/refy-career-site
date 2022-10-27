@@ -9,7 +9,7 @@ const Footer = () => {
   const { t } = useTranslation("common");
   return (
     <>
-      <footer className="pt-10 py-16 space-y-5 flex flex-col items-center background-theme">
+      <footer className="pt-10 py-16 space-y-5 flex flex-col items-center background-color--white">
         <Link href='https://try.refyapp.com' target="_blank">
           <div className="flex-column flex-align-justify-center cursor-pointer">
             <p className="font-hint mb-1">{t('powered-by')}</p>

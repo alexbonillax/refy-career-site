@@ -50,7 +50,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
       <div className='flex items-center justify-center w-2 h-2 mr-1'>
         <FontAwesomeIcon icon={icon} className='icon-font icon-font--normal icon-font--light'/>
       </div>
-      <p className="flex flex-align-center font-hint font--white mr-3">
+      <p className="flex flex-align-center font-hint font--light mr-3">
         {text}
       </p>
     </>
@@ -62,8 +62,8 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-40 desktop:h-screen text-center">
-          <p className="font-title font--white">{company.attributes.name}</p>
-          <p className="font-big-title desktop:text-4xl mobile:text-3xl font--white mt-3 mb-3">{jobDetails.attributes.title}</p>
+          <p className="font-title font--light">{company.attributes.name}</p>
+          <p className="font-big-title desktop:text-4xl mobile:text-3xl font--light mt-3 mb-3">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap items-center justify-center">
             {
               jobDetails.department &&
@@ -84,8 +84,8 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
           </div >
         </div >
         <div className="absolute bottom-0 left-0 right-0 flex flex-justify-center pt-2 pb-3">
-          <div className='noselect relative flex flex-align-center button button--underline button--underline-white cursor-pointer' onClick={scrollToDescription}>
-            <p className='font--white'>{t('job.go-down')}</p>
+          <div className='noselect relative flex flex-align-center button button--underline button--underline-light cursor-pointer' onClick={scrollToDescription}>
+            <p className='font--light'>{t('job.go-down')}</p>
             <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light ml-1" icon={faArrowDown} />
           </div>
         </div >
@@ -100,11 +100,11 @@ interface JobDetailsProps {
 
 const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
-    <div className='w-2 h-2 flex items-center justify-center mr-1'>
-      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-color-theme"/>
+    <div className='w-2 h-2 flex items-center justify-center mr-1 icon-font--normal'>
+      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--grey-1000"/>
     </div>
     <div className="flex flex-align-center flex-justify-between full-width">
-      <p className="font-multiline color-theme">{title}</p>
+      <p className="font-multiline font--grey-1000">{title}</p>
       <p className="font-multiline">{value}</p>
     </div>
   </div>
@@ -115,9 +115,9 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
   const { t } = useTranslation("common");
 
   return (
-    <section id="job-details" className="py-10 background-theme">
+    <section id="job-details" className="py-10 background-color--white">
       <div className="flex-column mobile-container px-3">
-        <div className="font-prose mb-3 color-theme" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
+        <div className="font-prose mb-3" dangerouslySetInnerHTML={{ __html: job.attributes.description }}></div>
         <Divider />
         {
           (job.attributes.employmentType || job.attributes.maxSalary) &&

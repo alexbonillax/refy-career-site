@@ -64,7 +64,7 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: {
     <>
       <Header company={pageProps.companyInfo} title={Translate('teams')}/>
       <Navbar company={pageProps.companyInfo} url='teams'/>
-      <Areas {...pageProps.companyInfo} classes="background--grey-0-theme"/> <AboutCompany {...pageProps.companyInfo} />
+      <Areas {...pageProps.companyInfo} classes="background-color--grey--0"/> <AboutCompany {...pageProps.companyInfo} />
       <Footer/>
     </>
   )
