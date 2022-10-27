@@ -54,7 +54,7 @@ export const DepartmentsMenuItem = ({department}: { department: Department }) =>
   return (
     <div className="flex flex-align-center h-6">
       <div className='noselect relative flex flex-align-center button button--underline cursor-pointer' onClick={scrollToDepartment}>
-        <p className='font--dark'>{department.attributes.name}</p>
+        <p className='color-theme'>{department.attributes.name}</p>
       </div>
     </div>
   )
