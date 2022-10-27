@@ -19,12 +19,12 @@ interface NavbarProps {
 
 const setSections = (company: Company): string[] => {
   let linkList: string[] = [];
-  (company.benefits.length > 0) && linkList.push('benefits');
   (company.departments.length > 0) && linkList.push('teams');
   (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
   (company.workplaces.length > 0) && linkList.push('locations');
+  linkList.push('jobs');
+  (company.benefits.length > 0) && linkList.push('benefits');
   (company.referralProgram.accessPosts) && linkList.push('stories');
-  linkList = linkList.concat(['jobs'])
   return linkList;
 }
 
