@@ -31,7 +31,7 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
         }
         <div className="flex flex-justify-center mt-2">
           <Link href={{ pathname: `/locations/${workplace.id}` }}>
-              <ButtonBasic>{t('workplaces.jobs.button')}</ButtonBasic>
+              <ButtonBasic>{t('workplaces.button')}</ButtonBasic>
           </Link>
         </div>
       </div>
