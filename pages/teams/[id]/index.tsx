@@ -19,9 +19,9 @@ import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../../../utils/redirects";
 import { Coworkers } from "../../people";
 
-export const Translate = (text: string, array?: boolean): string => {
+export const Translate = (text: string, options?: any): string => {
   const { t } = useTranslation("common");
-  return array ? t(text, { returnObjects: true }) : t(text);
+  return options ? t(text, options) : t(text);
 }
 
 interface TeamJobsProps {
@@ -51,7 +51,12 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
         <>
           <Header company={pageProps.companyInfo} title={Translate('teams')} />
           <Navbar company={pageProps.companyInfo} transparent={true} url='teams' />
-          <Banner picture={department.attributes.pictures ? department.attributes.pictures[0] : null} tagline={Translate('teams')} title={department.attributes.name} height={BannerHeight.mediumScreen} />
+          <Banner
+              picture={department.attributes.pictures ? department.attributes.pictures[0] : null}
+              tagline={Translate('teams')} title={department.attributes.name}
+              height={BannerHeight.smallScreen}
+              backButton={{ url: '/teams', text: Translate('back-to', { page: Translate('teams')}) }}
+          />
           <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} />
           {
             (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&

@@ -167,12 +167,8 @@
 /* mobile */
 
 .mobile-container {
-
+  width: 100%;
   max-width: $mobile-inner-width;
-
-  @media (max-width: $mobile-inner-width) {
-    width: 100%;
-  }
 
   @media (min-width: $mobile-inner-width) {
     margin: 0 auto;

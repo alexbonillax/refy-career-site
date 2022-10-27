@@ -15,15 +15,15 @@ export const DepartmentCard = ({ department }: DepartmentCardProps) => {
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        <CardImage pictures={department.attributes.pictures} icon={faScreenUsers} />
-      </div>
-      <div className={`flex flex-col w-full p-3 mobile:w-full background-theme`}>
-        <p className="font-title font--ellipsis">{department.attributes.name}</p>
-        <JobsAvailable url={{ pathname: '/teams/' + department.id }} availability={department.attributes.availableJobs} />
-        <div className="flex flex-justify-center mt-2">
-          <Link href={{ pathname: `/teams/${department.id}` }}>
-            <ButtonBasic>{t('workplaces.jobs.button')}</ButtonBasic>
-          </Link>
+        <CardImage pictures={department.attributes.pictures} icon={faScreenUsers} blurr={true} />
+        <div className="absolute left-0 right-0 top-0 bottom-0 flex-column flex-align-justify-center">
+          <p className="font-title font--white font--ellipsis">{department.attributes.name}</p>
+          <JobsAvailable url={{ pathname: '/teams/' + department.id }} availability={department.attributes.availableJobs} light={true}/>
+          <div className="flex flex-justify-center mt-2">
+            <Link href={{ pathname: `/teams/${department.id}` }}>
+              <ButtonBasic>{t('teams.button')}</ButtonBasic>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

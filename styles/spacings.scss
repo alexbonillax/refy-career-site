@@ -47,6 +47,7 @@
     width: 2.75rem;
   }
 }
+
 @include generate(mw, min-width);
 @include generateResponsive(w-m, width, 0);
 @include generateResponsive(w-d, width, $mobile-breakpoint);
@@ -86,6 +87,22 @@
 @include generate(pl, padding-left);
 @include generate(pr, padding-right);
 @include generate(pb, padding-bottom);
+.p {
+  &y {
+    &-20 {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
+    &-30 {
+      padding-top: 15rem;
+      padding-bottom: 15rem;
+    }
+    &-40 {
+      padding-top: 20rem;
+      padding-bottom: 20rem;
+    }
+  }
+}
 
 /* translateY */
 @include generateTransform(ty, translateY);

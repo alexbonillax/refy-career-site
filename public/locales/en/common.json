@@ -4,7 +4,6 @@
   "locations": "Locations",
   "stories": "Stories",
   "jobs": "Jobs",
-  "benefits": "Benefits",
   "company-site": "Company website",
   "offer": "offer",
   "offers": "offers",
@@ -16,7 +15,7 @@
   "jobs.find": "Find your next job at {{company}}",
   "about.company": "About {{company}}",
   "workplaces.title": "Our offices",
-  "workplaces.jobs.button": "See positions",
+  "workplaces.button": "View location",
   "stories.latest": "Our latest stories",
   "job.type.title": "Type of job",
   "job.conditions.title": "Candidate conditions",
@@ -36,8 +35,11 @@
   "job.type_interval": "(1)[Full time];(2)[Partial time];(3)[Contract];(4)[Temporary];(5)[Learning];(6)[Internship];(7)[Volunteer];",
   "job.salary_interval": "(1)[€];(2)[$];",
   "coworkers": "Coworkers",
-  "coworkers.description": "We know that {{referrer}} is helping you but, ¿What if you contact any other team member to solve any doubt else?\nThey will be so happy to help you",
-  "stories.empty": "There are no stories actually",
+  "coworkers.description": "We know that {{referrer}} is helping you but, ¿What if you contact any other team member to solve any doubt else?\\nThey will be so happy to help you",
+  "stories.empty\n": "There are no stories actually",
   "job.not-exist": "The position that you were searching seems taken or deleted.",
-  "job.apply.button.short": "Apply now"
+  "job.apply.button.short": "Apply now",
+  "benefits": "Benefits",
+  "back-to": "Back to {{page}}",
+  "teams.button": "View team"
 }

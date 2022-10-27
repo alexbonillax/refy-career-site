@@ -22,9 +22,9 @@ import intervalPlural from "i18next-intervalplural-postprocessor";
 import {faClock, faCoin, faHandshake} from "@fortawesome/pro-light-svg-icons";
 import {numberWithCommas} from "../../../utils";
 
-export const Translate = (text: string, array?: boolean): string => {
+export const Translate = (text: string, options?: any): string => {
   const { t } = useTranslation("common");
-  return array ? t(text, { returnObjects: true }) : t(text);
+  return options ? t(text, options) : t(text);
 }
 
 interface WorkplaceDescriptionProps {
@@ -71,7 +71,13 @@ const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageP
         <>
           <Header company={pageProps.companyInfo} title={Translate('locations')} />
           <Navbar company={pageProps.companyInfo} transparent={true} url='locations' />
-          <Banner picture={workplace.attributes.pictures ? workplace.attributes.pictures[0] : null} tagline={Translate('locations')} title={workplace.attributes.name} height={BannerHeight.mediumScreen} />
+          <Banner
+              picture={workplace.attributes.pictures ? workplace.attributes.pictures[0] : null}
+              tagline={Translate('locations')}
+              title={workplace.attributes.name}
+              height={BannerHeight.smallScreen}
+              backButton={{ url: '/locations', text: Translate('back-to', { page: Translate('locations')}) }}
+          />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
           <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} classes="background--grey-0-theme"/>
           <AboutCompany {...pageProps.companyInfo} />
