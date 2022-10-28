@@ -37,8 +37,8 @@ export const RecentJobs = ({ recentJobsList, company, workplace, loading = true,
   }
   return (
     <section id="department-jobs" className={`background-color--white ${classes}`}>
-      <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-        <h2 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{company.careers.jobs?.title || t('jobs.available')}</h2>
+      <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
+        <h2 className="font-big-title text-center">{company.careers.jobs?.title || t('jobs.available')}</h2>
         <p className="font-subtitle text-center mt-2">{company.careers.jobs?.subtitle || t('jobs.find', { company: company.attributes.name })}</p>
         <div className="flex flex-wrap flex-align-justify-center mt-5">
           {

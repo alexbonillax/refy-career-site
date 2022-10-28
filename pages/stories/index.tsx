@@ -35,7 +35,7 @@ export const Posts = ({
   return (
     <section className="py-10 px-2 background-color--grey--0">
       <div className="mobile-container">
-        <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('stories.latest')}</p>
+        <p className="font-big-title text-center">{t('stories.latest')}</p>
       </div>
       <div className="mobile-container--stretch flex-column pt-5">
         {

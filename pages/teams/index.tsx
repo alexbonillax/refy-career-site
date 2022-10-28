@@ -31,8 +31,8 @@ export const Areas = ({companyInfo = null, reduced = false, classes}: AreasProps
   <>
     {companyInfo.departments.length > 0 &&
         <section id="teams" className={`${classes}`}>
-            <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-                <h2 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{companyInfo.careers.departments?.title || Translate('teams')}</h2>
+            <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
+                <h2 className="font-big-title text-center">{companyInfo.careers.departments?.title || Translate('teams')}</h2>
                 {
                 companyInfo.careers.departments?.subtitle &&
                 <h3 className="font-subtitle text-center mt-2">{companyInfo.careers.departments.subtitle}</h3>

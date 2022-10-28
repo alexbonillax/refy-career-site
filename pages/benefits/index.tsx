@@ -31,7 +31,7 @@ export const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
       <>
         <section className="background-color--white">
           <div className="mobile-container m-auto flex-col px-1 py-10">
-            <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{t('benefits')}</p>
+            <p className="font-big-title text-center">{t('benefits')}</p>
             <div className="flex-column box-shadow-container--card br-var py-1 mx-1 mt-5 background-color--white">
               {
                 categories.map((category, i) => (

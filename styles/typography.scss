@@ -40,12 +40,12 @@ body {
     font-weight: $font-bold;
     line-height: 3rem;
     color: $refy-blue;
-    font-size: 40px;
+    font-size: 42px;
 
     @media (max-width: $mobile-breakpoint) {
       font-size: 32px;
+      line-height: 2.25rem;
     }
-
   }
 
   &-title {
@@ -62,6 +62,11 @@ body {
     font-size: 18px;
     line-height: 2rem;
     color: $refy-text-grey;
+
+    @media (max-width: $mobile-breakpoint) {
+      font-size: 16px;
+      line-height: 1.5rem;
+    }
   }
 
   &-header {
