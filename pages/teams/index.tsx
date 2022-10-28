@@ -22,20 +22,24 @@ export const Translate = (text: string, array?: boolean): string => {
 }
 
 interface AreasProps {
-  departments: Department[];
+  companyInfo: Company;
   reduced?: boolean;
   classes?: string;
 }
 
-export const Areas = ({departments = [], reduced = false, classes}: AreasProps) => (
+export const Areas = ({companyInfo = null, reduced = false, classes}: AreasProps) => (
   <>
-    {departments.length > 0 &&
+    {companyInfo.departments.length > 0 &&
         <section id="teams" className={`${classes}`}>
             <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-                <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('teams')}</p>
+                <h2 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{companyInfo.careers.departments?.title || Translate('teams')}</h2>
+                {
+                companyInfo.careers.departments?.subtitle &&
+                <h3 className="font-subtitle text-center mt-2">{companyInfo.careers.departments.subtitle}</h3>
+                }
                 <div className="flex flex-wrap flex-justify-center mt-5">
                   {
-                    departments?.map((department, i) => (
+                    companyInfo.departments?.slice(0, reduced ? 3 : 1000).map((department, i) => (
                       <div key={i} className={`p-1 w-m--100 w-d--33`}>
                         <DepartmentCard department={department}/>
                       </div>
@@ -64,7 +68,8 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: {
     <>
       <Header company={pageProps.companyInfo} title={Translate('teams')}/>
       <Navbar company={pageProps.companyInfo} url='teams'/>
-      <Areas {...pageProps.companyInfo} classes="background-color--grey--0"/> <AboutCompany {...pageProps.companyInfo} />
+      <Areas companyInfo={pageProps.companyInfo} classes="background-color--grey--0"/>
+      <AboutCompany {...pageProps.companyInfo} />
       <Footer/>
     </>
   )

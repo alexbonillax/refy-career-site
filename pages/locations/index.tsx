@@ -26,7 +26,11 @@ interface WorkplacesProps {
 export const Workplaces = (props: WorkplacesProps) => (
   <section id="workplaces" className={`${props.classes}`}>
     <div className="mobile-container--responsive m-auto flex-col px-1 py-10">
-      <p className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{Translate('workplaces.title')}</p>
+      <h2 className="font-big-title text-center desktop:text-4xl mobile:text-3xl">{props.companyInfo.careers.workplaces?.title || Translate('workplaces.title')}</h2>
+      {
+      props.companyInfo.careers.workplaces?.subtitle &&
+      <h3 className="font-subtitle text-center mt-2">{props.companyInfo.careers.workplaces.subtitle}</h3>
+      }
       <div className="flex flex-wrap flex-justify-center mt-5">
         {
           props.companyInfo.workplaces.map((workplace, i) => (
