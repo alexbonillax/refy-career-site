@@ -4,6 +4,7 @@ import { Carousel, CarouselItem } from "./carousel";
 
 
 export const ValuesCarousel = ({ values }: { values: Value[] }) => {
+  if (values.length <= 0) { return };
   const {t} = useTranslation("common");
   return (
     <section className="py-10 background-color--grey--0">
@@ -14,7 +15,7 @@ export const ValuesCarousel = ({ values }: { values: Value[] }) => {
 }
 
 export const ValuesToCarouselItem = (values: Value[]): CarouselItem[] => {
-  if (values.length <= 0) { return };
+  if (values.length <= 0) { return [] };
   const items = values.map(value => {
     return {
       name: value.attributes.name,
