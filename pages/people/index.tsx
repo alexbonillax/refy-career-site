@@ -31,7 +31,7 @@ export const Coworkers = ({referrer, employees}: { referrer?: string, employees:
     employees &&
     <section className="py-8 background-color--white">
         <div className="mobile-container px-3">
-            <h1 className="font-big-title text-center desktop:text-4xl mobile:text-3xl mb-5">{t('coworkers')}</h1>{
+            <h1 className="font-big-title text-center mb-5">{t('coworkers')}</h1>{
           referrer &&
             <h2 className="font-subtitle text-center mt-1">{t('coworkers.description', {referrer})}</h2>
         }
@@ -78,11 +78,11 @@ export const PeopleSection = ({departments}: { departments: Department[] }) => {
               departments.map((department, i) => (
                 department.employees.length > 0 &&
                 <section key={i} id={'department-employees-' + department.id} className="py-5 px-2">
-                    <h1 className="font-big-title mobile:text-center desktop:text-4xl mobile:text-3xl mb-5">{department.attributes.name}</h1>
+                    <h1 className="font-big-title mobile:text-center mb-5">{department.attributes.name}</h1>
                     <div className="flex flex-wrap mobile:justify-center">
                       {
                         department.employees.map((employee, i) => (
-                          <div className="desktop:w-1/3 mobile:w-1/2" key={i}>
+                          <div className="desktop:w-1/3 mobile:w-full" key={i}>
                             <RefierCard user={employee}/>
                           </div>
                         ))

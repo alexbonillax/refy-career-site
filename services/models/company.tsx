@@ -24,9 +24,12 @@ export default interface Company {
   };
   benefits: Benefit[];
   careers: {
-    referrers: {visible: boolean};
     style: CareerStyles;
     home: HomeProps;
+    departments: SectionProps;
+    workplaces: SectionProps;
+    jobs: SectionProps;
+    referrers: SectionProps;
     languageCode: string;
     published: boolean;
   };
@@ -55,4 +58,10 @@ export interface GoogleFont {
 interface HomeProps {
   title: string;
   picture: string;
+}
+
+interface SectionProps {
+  visible: boolean;
+  title: string;
+  subtitle: string;
 }

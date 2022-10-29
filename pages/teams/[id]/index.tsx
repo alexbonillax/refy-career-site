@@ -57,7 +57,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
               height={BannerHeight.smallScreen}
               backButton={{ url: '/teams', text: Translate('back-to', { page: Translate('teams')}) }}
           />
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} />
+          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} />
           {
             (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&
             <Coworkers employees={department.employees} />

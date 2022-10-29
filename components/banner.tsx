@@ -41,7 +41,7 @@ export const Banner = ({ picture, tagline, title, height, backButton }: BannerPr
           }
           <div className={`mobile-container flex-col flex justify-center items-center px-3 text-center ${height}`}>
             <h1 className="font-big-title font--light">{title}</h1>
-            <h2 className="font-subtitle font--light">{tagline}</h2>
+            <h2 className="font-subtitle font--light mt-2">{tagline}</h2>
           </div>
         </div>
       </div>

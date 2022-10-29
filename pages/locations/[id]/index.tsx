@@ -79,7 +79,7 @@ const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageP
               backButton={{ url: '/locations', text: Translate('back-to', { page: Translate('locations')}) }}
           />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
+          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>
