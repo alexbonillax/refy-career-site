@@ -94,7 +94,6 @@ const Referral: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
         Router.push(`/jobs?unknown`);
       } else {
         const canApply = !!jobDetails.referrerUser?.id;
-        console.log(jobDetails);
         if (canApply) { localStorage.setItem(jobDetails.id.toString(), jobId) } else { localStorage.removeItem(jobDetails.id.toString()) }
         setData({ jobDetails, canApply });
         setLoading(false);

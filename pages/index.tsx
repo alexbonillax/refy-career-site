@@ -32,7 +32,6 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       recentJobsList = { ...recentJobsList, content: recentJobsList.content.slice(0, 6) };
       setData({ recentJobsList });
       setLoading(false);
-      console.log(pageProps.companyInfo);
     }
     getJobsData();
   }, [pageProps.companyInfo])
