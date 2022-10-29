@@ -1,7 +1,8 @@
 import Benefit from "./benefit";
 import Department from "./department";
-import Profile from "./profile";
+import { Value } from "./values";
 import Workplace from "./workplace";
+
 export default interface Company {
   id: number;
   attributes: {
@@ -32,7 +33,7 @@ export default interface Company {
   type: string;
   departments: Department[];
   workplaces: Workplace[];
-
+  values: Value[];
 }
 
 export interface CareerStyles {

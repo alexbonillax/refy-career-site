@@ -15,7 +15,7 @@ import Company from "../services/models/company";
 import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../utils/redirects";
 import { BenefitsArea } from "./benefits";
-
+import { ValuesCarousel } from "../components/carousel/values-carousel";
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t, ready } = useTranslation("common");
@@ -32,6 +32,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       recentJobsList = { ...recentJobsList, content: recentJobsList.content.slice(0, 6) };
       setData({ recentJobsList });
       setLoading(false);
+      console.log(pageProps.companyInfo);
     }
     getJobsData();
   }, [pageProps.companyInfo])
@@ -40,19 +41,17 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     ready &&
     <>
       <Header company={pageProps.companyInfo} title={t('home')} />
-      <Navbar company={pageProps.companyInfo} url='' transparent={true} />
+      <Navbar company={pageProps.companyInfo} url='' transparent />
       <Banner
         height={BannerHeight.bigScreen}
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      {
-        pageProps.companyInfo.benefits.length > 0 &&
-        <BenefitsArea benefits={pageProps.companyInfo.benefits} />
-      }
-      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0"/>
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white"/>
-      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced classes="background-color--grey--0"/>
+      <ValuesCarousel values={pageProps.companyInfo.values} /> 
+      <BenefitsArea benefits={pageProps.companyInfo.benefits} />
+      <Areas departments={pageProps.companyInfo.departments.slice(0, 3)} reduced classes="background-color--grey--0" />
+      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white" />
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo.attributes.name} loading={isLoading} reduced classes="background-color--grey--0" />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

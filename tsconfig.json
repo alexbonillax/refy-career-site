@@ -21,12 +21,18 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "allowSyntheticDefaultImports": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "next-i18next.config.js"
+    "next-i18next.config.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
