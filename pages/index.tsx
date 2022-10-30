@@ -46,7 +46,10 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-        <ValuesCarousel values={pageProps.companyInfo.values} /> 
+      {
+        pageProps.companyInfo.values &&
+        <ValuesCarousel values={pageProps.companyInfo.values} />
+      }
       {
         pageProps.companyInfo.benefits.length > 0 &&
         <BenefitsArea benefits={pageProps.companyInfo.benefits} />
