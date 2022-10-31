@@ -164,9 +164,19 @@ body {
 
     &--condensed {
       font-size: 16px;
+      line-height: 1.75rem;
 
       strong {
         font-size: 18px;
+      }
+
+      ul {
+
+        li {
+          padding-left: 1rem;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
       }
 
     }

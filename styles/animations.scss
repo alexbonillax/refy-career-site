@@ -124,3 +124,13 @@
     border-radius: 50%;
   }
 }
+
+.transition {
+  &--width {
+    transition: width 50ms ease-in;
+  }
+
+  &--opacity {
+    transition: opacity 50ms ease-in;
+  }
+}
