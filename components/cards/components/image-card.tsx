@@ -10,7 +10,7 @@ export const CardImage = ({pictures, icon, blurr = false}: {pictures: string[], 
           ? <Image loader={loaderBucketXL} src={pictures[0]} alt='workplace' fill={true} className="flex relative object-cover" />
           :
           <div className={`absolute top-0 full-width full-height flex flex-align-justify-center relative background-dynamic`}>
-            <div className="w-6 h-9 flex items-center justify-center"><FontAwesomeIcon icon={icon} className='icon-font text-6xl icon-font--light' /></div>
+            <div className="w-10 h-10 flex items-center justify-center"><FontAwesomeIcon icon={icon} className='icon-font icon-font--light' /></div>
           </div>
       }
       {

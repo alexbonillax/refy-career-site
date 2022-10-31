@@ -17,6 +17,10 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
       </div>
       <div className={`flex flex-col w-full p-3 mobile:w-full background-color--white`}>
         <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
+        {
+          workplace.attributes.shortDescription &&
+            <p className="font-subtitle font--ellipsis-3">{workplace.attributes.shortDescription}</p>
+        }
         <JobsAvailable url={{ pathname: '/locations/' + workplace.id.toString() }} availability={workplace.attributes.availableJobs} />
         <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
           href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
@@ -25,10 +29,6 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
           </div>
           <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
         </a>
-        {
-          workplace.attributes.shortDescription &&
-          <p className="font-prose font--ellipsis-3 mt-1">{workplace.attributes.shortDescription}</p>
-        }
         <div className="flex flex-justify-center mt-2">
           <Link href={{ pathname: `/locations/${workplace.id}` }}>
               <ButtonBasic>{t('workplaces.button')}</ButtonBasic>

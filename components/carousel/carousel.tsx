@@ -42,7 +42,7 @@ export const Carousel = ({ items }: { items: CarouselItem[] }) => {
         <div className="flex justify-evenly mobile:hidden mobile-container--responsive">
           {
             items.map((item, i) => (
-              <button key={i} onClick={() => { ref.current.splide.go(i); setPosition(i)}} className={`font-subtitle ${i === position ? 'font--dark' : ''}`}>{item.name}</button>
+              <button key={i} onClick={() => { ref.current.splide.go(i); setPosition(i)}} className={`font-subtitle font--black transition--opacity ${i === position ? '' : 'opacity--50'}`}>{item.name}</button>
             ))
           }
         </div>
