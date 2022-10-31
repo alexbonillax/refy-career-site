@@ -29,17 +29,18 @@ interface AreasProps {
 
 export const Areas = ({companyInfo = null, reduced = false, classes}: AreasProps) => (
   <>
-    {companyInfo.departments.length > 0 &&
+    {
+      companyInfo.careers?.departments?.visible &&
         <section id="teams" className={`${classes}`}>
             <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
-                <h2 className="font-big-title text-center">{companyInfo.careers.departments?.title || Translate('teams')}</h2>
-                {
-                companyInfo.careers.departments?.subtitle &&
+                <h2 className="font-big-title text-center">{companyInfo.careers.departments?.title || Translate('teams')}</h2>{
+              companyInfo.careers.departments?.subtitle &&
                 <h3 className="font-subtitle text-center mt-2">{companyInfo.careers.departments.subtitle}</h3>
-                }
+            }
                 <div className="flex flex-wrap flex-justify-center mt-5">
                   {
-                    companyInfo.departments?.slice(0, reduced ? 3 : 1000).map((department, i) => (
+                    companyInfo.careers?.departments?.ids?.map(id => companyInfo.departments?.find(department => department.id === id))
+                      .slice(0, reduced ? 3 : 1000).map((department, i) => (
                       <div key={i} className={`p-1 w-m--100 w-d--33`}>
                         <DepartmentCard department={department}/>
                       </div>
@@ -69,8 +70,7 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: {
       <Header company={pageProps.companyInfo} title={Translate('teams')}/>
       <Navbar company={pageProps.companyInfo} url='teams'/>
       <Areas companyInfo={pageProps.companyInfo} classes="background-color--grey--0"/>
-      <AboutCompany {...pageProps.companyInfo} />
-      <Footer/>
+      <AboutCompany {...pageProps.companyInfo} /> <Footer/>
     </>
   )
 };

@@ -19,9 +19,9 @@ interface NavbarProps {
 
 const setSections = (company: Company): string[] => {
   let linkList: string[] = [];
-  (company.departments.length > 0) && linkList.push('teams');
+  (company.careers?.departments?.visible) && linkList.push('teams');
   (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
-  (company.workplaces.length > 0) && linkList.push('locations');
+  (company.careers?.workplaces?.visible) && linkList.push('locations');
   (company.benefits.length > 0) && linkList.push('benefits');
   linkList.push('jobs');
   (company.referralProgram.accessPosts) && linkList.push('stories');

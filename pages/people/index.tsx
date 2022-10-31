@@ -2,7 +2,7 @@ import type {NextPage} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 import {Header} from "../../components/header";
-import {Divider, Navbar} from "../../components";
+import {Navbar} from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import {getCompanyInfo} from "../../services";
@@ -14,10 +14,6 @@ import Company from "../../services/models/company";
 import {useEffect} from "react";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import {SSRCheck} from "../../utils/redirects";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft} from "@fortawesome/pro-regular-svg-icons";
-import Link from "next/link";
-import createCache from "@emotion/cache/dist/emotion-cache.cjs";
 
 
 export const Translate = (text: string, array?: boolean): string => {
@@ -60,14 +56,15 @@ export const DepartmentsMenuItem = ({department}: { department: Department }) =>
   )
 }
 
-export const PeopleSection = ({departments}: { departments: Department[] }) => {
-  if (departments.some(department => department.employees.length > 0)) {
+export const PeopleSection = ({company}: { company: Company }) => {
+  if (company.careers?.referrers?.visible) {
     return (
       <div className="background-color--white">
         <div className="mobile-container--responsive flex flex-align-start">
           <div className="sticky top-2 flex-column py-10 w-1/3 mobile:hidden px-3">
             {
-              departments.map((department, i) => (
+              company.careers?.departments?.ids?.map(id => company.departments?.find(department => department.id === id))
+                .map((department, i) => (
                 department.employees.length > 0 &&
                 <DepartmentsMenuItem key={i} department={department}></DepartmentsMenuItem>
               ))
@@ -75,7 +72,8 @@ export const PeopleSection = ({departments}: { departments: Department[] }) => {
           </div>
           <div className="flex-column py-5 w-2/3 mobile:w-full">
             {
-              departments.map((department, i) => (
+              company.careers?.departments?.ids?.map(id => company.departments?.find(department => department.id === id))
+                .map((department, i) => (
                 department.employees.length > 0 &&
                 <section key={i} id={'department-employees-' + department.id} className="py-5 px-2">
                     <h1 className="font-big-title mobile:text-center mb-5">{department.attributes.name}</h1>
@@ -106,7 +104,8 @@ const People: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: 
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')}/>
       <Navbar url='people' company={pageProps.companyInfo}/>
-      <PeopleSection departments={pageProps.companyInfo.departments}/> <AboutCompany {...pageProps.companyInfo} />
+      <PeopleSection company={pageProps.companyInfo}/>
+      <AboutCompany {...pageProps.companyInfo} />
       <Footer/>
     </>
   )

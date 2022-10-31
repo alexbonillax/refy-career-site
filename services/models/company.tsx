@@ -64,4 +64,5 @@ interface SectionProps {
   visible: boolean;
   title: string;
   subtitle: string;
+  ids: number[];
 }
