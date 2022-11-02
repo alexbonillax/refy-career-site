@@ -6,7 +6,6 @@ import {Navbar} from "../../components";
 import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import {getCompanyInfo} from "../../services";
-import {RefierCard} from "../jobs/referral/[id]";
 import Department from "../../services/models/department";
 import Profile from "../../services/models/profile";
 import getWildcardCode from "../../utils/wildcard";
@@ -14,6 +13,7 @@ import Company from "../../services/models/company";
 import {useEffect} from "react";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import {SSRCheck} from "../../utils/redirects";
+import { RefierCard } from "../jobs/[id]";
 
 
 export const Translate = (text: string, array?: boolean): string => {

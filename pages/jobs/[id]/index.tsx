@@ -1,10 +1,10 @@
-import { getCompanyInfo } from '../../../services'
+import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
-import { Divider, Navbar } from '../../../components';
-import { getJobDetails } from '../../../services/getJobDetails';
+import { Divider, Logo, LogoTypes, Navbar } from '../../../components';
+import { getJobDetails, getReferredJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
-import { bucketXL } from '../../../services/urls';
+import { bucketL, bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-solid-svg-icons";
@@ -30,15 +30,77 @@ import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
 import { SSRCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
-
+import { isReferralCode } from '../../../utils/is-referral-code';
+import Profile from '../../../services/models/profile';
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
+
+const applyJob = (referralCode: string) => {
+  const code = isReferralCode(referralCode) ? referralCode : localStorage.getItem(referralCode);
+  const tenantCode = getTenantCode(window.location.hostname);
+  window.open(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${code}`, '_blank');
+}
+
+const openLinkedin = (username: string): Window => window.open(`https://www.linkedin.com/in/${username}`, '_blank');
+interface RefierCardProps {
+  user: Profile,
+}
+export const RefierCard = ({ user }: RefierCardProps) => {
+  const picUrl = user?.attributes.avatar ? bucketL + user.attributes.avatar : '';
+  return (
+    <div className="flex-column text-center py-2 px-1">
+      <div className="flex flex-justify-center">
+        <Logo type={LogoTypes.refierCard} imgSrc={picUrl}></Logo>
+      </div>
+      <div className="flex-column full-width px-2 mt-2">
+        <p className="font-title flex flex-align-justify-center">{user.attributes.firstName} {user.attributes.lastName}
+          {
+            user.attributes.linkedinVanityName &&
+            <FontAwesomeIcon
+              className='flex h-2 w-2 ml-1 icon-font icon-font--normal icon-font--field-button cursor-pointer'
+              icon={faLinkedin as IconProp}
+              onClick={_ => openLinkedin(user.attributes.linkedinVanityName)}></FontAwesomeIcon>
+          }
+        </p>
+        <p className="h-3 font-multiline font--grey">{user.attributes.headline}</p>
+      </div>
+    </div>
+  )
+}
+
+export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Job, company: string, color: string }) => {
+  const { t } = useTranslation("common");
+  return (
+    <section id="about-company" className="py-10 background-color--grey--0">
+      <div className="mobile-container px-3">
+        <h1 className="font-big-title text-center mb-5">{t('job.apply.refier.title', { company })}</h1>
+        <RefierCard user={jobDetails.referrerUser} />
+      </div>
+    </section>
+  )
+}
 
 interface JobBannerProps {
   jobDetails: Job,
   company: Company;
   referralCode: string;
   onClick?: () => void;
+}
+
+const getJob = async (jobId: string, companyId: number): Promise<Job> => {
+  let jobDetails;
+  if (isReferralCode(jobId)) {
+    jobDetails = await getReferredJobDetails(jobId, companyId);
+    jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString()) 
+  } else {
+    if (localStorage.getItem(jobId)) {
+      jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), companyId);
+    } else {
+      jobDetails = await getJobDetails(+jobId, companyId);
+    }
+  }
+  return jobDetails;
 }
 
 export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
@@ -48,7 +110,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
   const JobSection = ({ text, icon }: { text: string, icon: IconProp }) => (
     <>
       <div className='flex items-center justify-center w-2 h-2 mr-1'>
-        <FontAwesomeIcon icon={icon} className='icon-font icon-font--normal icon-font--light'/>
+        <FontAwesomeIcon icon={icon} className='icon-font icon-font--normal icon-font--light' />
       </div>
       <p className="flex flex-align-center font-hint font--light mr-3">
         {text}
@@ -101,7 +163,7 @@ interface JobDetailsProps {
 const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
     <div className='w-2 h-2 flex items-center justify-center mr-1 icon-font--normal'>
-      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--grey-1000"/>
+      <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--grey-1000" />
     </div>
     <div className="flex flex-align-center flex-justify-between full-width">
       <p className="font-multiline font--grey-1000">{title}</p>
@@ -147,6 +209,7 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
 
 export interface JobProps {
   jobDetails: Job;
+  canApply: boolean;
 }
 
 const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: string }) => {
@@ -164,22 +227,21 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
 
 const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
-  const [data, setData] = useState<JobProps>({ jobDetails: null });
+  const [data, setData] = useState<JobProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
   const snackbarRef = useRef(null);
-  const jobId: any = useRouter().query?.id as any
+  let jobId: any = useRouter().query?.id as any
 
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      if (localStorage.getItem(jobId)) { Router.push(`/jobs/referral/${localStorage.getItem(jobId)}`)}
       ApplyDynamicStyles(pageProps.companyInfo);
-      const jobDetails = await getJobDetails(jobId, pageProps.companyInfo.id);
-      if (!jobDetails.id) {
-        Router.push(`/jobs?unknown`);
-      } else {
-        setData({ jobDetails });
+      const jobDetails = await getJob(jobId, pageProps.companyInfo.id);
+      if (jobDetails.id) {
+        setData({ jobDetails, canApply: !!jobDetails.referrerUser?.id });
         setLoading(false);
+      } else {
+        Router.push(`/jobs?unknown`);
       };
     }
     getJobsData();
@@ -194,16 +256,20 @@ const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: {
             <>
               <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
+              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetails job={data.jobDetails} />
               {
+                data.canApply &&
+                <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
+              }
+              {
                 (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees.length > 0) &&
-                <Coworkers employees={data.jobDetails.department.employees}/>
-              } 
+                <Coworkers employees={data.jobDetails.department.employees} />
+              }
               <AboutCompany {...pageProps.companyInfo} />
               <Footer />
               <FloatingContainer>
-                <ApplyButton classes='button--floating box-shadow-container--elevated' onClick={() => snackbarRef.current.handleClick(t('toast.apply.warning'))} />
+                <ApplyButton classes='button--floating box-shadow-container--elevated' onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} />
               </FloatingContainer>
               <BottomSnackbar ref={snackbarRef} />
             </>
