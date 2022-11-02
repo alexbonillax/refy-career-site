@@ -1,10 +1,10 @@
 import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
 import { Header } from '../../../components/header';
-import { Divider, Logo, LogoTypes, Navbar } from '../../../components';
+import { Divider, Navbar } from '../../../components';
 import { getJobDetails, getReferredJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
-import { bucketL, bucketXL } from '../../../services/urls';
+import { bucketXL } from '../../../services/urls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faMapMarkerAlt, faScreenUsers } from '@fortawesome/pro-regular-svg-icons';
 import { faArrowUpRightFromSquare } from "@fortawesome/pro-solid-svg-icons";
@@ -31,8 +31,7 @@ import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
 import { SSRCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
 import { isReferralCode } from '../../../utils/is-referral-code';
-import Profile from '../../../services/models/profile';
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { RefierCard } from '../../../components/cards/refier-card';
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 
@@ -40,33 +39,6 @@ const applyJob = (referralCode: string) => {
   const code = isReferralCode(referralCode) ? referralCode : localStorage.getItem(referralCode);
   const tenantCode = getTenantCode(window.location.hostname);
   window.open(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${code}`, '_blank');
-}
-
-const openLinkedin = (username: string): Window => window.open(`https://www.linkedin.com/in/${username}`, '_blank');
-interface RefierCardProps {
-  user: Profile,
-}
-export const RefierCard = ({ user }: RefierCardProps) => {
-  const picUrl = user?.attributes.avatar ? bucketL + user.attributes.avatar : '';
-  return (
-    <div className="flex-column text-center py-2 px-1">
-      <div className="flex flex-justify-center">
-        <Logo type={LogoTypes.refierCard} imgSrc={picUrl}></Logo>
-      </div>
-      <div className="flex-column full-width px-2 mt-2">
-        <p className="font-title flex flex-align-justify-center">{user.attributes.firstName} {user.attributes.lastName}
-          {
-            user.attributes.linkedinVanityName &&
-            <FontAwesomeIcon
-              className='flex h-2 w-2 ml-1 icon-font icon-font--normal icon-font--field-button cursor-pointer'
-              icon={faLinkedin as IconProp}
-              onClick={_ => openLinkedin(user.attributes.linkedinVanityName)}></FontAwesomeIcon>
-          }
-        </p>
-        <p className="h-3 font-multiline font--grey">{user.attributes.headline}</p>
-      </div>
-    </div>
-  )
 }
 
 export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Job, company: string, color: string }) => {
