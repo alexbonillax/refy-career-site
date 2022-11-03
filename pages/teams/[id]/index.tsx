@@ -55,7 +55,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
               picture={department.attributes.pictures ? department.attributes.pictures[0] : null}
               tagline={pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')} title={department.attributes.name}
               height={BannerHeight.smallScreen}
-              backButton={{ url: '/teams', text: pageProps.companyInfo.careers?.departments?.navbar || Translate('back-to', { page: Translate('teams')}) }}
+              backButton={{ url: '/teams', text: Translate('back-to', { page: pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')}) }}
           />
           <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} />
           {
