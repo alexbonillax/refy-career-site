@@ -4,7 +4,6 @@
   "locations": "Locations",
   "stories": "Stories",
   "jobs": "Jobs",
-  "values": "Values",
   "company-site": "Company website",
   "offer": "offer",
   "offers": "offers",
@@ -16,7 +15,7 @@
   "jobs.find": "Find your next job at {{company}}",
   "about.company": "About {{company}}",
   "workplaces.title": "Our offices",
-  "workplaces.button": "View location",
+  "view-more": "View more",
   "stories.latest": "Our latest stories",
   "job.type.title": "Type of job",
   "job.conditions.title": "Candidate conditions",
@@ -42,6 +41,6 @@
   "job.apply.button.short": "Apply now",
   "benefits": "Benefits",
   "back-to": "Back to {{page}}",
-  "teams.button": "View team",
-  "jobs.view": "View more jobs"
+  "jobs.view": "View more jobs",
+  "values": "Values"
 }

@@ -4,7 +4,6 @@
   "locations": "Localizaciones",
   "stories": "Historias",
   "jobs": "Posiciones",
-  "values": "Valores",
   "company-site": "Ir a web de empresa",
   "offer": "oferta",
   "offers": "ofertas",
@@ -16,7 +15,7 @@
   "jobs.find": "Encuentra tu próximo trabajo en {{company}}",
   "about.company": "Sobre {{company}}",
   "workplaces.title": "Nuestras oficinas",
-  "workplaces.button": "Ver localización",
+  "view-more": "Ver más",
   "stories.latest": "Nuestras historias recientes",
   "job.type.title": "Tipo de empleo",
   "job.conditions.title": "Condiciones para el candidato",
@@ -42,6 +41,6 @@
   "job.apply.button.short": "Aplicar ahora",
   "benefits": "Beneficios",
   "back-to": "Volver a {{page}}",
-  "teams.button": "Ver equipo",
-  "jobs.view": "Ver más ofertas"
+  "jobs.view": "Ver más ofertas",
+  "values": "Valores"
 }

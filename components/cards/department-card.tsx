@@ -21,7 +21,7 @@ export const DepartmentCard = ({ department }: DepartmentCardProps) => {
           <JobsAvailable url={{ pathname: '/teams/' + department.id }} availability={department.attributes.availableJobs} light={true}/>
           <div className="flex flex-justify-center mt-2">
             <Link href={{ pathname: `/teams/${department.id}` }}>
-              <ButtonBasic>{t('teams.button')}</ButtonBasic>
+              <ButtonBasic>{t('view-more')}</ButtonBasic>
             </Link>
           </div>
         </div>
