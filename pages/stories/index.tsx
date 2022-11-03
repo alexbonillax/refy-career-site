@@ -35,7 +35,11 @@ export const Posts = ({
   return (
     <section className="py-10 px-2 background-color--grey--0">
       <div className="mobile-container">
-        <p className="font-big-title text-center">{t('stories.latest')}</p>
+        <h2 className="font-big-title text-center">{companyInfo.careers.stories?.title || t('stories.latest')}</h2>
+        {
+          companyInfo.careers.stories?.subtitle &&
+            <h3 className="font-subtitle text-center mt-2">{companyInfo.careers.stories.subtitle}</h3>
+        }
       </div>
       <div className="mobile-container--stretch flex-column pt-5">
         {
@@ -266,7 +270,7 @@ export const getServerSideProps = async ({req}: any) => {
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   let result = SSRCheck(companyInfo, translations);
-  if (!companyInfo?.referralProgram?.accessPosts) {
+  if (!companyInfo?.careers?.stories?.visible) {
     result = {
       redirect: {
         destination: '/',

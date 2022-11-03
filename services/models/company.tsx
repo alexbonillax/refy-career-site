@@ -19,9 +19,6 @@ export default interface Company {
     currencyId: number;
     privacyPolicy: string;
   };
-  referralProgram: {
-    accessPosts: boolean;
-  };
   benefits: Benefit[];
   careers: {
     style: CareerStyles;
@@ -29,6 +26,7 @@ export default interface Company {
     departments: SectionProps;
     workplaces: SectionProps;
     jobs: SectionProps;
+    stories: SectionProps;
     referrers: SectionProps;
     languageCode: string;
     published: boolean;
@@ -62,6 +60,7 @@ interface HomeProps {
 
 interface SectionProps {
   visible: boolean;
+  navbar: string;
   title: string;
   subtitle: string;
   ids: number[];

@@ -10,7 +10,6 @@ import Footer from "../../components/footer";
 import {Header} from "../../components/header";
 import {getCompanyInfo} from "../../services";
 import Company from "../../services/models/company";
-import Department from "../../services/models/department";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import {SSRCheck} from "../../utils/redirects";

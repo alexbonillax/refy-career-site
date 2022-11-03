@@ -17,14 +17,19 @@ interface NavbarProps {
   company: Company
 }
 
-const setSections = (company: Company): string[] => {
-  let linkList: string[] = [];
-  (company.careers?.departments?.visible) && linkList.push('teams');
-  (company.careers?.referrers?.visible && company.departments.length > 0) && linkList.push('people');
-  (company.careers?.workplaces?.visible) && linkList.push('locations');
-  (company.benefits.length > 0) && linkList.push('benefits');
-  linkList.push('jobs');
-  (company.referralProgram.accessPosts) && linkList.push('stories');
+interface LinkProps {
+  url: string;
+  title?: string;
+}
+
+const setSections = (company: Company): LinkProps[] => {
+  let linkList: LinkProps[] = [];
+  (company.careers?.departments?.visible) && linkList.push({url: 'teams', title: company.careers?.departments?.navbar });
+  (company.careers?.referrers?.visible) && linkList.push({url: 'people', title: company.careers?.referrers?.navbar });
+  (company.careers?.workplaces?.visible) && linkList.push({url: 'locations', title: company.careers?.workplaces?.navbar });
+  (company.benefits.length > 0) && linkList.push({url: 'benefits' });
+  linkList.push({url: 'jobs', title: company.careers?.jobs?.navbar });
+  (company.careers?.stories?.visible) && linkList.push({url: 'stories', title: company.careers?.stories?.navbar });
   return linkList;
 }
 
@@ -32,7 +37,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   const { t } = useTranslation("common");
   const [state, setState] = useState({ navbar: false });
   const [clientWindowHeight, setClientWindowHeight] = useState("");
-  let linkList: string[] = setSections(company);
+  let linkList: LinkProps[] = setSections(company);
   const [scrolled, setScrolling] = useState(false);
   const handleScroll = () => {
     setClientWindowHeight((window.scrollY).toString());
@@ -61,9 +66,9 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       <div className={`flex items-center`} >
         {
           linkList.map((link, i) => (
-            <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link) && 'active'}`}>
-              <Link href={`/${link}`}>
-                <span className={` ${((scrolled && transparent) || (!transparent) ? "font--grey-1000" : "font--light")}`}>{t(link)}</span>
+            <div key={i} className={`navbar-item relative px-2 h-5 flex flex-align-center ${(url === link.url) && 'active'}`}>
+              <Link href={`/${link.url}`}>
+                <span className={` ${((scrolled && transparent) || (!transparent) ? "font--grey-1000" : "font--light")}`}>{link.title || t(link.url)}</span>
               </Link>
               <div className="navbar-item-underline absolute h-0.5 left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
             </div>
@@ -92,12 +97,11 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
     )
   }
 
-  const NavbarItem = ({ link }: { link: string }) => (
-    <div className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link) ? 'active' : ''}`}>
-      <Link href={`/${link}`}>{t(link)}</Link>
+  const NavbarItem = ({ link }: { link: LinkProps }) => (
+    <div className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link.url) ? 'active' : ''}`}>
+      <Link href={`/${link.url}`}>{link.title || t(link.url)}</Link>
       <div className="navbar-item-underline absolute left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
     </div>
-
   )
 
   const SideBarLinks = () => (

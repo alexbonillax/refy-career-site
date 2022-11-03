@@ -46,7 +46,7 @@ export const Carousel = ({ items }: { items: CarouselItem[] }) => {
             ))
           }
         </div>
-        <Splide options={mainOptions} ref={ref} hasTrack={false} className="my-4">
+        <Splide options={mainOptions} ref={ref} hasTrack={false} className="my-5">
           <SplideTrack>
             {
               items.map((item, i) => (
