@@ -53,7 +53,7 @@ const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
           <Navbar company={pageProps.companyInfo} transparent={true} url='teams' />
           <Banner
               picture={department.attributes.pictures ? department.attributes.pictures[0] : null}
-              tagline={Translate('teams')} title={department.attributes.name}
+              tagline={pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')} title={department.attributes.name}
               height={BannerHeight.smallScreen}
               backButton={{ url: '/teams', text: pageProps.companyInfo.careers?.departments?.navbar || Translate('back-to', { page: Translate('teams')}) }}
           />
