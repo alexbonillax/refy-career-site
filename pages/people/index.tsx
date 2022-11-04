@@ -55,7 +55,7 @@ export const DepartmentsMenuItem = ({department}: { department: Department }) =>
   )
 }
 
-export const ReferrerSection = ({company}: { company: Company }) => {
+export const ReferrersSection = ({company}: { company: Company }) => {
   if (company.careers?.referrers?.visible) {
     return (
       <div className="background-color--white">
@@ -95,7 +95,7 @@ export const ReferrerSection = ({company}: { company: Company }) => {
   }
 }
 
-const Referrer: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
+const Referrers: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
     ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
@@ -103,7 +103,7 @@ const Referrer: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}
     <>
       <Header company={pageProps.companyInfo} title={Translate('people')}/>
       <Navbar url='people' company={pageProps.companyInfo}/>
-      <ReferrerSection company={pageProps.companyInfo}/>
+      <ReferrersSection company={pageProps.companyInfo}/>
       <AboutCompany {...pageProps.companyInfo} />
       <Footer/>
     </>
@@ -130,4 +130,4 @@ export const getServerSideProps = async ({req}: any) => {
 
 };
 
-export default Referrer;
+export default Referrers;
