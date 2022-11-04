@@ -8,7 +8,7 @@ import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import { useEffect } from "react";
 import getWildcardCode from "../../utils/wildcard";
-import Company from "../../services/models/company";
+import Company, {SectionProps} from "../../services/models/company";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../../utils/redirects";
 import { Benefit, BenefitCategory } from "../../services/models/benefit";
@@ -17,9 +17,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCircleCheck } from "@fortawesome/pro-solid-svg-icons";
 import { far } from "@fortawesome/pro-regular-svg-icons";
 
-export const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
+export const BenefitsSection = ({ section, benefits }: { section: SectionProps, benefits: Benefit[] }) => {
   const { t } = useTranslation("common");
-  if (benefits.length > 0) {
+  if (section?.visible) {
     let categories: BenefitCategory[] = [];
     benefits.forEach(benefit => {
       if (!categories.find(category => category.id === benefit.category.id)) {
@@ -29,9 +29,15 @@ export const BenefitsArea = ({ benefits }: { benefits: Benefit[] }) => {
     library.add(far)
     return (
       <>
-        <section className="background-color--white">
-          <div className="mobile-container m-auto flex-col px-1 py-10">
-            <p className="font-big-title text-center">{t('benefits')}</p>
+        <section className="background-color--white py-10">
+          <div className="mobile-container--responsive m-auto flex-col px-2">
+            <h2 className="font-big-title text-center">{section?.title || t('benefits')}</h2>
+            {
+              section?.subtitle &&
+              <h3 className="font-subtitle text-center mt-2">{section.subtitle}</h3>
+            }
+          </div>
+          <div className="mobile-container">
             <div className="flex-column box-shadow-container--card br-var py-1 mx-1 mt-5 background-color--white">
               {
                 categories.map((category, i) => (
@@ -76,7 +82,7 @@ const Benefits: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps
     <>
       <Header company={pageProps.companyInfo} title={t('benefits')} />
       <Navbar company={pageProps.companyInfo} url='benefits' />
-      <BenefitsArea benefits={pageProps.companyInfo.benefits} />
+      <BenefitsSection section={pageProps.companyInfo?.careers?.benefits} benefits={pageProps.companyInfo.benefits} />
       <AboutCompany {...pageProps.companyInfo} /> <Footer />
     </>
   )

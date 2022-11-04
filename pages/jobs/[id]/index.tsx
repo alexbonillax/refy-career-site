@@ -132,7 +132,7 @@ interface JobDetailsProps {
   job: Job;
 }
 
-const SectionJobDetails = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
+const JobDetailsItem = ({ title, value, icon }: { title: string, value: string, icon: IconProp }) => (
   <div className="flex flex-align-center">
     <div className='w-2 h-2 flex items-center justify-center mr-1 icon-font--normal'>
       <FontAwesomeIcon icon={icon} className="icon-font icon-font--normal icon-font--grey-1000" />
@@ -144,7 +144,7 @@ const SectionJobDetails = ({ title, value, icon }: { title: string, value: strin
   </div>
 )
 
-export const JobDetails = ({ job }: JobDetailsProps) => {
+export const JobDetailsSection = ({ job }: JobDetailsProps) => {
   i18next.use(intervalPlural);
   const { t } = useTranslation("common");
 
@@ -160,15 +160,15 @@ export const JobDetails = ({ job }: JobDetailsProps) => {
             <div className="flex-column space-y-6">
               {
                 job.attributes.employmentType &&
-                <SectionJobDetails title={t('job.type.title')} value={t('job.type_interval', { postProcess: 'interval', count: job.attributes.employmentType })} icon={faHandshake} />
+                <JobDetailsItem title={t('job.type.title')} value={t('job.type_interval', { postProcess: 'interval', count: job.attributes.employmentType })} icon={faHandshake} />
               }
               {
                 job.attributes.maxSalary &&
-                <SectionJobDetails title={t('job.salary.title')} value={`${numberWithCommas(job.attributes.minSalary)} - ${numberWithCommas(job.attributes.maxSalary)} ${t('job.salary_interval', { postProcess: 'interval', count: job.attributes.salaryCurrencyId })}`} icon={faCoin} />
+                <JobDetailsItem title={t('job.salary.title')} value={`${numberWithCommas(job.attributes.minSalary)} - ${numberWithCommas(job.attributes.maxSalary)} ${t('job.salary_interval', { postProcess: 'interval', count: job.attributes.salaryCurrencyId })}`} icon={faCoin} />
               }
               {
                 job.attributes.salaryFrequency &&
-                <SectionJobDetails title={t('job.frequency.title')} value={t('job.frequency_interval', { postProcess: 'interval', count: job.attributes.salaryFrequency })} icon={faClock} />
+                <JobDetailsItem title={t('job.frequency.title')} value={t('job.frequency_interval', { postProcess: 'interval', count: job.attributes.salaryFrequency })} icon={faClock} />
               }
             </div>
           </div>
@@ -197,7 +197,7 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
   )
 }
 
-const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
@@ -229,7 +229,7 @@ const Job: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: {
               <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
               <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
               <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
-              <JobDetails job={data.jobDetails} />
+              <JobDetailsSection job={data.jobDetails} />
               {
                 data.canApply &&
                 <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
@@ -268,4 +268,4 @@ export const getServerSideProps = async ({ req }: any) => {
   return SSRCheck(companyInfo, translations);
 };
 
-export default Job
+export default JobDetails

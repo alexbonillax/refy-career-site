@@ -46,13 +46,13 @@ const WorkplaceDescription = ({workplace} : WorkplaceDescriptionProps) => {
   )
 }
 
-interface WorkplaceJobsProps {
+interface WorkplaceDetailsProps {
   recentJobsList: Page<Job>;
 }
 
-const LocationJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const workplaceId: any = +useRouter().query?.id;
-  const [data, setData] = useState<WorkplaceJobsProps>({ recentJobsList: null })
+  const [data, setData] = useState<WorkplaceDetailsProps>({ recentJobsList: null })
   const [isLoading, setLoading] = useState(true)
   const workplace = pageProps.companyInfo.workplaces.find((workplace: Workplace) => workplace.id === workplaceId);
   useEffect(() => {
@@ -106,4 +106,4 @@ export const getServerSideProps = async ({ req }: any) => {
   return result
 };
 
-export default LocationJobs;
+export default WorkplaceDetails;

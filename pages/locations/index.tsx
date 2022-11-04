@@ -7,13 +7,14 @@ import AboutCompany from "../../components/about";
 import Footer from "../../components/footer";
 import {Header} from "../../components/header";
 import {getCompanyInfo} from "../../services";
-import Company from "../../services/models/company";
+import Company, {SectionProps} from "../../services/models/company";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import {SSRCheck} from "../../utils/redirects";
 
 ;
 import {WorkplaceCard} from "../../components";
+import Workplace from "../../services/models/workplace";
 
 const Translate = (text: string, array?: boolean): string => {
   const {t} = useTranslation("common");
@@ -21,23 +22,24 @@ const Translate = (text: string, array?: boolean): string => {
 }
 
 interface WorkplacesProps {
-  companyInfo: Company;
+  section: SectionProps;
+  workplaces: Workplace[];
   classes?: string;
 }
 
-export const Workplaces = (props: WorkplacesProps) => (
+export const WorkplacesSection = ({section, workplaces, classes}: WorkplacesProps) => (
   <>
     {
-      props.companyInfo.careers?.workplaces?.visible &&
-        <section id="workplaces" className={`${props.classes}`}>
+      section?.visible &&
+        <section id="workplaces" className={`${classes}`}>
             <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
-                <h2 className="font-big-title text-center">{props.companyInfo.careers.workplaces?.title || Translate('workplaces.title')}</h2>{
-              props.companyInfo.careers.workplaces?.subtitle &&
-                <h3 className="font-subtitle text-center mt-2">{props.companyInfo.careers.workplaces.subtitle}</h3>
+                <h2 className="font-big-title text-center">{section?.title || Translate('workplaces.title')}</h2>{
+              section?.subtitle &&
+                <h3 className="font-subtitle text-center mt-2">{section.subtitle}</h3>
             }
                 <div className="flex flex-wrap flex-justify-center mt-5">
                   {
-                    props.companyInfo.careers?.workplaces?.ids?.map(id => props.companyInfo.workplaces?.find(department => department.id === id))
+                    section?.ids?.map(id => workplaces?.find(workplace => workplace.id === id))
                       .map((workplace, i) => (
                         <div className="p-1 w-m--100 w-d--33" key={i}>
                           <WorkplaceCard key={i} workplace={workplace}/>
@@ -51,7 +53,7 @@ export const Workplaces = (props: WorkplacesProps) => (
   </>
 )
 
-const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
+const Workplaces: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
     ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
@@ -59,7 +61,7 @@ const Locations: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps
     <>
       <Header company={pageProps.companyInfo} title={Translate('locations')}/>
       <Navbar url='locations' company={pageProps.companyInfo}/>
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white"/>
+      <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white"/>
       <AboutCompany {...pageProps.companyInfo} /> <Footer/>
     </>
   )
@@ -81,4 +83,4 @@ export const getServerSideProps = async ({req}: any) => {
   return result
 };
 
-export default Locations;
+export default Workplaces;

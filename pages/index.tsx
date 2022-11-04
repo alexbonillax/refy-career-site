@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getCompanyInfo, getRecentJobs } from "../services";
 import { RecentJobs } from "./jobs";
-import { Workplaces } from "./locations";
+import { WorkplacesSection } from "./locations";
 import { useTranslation } from "next-i18next";
-import { Areas } from "./teams";
+import { DepartmentsSection } from "./teams";
 import { Header } from "../components/header";
 import { Banner, BannerHeight, Navbar } from "../components";
 import AboutCompany from "../components/about";
@@ -14,8 +14,7 @@ import getWildcardCode from "../utils/wildcard";
 import Company from "../services/models/company";
 import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../utils/redirects";
-import { BenefitsArea } from "./benefits";
-import { ValuesCarousel } from "../components/carousel/values-carousel";
+import { ValuesSection } from "../components/carousel/values-section";
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t, ready } = useTranslation("common");
@@ -46,11 +45,10 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
-      <ValuesCarousel values={pageProps.companyInfo.values} />
-      <BenefitsArea benefits={pageProps.companyInfo.benefits} />
-      <Areas companyInfo={pageProps.companyInfo} reduced classes="background-color--grey--0"/>
-      <Workplaces companyInfo={pageProps.companyInfo} classes="background-color--white"/>
-      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--grey--0"/>
+      <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
+      <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
+      <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0"/>
+      <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white"/>
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

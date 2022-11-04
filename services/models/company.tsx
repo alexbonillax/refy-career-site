@@ -28,6 +28,8 @@ export default interface Company {
     jobs: SectionProps;
     stories: SectionProps;
     referrers: SectionProps;
+    values: SectionProps;
+    benefits: SectionProps;
     languageCode: string;
     published: boolean;
   };
@@ -58,7 +60,7 @@ interface HomeProps {
   picture: string;
 }
 
-interface SectionProps {
+export interface SectionProps {
   visible: boolean;
   navbar: string;
   title: string;

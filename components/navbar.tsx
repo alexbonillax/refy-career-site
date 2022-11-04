@@ -27,7 +27,7 @@ const setSections = (company: Company): LinkProps[] => {
   (company.careers?.departments?.visible) && linkList.push({url: 'teams', title: company.careers?.departments?.navbar });
   (company.careers?.referrers?.visible) && linkList.push({url: 'people', title: company.careers?.referrers?.navbar });
   (company.careers?.workplaces?.visible) && linkList.push({url: 'locations', title: company.careers?.workplaces?.navbar });
-  (company.benefits.length > 0) && linkList.push({url: 'benefits' });
+  (company.careers?.benefits?.visible) && linkList.push({url: 'benefits', title: company.careers?.benefits?.navbar });
   linkList.push({url: 'jobs', title: company.careers?.jobs?.navbar });
   (company.careers?.stories?.visible) && linkList.push({url: 'stories', title: company.careers?.stories?.navbar });
   return linkList;

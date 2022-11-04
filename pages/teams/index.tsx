@@ -9,36 +9,38 @@ import {ButtonBasic} from "../../components";
 import Footer from "../../components/footer";
 import {Header} from "../../components/header";
 import {getCompanyInfo} from "../../services";
-import Company from "../../services/models/company";
+import Company, {SectionProps} from "../../services/models/company";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import getWildcardCode from "../../utils/wildcard";
 import {SSRCheck} from "../../utils/redirects";
 import {DepartmentCard} from "../../components";
+import Department from "../../services/models/department";
 
 export const Translate = (text: string, array?: boolean): string => {
   const {t} = useTranslation("common");
   return array ? t(text, {returnObjects: true}) : t(text);
 }
 
-interface AreasProps {
-  companyInfo: Company;
+interface DepartmentsProps {
+  section: SectionProps;
+  departments: Department[];
   reduced?: boolean;
   classes?: string;
 }
 
-export const Areas = ({companyInfo = null, reduced = false, classes}: AreasProps) => (
+export const DepartmentsSection = ({section, departments, reduced = false, classes}: DepartmentsProps) => (
   <>
     {
-      companyInfo.careers?.departments?.visible &&
+      section?.visible &&
         <section id="teams" className={`${classes}`}>
             <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
-                <h2 className="font-big-title text-center">{companyInfo.careers.departments?.title || Translate('teams')}</h2>{
-              companyInfo.careers.departments?.subtitle &&
-                <h3 className="font-subtitle text-center mt-2">{companyInfo.careers.departments.subtitle}</h3>
+                <h2 className="font-big-title text-center">{section?.title || Translate('teams')}</h2>{
+              section?.subtitle &&
+                <h3 className="font-subtitle text-center mt-2">{section.subtitle}</h3>
             }
                 <div className="flex flex-wrap flex-justify-center mt-5">
                   {
-                    companyInfo.careers?.departments?.ids?.map(id => companyInfo.departments?.find(department => department.id === id))
+                    section?.ids?.map(id => departments?.find(department => department.id === id))
                       .slice(0, reduced ? 3 : 1000).map((department, i) => (
                       <div key={i} className={`p-1 w-m--100 w-d--33`}>
                         <DepartmentCard department={department}/>
@@ -60,7 +62,7 @@ export const Areas = ({companyInfo = null, reduced = false, classes}: AreasProps
   </>
 )
 
-const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
+const Departments: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: { pageProps: { companyInfo: Company } }) => {
   useEffect(() => {
     ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
@@ -68,7 +70,7 @@ const Teams: NextPage<{ pageProps: { companyInfo: Company } }> = ({pageProps}: {
     <>
       <Header company={pageProps.companyInfo} title={Translate('teams')}/>
       <Navbar company={pageProps.companyInfo} url='teams'/>
-      <Areas companyInfo={pageProps.companyInfo} classes="background-color--grey--0"/>
+      <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} classes="background-color--grey--0"/>
       <AboutCompany {...pageProps.companyInfo} /> <Footer/>
     </>
   )
@@ -91,4 +93,4 @@ export const getServerSideProps = async ({req}: any) => {
   return result
 };
 
-export default Teams;
+export default Departments;

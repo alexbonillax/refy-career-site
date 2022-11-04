@@ -24,14 +24,14 @@ export const Translate = (text: string, options?: any): string => {
   return options ? t(text, options) : t(text);
 }
 
-interface TeamJobsProps {
+interface DepartmentDetailsProps {
   recentJobsList: Page<Job>;
   teamName: string;
 }
 
-const TeamJobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const departmentId = +useRouter().query?.id;
-  const [data, setData] = useState<TeamJobsProps>({ recentJobsList: null, teamName: null })
+  const [data, setData] = useState<DepartmentDetailsProps>({ recentJobsList: null, teamName: null })
   const [isLoading, setLoading] = useState(true)
   const department = pageProps.companyInfo.departments.find((dept: Department) => dept.id === departmentId);
   useEffect(() => {
@@ -88,4 +88,4 @@ export const getServerSideProps = async ({ req }: any) => {
   return result
 };
 
-export default TeamJobs;
+export default DepartmentDetails;
