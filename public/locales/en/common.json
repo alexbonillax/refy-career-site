@@ -32,6 +32,7 @@
   "read-less": "see less",
   "about.workers_interval": "(1)[Less than 10 employees];(2)[Between 10 and 50 employees];(3)[Between 50 and 200 employees];(4)[More than 200 employees];",
   "job.frequency_interval": "(1)[Anualy];(2)[Monthly];(3)[Weekly];(4)[Daily];(5)[Hourly];",
+  "job.workplace-type_interval": "(1)[On-site];(2)[Hybrid];(3)[Remote];",
   "job.type_interval": "(1)[Full time];(2)[Partial time];(3)[Contract];(4)[Temporary];(5)[Learning];(6)[Internship];(7)[Volunteer];",
   "job.salary_interval": "(1)[€];(2)[$];",
   "coworkers": "Coworkers",

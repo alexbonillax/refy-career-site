@@ -8,7 +8,6 @@ import { getCompanyInfo, getRecentJobs } from "../../../services";
 import Company from "../../../services/models/company";
 import Page from "../../../services/models/page";
 import Job from "../../../services/models/job";
-import { RecentJobs } from "../../jobs";
 import Footer from "../../../components/footer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -18,6 +17,7 @@ import Router from 'next/router';
 import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../../../utils/redirects";
 import { Coworkers } from "../../people";
+import { JobCardsList } from "../../../components/lists/job-cards-list";
 
 export const Translate = (text: string, options?: any): string => {
   const { t } = useTranslation("common");
@@ -57,7 +57,7 @@ const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ 
               height={BannerHeight.smallScreen}
               backButton={{ url: '/teams', text: Translate('back-to', { page: pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')}) }}
           />
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} />
+          <JobCardsList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} />
           {
             (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&
             <Coworkers employees={department.employees} />

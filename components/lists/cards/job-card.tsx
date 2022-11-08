@@ -1,11 +1,11 @@
 import { useTranslation } from "next-i18next";
-import Job from "../../services/models/job";
+import Job from "../../../services/models/job";
 import { CardImage } from "./components/image-card";
 import { faSuitcase } from "@fortawesome/pro-light-svg-icons";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faScreenUsers } from "@fortawesome/pro-regular-svg-icons";
-import { ButtonBasic } from "../buttons";
+import { ButtonBasic } from "../../buttons";
 
 export const JobCard = (job: Job) => {
   const { t } = useTranslation("common");

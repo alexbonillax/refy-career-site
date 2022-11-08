@@ -3,8 +3,8 @@ import { faMapLocationDot } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
-import Workplace from "../../services/models/workplace";
-import { ButtonBasic } from "../buttons/button-basic";
+import Workplace from "../../../services/models/workplace";
+import { ButtonBasic } from "../../buttons/button-basic";
 import { CardImage } from "./components/image-card";
 import { JobsAvailable } from "./components/job-availability";
 

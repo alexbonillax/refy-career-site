@@ -31,7 +31,7 @@ import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
 import { SSRCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
 import { isReferralCode } from '../../../utils/is-referral-code';
-import { RefierCard } from '../../../components/cards/refier-card';
+import { RefierCard } from '../../../components/lists/cards/refier-card';
 
 const scrollToDescription = (): void => window.scrollTo({ top: document.getElementById('cover').scrollHeight, behavior: 'smooth' });
 

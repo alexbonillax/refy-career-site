@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { loaderBucketXL } from "../../../utils/image-loader";
+import { loaderBucketXL } from "../../../../utils/image-loader";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const CardImage = ({pictures, icon, blurr = false}: {pictures: string[], icon: IconProp, blurr?: boolean}) => (

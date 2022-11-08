@@ -13,7 +13,7 @@ import Company from "../../services/models/company";
 import {useEffect} from "react";
 import {ApplyDynamicStyles} from "../../utils/dynamic-styles/apply-styles";
 import {SSRCheck} from "../../utils/redirects";
-import { RefierCard } from "../../components/cards/refier-card";
+import { RefierCard } from "../../components/lists/cards/refier-card";
 
 export const Translate = (text: string, array?: boolean): string => {
   const {t} = useTranslation("common");

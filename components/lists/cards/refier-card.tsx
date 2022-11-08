@@ -1,8 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Profile from "../../services/models/profile";
-import { bucketL } from "../../services/urls";
-import { Logo, LogoTypes } from "../logo";
+import Profile from "../../../services/models/profile";
+import { bucketL } from "../../../services/urls";
+import { Logo, LogoTypes } from "../../logo";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const openLinkedin = (username: string): Window => window.open(`https://www.linkedin.com/in/${username}`, '_blank');

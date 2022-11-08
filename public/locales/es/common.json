@@ -32,6 +32,7 @@
   "read-less": "ver menos",
   "about.workers_interval": "(1)[Menos de 10 empleados];(2)[Entre 10 y 50 empleados];(3)[Entre 50 y 200 empleados];(4)[Más de 200 empleados];",
   "job.frequency_interval": "(1)[Anual];(2)[Mensual];(3)[Semanal];(4)[Diaria];(5)[Horaria];",
+  "job.workplace-type_interval": "(1)[Presencial];(2)[Híbrido];(3)[Remoto];",
   "job.type_interval": "(1)[Tiempo completo];(2)[Tiempo parcial];(3)[Contrato];(4)[Temporal];(5)[Aprendizaje];(6)[Prácticas];(7)[Voluntario];",
   "job.salary_interval": "(1)[€];(2)[$];",
   "coworkers": "Compañeros de equipo",

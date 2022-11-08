@@ -1,9 +1,9 @@
-import Department from "../../services/models/department";
+import Department from "../../../services/models/department";
 import { faScreenUsers } from "@fortawesome/pro-light-svg-icons";
 import { CardImage } from "./components/image-card";
 import { JobsAvailable } from "./components/job-availability";
 import Link from "next/link";
-import { ButtonBasic } from "../buttons/button-basic";
+import { ButtonBasic } from "../../buttons/button-basic";
 import { useTranslation } from "next-i18next";
 
 interface DepartmentCardProps {

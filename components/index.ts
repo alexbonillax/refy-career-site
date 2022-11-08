@@ -9,7 +9,7 @@ export * from './loading-page';
 export * from './logo';
 export * from './read-more';
 export * from './snackbar';
-export * from './cards';
+export * from './lists/cards';
 export * from './buttons';
 export * from './accordion';
 export * from './toggle';

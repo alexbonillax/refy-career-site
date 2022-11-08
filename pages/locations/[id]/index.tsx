@@ -8,7 +8,6 @@ import { getCompanyInfo, getRecentJobs } from "../../../services";
 import Company from "../../../services/models/company";
 import Page from "../../../services/models/page";
 import Job from "../../../services/models/job";
-import { RecentJobs } from "../../jobs";
 import Footer from "../../../components/footer";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -17,10 +16,7 @@ import Router from 'next/router';
 import { ApplyDynamicStyles } from "../../../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../../../utils/redirects";
 import Workplace from "../../../services/models/workplace";
-import i18next from "i18next";
-import intervalPlural from "i18next-intervalplural-postprocessor";
-import {faClock, faCoin, faHandshake} from "@fortawesome/pro-light-svg-icons";
-import {numberWithCommas} from "../../../utils";
+import { JobCardsList } from "../../../components/lists/job-cards-list";
 
 export const Translate = (text: string, options?: any): string => {
   const { t } = useTranslation("common");
@@ -79,7 +75,7 @@ const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ p
               backButton={{ url: '/locations', text: Translate('back-to', { page: pageProps.companyInfo.careers?.workplaces?.navbar || Translate('locations')}) }}
           />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
-          <RecentJobs recentJobsList={data.recentJobsList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
+          <JobCardsList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>
