@@ -21,13 +21,25 @@ export const JobRow = (job: Job) => {
         <div className="flex items-center w-6/12 pl-5">
           <p className="font-title font--ellipsis">{job.attributes.title}</p>
         </div>
+
         <div className="flex items-center justify-center w-2/12 pl-5">
-          <RowIcon {...faSuitcase} />
-          <p className="font-subtitle font--ellipsis">{job.overview?.department.name}</p>
+          {
+            job.overview?.department?.name &&
+            <>
+              <RowIcon {...faSuitcase} />
+              <p className="font-subtitle font--ellipsis">{job.overview?.department.name}</p>
+            </>
+          }
+
         </div>
         <div className="flex items-center justify-center w-2/12">
-          <RowIcon {...faMapMarkerAlt} />
-          <p className="font-subtitle font--ellipsis">{job.overview?.workplaces[0].areaName}</p>
+          {
+            job.overview?.workplaces[0]?.areaName &&
+            <>
+              <RowIcon {...faMapMarkerAlt} />
+              <p className="font-subtitle font--ellipsis">{job.overview?.workplaces[0]?.areaName}</p>
+            </>
+          }
         </div>
         <div className="flex items-center justify-end w-2/12 pr-5 ">
           <Link href={{ pathname: '/jobs/' + job.id }}>
@@ -37,19 +49,25 @@ export const JobRow = (job: Job) => {
       </div>
 
       <Link className="desktop:hidden cursor-pointer flex flex-col w-full br-var px-3 py-1 box-shadow-container--card background-color--grey--0" href={{ pathname: '/jobs/' + job.id }}>
-        <div className="flex items-center h-4">
-          <RowIcon {...faMapMarkerAlt} />
-          <p className="font-subtitle font--ellipsis">{job.overview?.workplaces[0].areaName}</p>
-        </div>
-        <p className="font-title font--ellipsis">{job.attributes.title}</p>
-        <div className="flex" >
-          <div className="flex items-center h-4 border-r pr-2">
-            <RowIcon {...faScreenUsers} />
-            <p className="font-subtitle font--ellipsis">{job.overview?.department.name}</p>
+        {
+          job.overview?.workplaces[0]?.areaName &&
+          <div className="flex items-center h-4">
+            <RowIcon {...faMapMarkerAlt} />
+            <p className="font-subtitle font--ellipsis">{job.overview.workplaces[0].areaName}</p>
           </div>
+        }
+        <p className="font-title font--ellipsis">{job.attributes?.title}</p>
+        <div className="flex" >
+          {
+            job.overview?.department?.name &&
+            <div className="flex items-center h-4 border-r pr-2 mr-2">
+              <RowIcon {...faScreenUsers} />
+              <p className="font-subtitle font--ellipsis">{job.overview.department.name}</p>
+            </div>
+          }
           {
             (!isLoading && job.attributes?.workplaceType) &&
-            <div className="flex items-center h-4 pl-2">
+            <div className="flex items-center h-4">
               <RowIcon {...faHouseLaptop} />
               <p className="font-subtitle font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
             </div>
