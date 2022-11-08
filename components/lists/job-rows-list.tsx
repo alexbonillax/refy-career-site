@@ -14,6 +14,8 @@ export const JobRowsList = ({ recentJobsList, company, workplace, loading = true
   return (
     <>
       <div className="flex flex-wrap flex-align-justify-center mt-5 space-y-5">
+      <JobRowLoading />
+
         {
           !loading && jobs && jobs.map((job, i) => (
             <JobRow {...job} key={i} />
