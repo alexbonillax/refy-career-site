@@ -17,7 +17,7 @@ export const JobRow = (job: Job) => {
   }, []);
   return (
     <>
-      <div className="mobile:hidden desktop:flex flex-row h-12 w-full br-var box-shadow-container--card background-color--grey--0">
+      <div className="mobile:hidden desktop:flex flex-row h-12 w-full br-var box-shadow-container--card background-color--white">
         <div className="flex items-center w-6/12 pl-5">
           <p className="font-title font--ellipsis">{job.attributes.title}</p>
         </div>
@@ -48,7 +48,7 @@ export const JobRow = (job: Job) => {
         </div>
       </div>
 
-      <Link className="desktop:hidden cursor-pointer flex flex-col w-full br-var px-3 py-1 box-shadow-container--card background-color--grey--0" href={{ pathname: '/jobs/' + job.id }}>
+      <Link className="desktop:hidden cursor-pointer flex flex-col w-full br-var px-3 py-1 box-shadow-container--card background-color--white" href={{ pathname: '/jobs/' + job.id }}>
         {
           job.overview?.workplaces[0]?.areaName &&
           <div className="flex items-center h-4">

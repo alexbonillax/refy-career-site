@@ -24,7 +24,7 @@ export const JobFilterList = ({ recentJobsList, company, workplace, loading = tr
         <h2 className="font-big-title text-center">{company.careers.jobs?.title || t('jobs.available')}</h2>
         <p className="font-subtitle text-center my-2">{company.careers.jobs?.subtitle || t('jobs.find', { company: company.attributes.name })}</p>
 
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center space-x-1">
           <FilterButton icon={faList} onClick={()=> { setType(listType.rows); localStorage.setItem('jobListType', listType.rows) } } />
           <FilterButton icon={faWindowMaximize} onClick={()=> { setType(listType.cards); localStorage.setItem('jobListType', listType.cards) } }/>
         <div>
@@ -45,7 +45,7 @@ export const JobFilterList = ({ recentJobsList, company, workplace, loading = tr
 }
 
 const FilterButton = ({icon, onClick} : {icon: IconDefinition, onClick: () => void }) => (
-  <div onClick={onClick} className="flex justify-center items-center w-4 h-4 cursor-pointer br-var background-color--grey--0 box-shadow-container--card">
+  <div onClick={onClick} className="flex justify-center items-center w-4 h-4 cursor-pointer br-var background-color--white box-shadow-container--card">
     <div className="flex items-center justify-center w-2 h-2">
       <FontAwesomeIcon icon={icon} className={`icon-font icon-font--normal icon-font--field-button`} />
     </div>
