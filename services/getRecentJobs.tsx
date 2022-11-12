@@ -5,6 +5,7 @@ import Page from "./models/page";
 export interface JobSearchProps {
   page: number;
   perPage: number;
+  companyId: number;
   searchText: string;
   workplaces: number[];
   departments: number[]

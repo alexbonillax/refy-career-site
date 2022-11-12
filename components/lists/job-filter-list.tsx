@@ -1,8 +1,7 @@
-import { faList, faWindowMaximize, IconDefinition } from "@fortawesome/pro-light-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faList, faWindowMaximize } from "@fortawesome/pro-light-svg-icons";
 import { useTranslation } from "next-i18next";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { getJobs, getRecentJobs, JobSearchProps } from "../../services";
+import { useEffect, useState } from "react";
+import { getJobs, JobSearchProps } from "../../services";
 import Company from "../../services/models/company";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
@@ -20,7 +19,7 @@ enum listType {
 
 export const JobFilterList = ({ company, workplace, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
-  let lastSearch: JobSearchProps = { page: 1, perPage: 20, searchText: '', workplaces: [], departments: [] };
+  let lastSearch: JobSearchProps = { companyId: company.id ,page: 1, perPage: 20, searchText: '', workplaces: [], departments: [] };
   const [type, setType] = useState<listType>(listType.cards);
   const [jobList, setJobList] = useState<Page<Job>>();
   const [isLoading, setLoading] = useState(true);
