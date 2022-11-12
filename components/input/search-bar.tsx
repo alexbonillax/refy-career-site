@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import debounce from 'lodash.debounce';
 
 
-export const SearchBar = ({ onChange }: { onChange?: (e: string) => void }) => {
+export const SearchBar = ({ placeholder, onChange }: { placeholder: string, onChange?: (e: string) => void }) => {
   const changeHandler = (event: any) => {
     onChange(event.target.value);
   };
@@ -16,7 +16,7 @@ export const SearchBar = ({ onChange }: { onChange?: (e: string) => void }) => {
       <div className="flex absolute left-3 items-center justify-center w-2 h-2">
         <FontAwesomeIcon icon={faMagnifyingGlass} className={`icon-font icon-font--normal icon-font--field-button`} />
       </div>
-      <input onChange={debouncedChangeHandler} className="w-full font-multiline font--grey-1000 h-6 appearance-none" />
+      <input onChange={debouncedChangeHandler} placeholder={placeholder} className="w-full font-multiline font--grey-1000 h-6 appearance-none" />
     </div>
   )
 }

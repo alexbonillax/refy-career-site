@@ -12,7 +12,7 @@ import { JobCardsList, JobListProps } from "./job-cards-list";
 import { JobRowsList } from "./job-rows-list";
 import _ from 'lodash';
 
-enum listType {
+enum ListType {
   cards = 'cards',
   rows = 'rows',
 }
@@ -20,7 +20,7 @@ enum listType {
 export const JobFilterList = ({ company, workplace, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
   let lastSearch: JobSearchProps = { companyId: company.id ,page: 1, perPage: 20, searchText: '', workplaces: [], departments: [] };
-  const [type, setType] = useState<listType>(listType.cards);
+  const [type, setType] = useState<ListType>(ListType.cards);
   const [jobList, setJobList] = useState<Page<Job>>();
   const [isLoading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useState<JobSearchProps>(lastSearch)
@@ -36,7 +36,7 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
       await searchJobs();
     }
     if (localStorage.getItem('jobListType')) {
-      setType(localStorage.getItem('jobListType') as unknown as listType);
+      setType(localStorage.getItem('jobListType') as unknown as ListType);
     }
     fetchJobsOnInit();
   }, [])
@@ -53,17 +53,17 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
   }, [searchParams])
   return (
     <section id="department-jobs" className={`background-color--white ${classes}`}>
-      <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
+      <div className="mobile-container--responsive m-auto flex-col px-2 pt-10">
         <h2 className="font-big-title text-center">{company.careers.jobs?.title || t('jobs.available')}</h2>
         <p className="font-subtitle text-center my-2">{company.careers.jobs?.subtitle || t('jobs.find', { company: company.attributes.name })}</p>
 
-        <FilterJobsArea searchParams={searchParams} companyInfo={company} setType={value => setType(value)} setSearch={value => { setSearchParams(value) }} />
+        <FilterJobsArea searchParams={searchParams} type={type} companyInfo={company} setType={value => setType(value)} setSearch={value => { setSearchParams(value) }} />
         {
-          type === listType.cards &&
+          type === ListType.cards &&
           <JobCardsList jobList={jobList} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
         }
         {
-          type === listType.rows &&
+          type === ListType.rows &&
           <JobRowsList jobList={jobList} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
         }
       </div>
@@ -74,23 +74,25 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
 interface FilterJobsAreaProps {
   searchParams: JobSearchProps;
   companyInfo: Company;
-  setType: (e: listType) => void;
+  type: ListType;
+  setType: (e: ListType) => void;
   setSearch: (e: JobSearchProps) => void;
 }
 
-const FilterJobsArea = ({ searchParams, companyInfo, setType, setSearch }: FilterJobsAreaProps) => {
+const FilterJobsArea = ({ searchParams, companyInfo, type, setType, setSearch }: FilterJobsAreaProps) => {
   const { t } = useTranslation("common");
+  const setListViewType = (listType: ListType) => {setType(listType); localStorage.setItem('jobListType', listType) };
   const departments: SelectListProps[] = companyInfo.departments.map(department => { return { id: department.id, value: department.attributes.name } });
   const workplaces: SelectListProps[] = companyInfo.workplaces.map(workplace => { return { id: workplace.id, value: workplace.attributes.name } });
   return (
     <div className="w-full space-y-4 p-4 mobile:pb-3 br-var box-shadow-container--card background-color--white">
-      <SearchBar onChange={value => setSearch({ ...searchParams, searchText: value })} />
+      <SearchBar placeholder={t('search')} onChange={value => setSearch({ ...searchParams, searchText: value })} />
       <div className="flex desktop:flex-row desktop:space-x-4 mobile:space-y-4 mobile:flex-col">
         <Select list={workplaces} emptyValue={t('jobs.all-workplaces')} onChange={value => { setSearch({ ...searchParams, workplaces: +value ? [+value] : [] }); }} />
         <Select list={departments} emptyValue={t('jobs.all-locations')} onChange={value => setSearch({ ...searchParams, departments: +value ? [+value] : [] })} />
         <div className="flex items-center justify-center space-x-1">
-          <ButtonTiny icon={faList} onClick={() => { setType(listType.rows); localStorage.setItem('jobListType', listType.rows) }} />
-          <ButtonTiny icon={faWindowMaximize} onClick={() => { setType(listType.cards); localStorage.setItem('jobListType', listType.cards) }} />
+          <ButtonTiny icon={faWindowMaximize} selected={type === ListType.cards} onClick={() => setListViewType(ListType.cards)} />
+          <ButtonTiny icon={faList} selected={type === ListType.rows} onClick={() => setListViewType(ListType.rows)} />
         </div>
       </div>
     </div>

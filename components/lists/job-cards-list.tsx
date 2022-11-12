@@ -24,7 +24,7 @@ export const JobCardsList = ({ jobList, workplace, loading = true, reduced = fal
   }
   return (
     <>
-      <div className="flex flex-wrap flex-align-justify-center mt-5">
+      <div className="flex flex-wrap mobile-container--responsive  flex-align-justify-center py-10">
         {
           !loading && jobs && jobs.map((job, i) => (
             <div className="p-1 w-m--100 w-d--33" key={i}>
@@ -44,8 +44,7 @@ export const JobCardsList = ({ jobList, workplace, loading = true, reduced = fal
             </div>
           )
         }
-      </div>
-      {
+              {
         reduced &&
         <div className="flex justify-center mt-2">
           <Link href="/jobs">
@@ -53,6 +52,7 @@ export const JobCardsList = ({ jobList, workplace, loading = true, reduced = fal
           </Link>
         </div>
       }
+      </div>
     </>
   )
 };
