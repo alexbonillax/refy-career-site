@@ -5,11 +5,11 @@ import { JobListProps } from "./job-cards-list";
 import { JobRow } from "./rows/job-row";
 import { JobRowLoading } from "./rows/loading-rows/job-loading-row";
 
-export const JobRowsList = ({ recentJobsList, company, workplace, loading = true, reduced = false, classes = '' }: JobListProps) => {
+export const JobRowsList = ({ jobList, company, workplace, loading = true, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
-  let jobs = recentJobsList?.content;
+  let jobs = jobList?.content;
   if (workplace) {
-    jobs = recentJobsList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <>

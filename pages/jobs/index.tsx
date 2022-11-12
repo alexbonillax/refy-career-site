@@ -18,24 +18,16 @@ import { SSRCheck } from "../../utils/redirects";
 import { JobFilterList } from "../../components/lists/job-filter-list";
 
 interface JobsProps {
-  recentJobsList: Page<Job>,
+  jobList: Page<Job>,
 }
 
 const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const snackbarRef = useRef(null);
   const workplaceId = +useRouter().query?.workplace;
-  const [data, setData] = useState<JobsProps>({ recentJobsList: null })
-  const [isLoading, setLoading] = useState(true);
   ('unknown' in useRouter().query) && snackbarRef.current?.handleClick(t('job.not-exist'));
   useEffect(() => {
-    async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo);
-      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
-      setData({ recentJobsList });
-      setLoading(false);
-    }
-    getJobsData();
+    ApplyDynamicStyles(pageProps.companyInfo);
   }, [])
 
 
@@ -43,7 +35,7 @@ const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     <>
       <Header company={pageProps.companyInfo} title={t('jobs')} />
       <Navbar url='jobs' company={pageProps.companyInfo} />
-      <JobFilterList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} />
+      <JobFilterList company={pageProps.companyInfo} workplace={workplaceId} />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
       <BottomSnackbar ref={snackbarRef} />

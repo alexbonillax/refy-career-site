@@ -25,22 +25,22 @@ export const Translate = (text: string, options?: any): string => {
 }
 
 interface DepartmentDetailsProps {
-  recentJobsList: Page<Job>;
+  jobList: Page<Job>;
   teamName: string;
 }
 
 const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const departmentId = +useRouter().query?.id;
-  const [data, setData] = useState<DepartmentDetailsProps>({ recentJobsList: null, teamName: null })
+  const [data, setData] = useState<DepartmentDetailsProps>({ jobList: null, teamName: null })
   const [isLoading, setLoading] = useState(true)
   const department = pageProps.companyInfo.departments.find((dept: Department) => dept.id === departmentId);
   useEffect(() => {
     if (!departmentId || !department) { Router.push(`/teams`) };
     ApplyDynamicStyles(pageProps.companyInfo);
     async function getJobsData() {
-      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
+      const jobList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
       const teamName = pageProps.companyInfo.departments.find((dept: Department) => dept.id === +departmentId)?.attributes.name;
-      setData({ recentJobsList, teamName });
+      setData({ jobList, teamName });
       setLoading(false);
     }
     getJobsData();
@@ -57,7 +57,7 @@ const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ 
               height={BannerHeight.smallScreen}
               backButton={{ url: '/teams', text: Translate('back-to', { page: pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')}) }}
           />
-          <JobCardsList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} />
+          <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} />
           {
             (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&
             <Coworkers employees={department.employees} />

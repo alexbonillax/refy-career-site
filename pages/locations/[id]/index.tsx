@@ -43,20 +43,20 @@ const WorkplaceDescription = ({workplace} : WorkplaceDescriptionProps) => {
 }
 
 interface WorkplaceDetailsProps {
-  recentJobsList: Page<Job>;
+  jobList: Page<Job>;
 }
 
 const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const workplaceId: any = +useRouter().query?.id;
-  const [data, setData] = useState<WorkplaceDetailsProps>({ recentJobsList: null })
+  const [data, setData] = useState<WorkplaceDetailsProps>({ jobList: null })
   const [isLoading, setLoading] = useState(true)
   const workplace = pageProps.companyInfo.workplaces.find((workplace: Workplace) => workplace.id === workplaceId);
   useEffect(() => {
     if (!workplaceId || !workplace) { Router.push(`/locations`) };
     ApplyDynamicStyles(pageProps.companyInfo);
     async function getJobsData() {
-      const recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
-      setData({ recentJobsList });
+      const jobList = await getRecentJobs(pageProps.companyInfo.id);
+      setData({ jobList });
       setLoading(false);
     }
     getJobsData();
@@ -75,7 +75,7 @@ const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ p
               backButton={{ url: '/locations', text: Translate('back-to', { page: pageProps.companyInfo.careers?.workplaces?.navbar || Translate('locations')}) }}
           />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
-          <JobCardsList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
+          <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>

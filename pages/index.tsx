@@ -18,7 +18,7 @@ import { JobCardsList } from "../components/lists/job-cards-list";
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t, ready } = useTranslation("common");
-  const [data, setData] = useState({ recentJobsList: null });
+  const [data, setData] = useState({ jobList: null });
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,9 +27,9 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     }
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo);
-      let recentJobsList = await getRecentJobs(pageProps.companyInfo.id);
-      recentJobsList = { ...recentJobsList, content: recentJobsList.content.slice(0, 6) };
-      setData({ recentJobsList });
+      let jobList = await getRecentJobs(pageProps.companyInfo.id);
+      jobList = { ...jobList, content: jobList.content.slice(0, 6) };
+      setData({ jobList });
       setLoading(false);
     }
     getJobsData();
@@ -46,7 +46,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
       <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
-      <JobCardsList recentJobsList={data.recentJobsList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
+      <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
       <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0"/>
       <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white"/>
       <AboutCompany {...pageProps.companyInfo} />

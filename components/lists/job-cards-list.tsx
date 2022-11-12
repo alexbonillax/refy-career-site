@@ -8,19 +8,19 @@ import { JobCard } from "./cards";
 import { JobCardLoading } from "./cards/loading-cards/job-loading-card";
 
 export interface JobListProps {
-  recentJobsList: Page<Job>;
+  jobList?: Page<Job>;
   company: Company;
   workplace?: number;
-  loading: boolean;
+  loading?: boolean;
   reduced?: boolean;
   classes?: string;
 }
 
-export const JobCardsList = ({ recentJobsList, workplace, loading = true, reduced = false }: JobListProps) => {
+export const JobCardsList = ({ jobList, workplace, loading = true, reduced = false }: JobListProps) => {
   const { t } = useTranslation("common");
-  let jobs = recentJobsList?.content;
+  let jobs = jobList?.content;
   if (workplace) {
-    jobs = recentJobsList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <>
