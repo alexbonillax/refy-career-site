@@ -28,6 +28,7 @@
   "job.apply.refier.title": "Tu referidor en {{ company }}",
   "people": "Personas",
   "banner.subtitle": "Encuentra tu próximo trabajo en {{company}}",
+  "job.banner.search": "Busca tu siguiente trabajo en {{company}}",
   "job.salary.title": "Rango salarial",
   "job.frequency.title": "Frecuencia de pago",
   "job.empty": "No hay posiciones por ahora",

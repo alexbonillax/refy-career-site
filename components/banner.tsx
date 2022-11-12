@@ -10,7 +10,7 @@ interface BannerProps {
   title?: string;
   height: BannerHeight;
   backButton?: BannerBackButton;
-  searchBar?: boolean;
+  searchBar?: string;
   onSearch?: (e: string) => void;
 }
 
@@ -47,7 +47,7 @@ export const Banner = ({ picture, tagline, title, height, backButton, searchBar,
             <h2 className="font-subtitle font--light my-2">{tagline}</h2>
             {
               searchBar &&
-              <SearchBarAction placeholder="Busca cualquier trabajo" onClick={value => onSearch(value)} />
+              <SearchBarAction placeholder={searchBar} onClick={value => onSearch(value)} />
             }
           </div>
         </div>

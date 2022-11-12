@@ -47,7 +47,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} 
-        searchBar
+        searchBar={t('job.banner.search', {company: pageProps.companyInfo.attributes.name})}
         onSearch={goToSearchJobs}/>
       <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
       <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
