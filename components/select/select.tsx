@@ -19,8 +19,8 @@ export const Select = ({ emptyValue, list, onChange }: SelectProps) => {
         list?.length > 0 &&
         <>
           <div className="relative w-full flex items-center">
-            <select onChange={e => onChange(e.target.value)} className="w-full font-multiline font--grey-1000 h-6 pl-3 box-shadow-container--card background-color--white br-var appearance-none">
-              <option selected value={0}>{emptyValue}</option>
+            <select defaultValue={0} onChange={e => onChange(e.target.value)} className="w-full font-multiline font--grey-1000 h-6 pl-3 box-shadow-container--card background-color--white br-var appearance-none">
+              <option value={0}>{emptyValue}</option>
               {
                 list.map((item, i) => (
                   <option key={i} value={item.id}>{item.value}</option>

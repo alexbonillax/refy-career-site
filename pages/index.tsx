@@ -15,11 +15,13 @@ import { ApplyDynamicStyles } from "../utils/dynamic-styles/apply-styles";
 import { SSRCheck } from "../utils/redirects";
 import { ValuesSection } from "../components/carousel/values-section";
 import { JobCardsList } from "../components/lists/job-cards-list";
+import Router from 'next/router';
 
 const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t, ready } = useTranslation("common");
   const [data, setData] = useState({ jobList: null });
   const [isLoading, setLoading] = useState(true);
+  const goToSearchJobs = (jobId: string) => Router.push(`/jobs?search=${jobId}`)
 
   useEffect(() => {
     if (!pageProps.companyInfo) {
@@ -44,7 +46,9 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         height={BannerHeight.bigScreen}
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
-        title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} />
+        title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} 
+        searchBar
+        onSearch={goToSearchJobs}/>
       <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
       <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
       <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0"/>

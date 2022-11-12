@@ -17,10 +17,6 @@ import getWildcardCode from "../../utils/wildcard";
 import { SSRCheck } from "../../utils/redirects";
 import { JobFilterList } from "../../components/lists/job-filter-list";
 
-interface JobsProps {
-  jobList: Page<Job>,
-}
-
 const Jobs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
   const { t } = useTranslation("common");
   const snackbarRef = useRef(null);

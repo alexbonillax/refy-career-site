@@ -205,6 +205,24 @@ $box-shadow-container-soft: rgb(0 0 0 / 12%) 0px 6px 16px;
   &-var {
     border-radius: var(--card-roundedCorners);
   }
+
+  &-x-var {
+    border-radius: var(--card-roundedCorners) 0;
+  }
+
+  &-y-var {
+    border-radius: 0 var(--card-roundedCorners);
+  }
+
+  &-l-var {
+    border-top-left-radius: var(--card-roundedCorners);
+    border-bottom-left-radius: var(--card-roundedCorners);
+  }
+
+  &-r-var {
+    border-top-right-radius: var(--card-roundedCorners);
+    border-bottom-right-radius: var(--card-roundedCorners);
+  }
 }
 
 .h {
