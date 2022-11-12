@@ -53,7 +53,7 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
 
   return (
     <section id="department-jobs" className={`background-color--white ${classes}`}>
-      <div className="mobile-container--responsive m-auto flex-col px-2 pt-10">
+      <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
         <h2 className="font-big-title text-center">{company.careers.jobs?.title || t('jobs.available')}</h2>
         <p className="font-subtitle text-center my-2">{company.careers.jobs?.subtitle || t('jobs.find', { company: company.attributes.name })}</p>
 
