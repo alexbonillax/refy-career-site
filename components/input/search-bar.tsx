@@ -16,7 +16,7 @@ export const SearchBar = ({ placeholder, value, onChange }: { placeholder: strin
       <div className="flex absolute left-3 items-center justify-center w-2 h-2">
         <FontAwesomeIcon icon={faMagnifyingGlass} className={`icon-font icon-font--normal icon-font--field-button`} />
       </div>
-      <input onChange={debouncedChangeHandler} defaultValue={value} placeholder={placeholder} className="w-full font-multiline font--grey-1000 h-6 appearance-none" />
+      <input onChange={debouncedChangeHandler} defaultValue={value} placeholder={placeholder} className="w-full background-color--white  font-multiline font--grey-1000 h-6 appearance-none" />
     </div>
   )
 }
