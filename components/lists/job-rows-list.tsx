@@ -13,7 +13,7 @@ export const JobRowsList = ({ jobList, company, workplace, loading = true, reduc
   }
   return (
     <>
-      <div className="flex flex-wrap flex-align-justify-center mt-5 space-y-5">
+      <div className="flex flex-wrap mobile-container--responsive flex-align-justify-center py-6 space-y-5">
         {
           !loading && jobs && jobs.map((job, i) => (
             <JobRow {...job} key={i} />

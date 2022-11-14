@@ -21,7 +21,7 @@ export interface JobsFilterProps {
     const departments: SelectListProps[] = companyInfo.departments.map(department => { return { id: department.id, value: department.attributes.name } });
     const workplaces: SelectListProps[] = companyInfo.workplaces.map(workplace => { return { id: workplace.id, value: workplace.attributes.name } });
     return (
-      <div className="w-full space-y-4 p-4 mobile:pb-3 br-var box-shadow-container--card background-color--white">
+      <div className="w-full space-y-4 p-4 mobile:pb-3 mobile-container br-var box-shadow-container--card background-color--white">
         <SearchBar placeholder={t('search')} value={searchParams.searchText} onChange={value => setSearch({ ...searchParams, searchText: value })} />
         <div className="flex desktop:flex-row desktop:space-x-4 mobile:space-y-4 mobile:flex-col">
           <Select list={workplaces} emptyValue={t('jobs.all-workplaces')} onChange={value => { setSearch({ ...searchParams, workplaces: +value ? [+value] : [] }); }} />

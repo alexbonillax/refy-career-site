@@ -4,6 +4,7 @@ import Company from "../../services/models/company";
 import Job from "../../services/models/job";
 import Page from "../../services/models/page";
 import { ButtonBasic } from "../buttons";
+import { JobsSectionTitle } from "../titles/jobs-section-title";
 import { JobCard } from "./cards";
 import { JobCardLoading } from "./cards/loading-cards/job-loading-card";
 
@@ -16,7 +17,7 @@ export interface JobListProps {
   classes?: string;
 }
 
-export const JobCardsList = ({ jobList, workplace, loading = true, reduced = false }: JobListProps) => {
+export const JobCardsList = ({ jobList, company, workplace, loading = true, reduced = false }: JobListProps) => {
   const { t } = useTranslation("common");
   let jobs = jobList?.content;
   if (workplace) {
@@ -24,7 +25,12 @@ export const JobCardsList = ({ jobList, workplace, loading = true, reduced = fal
   }
   return (
     <>
-      <div className="flex flex-wrap mobile-container--responsive  flex-align-justify-center py-10">
+      <div className={`flex flex-wrap mobile-container--responsive flex-align-justify-center ${reduced ? 'py-10' : 'py-5'}`}>
+        {
+          reduced &&
+          <JobsSectionTitle {...company} />
+        }
+
         {
           !loading && jobs && jobs.map((job, i) => (
             <div className="p-1 w-m--100 w-d--33" key={i}>
@@ -44,14 +50,14 @@ export const JobCardsList = ({ jobList, workplace, loading = true, reduced = fal
             </div>
           )
         }
-              {
-        reduced &&
-        <div className="flex justify-center mt-2">
-          <Link href="/jobs">
-            <ButtonBasic classes='!py-4 !text-lg'>{t('jobs.view')}</ButtonBasic>
-          </Link>
-        </div>
-      }
+        {
+          reduced &&
+          <div className="flex justify-center mt-2">
+            <Link href="/jobs">
+              <ButtonBasic classes='!py-4 !text-lg'>{t('jobs.view')}</ButtonBasic>
+            </Link>
+          </div>
+        }
       </div>
     </>
   )
