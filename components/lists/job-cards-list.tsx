@@ -24,8 +24,8 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
     jobs = jobList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
-    <>
-      <div className={`flex flex-col background-color--white mobile-container--responsive ${reduced ? 'py-10' : 'py-5'}`}>
+    <div className="flex w-full background-color--white">
+      <div className={`flex w-full flex-col background-color--white mobile-container--responsive ${reduced ? 'py-10' : 'py-5'}`}>
         {
           reduced &&
           <JobsSectionTitle {...company} />
@@ -60,6 +60,6 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
           }
         </div>
       </div>
-    </>
+    </div>
   )
 };
