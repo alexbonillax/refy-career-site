@@ -25,39 +25,40 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
   }
   return (
     <>
-      <div className={`flex flex-wrap mobile-container--responsive flex-align-justify-center ${reduced ? 'py-10' : 'py-5'}`}>
+      <div className={`flex flex-col mobile-container--responsive ${reduced ? 'py-10' : 'py-5'}`}>
         {
           reduced &&
           <JobsSectionTitle {...company} />
         }
-
-        {
-          !loading && jobs && jobs.map((job, i) => (
-            <div className="p-1 w-m--100 w-d--33" key={i}>
-              <JobCard {...job} />
+        <div className="flex flex-wrap flex-align-justify-center">
+          {
+            !loading && jobs && jobs.map((job, i) => (
+              <div className="p-1 w-m--100 w-d--33" key={i}>
+                <JobCard {...job} />
+              </div>
+            ))
+          }
+          {
+            //TODO
+            (!jobs || jobs.length == 0) && !loading &&
+            <h1 className="font-prose">{t('job.empty')}</h1>
+          }
+          {
+            loading && Array.from(Array(6)).map((_, i) =>
+              <div className="p-1 w-m--100 w-d--33" key={i}>
+                <JobCardLoading />
+              </div>
+            )
+          }
+          {
+            reduced &&
+            <div className="flex justify-center mt-2">
+              <Link href="/jobs">
+                <ButtonBasic classes='!py-4 !text-lg'>{t('jobs.view')}</ButtonBasic>
+              </Link>
             </div>
-          ))
-        }
-        {
-          //TODO
-          (!jobs || jobs.length == 0) && !loading &&
-          <h1 className="font-prose">{t('job.empty')}</h1>
-        }
-        {
-          loading && Array.from(Array(6)).map((_, i) =>
-            <div className="p-1 w-m--100 w-d--33" key={i}>
-              <JobCardLoading />
-            </div>
-          )
-        }
-        {
-          reduced &&
-          <div className="flex justify-center mt-2">
-            <Link href="/jobs">
-              <ButtonBasic classes='!py-4 !text-lg'>{t('jobs.view')}</ButtonBasic>
-            </Link>
-          </div>
-        }
+          }
+        </div>
       </div>
     </>
   )
