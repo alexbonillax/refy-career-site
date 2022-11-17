@@ -43,16 +43,17 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
       <Header company={pageProps.companyInfo} title={t('home')} />
       <Navbar company={pageProps.companyInfo} url='' transparent />
       <Banner
+        company={pageProps.companyInfo}
         height={BannerHeight.bigScreen}
+        searchBar
         picture={pageProps.companyInfo.careers.home.picture}
         tagline={pageProps.companyInfo.attributes.tagline}
-        title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })} 
-        searchBar={t('job.banner.search', {company: pageProps.companyInfo.attributes.name})}
-        onSearch={goToSearchJobs}/>
+        title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })}
+        onSearch={goToSearchJobs} />
       <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
-      <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white"/>
-      <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0"/>
-      <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white"/>
+      <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white" />
+      <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0" />
+      <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white" />
       <AboutCompany {...pageProps.companyInfo} />
       <Footer />
     </>

@@ -5,7 +5,7 @@ import { JobListProps } from "./job-cards-list";
 import { JobRow } from "./rows/job-row";
 import { JobRowLoading } from "./rows/loading-rows/job-loading-row";
 
-export const JobRowsList = ({ jobList, company, workplace, loading = true, reduced = false, classes = '' }: JobListProps) => {
+export const JobRowsList = ({ jobList, workplace, loading = true, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
   let jobs = jobList?.content;
   if (workplace) {
@@ -13,7 +13,7 @@ export const JobRowsList = ({ jobList, company, workplace, loading = true, reduc
   }
   return (
     <>
-      <div className="flex flex-wrap mobile-container--responsive flex-align-justify-center py-6 space-y-5">
+      <div className={`flex flex-wrap mobile-container--responsive flex-align-justify-center py-6 space-y-5 ${classes} `}>
         {
           !loading && jobs && jobs.map((job, i) => (
             <JobRow {...job} key={i} />

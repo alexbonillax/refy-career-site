@@ -44,10 +44,11 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
             <h1 className="font-prose">{t('job.empty')}</h1>
           }
           {
-            loading && Array.from(Array(6)).map((_, i) =>
+            loading && Array.from(Array(6)).map((_, i) => (
               <div className="p-1 w-m--100 w-d--33" key={i}>
                 <JobCardLoading />
               </div>
+            )
             )
           }
           {

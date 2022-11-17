@@ -3,14 +3,17 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/pro-regular-svg-icons";
 import { SearchBarAction } from "./input/search-bar-action";
+import { JobsAutosuggest } from "./autosuggest/jobs-autosuggest";
+import Company from "../services/models/company";
 
 interface BannerProps {
+  company?: Company;
   picture: string;
-  tagline: string;
+  tagline: string
   title?: string;
   height: BannerHeight;
   backButton?: BannerBackButton;
-  searchBar?: string;
+  searchBar?: boolean;
   onSearch?: (e: string) => void;
 }
 
@@ -26,7 +29,7 @@ export interface BannerBackButton {
   text: string;
 }
 
-export const Banner = ({ picture, tagline, title, height, backButton, searchBar, onSearch }: BannerProps) => {
+export const Banner = ({ company, picture, tagline, title, height, backButton, searchBar, onSearch }: BannerProps) => {
   const picUrl = picture ? bucketXXL + picture : false;
   return (
     <section id="home-banner" className={`background-color--dark background-center`} style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
@@ -47,7 +50,8 @@ export const Banner = ({ picture, tagline, title, height, backButton, searchBar,
             <h2 className="font-subtitle font--light my-2">{tagline}</h2>
             {
               searchBar &&
-              <SearchBarAction placeholder={searchBar} onClick={value => onSearch(value)} />
+              // <SearchBarAction placeholder={searchBar} onClick={value => onSearch(value)} />
+              <JobsAutosuggest company={company} onClick={value => onSearch(value)}/>
             }
           </div>
         </div>
