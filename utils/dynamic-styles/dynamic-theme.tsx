@@ -2,6 +2,7 @@ export const DynamicTheme = (darkTheme: boolean) => {
   let bodyStyles = document.body.style;
   bodyStyles.setProperty('--refy-black', darkTheme ? '#FFF' : '#000');
   bodyStyles.setProperty('--refy-white', darkTheme ? '#16181C' : '#FFF');
+  bodyStyles.setProperty('--refy-white-transparent', darkTheme ? '#16181C63' : '#ffffff63');
   bodyStyles.setProperty('--refy-backdrop', darkTheme ? '#FFFFFF52' : '#00000052');
   bodyStyles.setProperty('--refy-blue', darkTheme ? '#FFF' : '#133273');
   bodyStyles.setProperty('--refy-placeholder', darkTheme ? '#B3B3B8' : '#B3B3B8');

@@ -2,6 +2,7 @@ $refy-dark: #000;
 $refy-light: #FFF;
 $refy-black: var(--refy-black);
 $refy-white: var(--refy-white);
+$refy-white-transparent: var(--refy-white-transparent);
 $refy-backdrop: var(--refy-backdrop);
 $refy-blue: var(--refy-blue);
 $refy-placeholder: var(--refy-placeholder);
@@ -52,6 +53,10 @@ $microsoft-color: #00A1F1;
 
   &--white {
     background-color: $refy-white;
+
+    &-transparent {
+      background-color: $refy-white-transparent;
+    }
   }
 
   &--grey {

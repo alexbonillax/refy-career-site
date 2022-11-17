@@ -44,8 +44,8 @@ export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClic
       <input onKeyDown={handleKeyDown} onChange={debouncedChangeHandler} placeholder={t('job.banner.search', {company: company.attributes.name})} className="w-full background-color--white  font-multiline font--grey-1000 h-6 appearance-none" />
       {
         (loading || list?.content.length > 0) &&
-        <div className="flex absolute h-57 left-0 right-0 top-6">
-            <JobRowsList loading={loading} jobList={list} company={company} classes="!h-57 w-full !my-2 !py-0 overflow-scroll "/>
+        <div className="flex desktop:h-90 mobile:h-80 absolute mobile:left-0 mobile:right-0 desktop:-left-16 desktop:-right-16 top-6">
+            <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!h-90 mobile:!h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var"/>
         </div>
       }
     </div>
