@@ -51,13 +51,13 @@ export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClic
       <input onKeyDown={handleKeyDown} value={value} onChange={handleOnInputChange} placeholder={t('job.banner.search', { company: company.attributes.name })} className="w-full background-color--white br-var font-multiline font--grey-1000 h-6 appearance-none" />
       {
         value &&
-        <div className="flex cursor-pointer absolute right-3 items-center justify-center w-2" onClick={_ => {setValue(''); setDebounceInput('');}}>
+        <div className="flex cursor-pointer absolute right-3 items-center justify-center w-2" onClick={_ => {setValue(''); setDebounceInput(''); setList(null)}}>
           <FontAwesomeIcon icon={faXmark} className={`icon-font icon-font--normal icon-font--field-button`} />
         </div>
       }
       {
         (loading || list?.content.length > 0) &&
-        <div className="flex  absolute mobile:left-0 mobile:right-0 desktop:-left-32 desktop:-right-32 top-8">
+        <div className="flex absolute mobile:left-0 mobile:right-0 desktop:-left-32 desktop:-right-32 top-8">
           <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!max-h-90 mobile:!max-h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var" />
         </div>
       }
