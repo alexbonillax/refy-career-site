@@ -1,4 +1,4 @@
-import { faMagnifyingGlass } from "@fortawesome/pro-light-svg-icons";
+import { faMagnifyingGlass, faXmark } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useState } from "react";
 import debounce from 'lodash.debounce';
@@ -37,15 +37,22 @@ export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClic
   const debouncedChangeHandler = useCallback(debounce(changeHandler, 400), []);
 
   return (
-    <div className="relative w-full pl-6 pr-1 flex items-center box-shadow-container--card background-color--white br-var">
+    <div className="relative w-full px-6 pr-1 flex items-center box-shadow-container--card background-color--white br-var">
       <div className="flex absolute left-3 items-center justify-center w-2">
         <FontAwesomeIcon icon={faMagnifyingGlass} className={`icon-font icon-font--normal icon-font--field-button`} />
       </div>
-      <input onKeyDown={handleKeyDown} onChange={debouncedChangeHandler} placeholder={t('job.banner.search', {company: company.attributes.name})} className="w-full background-color--white  font-multiline font--grey-1000 h-6 appearance-none" />
+      <input onKeyDown={handleKeyDown} onChange={debouncedChangeHandler} placeholder={t('job.banner.search', { company: company.attributes.name })} className="w-full background-color--white  font-multiline font--grey-1000 h-6 appearance-none" />
+      {
+        value &&
+        <div className="flex cursor-pointer absolute right-3 items-center justify-center w-2" onClick={_ => setValue('')}>
+          <FontAwesomeIcon icon={faXmark} className={`icon-font icon-font--normal icon-font--field-button`} />
+        </div>
+      }
+
       {
         (loading || list?.content.length > 0) &&
-        <div className="flex desktop:h-90 mobile:h-80 absolute mobile:left-0 mobile:right-0 desktop:-left-16 desktop:-right-16 top-6">
-            <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!h-90 mobile:!h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var"/>
+        <div className="flex desktop:h-90 mobile:h-80 absolute mobile:left-0 mobile:right-0 desktop:-left-32 desktop:-right-32 top-6">
+          <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!h-90 mobile:!h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var" />
         </div>
       }
     </div>
