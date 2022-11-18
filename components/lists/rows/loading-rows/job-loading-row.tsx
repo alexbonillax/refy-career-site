@@ -16,7 +16,7 @@ export const JobRowLoading = () => {
   const mobileLoadingRow = (
     <div className="flex flex-col h-12 px-3 py-2 justify-between w-full br-var box-shadow-container--card background-color--white">
       <div className="h-2 w-16 background-loading-gradient"></div>
-      <div className="h-2 w-96  background-loading-gradient"></div>
+      <div className="h-2 w-3/4  background-loading-gradient"></div>
       <div className="flex space-x-2">
         <div className="h-2 w-20 background-loading-gradient"></div>
         <div className="h-2 w-20 background-loading-gradient"></div>

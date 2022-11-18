@@ -1,18 +1,18 @@
 import { faMagnifyingGlass, faXmark } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCallback, useState } from "react";
-import debounce from 'lodash.debounce';
+import { useCallback, useEffect, useState } from "react";
 import { getJobs } from "../../services";
 import Company from "../../services/models/company";
 import Page from "../../services/models/page";
 import Job from "../../services/models/job";
 import { JobRowsList } from "../lists/job-rows-list";
 import { useTranslation } from "next-i18next";
-
+import { useDebounce } from "../../utils/debounce";
 
 export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClick?: (e: string) => void }) => {
   const { t } = useTranslation("common");
   const [value, setValue] = useState<string>('');
+  const [debounceInput, setDebounceInput] = useDebounce(value, 400);
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter') {
       onClick(value);
@@ -26,33 +26,45 @@ export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClic
     setList(result);
     setLoading(false);
   }
-  const changeHandler = (event: any): void => {
-    setValue(event.target.value)
-    if (event.target.value) {
-      search(event.target.value);
+  const changeHandler = (value: string): void => {
+    if (value) {
+      search(value);
     } else {
       setList(null);
     }
   };
-  const debouncedChangeHandler = useCallback(debounce(changeHandler, 400), []);
+
+  const handleOnInputChange = useCallback((e: { target: { value: any; }; }) => {
+    setValue(e.target.value)
+    setDebounceInput(e.target.value);
+  }, [debounceInput]);
+
+  useEffect(() => {
+    changeHandler(debounceInput)
+  }, [debounceInput]);
 
   return (
     <div className="relative w-full px-6 pr-1 flex items-center box-shadow-container--card background-color--white br-var">
       <div className="flex absolute left-3 items-center justify-center w-2">
         <FontAwesomeIcon icon={faMagnifyingGlass} className={`icon-font icon-font--normal icon-font--field-button`} />
       </div>
-      <input onKeyDown={handleKeyDown} onChange={debouncedChangeHandler} placeholder={t('job.banner.search', { company: company.attributes.name })} className="w-full background-color--white  font-multiline font--grey-1000 h-6 appearance-none" />
+      <input onKeyDown={handleKeyDown} value={value} onChange={handleOnInputChange} placeholder={t('job.banner.search', { company: company.attributes.name })} className="w-full background-color--white br-var font-multiline font--grey-1000 h-6 appearance-none" />
       {
         value &&
-        <div className="flex cursor-pointer absolute right-3 items-center justify-center w-2" onClick={_ => setValue('')}>
+        <div className="flex cursor-pointer absolute right-3 items-center justify-center w-2" onClick={_ => {setValue(''); setDebounceInput('');}}>
           <FontAwesomeIcon icon={faXmark} className={`icon-font icon-font--normal icon-font--field-button`} />
         </div>
       }
-
       {
         (loading || list?.content.length > 0) &&
-        <div className="flex desktop:h-90 mobile:h-80 absolute mobile:left-0 mobile:right-0 desktop:-left-32 desktop:-right-32 top-6">
-          <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!h-90 mobile:!h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var" />
+        <div className="flex  absolute mobile:left-0 mobile:right-0 desktop:-left-32 desktop:-right-32 top-8">
+          <JobRowsList loading={loading} jobList={list} company={company} classes="desktop:!max-h-90 mobile:!max-h-80 w-full !p-4 overflow-scroll background-color--white-transparent br-var" />
+        </div>
+      }
+      {
+        (!loading && list?.content.length <= 0 && value) && 
+        <div className="flex absolute left-0 right-0 top-8">
+          <div className="w-full font-subtitle !p-4 overflow-scroll background-color--white-transparent br-var">{t('job.not-exist')}</div>
         </div>
       }
     </div>
