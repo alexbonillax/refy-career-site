@@ -51,7 +51,9 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
             )
             )
           }
-          {
+
+        </div>
+        {
             reduced &&
             <div className="flex justify-center mt-2">
               <Link href="/jobs">
@@ -59,7 +61,6 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
               </Link>
             </div>
           }
-        </div>
       </div>
     </div>
   )
