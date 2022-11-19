@@ -98,9 +98,9 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
   }
 
   const NavbarItem = ({ link }: { link: LinkProps }) => (
-    <div className={`navbar-item relative px-3 h-5 flex flex-align-center ${(url === link.url) ? 'active' : ''}`}>
+    <div className={`navbar-item font--grey-1000 relative px-3 h-5 flex flex-align-center ${(url === link.url) ? 'active' : ''}`}>
       <Link href={`/${link.url}`}>{link.title || t(link.url)}</Link>
-      <div className="navbar-item-underline absolute left-2 right-2 bottom-0" style={{ backgroundColor: company.attributes.primaryColor }}></div>
+      <div className="navbar-item-underline absolute left-2 right-2 bottom-0 background-color--white"></div>
     </div>
   )
 
@@ -109,7 +109,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       <div className="flex w-full flex-col space-y-3">
         <div className="flex justify-between items-center px-3">
           <div className='w-2 h-2 flex items-center justify-center'>
-            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar font--grey-1000" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
           <CompanyWebsiteButton />
         </div>
