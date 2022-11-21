@@ -25,7 +25,7 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
   }
   return (
     <div className="flex w-full background-color--white">
-      <div className={`flex w-full flex-col background-color--white mobile-container--responsive ${reduced ? 'py-10' : 'py-5'}`}>
+      <div className={`flex w-full flex-col background-color--white mobile-container--responsive ${reduced ? 'py-10 px-2' : 'py-5'}`}>
         {
           reduced &&
           <JobsSectionTitle {...company} />

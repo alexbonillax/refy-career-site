@@ -64,7 +64,9 @@ export const JobsAutosuggest = ({ company, onClick }: { company: Company, onClic
       {
         (!loading && list?.content.length <= 0 && value) && 
         <div className="flex absolute left-0 right-0 top-8">
-          <div className="w-full font-subtitle !p-4 overflow-scroll background-color--white-transparent br-var">{t('job.not-exist')}</div>
+          <div className="w-full !p-4 overflow-scroll background-color--white-transparent br-var">
+            <p className="font-subtitle font-bold font--grey-1000">{t('job.not-exist')}</p>
+          </div>
         </div>
       }
     </div>
