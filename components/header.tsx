@@ -20,6 +20,7 @@ export const Header = ({ company, title }: HeaderProps) => {
     <Head>
       <title>{`${title} | ${company.attributes.name}`}</title>
       <meta property="og:title" content={`${title} | ${company.attributes.name}`} />
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       {
         company.attributes.description &&
         <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
