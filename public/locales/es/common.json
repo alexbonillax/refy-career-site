@@ -47,5 +47,22 @@
   "benefits": "Beneficios",
   "back-to": "Volver a {{page}}",
   "jobs.view": "Ver más ofertas",
-  "values": "Valores"
+  "values": "Valores",
+  "cookies": {
+    "title": "Este sitio web utiliza cookies para garantizar que obtenga la mejor experiencia en nuestro sitio web.",
+    "description": "Utilizamos cookies propias y de terceros con la finalidad de mejorar los servicios prestados a través de este Sitio Web tratando los datos necesarios para ello. Puedes obtener más información y configurar o rechazar las cookies en 'Configurar' o aceptarlas haciendo clic en 'Aceptar'. ",
+    "setting": "Configuración",
+    "reject": "Rechazar",
+    "accept": "Aceptar",
+    "type": {
+      "analysis": "Análisis y medición",
+      "analysis-desc" : "Son aquellas que permiten al responsable de las mismas el seguimiento y análisis del comportamiento de los usuarios de los sitios web a los que están vinculadas, incluida la cuantificación de los impactos de los anuncios. La información recogida mediante este tipo de cookies se utiliza en la medición de la actividad de los sitios web, aplicación o plataforma, con el fin de introducir mejoras en función del análisis de los datos de uso que hacen los usuarios del servicio.",
+      "publi": "Publicidad comportamental",
+      "publi-desc" : "Son aquellas que almacenan información del comportamiento de los usuarios obtenida a través de la observación continuada de sus hábitos de navegación, lo que permite desarrollar un perfil específico para mostrar publicidad en función del mismo.",
+      "techniques": "Técnicas",
+      "techniques-desc" : "Son aquéllas que permiten al usuario la navegación a través de una página web, plataforma o aplicación y la utilización de las diferentes opciones o servicios que en ella existan, incluyendo aquellas que el editor utiliza para permitir la gestión y operativa de la página web y habilitar sus funciones y servicios, como, por ejemplo, controlar el tráfico y la comunicación de datos, identificar la sesión, acceder a partes de acceso restringido, recordar los elementos que integran un pedido, realizar el proceso de compra de un pedido, gestionar el pago, controlar el fraude vinculado a la seguridad del servicio, realizar la solicitud de inscripción o participación en un evento, contar visitas a efectos de la facturación de licencias del software con el que funciona el servicio (sitio web, plataforma o aplicación), utilizar elementos de seguridad durante la navegación, almacenar contenidos para la difusión de vídeos o sonido, habilitar contenidos dinámicos (por ejemplo, animación de carga de un texto o imagen) o compartir contenidos a través de redes sociales. También pertenecen a esta categoría, por su naturaleza técnica, aquellas cookies que permiten la gestión, de la forma más eficaz posible, de los espacios publicitarios que, como un elemento más de diseño o “maquetación” del servicio ofrecido al usuario, el editor haya incluido en una página web, aplicación o plataforma en base a criterios como el contenido editado, sin que se recopile información de los usuarios con fines distintos, como puede ser personalizar ese contenido publicitario u otros contenidos.",
+      "preferences": "Preferencias o personalización",
+      "preferences-desc" : "Son aquéllas que permiten recordar información para que el usuario acceda al servicio con determinadas características que pueden diferenciar su experiencia de la de otros usuarios, como, por ejemplo, el idioma, el número de resultados a mostrar cuando el usuario realiza una búsqueda, el aspecto o contenido del servicio en función del tipo de navegador a través del cual el usuario accede al servicio o de la región desde la que accede al servicio, etc."
+    }
+  }
 }

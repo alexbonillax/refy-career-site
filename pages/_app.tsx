@@ -5,6 +5,7 @@ import Layout from "../components/material-ui/layout/layout";
 import nextI18NextConfig from "../next-i18next.config.js";
 import { CssBaseline } from "@mui/material";
 import { useEffect } from "react";
+import { CookiesBanner } from "../components/cookies/cookies-banner";
 
 
 function RefyApp(props: AppProps) {
@@ -24,6 +25,7 @@ function RefyApp(props: AppProps) {
     <Layout>
       <CssBaseline />
       <Component {...pageProps} />
+      <CookiesBanner />
     </Layout>
   );
 }
