@@ -12,18 +12,18 @@ import { responsive } from "../../../utils/responsive";
 export const JobRow = (job: Job) => {
   const { t } = useTranslation("common");
   const [isLoading, setLoading] = useState(true);
-  const {isDesktop} = responsive();
+  const { isDesktop } = responsive();
   useEffect(() => {
     i18next.use(intervalPlural).init(_ => setLoading(false));
   }, []);
 
   const desktopRow = (
     <div className="flex flex-row h-12 w-full br-var box-shadow-container--card background-color--white">
-      <div className="flex items-center w-6/12 pl-5">
-        <p className="font-title font--ellipsis">{job.attributes.title}</p>
+      <div className="flex items-center w-5/12 pl-5">
+        <p className="font-title font--ellipsis">{job.attributes.title}sssscsddfsddffsdsddssd</p>
       </div>
 
-      <div className="flex items-center justify-center w-2/12 pl-5">
+      <div className="flex items-center w-2/12 pl-3">
         {
           job.overview?.department?.name &&
           <>
@@ -31,15 +31,23 @@ export const JobRow = (job: Job) => {
             <p className="font-subtitle font--ellipsis">{job.overview?.department.name}</p>
           </>
         }
-
       </div>
-      <div className="flex items-center justify-center w-2/12">
+      <div className="flex items-center w-2/12 pl-2">
         {
           job.overview?.workplaces[0]?.areaName &&
           <>
             <RowIcon {...faMapMarkerAlt} />
             <p className="font-subtitle font--ellipsis">{job.overview?.workplaces[0]?.areaName}</p>
           </>
+        }
+      </div>
+      <div className="flex items-center w-1/12 pl-2">
+        {
+          (!isLoading && job.attributes?.workplaceType) &&
+          <div className="flex items-center h-4">
+            <RowIcon {...faHouseLaptop} />
+            <p className="font-subtitle font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
+          </div>
         }
       </div>
       <div className="flex items-center justify-end w-2/12 pr-5 ">
@@ -80,7 +88,7 @@ export const JobRow = (job: Job) => {
   return (
     <>
       {
-        isDesktop ? desktopRow : mobileRow 
+        isDesktop ? desktopRow : mobileRow
       }
     </>
   )
