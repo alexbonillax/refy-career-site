@@ -23,40 +23,43 @@ export const JobCard = (job: Job) => {
       </div>
       <div className={`flex flex-col p-3 mobile:w-full background-color--white`}>
         <p className="font-title font--ellipsis">{job.attributes.title}</p>
-        <div className="flex items-center justify-center h-3 mt-1">
-          {
-            job.overview?.department &&
-            <Link className="flex justify-start" href={{ pathname: '/teams/' + job.overview.department.id }}>
-              <div className="flex w-26 items-center font-hint mr-3 font-hover--underline cursor-pointer">
+        <div className="flex items-center justify-between h-3 mt-1">
+
+          <Link className="flex justify-start w-3.5/12 pl-1" href={{ pathname: '/teams/' + job.overview?.department?.id }}>
+            {
+              job.overview?.department &&
+              <div className="flex w-full items-center font-hint font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faScreenUsers} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
                 <p className="font--ellipsis">{job.overview.department.name}</p>
               </div>
-            </Link>
-          }
-          {
-            job.overview?.workplaces.length > 0 &&
-            <Link className="flex justify-start" href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
-              <div className="flex w-26 items-center font-hint mr-3  font-hover--underline cursor-pointer">
+            }
+          </Link>
+
+          <Link className="flex justify-center w-3.5/12" href={{ pathname: '/locations/' + job.overview.workplaces[0]?.id }}>
+            {
+              job.overview?.workplaces.length > 0 &&
+              <div className="flex w-full items-center justify-center font-hint  font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
                 <p className="font--ellipsis">{job.overview.workplaces[0].areaName || ''}</p>
               </div>
-            </Link>
-          }
+            }
+          </Link>
 
-          {
-            (!isLoading && job.attributes?.workplaceType) &&
-            <div className="flex w-26 items-center font-hint font-hover--underline cursor-pointer">
-              <div className="flex items-center w-2 h-2 mr-1">
-                <FontAwesomeIcon icon={faHouseLaptop} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
-              </div>
-              <p className="font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
-            </div>
-          }
-
+          <div className="flex w-3.5/12 pr-1 justify-end items-center font-hint font-hover--underline cursor-pointer">
+            {
+              (!isLoading && job.attributes?.workplaceType) &&
+              <>
+                <div className="flex items-center w-2 h-2 mr-1">
+                  <FontAwesomeIcon icon={faHouseLaptop} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
+                </div>
+                <p className="font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
+              </>
+            }
+          </div>
 
         </div>
         <div className="flex flex-justify-center mt-2">
