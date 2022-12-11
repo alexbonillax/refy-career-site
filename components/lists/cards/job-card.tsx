@@ -27,7 +27,7 @@ export const JobCard = (job: Job) => {
           {
             job.overview?.department &&
             <Link className="flex justify-start" href={{ pathname: '/teams/' + job.overview.department.id }}>
-              <div className="flex  items-center font-hint mr-3 font-hover--underline cursor-pointer">
+              <div className="flex w-26 items-center font-hint mr-3 font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faScreenUsers} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
@@ -38,7 +38,7 @@ export const JobCard = (job: Job) => {
           {
             job.overview?.workplaces.length > 0 &&
             <Link className="flex justify-start" href={{ pathname: '/locations/' + job.overview.workplaces[0].id }}>
-              <div className="flex  items-center font-hint mr-3  font-hover--underline cursor-pointer">
+              <div className="flex w-26 items-center font-hint mr-3  font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
@@ -49,7 +49,7 @@ export const JobCard = (job: Job) => {
 
           {
             (!isLoading && job.attributes?.workplaceType) &&
-            <div className="flex  items-center font-hint font-hover--underline cursor-pointer">
+            <div className="flex w-26 items-center font-hint font-hover--underline cursor-pointer">
               <div className="flex items-center w-2 h-2 mr-1">
                 <FontAwesomeIcon icon={faHouseLaptop} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
               </div>
