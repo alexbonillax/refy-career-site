@@ -20,7 +20,7 @@ export const JobRow = (job: Job) => {
   const desktopRow = (
     <div className="flex flex-row h-12 w-full br-var box-shadow-container--card background-color--white">
       <div className="flex items-center w-5/12 pl-5">
-        <p className="font-title font--ellipsis">{job.attributes.title}sssscsddfsddffsdsddssd</p>
+        <p className="font-title font--ellipsis">{job.attributes.title}</p>
       </div>
 
       <div className="flex items-center w-2/12 pl-3">
