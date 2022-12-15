@@ -6,6 +6,7 @@ import Workplace from "./workplace";
 export default interface Company {
   id: number;
   attributes: {
+    analyticsCode: any;
     name: string;
     code: string;
     tagline: string;
