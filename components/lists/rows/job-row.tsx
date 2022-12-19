@@ -23,34 +23,34 @@ export const JobRow = (job: Job) => {
         <p className="font-title font--ellipsis">{job.attributes.title}</p>
       </div>
 
-      <div className="flex items-center w-2/12 pl-3">
+      <div className="flex items-center w-44 pl-3">
         {
           job.overview?.department?.name &&
           <>
             <RowIcon {...faSuitcase} />
-            <p className="font-subtitle font--ellipsis">{job.overview?.department.name}</p>
+            <p className="font-multiline font--ellipsis">{job.overview?.department.name}</p>
           </>
         }
       </div>
-      <div className="flex items-center w-2/12 pl-2">
+      <div className="flex items-center w-60 pl-2">
         {
           job.overview?.workplaces[0]?.areaName &&
           <>
             <RowIcon {...faMapMarkerAlt} />
-            <p className="font-subtitle font--ellipsis">{job.overview?.workplaces[0]?.areaName}</p>
+            <p className="font-multiline font--ellipsis">{job.overview?.workplaces[0]?.areaName}</p>
           </>
         }
       </div>
-      <div className="flex items-center w-1/12 pl-2">
+      <div className="flex items-center w-36 pl-2">
         {
           (!isLoading && job.attributes?.workplaceType) &&
-          <div className="flex items-center h-4">
+          <>
             <RowIcon {...faHouseLaptop} />
-            <p className="font-subtitle font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
-          </div>
+            <p className="font-multiline font--ellipsis">{t('job.workplace-type_interval', { postProcess: 'interval', count: job.attributes?.workplaceType })}</p>
+          </>
         }
       </div>
-      <div className="flex items-center justify-end w-2/12 pr-5 ">
+      <div className="flex items-center justify-end w-2/12 pr-4 ">
         <Link href={{ pathname: '/jobs/' + job.id }}>
           <ButtonBasic>{t('job.apply.button.short')}</ButtonBasic>
         </Link>
