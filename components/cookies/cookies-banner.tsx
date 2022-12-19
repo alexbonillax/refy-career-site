@@ -60,13 +60,15 @@ export const CookiesBanner = () => {
   const [settedCookies, setSettedCookies] = useState(Boolean);
   const [cookies, setCookies] = useState(refyCookies);
   const [editCookies, setEditCookies] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     if (!document) { return };
     setSettedCookies(!refyCookies.some(cookie => !!!getCookie(cookie.id)));
+    setLoading(false);
   }, [])
   return (
     <>
-      {!settedCookies &&
+      {(!settedCookies && !loading) &&
         <section className="fixed flex flex-col bottom-0 left-0 right-0 background-color--grey--0 z-20">
           <div className="w-full pt-0.5 background-dynamic"></div>
           <div className="w-5 h-4 flex justify-center items-center background-dynamic rounded-b-3xl margin-auto">
