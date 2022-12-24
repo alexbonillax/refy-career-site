@@ -27,7 +27,9 @@ export const JobCard = (job: Job) => {
 
           {
             job.overview?.department &&
-            <Link className={`flex justify-start ${(job.overview?.workplaces.length > 0) && (!isLoading && job.attributes?.workplaceType) ? 'w-4/12' : 'w-6/12' }`} 
+            <Link className={`flex
+              ${(job.overview?.workplaces.length > 0) && (!isLoading && job.attributes?.workplaceType) ? 'w-4/12' : 
+              (job.overview?.workplaces.length > 0) || (!isLoading && job.attributes?.workplaceType) ? 'w-6/12' : 'w-0' }`} 
               href={{ pathname: '/teams/' + job.overview?.department?.id }}>
               <div className="flex w-full items-center font-hint font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
@@ -37,11 +39,13 @@ export const JobCard = (job: Job) => {
               </div>
             </Link>
           }
+
           {
             job.overview?.workplaces.length > 0 &&
-            <Link className={`flex justify-center ${job.overview?.department && (!isLoading && job.attributes?.workplaceType) ? 'w-4/12' : 'w-6/12' }`}
+            <Link className={`flex ${job.overview?.department && (!isLoading && job.attributes?.workplaceType) ? 'w-4/12 ml-2' : 
+            job.overview?.department || (!isLoading && job.attributes?.workplaceType) ? 'w-6/12' : 'w-0' }`}
               href={{ pathname: '/locations/' + job.overview.workplaces[0]?.id }}>
-              <div className="flex w-full items-center justify-center font-hint  font-hover--underline cursor-pointer">
+              <div className="flex w-full items-center font-hint  font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
@@ -52,7 +56,9 @@ export const JobCard = (job: Job) => {
 
           {
             (!isLoading && job.attributes?.workplaceType) &&
-            <div className={`flex justify-end items-center font-hint font-hover--underline cursor-pointer ${job.overview?.department && (job.overview?.workplaces.length > 0) ? 'w-4/12' : 'w-6/12' }`}>
+            <div className={`flex justify-end items-center font-hint font-hover--underline cursor-pointer 
+            ${job.overview?.department && (job.overview?.workplaces.length > 0) ? 'w-4/12' : 
+            job.overview?.department && (job.overview?.workplaces.length > 0) ? 'w-6/12' : 'justify-start' }`}>
               <div className="flex items-center w-2 h-2 mr-1">
                 <FontAwesomeIcon icon={faHouseLaptop} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
               </div>

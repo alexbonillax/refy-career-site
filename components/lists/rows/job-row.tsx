@@ -23,22 +23,22 @@ export const JobRow = (job: Job) => {
         <p className="font-title font--ellipsis">{job.attributes.title}</p>
       </div>
 
-      <div className="flex items-center w-44 pl-3">
+      <div className="flex items-center w-52 pl-3">
         {
           job.overview?.department?.name &&
-          <>
+          <Link className="flex items-center w-52 font-multiline font--ellipsis" href={{ pathname: '/teams/' + job.overview?.department?.id }}>
             <RowIcon {...faSuitcase} />
-            <p className="font-multiline font--ellipsis">{job.overview?.department.name}</p>
-          </>
+            <p>{job.overview?.department.name}</p>
+          </Link>
         }
       </div>
-      <div className="flex items-center w-60 pl-2">
+      <div className="flex items-center w-40 pl-2">
         {
           job.overview?.workplaces[0]?.areaName &&
-          <>
+          <Link className="flex items-center w-40 font-multiline font--ellipsis" href={{ pathname: '/locations/' + job.overview.workplaces[0]?.id }}>
             <RowIcon {...faMapMarkerAlt} />
-            <p className="font-multiline font--ellipsis">{job.overview?.workplaces[0]?.areaName}</p>
-          </>
+            <p>{job.overview?.workplaces[0]?.areaName}</p>
+          </Link>
         }
       </div>
       <div className="flex items-center w-36 pl-2">
