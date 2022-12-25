@@ -31,7 +31,7 @@ export const Header = ({ company, title }: HeaderProps) => {
         company.careers.analytics?.google &&
         <>
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${company.attributes.analyticsCode}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${company.careers.analytics?.google}`}
             strategy="afterInteractive"
           />
           <Script id="google-analytics" strategy="afterInteractive">
