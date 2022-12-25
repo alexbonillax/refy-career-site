@@ -13,6 +13,7 @@ export const Header = ({ company, title }: HeaderProps) => {
   const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
     let headerFont = (header?.name ?? 'Fira Sans').replace(' ', '+');
     let bodyFont = (body?.name ?? 'Fira Sans').replace(' ', '+');
+    console.log(company);
     return <link href={`https://fonts.googleapis.com/css2?family=${headerFont}:wght@500;600;700&family=${bodyFont}`} rel="stylesheet" />
   }
 
@@ -27,7 +28,7 @@ export const Header = ({ company, title }: HeaderProps) => {
         <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
       }
       {
-        company.attributes.analyticsCode &&
+        company.careers.analytics?.google &&
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${company.attributes.analyticsCode}`}
@@ -38,7 +39,7 @@ export const Header = ({ company, title }: HeaderProps) => {
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', ${company.attributes.analyticsCode});
+          gtag('config', ${company.careers.analytics?.google});
         `}
           </Script>
         </>

@@ -6,7 +6,6 @@ import Workplace from "./workplace";
 export default interface Company {
   id: number;
   attributes: {
-    analyticsCode: any;
     name: string;
     code: string;
     tagline: string;
@@ -22,6 +21,7 @@ export default interface Company {
   };
   benefits: Benefit[];
   careers: {
+    analytics: Analytics;
     style: CareerStyles;
     home: HomeProps;
     departments: SectionProps;
@@ -67,4 +67,8 @@ export interface SectionProps {
   title: string;
   subtitle: string;
   ids: number[];
+}
+
+interface Analytics {
+  google: string;
 }
