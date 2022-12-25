@@ -25,7 +25,6 @@ export const CookiesBanner = () => {
 
   const updateFieldChanged = (index: number, value: boolean) => {
     let newArr = [...cookies];
-    console.log(value)
     newArr[index] = { ...newArr[index], value: value ? newArr[index].defValue : 'NaN' }
     setCookies(newArr);
   }

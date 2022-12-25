@@ -13,7 +13,6 @@ export const Header = ({ company, title }: HeaderProps) => {
   const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
     let headerFont = (header?.name ?? 'Fira Sans').replace(' ', '+');
     let bodyFont = (body?.name ?? 'Fira Sans').replace(' ', '+');
-    console.log(company);
     return <link href={`https://fonts.googleapis.com/css2?family=${headerFont}:wght@500;600;700&family=${bodyFont}`} rel="stylesheet" />
   }
 

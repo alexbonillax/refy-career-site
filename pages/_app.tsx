@@ -13,7 +13,10 @@ function RefyApp(props: AppProps) {
     <Layout>
       <CssBaseline />
       <Component {...pageProps} />
-      <CookiesBanner />
+      {
+        pageProps.pageProps?.companyInfo?.careers?.published &&
+         <CookiesBanner />
+      }
     </Layout>
   );
 }
