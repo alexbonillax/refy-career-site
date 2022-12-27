@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare, faBars } from "@fortawesome/pro-solid-svg-icons";
+import { faBars } from "@fortawesome/pro-solid-svg-icons";
 import { SwipeableDrawer } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { bucketM } from "../services/urls";
 import { logo } from "../assets/svg";
-import { ButtonBasic } from "./buttons";
 import { faXmark } from "@fortawesome/pro-regular-svg-icons";
 import Company from "../services/models/company";
 import { LoadingBar } from "./loading-bar";
+import { CompanyWebsiteButton } from "./buttons/button-company";
 
 interface NavbarProps {
   transparent?: boolean;
@@ -77,25 +77,12 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
       </div>
 
       <div className="flex mx-2">
-        <CompanyWebsiteButton />
+        <CompanyWebsiteButton site={company.attributes?.site} />
       </div>
     </div>
   );
 
-  const CompanyWebsiteButton = () => {
-    const { t } = useTranslation("common");
 
-    return (
-      <Link href={company.attributes?.site} target="_blank">
-          <ButtonBasic>
-            {t('company-site')}
-            <div className='w-2 h-2 flex items-center justify-center ml-1'>
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="icon-font icon-font--normal" />
-            </div>
-          </ButtonBasic>
-      </Link>
-    )
-  }
 
   const NavbarItem = ({ link }: { link: LinkProps }) => (
     <div className={`navbar-item font--grey-1000 relative px-3 h-5 flex flex-align-center ${(url === link.url) ? 'active' : ''}`}>
@@ -111,7 +98,7 @@ export const Navbar = ({ transparent = false, url, company }: NavbarProps) => {
           <div className='w-2 h-2 flex items-center justify-center'>
             <FontAwesomeIcon icon={faXmark} className="cursor-pointer icon-font icon-font--navbar font--grey-1000" onClick={toggleDrawer("navbar", false)}></FontAwesomeIcon>
           </div>
-          <CompanyWebsiteButton />
+          <CompanyWebsiteButton site={company.attributes?.site} />
         </div>
         {
           linkList.map((link, i) =>

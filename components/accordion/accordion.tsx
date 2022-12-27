@@ -25,7 +25,7 @@ export const Accordion = ({ first, children, title, iconName, open = true, setHe
     <div className="">
       {
         !first &&
-        <Divider></Divider>
+        <Divider/>
       }
       <div className="mx-2">
         <div className="flex items-center justify-between py-2 cursor-pointer" onClick={toggle}>
@@ -48,7 +48,7 @@ export const Accordion = ({ first, children, title, iconName, open = true, setHe
           </div>
         </div>
         <div ref={targetRef} className={`accordion accordion--${state ? 'open' : 'close'}`} style={{ maxHeight: maxHeight }}>
-          <Divider></Divider>
+          <Divider/>
           {children}
         </div>
       </div>
