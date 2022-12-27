@@ -18,17 +18,37 @@ export const Header = ({ company, title }: HeaderProps) => {
 
   const favicon = company.attributes.logo ? bucketM + company.attributes.logo : false;
   return (
-    <Head>
-      <title>{`${title} | ${company.attributes.name}`}</title>
-      <meta property="og:title" content={`${title} | ${company.attributes.name}`} />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-      {
-        company.attributes.description &&
-        <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
-      }
+    <>
+      <Head>
+        <title>{`${title} | ${company.attributes.name}`}</title>
+        <meta property="og:title" content={`${title} | ${company.attributes.name}`} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        {
+          company.attributes.description &&
+          <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
+        }
+        {
+          company.attributes.primaryColor &&
+          <>
+            <meta name="msapplication-TileColor" content={company.attributes.primaryColor} />
+            <meta name="theme-color" content={company.attributes.primaryColor} />
+          </>
+        }
+        {
+          favicon &&
+          <>
+            <link id="appIcon" rel="icon" type="image/png" href={favicon} />
+            <meta name="msapplication-TileImage" content={favicon} />
+          </>
+        }
+        {
+          getGoogleFonts(company.careers?.style?.body?.font, company.careers?.style?.header?.font)
+        }
+      </Head>
       {
         company.careers.analytics?.google &&
         <>
+          <p>pedo</p>
           <Script id="google-tag-manager" strategy="afterInteractive">
             {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -44,24 +64,7 @@ export const Header = ({ company, title }: HeaderProps) => {
           />
         </>
       }
-      {
-        company.attributes.primaryColor &&
-        <>
-          <meta name="msapplication-TileColor" content={company.attributes.primaryColor} />
-          <meta name="theme-color" content={company.attributes.primaryColor} />
-        </>
-      }
-      {
-        favicon &&
-        <>
-          <link id="appIcon" rel="icon" type="image/png" href={favicon} />
-          <meta name="msapplication-TileImage" content={favicon} />
-        </>
-      }
-      {
-        getGoogleFonts(company.careers?.style?.body?.font, company.careers?.style?.header?.font)
-      }
-    </Head>
+    </>
   )
 }
 

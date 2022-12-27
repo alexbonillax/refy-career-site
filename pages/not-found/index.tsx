@@ -29,9 +29,9 @@ export const NotFound: NextPage<{ companyInfo: Company }> = ({ companyInfo }: { 
       <div className="w-full h-screen flex flex-col items-center justify-center">
         <div className="flex mb-4 mx-2 mobile:flex-col mobile:items-center mobile:space-y-4 desktop:flex-row">
           <span className="w-10 h-10 flex flex-align-justify-center"><div className="w-10 h-10 border !border-slate-700 rounded-md background-center" style={{ backgroundImage: srcLogo ? `url(${srcLogo})` : '' }}></div></span>
-          <div className="flex flex-col justify-between pt-0.5 ml-1 mobile:items-center">
+          <div className="flex flex-col justify-between pt-0.5 desktop:ml-1 mobile:m-0 mobile:items-center">
             <h1 className="font-big-title">{companyInfo.attributes.name}</h1>
-            <h1 className="font-title">{companyInfo.attributes.tagline}</h1>
+            <h1 className="font-subtitle">{companyInfo.attributes.tagline}</h1>
           </div>
         </div>
         <p className="mx-2 mb-2">{t('not-found.description')}</p>
