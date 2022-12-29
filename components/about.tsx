@@ -74,7 +74,7 @@ const AboutCompany = (companyInfo: Company) => {
           </>
         }
         {
-          !companyInfo.attributes?.signupEnabled &&
+          companyInfo.attributes?.signupEnabled &&
           <DoYouWorkWithUsBanner />
         }
       </div>
