@@ -9,7 +9,8 @@ interface LogoProps {
 
 export enum LogoTypes {
   company = 'w-5 h-5 rounded-3xl',
-  refierCard = 'w-20 h-20 rounded-full'
+  refierCard = 'w-20 h-20 rounded-full',
+  workmates = 'w-8 h-8 rounded-full logo-border--3-white shadow-lg'
 }
 
 const randomPersonIcon = [faUserCowboy, faUserAlien, faUserAstronaut, faUserRobot, faUserNurseHairLong, faUserVisor, faUserHairBuns, faUserNinja, faUserSecret, faUserBountyHunter, faUserShakespeare];

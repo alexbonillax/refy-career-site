@@ -3,6 +3,7 @@ const {height} = require('./theme-extend-tailwind/theme.extend.height');
 const {maxHeight} = require('./theme-extend-tailwind/theme.extend.maxHeight');
 const {backgroundColor} = require('./theme-extend-tailwind/theme.extend.backgroundColor');
 const {screens} = require('./theme-extend-tailwind/theme.extend.breakpoints');
+const {border} = require('./theme-extend-tailwind/theme.extend.border');
 
 module.exports = {
     content: [
@@ -16,7 +17,8 @@ module.exports = {
             height,
             maxHeight,
             backgroundColor,
-            screens
+            screens,
+            border
         },
         minWidth: {
             '12': '3rem',
