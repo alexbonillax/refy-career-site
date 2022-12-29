@@ -50,6 +50,9 @@
   "values": "Valores",
   "not-found.description": "Lo sentimos, en este momento esta página no está disponible.",
   "not-found.404": "Lo sentimos, no pudimos encontrar la página.",
+  "about.do-you-work.title": "¿Ya trabajas en {{company}}?",
+  "about.do-you-work.subtitle": "Ayúdanos a encontrar a tu próximo compañero y se recompensado.",
+  "about.do-you-work.button": "Accede aquí",
   "cookies": {
     "title": "Este sitio web utiliza cookies para garantizar que obtenga la mejor experiencia en nuestro sitio web.",
     "description": "Utilizamos cookies propias y de terceros con la finalidad de mejorar los servicios prestados a través de este Sitio Web tratando los datos necesarios para ello. Puedes obtener más información y configurar o rechazar las cookies en 'Configurar' o aceptarlas haciendo clic en 'Aceptar'. ",

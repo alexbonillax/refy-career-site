@@ -22,9 +22,18 @@
   }
 
   &--outline {
-    border: 1px solid var(--primary-color);
-    background-color: transparent;
-    color: var(--primary-color);
+
+    &-primary {
+      border: 1px solid var(--primary-color);
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+
+    &-white {
+      border: 1px solid $refy-light;
+      background-color: transparent;
+      color: $refy-light;
+    }
   }
 
   &--underline {

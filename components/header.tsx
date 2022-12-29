@@ -45,27 +45,27 @@ export const Header = ({ company, title }: HeaderProps) => {
           getGoogleFonts(company.careers?.style?.body?.font, company.careers?.style?.header?.font)
         }
       </Head>
-      {
-        company.careers.analytics?.google &&
-        <>
-          <p>pedo</p>
-          <Script id="google-tag-manager" strategy="afterInteractive">
-            {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${company.careers.analytics?.google}');
-          `}
-          </Script>
-          <Script
-            src="https://www.google-analytics.com/analytics.js"
-            strategy="afterInteractive"
-          />
-        </>
-      }
+      <GoogleTagManager code={company.careers.analytics?.google} />
     </>
   )
 }
 
 
+const GoogleTagManager = ({ code }: { code: string }) => (
+  code &&
+  <>
+    <Script id="google-tag-manager" strategy="afterInteractive">
+      {`
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','${code}');
+      `}
+    </Script>
+    <Script
+      src="https://www.google-analytics.com/analytics.js"
+      strategy="afterInteractive"
+    />
+  </>
+)

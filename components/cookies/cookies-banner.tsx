@@ -99,7 +99,7 @@ export const CookiesBanner = () => {
               }
               <div className={`flex items-center mobile:justify-center mobile:my-5 h-auto space-x-4 ${editCookies ? 'justify-center' : 'ml-5'}`}>
                 <div className="w-28 font-subtitle !text-sm underline cursor-pointer" onClick={_ => setEditCookies(!editCookies)}>{t('cookies.setting')}</div>
-                <ButtonBasic classes="button button--outline" onClick={() => rejectAllCookies()}>{t('cookies.reject')}</ButtonBasic>
+                <ButtonBasic classes="button button--outline-primary" onClick={() => rejectAllCookies()}>{t('cookies.reject')}</ButtonBasic>
                 <ButtonBasic onClick={() => setAllCookies()}>{t('cookies.accept')}</ButtonBasic>
               </div>
             </div>

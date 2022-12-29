@@ -50,6 +50,9 @@
   "values": "Values",
   "not-found.description": "We’re sorry, this page is temporarily unavailable.",
   "not-found.404": "Sorry, we couldn't find that page.",
+  "about.do-you-work.title": "Do you work at {{company}}?",
+  "about.do-you-work.subtitle": "Help us to find your next partners and be rewarded.",
+  "about.do-you-work.button": "Access here",
   "cookies": {
     "title": "This website uses cookies to ensure you get the best experience on our website.",
     "description": "We use our own and third-party cookies in order to improve the services provided through this Website by treating the necessary data for it. You can obtain more information and configure or reject cookies in 'Configure' or accept them by clicking 'Accept'",
