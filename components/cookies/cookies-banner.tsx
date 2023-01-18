@@ -7,9 +7,9 @@ import { ButtonBasic } from "../buttons";
 import { Toggle } from "../toggle/toggle";
 
 const cookieLifespawn = (): string => {
-  var now = new Date();
-  var time = now.getTime();
-  var expireTime = time + 1000 * 36000;
+  const now = new Date();
+  const time = now.getTime();
+  const expireTime = time + 86400*1000;
   now.setTime(expireTime);
   return now.toUTCString();
 }
