@@ -9,8 +9,9 @@ import { Toggle } from "../toggle/toggle";
 const cookieLifespawn = (): string => {
   const now = new Date();
   const time = now.getTime();
-  const expireTime = time + 86400*1000;
+  const expireTime = time + (100000 * 315000);
   now.setTime(expireTime);
+  console.log(now.toUTCString());
   return now.toUTCString();
 }
 
