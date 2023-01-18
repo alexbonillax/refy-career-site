@@ -11,7 +11,6 @@ const cookieLifespawn = (): string => {
   const time = now.getTime();
   const expireTime = time + (100000 * 315000);
   now.setTime(expireTime);
-  console.log(now.toUTCString());
   return now.toUTCString();
 }
 
