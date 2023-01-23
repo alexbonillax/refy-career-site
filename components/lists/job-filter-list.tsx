@@ -28,16 +28,12 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
   }
 
   useEffect(() => {
-    async function fetchJobsOnInit() {
-      await searchJobs();
-    }
     if (localStorage.getItem('jobListType')) {
       setType(localStorage.getItem('jobListType') as unknown as ListType);
     }
     if (searchByUrl) {
       setSearchParams({ ...searchParams, searchText: searchByUrl });
     }
-    fetchJobsOnInit();
   }, [])
 
   useEffect(() => {
