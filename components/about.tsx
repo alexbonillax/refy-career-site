@@ -44,6 +44,9 @@ const AboutCompany = (companyInfo: Company) => {
             </div>
           </>
         }
+
+      </div>
+      <div className="mobile-container--responsive">
         {
           companyInfo.attributes?.signupEnabled &&
           <DoYouWorkWithUsBanner {...companyInfo} />
