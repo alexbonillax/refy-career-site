@@ -3,6 +3,7 @@ import Head from "next/head";
 import Company, { GoogleFont } from "../services/models/company";
 import { bucketM } from "../services/urls";
 import Script from "next/script";
+import { CookiesBanner } from "./cookies/cookies-banner";
 
 interface HeaderProps {
   company: Company;
@@ -10,11 +11,6 @@ interface HeaderProps {
 }
 
 export const Header = ({ company, title }: HeaderProps) => {
-  const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
-    let headerFont = (header?.name ?? 'Fira Sans').replace(' ', '+');
-    let bodyFont = (body?.name ?? 'Fira Sans').replace(' ', '+');
-    return <link href={`https://fonts.googleapis.com/css2?family=${headerFont}:wght@500;600;700&family=${bodyFont}`} rel="stylesheet" />
-  }
 
   const favicon = company.attributes.logo ? bucketM + company.attributes.logo : false;
   return (
@@ -46,10 +42,19 @@ export const Header = ({ company, title }: HeaderProps) => {
         }
       </Head>
       <GoogleTagManager code={company.careers.analytics?.google} />
+      {
+        company?.careers?.published &&
+         <CookiesBanner />
+      }
     </>
   )
 }
 
+export const getGoogleFonts = (body: GoogleFont, header: GoogleFont) => {
+  let headerFont = (header?.name ?? 'Fira Sans').replace(' ', '+');
+  let bodyFont = (body?.name ?? 'Fira Sans').replace(' ', '+');
+  return <link href={`https://fonts.googleapis.com/css2?family=${headerFont}:wght@500;600;700&family=${bodyFont}`} rel="stylesheet" />
+}
 
 const GoogleTagManager = ({ code }: { code: string }) => (
   code &&
