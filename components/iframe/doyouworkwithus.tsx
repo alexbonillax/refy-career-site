@@ -15,7 +15,7 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
   const workmates: Profile[] = companyInfo.departments.map(dept => dept.employees).flat();
   const loginProviders = companyInfo.attributes.loginProviders.length > 0;
   const [email, setEmail] = useState('');
-  const goToLogin = () => { if (email) window.open(`https://${companyInfo.attributes.code}.refyapp.com?email=${email}`) };
+  const goToLogin = () => { if (email) window.open(`https://${companyInfo.attributes.code}.refyapp.com/login?email=${email}`) };
   const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {
       goToLogin();
@@ -33,7 +33,7 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
               <FontAwesomeIcon className="icon-font icon-font--grey-300 ml-1" icon={faCircleArrowRight} />
             </div>
           </div> :
-          <Link href={`https://${companyInfo.attributes.code}.refyapp.com?email=${email}`}>
+          <Link href={`https://${companyInfo.attributes.code}.refyapp.com/login?email=${email}`}>
             <ButtonBasic classes="button button--outline-white">{t('about.do-you-work.button')} <FontAwesomeIcon className="icon-font icon-font--normal icon-font--light ml-1" icon={faCircleArrowRight} /></ButtonBasic>
           </Link>
       }
