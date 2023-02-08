@@ -19,6 +19,7 @@ export default interface Company {
     currencyId: number;
     privacyPolicy: string;
     signupEnabled: boolean;
+    loginProviders: string[];
   };
   benefits: Benefit[];
   careers: {
