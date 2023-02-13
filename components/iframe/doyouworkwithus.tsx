@@ -22,7 +22,7 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
     }
   }
   return (
-    <section className={`relative flex flex-col items-center w-full background-dynamic pt-10 px-5 br-var ${showWorkmates ? 'pb-10' : 'pb-6'}`}>
+    <section className={`relative flex flex-col items-center w-full background-dynamic pt-8 px-5 br-var ${showWorkmates ? 'pb-10' : 'pb-8'}`}>
       <h1 className="font-big-title mb-2 !text-white">{t('about.do-you-work.title', { company: companyInfo.attributes.name })}</h1>
       <p className="font-title !text-white text-center mb-3">{t('about.do-you-work.subtitle')}</p>
       {
