@@ -43,13 +43,13 @@ export const Posts = ({
       </div>
       <div className="mobile-container--stretch flex-column pt-5">
         {
-          !loading && stories.content?.map((post, i) => (
+          !loading && stories.data?.map((post, i) => (
             <PostItem key={i} post={post} companyInfo={companyInfo}/>
           ))
         }
 
         {
-          !loading && stories.content.length <= 0 &&
+          !loading && stories.data.length <= 0 &&
             <p className="font-prose text-center">{t('stories.empty')}</p>
         }
 
@@ -270,14 +270,15 @@ export const getServerSideProps = async ({req}: any) => {
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   let result = SSRCheck(companyInfo, translations);
-  if (!companyInfo?.careers?.stories?.visible) {
-    result = {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
+  // TODO
+  // if (!companyInfo?.careers?.stories?.visible) {
+  //   result = {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
   return result
 };
 

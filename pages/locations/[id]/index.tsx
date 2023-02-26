@@ -75,7 +75,7 @@ const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ p
               backButton={{ url: '/locations', text: Translate('back-to', { page: pageProps.companyInfo.careers?.workplaces?.navbar || Translate('locations')}) }}
           />
           <WorkplaceDescription workplace={workplace}></WorkplaceDescription>
-          <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
+          <JobCardsList jobList={data.jobList.data} company={pageProps.companyInfo} workplace={workplaceId} loading={isLoading} classes="background-color--grey--0"/>
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>
@@ -91,14 +91,15 @@ export const getServerSideProps = async ({ req }: any) => {
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   let result = SSRCheck(companyInfo, translations);
-  if (companyInfo?.departments?.length <= 0 || !companyInfo?.careers?.published) {
-    result = {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
+  // TODO
+  // if (companyInfo?.departments?.length <= 0 || !companyInfo?.careers?.published) {
+  //   result = {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
   return result
 };
 

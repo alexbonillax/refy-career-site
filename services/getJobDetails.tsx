@@ -1,4 +1,4 @@
-import { get, post } from ".";
+import { get } from ".";
 import Job from "./models/job";
 
 export const getJobDetails = async (id: number, tenantCode: string): Promise<Job> =>
@@ -7,7 +7,7 @@ export const getJobDetails = async (id: number, tenantCode: string): Promise<Job
     scope=candidate&
     tenant=${tenantCode}`
   );
-// get(`${id}?scope=candidate&tenant=${tenantCode}&include=reward,salary,supervisorUser,department,workplaces,userJob,stats,referrerQuestions,candidateQuestions`);
+
 
 export const getReferredJobDetails = async (userCode: string, tenantCode: string): Promise<Job> =>
   get(`jobs/${userCode}?
