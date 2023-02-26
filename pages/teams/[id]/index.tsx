@@ -38,7 +38,7 @@ const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ 
     if (!departmentId || !department) { Router.push(`/teams`) };
     ApplyDynamicStyles(pageProps.companyInfo);
     async function getJobsData() {
-      const jobList = await getRecentJobs(pageProps.companyInfo.id, departmentId);
+      const jobList = await getRecentJobs(pageProps.companyInfo.attributes.code);
       const teamName = pageProps.companyInfo.departments.find((dept: Department) => dept.id === +departmentId)?.attributes.name;
       setData({ jobList, teamName });
       setLoading(false);
@@ -57,11 +57,11 @@ const DepartmentDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ 
               height={BannerHeight.smallScreen}
               backButton={{ url: '/teams', text: Translate('back-to', { page: pageProps.companyInfo.careers?.departments?.navbar || Translate('teams')}) }}
           />
-          <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} />
-          {
+          <JobCardsList jobList={data.jobList?.data} company={pageProps.companyInfo} loading={isLoading} />
+          {/* {
             (pageProps.companyInfo.careers?.referrers?.visible && department.employees.length > 0) &&
             <Coworkers employees={department.employees} />
-          }
+          } */}
           <AboutCompany {...pageProps.companyInfo} />
           <Footer />
         </>

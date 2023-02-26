@@ -14,7 +14,7 @@ import { JobsSectionTitle } from "../titles/jobs-section-title";
 export const JobFilterList = ({ company, workplace, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
   const searchByUrl = useRouter().query?.search as string;
-  let lastSearch: JobSearchProps = { companyId: company.id, page: 1, perPage: 20, searchText: searchByUrl ? searchByUrl : '', workplaces: [], departments: [] };
+  let lastSearch: JobSearchProps = { tenantCode: company.attributes.code, page: 1, perPage: 20, searchText: searchByUrl ? searchByUrl : '', workplaces: [], departments: [] };
   const [type, setType] = useState<ListType>(ListType.cards);
   const [jobList, setJobList] = useState<Page<Job>>();
   const [isLoading, setLoading] = useState(true);
@@ -52,14 +52,14 @@ export const JobFilterList = ({ company, workplace, reduced = false, classes = '
     <section id="department-jobs" className={`background-color--white ${classes}`}>
       <div className="mobile-container--responsive m-auto flex-col px-2 py-10">
         <JobsSectionTitle {...company} />
-        <JobsFilter searchParams={searchParams} type={type} companyInfo={company} setType={value => setType(value)} setSearch={value => { setSearchParams(value) }} />
+        <JobsFilter propSearchParam={searchParams} type={type} companyInfo={company} setType={value => setType(value)} setSearch={value => { setSearchParams(value) }} />
         {
           type === ListType.cards &&
-          <JobCardsList jobList={jobList} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
+          <JobCardsList jobList={jobList?.data} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
         }
         {
           type === ListType.rows &&
-          <JobRowsList jobList={jobList} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
+          <JobRowsList jobList={jobList?.data} company={company} workplace={workplace} loading={isLoading} reduced={reduced} classes={classes} />
         }
       </div>
     </section>

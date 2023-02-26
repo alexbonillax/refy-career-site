@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {Banner, BannerHeight, Divider, Navbar} from "../../../components";
+import {Banner, BannerHeight, Navbar} from "../../../components";
 import AboutCompany from "../../../components/about";
 import { Header } from "../../../components/header";
 import { getCompanyInfo, getRecentJobs } from "../../../services";
@@ -55,7 +55,7 @@ const WorkplaceDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ p
     if (!workplaceId || !workplace) { Router.push(`/locations`) };
     ApplyDynamicStyles(pageProps.companyInfo);
     async function getJobsData() {
-      const jobList = await getRecentJobs(pageProps.companyInfo.id);
+      const jobList = await getRecentJobs(pageProps.companyInfo.attributes.code);
       setData({ jobList });
       setLoading(false);
     }

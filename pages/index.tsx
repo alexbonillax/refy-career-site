@@ -29,8 +29,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
     }
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo);
-      let jobList = await getRecentJobs(pageProps.companyInfo.id);
-      jobList = { ...jobList, content: jobList.content.slice(0, 6) };
+      let jobList = await getRecentJobs(pageProps.companyInfo.attributes.code);
       setData({ jobList });
       setLoading(false);
     }
@@ -51,7 +50,7 @@ const Home: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: 
         title={pageProps.companyInfo.careers?.home?.title ? pageProps.companyInfo.careers?.home?.title : t('banner.subtitle', { company: pageProps.companyInfo.attributes.name })}
         onSearch={goToSearchJobs} />
       <ValuesSection section={pageProps.companyInfo?.careers?.values} values={pageProps.companyInfo.values} />
-      <JobCardsList jobList={data.jobList} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white" />
+      <JobCardsList jobList={data.jobList?.data} company={pageProps.companyInfo} loading={isLoading} reduced classes="background-color--white" />
       <DepartmentsSection section={pageProps.companyInfo.careers?.departments} departments={pageProps.companyInfo.departments} reduced classes="background-color--grey--0" />
       <WorkplacesSection section={pageProps.companyInfo.careers?.workplaces} workplaces={pageProps.companyInfo.workplaces} classes="background-color--white" />
       <AboutCompany {...pageProps.companyInfo} />

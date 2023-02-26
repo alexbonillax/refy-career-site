@@ -65,7 +65,7 @@ export const ReferrersSection = ({ company }: { company: Company }) => {
             {
               company.careers?.departments?.ids?.map(id => company.departments?.find(department => department.id === id))
                 .map((department, i) => (
-                  department.employees.length > 0 &&
+                  department.employees?.length > 0 &&
                   <DepartmentsMenuItem key={i} department={department}></DepartmentsMenuItem>
                 ))
             }
@@ -74,7 +74,7 @@ export const ReferrersSection = ({ company }: { company: Company }) => {
             {
               company.careers?.departments?.ids?.map(id => company.departments?.find(department => department.id === id))
                 .map((department, i) => (
-                  department.employees.length > 0 &&
+                  department.employees?.length > 0 &&
                   <section key={i} id={'department-employees-' + department.id} className="py-5 px-2">
                     <h1 className="font-big-title mobile:text-center mb-5">{department.attributes.name}</h1>
                     <div className="flex flex-wrap mobile:justify-center">

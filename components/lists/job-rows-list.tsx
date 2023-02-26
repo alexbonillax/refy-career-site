@@ -7,9 +7,9 @@ import { JobRowLoading } from "./rows/loading-rows/job-loading-row";
 
 export const JobRowsList = ({ jobList, workplace, loading = true, reduced = false, classes = '' }: JobListProps) => {
   const { t } = useTranslation("common");
-  let jobs = jobList?.content;
+  let jobs = jobList;
   if (workplace) {
-    jobs = jobList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <>

@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
   const { t } = useTranslation("common");
-  const showWorkmates: boolean = (companyInfo.careers?.referrers?.visible && companyInfo.departments.some(dept => dept.employees.length > 0));
+  const showWorkmates: boolean = (companyInfo.careers?.referrers?.visible && companyInfo.departments.some(dept => dept.employees?.length > 0));
   const workmates: Profile[] = companyInfo.departments.map(dept => dept.employees).flat();
   const loginProviders = companyInfo.attributes.loginProviders.length > 0;
   const [email, setEmail] = useState('');

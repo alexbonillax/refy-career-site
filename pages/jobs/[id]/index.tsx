@@ -28,7 +28,7 @@ import { BottomSnackbar } from '../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
-import { SSRCheck } from '../../../utils/redirects';
+import { SSRJobCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
 import { isReferralCode } from '../../../utils/is-referral-code';
 import { RefierCard } from '../../../components/lists/cards/refier-card';
@@ -60,16 +60,16 @@ interface JobBannerProps {
   onClick?: () => void;
 }
 
-const getJob = async (jobId: string, companyId: number): Promise<Job> => {
+const getJob = async (jobId: string, tenantCode: string): Promise<Job> => {
   let jobDetails;
   if (isReferralCode(jobId)) {
-    jobDetails = await getReferredJobDetails(jobId, companyId);
+    jobDetails = await getReferredJobDetails(jobId, tenantCode);
     jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString()) 
   } else {
     if (localStorage.getItem(jobId)) {
-      jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), companyId);
+      jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), tenantCode);
     } else {
-      jobDetails = await getJobDetails(+jobId, companyId);
+      jobDetails = await getJobDetails(+jobId, tenantCode);
     }
   }
   return jobDetails;
@@ -208,7 +208,7 @@ const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pagePro
     if (!jobId) { return; }
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo);
-      const jobDetails = await getJob(jobId, pageProps.companyInfo.id);
+      const jobDetails = await getJob(jobId, pageProps.companyInfo.attributes.code);
       if (jobDetails.id) {
         setData({ jobDetails, canApply: !!jobDetails.referrerUser?.id });
         setLoading(false);
@@ -235,7 +235,7 @@ const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pagePro
                 <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
               }
               {
-                (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees.length > 0) &&
+                (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees?.length > 0) &&
                 <Coworkers employees={data.jobDetails.department.employees} />
               }
               <AboutCompany {...pageProps.companyInfo} />
@@ -265,7 +265,7 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  return SSRCheck(companyInfo, translations);
+  return SSRJobCheck(companyInfo, translations);
 };
 
 export default JobDetails
