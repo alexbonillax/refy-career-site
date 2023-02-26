@@ -61,12 +61,12 @@ export const Posts = ({
 };
 
 const HeaderUserPost = (post: Post) => {
-  const userPicUrl = post.overview.user.avatar ? bucketM + post.overview.user.avatar : '';
+  const userPicUrl = post.authorUser.avatar ? bucketM + post.authorUser.avatar : '';
   return (
     <>
       <Logo imgSrc={userPicUrl}/>
       <div className="flex-column pl-1 pr-2">
-        <p className="font-header">{post.overview.user.firstName} {post.overview.user.lastName}</p>
+        <p className="font-header">{post.authorUser.firstName} {post.authorUser.lastName}</p>
         <p className="flex flex-align-center font-value">
           <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1"/> {DateToTimeLeftReduced(post.attributes.createdAt)}
         </p>
@@ -167,10 +167,10 @@ export const PostItem = ({post, companyInfo}: { post: Post, companyInfo: Company
         <div className="flex flex-align-center flex-justify-between py-2 px-2">
           <div className="flex flex-align-center font--ellipsis">
             {
-              post.overview.user && post &&
+              post.authorUser && post &&
                 <HeaderUserPost {...post} />
             } {
-            !post.overview.user &&
+            !post.authorUser &&
               <HeaderCompanyPost post={post} companyInfo={companyInfo}/>
           }
           </div>
@@ -247,7 +247,7 @@ const Stories: NextPage = ({pageProps}: any) => {
   useEffect(() => {
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo);
-      const stories = await getPosts(pageProps.companyInfo.id);
+      const stories = await getPosts(pageProps.companyInfo.attributes.code);
       setData({stories});
       setLoading(false);
     }
