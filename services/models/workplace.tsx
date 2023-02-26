@@ -1,6 +1,5 @@
 export default interface Workplace {
   id?: number;
-  areaName: string;
   attributes: {
     atsPartnerCode: string;
     name: string;

@@ -25,19 +25,19 @@ export const JobRow = (job: Job) => {
 
       <div className="flex items-center w-52 pl-3">
         {
-          job.overview?.department?.name &&
-          <Link className="flex items-center w-52 font-multiline font--ellipsis" href={{ pathname: '/teams/' + job.overview?.department?.id }}>
+          job?.department?.attributes?.name &&
+          <Link className="flex items-center w-52 font-multiline font--ellipsis" href={{ pathname: '/teams/' + job.department?.id }}>
             <RowIcon {...faSuitcase} />
-            <p>{job.overview?.department.name}</p>
+            <p>{job.department?.attributes?.name}</p>
           </Link>
         }
       </div>
       <div className="flex items-center w-40 pl-2">
         {
-          job.overview?.workplaces[0]?.areaName &&
-          <Link className="flex items-center w-40 font-multiline font--ellipsis" href={{ pathname: '/locations/' + job.overview.workplaces[0]?.id }}>
+          job.workplaces[0]?.attributes?.name &&
+          <Link className="flex items-center w-40 font-multiline font--ellipsis" href={{ pathname: '/locations/' + job.workplaces[0]?.id }}>
             <RowIcon {...faMapMarkerAlt} />
-            <p>{job.overview?.workplaces[0]?.areaName}</p>
+            <p>{job.workplaces[0]?.attributes?.name}</p>
           </Link>
         }
       </div>
@@ -60,19 +60,19 @@ export const JobRow = (job: Job) => {
   const mobileRow = (
     <Link className="cursor-pointer flex flex-col w-full br-var px-3 py-1 box-shadow-container--card background-color--white" href={{ pathname: '/jobs/' + job.id }}>
       {
-        job.overview?.workplaces[0]?.areaName &&
+        job.workplaces[0]?.attributes?.name &&
         <div className="flex items-center h-4">
           <RowIcon {...faMapMarkerAlt} />
-          <p className="font-subtitle font--ellipsis">{job.overview.workplaces[0].areaName}</p>
+          <p className="font-subtitle font--ellipsis">{job.workplaces[0]?.attributes?.name}</p>
         </div>
       }
       <p className="font-title font--ellipsis">{job.attributes?.title}</p>
       <div className="flex" >
         {
-          job.overview?.department?.name &&
+          job.department?.attributes?.name &&
           <div className="flex items-center h-4 border-r pr-2 mr-2">
             <RowIcon {...faScreenUsers} />
-            <p className="font-subtitle font--ellipsis">{job.overview.department.name}</p>
+            <p className="font-subtitle font--ellipsis">{job.department?.attributes?.name}</p>
           </div>
         }
         {

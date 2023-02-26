@@ -20,9 +20,8 @@ export interface JobListProps {
 export const JobCardsList = ({ jobList, company, workplace, loading = true, reduced = false }: JobListProps) => {
   const { t } = useTranslation("common");
   let jobs = jobList;
-  console.log(jobList);
   if (workplace) {
-    jobs = jobList?.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.filter(job => job.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <div className="flex w-full background-color--white">

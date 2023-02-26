@@ -11,7 +11,6 @@ import Footer from "../../components/footer";
 import {Header} from "../../components/header";
 import {Logo} from "../../components";
 import {ReadMore} from "../../components";
-
 import {getCompanyInfo} from "../../services";
 import {PostType} from "../../services/enum/post-type";
 import {getPosts} from "../../services/getPosts";

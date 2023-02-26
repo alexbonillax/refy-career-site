@@ -9,7 +9,7 @@ export const JobRowsList = ({ jobList, workplace, loading = true, reduced = fals
   const { t } = useTranslation("common");
   let jobs = jobList;
   if (workplace) {
-    jobs = jobList?.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.filter(job => job.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <>

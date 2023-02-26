@@ -13,8 +13,8 @@ import intervalPlural from "i18next-intervalplural-postprocessor";
 export const JobCard = (job: Job) => {
   const { t } = useTranslation("common");
   const [isLoading, setLoading] = useState(true);
-  const department = job.overview?.department;
-  const workplaces = job.overview?.workplaces.length > 0;
+  const department = job.department;
+  const workplaces = job.workplaces?.length > 0;
   const workplaceType = job.attributes?.workplaceType;
   
   useEffect(() => {
@@ -23,21 +23,21 @@ export const JobCard = (job: Job) => {
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        <CardImage pictures={[job.attributes.picture]} icon={faSuitcase} />
+        <CardImage pictures={[job.attributes?.picture]} icon={faSuitcase} />
       </div>
       <div className={`flex flex-col p-3 mobile:w-full background-color--white`}>
-        <p className="font-title font--ellipsis">{job.attributes.title}</p>
+        <p className="font-title font--ellipsis">{job.attributes?.title}</p>
         <div className="flex items-center justify-between h-3 mt-1 w-full">
 
           {
             department &&
             <Link className={`flex ${workplaces ? 'w-1/3' : 'w-1/2'}`}
-              href={{ pathname: '/teams/' + job.overview?.department?.id }}>
+              href={{ pathname: '/teams/' + job.department?.id }}>
               <div className="flex w-full items-center font-hint font-hover--underline cursor-pointer">
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faScreenUsers} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
-                <p className="font--ellipsis">{job.overview.department.name}</p>
+                <p className="font--ellipsis">{job.department?.attributes?.name}</p>
               </div>
             </Link>
           }
@@ -45,12 +45,12 @@ export const JobCard = (job: Job) => {
           {
             workplaces &&
             <Link className={`flex ${department ? 'w-1/3' : 'w-1/2'}`}
-              href={{ pathname: '/locations/' + job.overview.workplaces[0]?.id }}>
+              href={{ pathname: '/locations/' + job.workplaces[0]?.id }}>
               <div className={`flex w-full items-center font-hint font-hover--underline cursor-pointer  ${department ? 'justify-center' : ''}`}>
                 <div className="flex items-center w-2 h-2 mr-1">
                   <FontAwesomeIcon icon={faMapMarkerAlt} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
                 </div>
-                <p className="font--ellipsis">{job.overview.workplaces[0].areaName || ''}</p>
+                <p className="font--ellipsis">{job.workplaces[0]?.attributes?.name || ''}</p>
               </div>
             </Link>
           }
