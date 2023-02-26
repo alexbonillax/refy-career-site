@@ -8,7 +8,6 @@ import { DoYouWorkWithUsBanner } from "../../components/iframe/doyouworkwithus";
 import { getCompanyInfo } from "../../services";
 import Company from "../../services/models/company";
 import { ApplyDynamicStyles } from "../../utils/dynamic-styles/apply-styles";
-import { SSRCheck } from "../../utils/redirects";
 import getWildcardCode from "../../utils/wildcard";
 
 

@@ -8,8 +8,10 @@ export default interface Department {
     pictures: string[];
     shortDescription: string;
     description: string;
-    availableJobs?: number;
   };
+  stats: {
+    jobsCount: number
+  },
   managerUser: Profile;
   companyId?: number;
   employees?: Profile[];

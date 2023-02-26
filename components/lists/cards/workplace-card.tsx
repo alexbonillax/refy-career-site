@@ -10,6 +10,7 @@ import { JobsAvailable } from "./components/job-availability";
 
 export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
   const { t } = useTranslation("common");
+  console.log(workplace)
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
@@ -19,22 +20,26 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
         <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
         {
           workplace.attributes.shortDescription &&
-            <p className="font-subtitle font--ellipsis-3">{workplace.attributes.shortDescription}</p>
+          <p className="font-subtitle font--ellipsis-3">{workplace.attributes.shortDescription}</p>
         }
-        <JobsAvailable url={{ pathname: '/locations/' + workplace.id.toString() }} availability={workplace.attributes.availableJobs} />
-        <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
-          href={'https://www.google.com/maps/search/' + workplace.attributes.route + '+' + workplace.attributes.streetNumber + '+' + workplace.attributes.postalCode} target="_blank" rel="noreferrer">
-          <div className="flex items-center w-2 h-2 mr-1">
-            <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
-          </div>
-          <p className="font--ellipsis">{workplace.attributes.route} {workplace.attributes.streetNumber}, {workplace.attributes.postalCode}, {workplace.attributes.locality}</p>
-        </a>
+        <JobsAvailable url={{ pathname: '/locations/' + workplace.id.toString() }} availability={workplace.stats.jobsCount} />
+        <GoogleMapsLocation {...workplace} />
         <div className="flex flex-justify-center mt-2">
           <Link href={{ pathname: `/locations/${workplace.id}` }}>
-              <ButtonBasic>{t('view-more')}</ButtonBasic>
+            <ButtonBasic>{t('view-more')}</ButtonBasic>
           </Link>
         </div>
       </div>
     </div>
   )
 }
+
+const GoogleMapsLocation = (workplace: Workplace) => (
+  <a className="flex flex-align-justify-center font-hint font-hover--underline cursor-pointer mt-1"
+    href={`https://www.google.com/maps/search/${workplace.attributes.address}`} target="_blank" rel="noreferrer">
+    <div className="flex items-center w-2 h-2 mr-1">
+      <FontAwesomeIcon icon={faMapLocationDot} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
+    </div>
+    <p className="font--ellipsis">{workplace.attributes.address}</p>
+  </a>
+)
