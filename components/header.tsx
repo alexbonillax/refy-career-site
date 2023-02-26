@@ -12,7 +12,7 @@ interface HeaderProps {
 
 export const Header = ({ company, title }: HeaderProps) => {
 
-  const favicon = company.attributes.logo ? bucketM + company.attributes.logo : false;
+  const favicon = company?.attributes?.logo ? bucketM + company?.attributes.logo : false;
   return (
     <>
       <Head>
@@ -43,9 +43,27 @@ export const Header = ({ company, title }: HeaderProps) => {
       </Head>
       <GoogleTagManager code={company.careers.analytics?.google} />
       {
-        company?.careers?.published &&
+        company.careers?.published &&
          <CookiesBanner />
       }
+    </>
+  )
+}
+
+export const HeaderNoCompany = ({ title }: {title: string}) => {
+  return (
+    <>
+      <Head>
+        <title>{`${title}`}</title>
+        <meta property="og:title" content={`${title}`} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        <meta name="msapplication-TileColor" content='#fe6680' />
+        <meta name="theme-color" content='#fe6680' />
+        <link id="appIcon" rel="icon" type="image/png" href={'https://refy.s3-eu-west-1.amazonaws.com/images/m/company_1623c844f8a9fe.jpg'} />
+        <meta name="msapplication-TileImage" content={'https://refy.s3-eu-west-1.amazonaws.com/images/m/company_1623c844f8a9fe.jpg'} />
+        { getGoogleFonts(null, null)}
+      </Head>
+      {/* <CookiesBanner /> */}
     </>
   )
 }
