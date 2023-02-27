@@ -209,7 +209,6 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
     if (!jobId) { return; }
     async function getJobsData() {
       // const translations = await serverSideTranslations(companyInfo?.careers?.languageCode ?? 'en', ["common"]);
-      ApplyDynamicStyles(companyInfo);
       const jobDetails = await getJob(jobId, wildcard);
       if (jobDetails.id) {
         setData({ jobDetails, canApply: !!jobDetails.referrerUser?.id });
@@ -221,6 +220,7 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
     async function getCompany(){
       const company = (await getCompanyInfo(wildcard));
       setCompanyInfo(company);
+      ApplyDynamicStyles(company);
     }
     getCompany();
     getJobsData();
@@ -233,7 +233,7 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
           {
             (data.jobDetails.attributes) &&
             <>
-              { companyInfo ? <Header company={companyInfo} title={data.jobDetails.attributes.title}/> : <HeaderNoCompany title={data.jobDetails.attributes.title}/>}
+              <Header company={companyInfo} title={data.jobDetails.attributes.title}/>
               { companyInfo && <Navbar transparent={true} url='jobs' company={companyInfo} /> }
               <JobBanner jobDetails={data.jobDetails} company={companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetailsSection job={data.jobDetails} />

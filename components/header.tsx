@@ -16,18 +16,18 @@ export const Header = ({ company, title }: HeaderProps) => {
   return (
     <>
       <Head>
-        <title>{`${title} | ${company.attributes.name}`}</title>
-        <meta property="og:title" content={`${title} | ${company.attributes.name}`} />
+        <title>{`${title} | ${company?.attributes.name}`}</title>
+        <meta property="og:title" content={`${title} | ${company?.attributes.name}`} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
         {
-          company.attributes.description &&
-          <meta property="og:description" content={stripHtmlTags((company.attributes.description))} />
+          company?.attributes.description &&
+          <meta property="og:description" content={stripHtmlTags((company?.attributes.description))} />
         }
         {
-          company.attributes.primaryColor &&
+          company?.attributes.primaryColor &&
           <>
-            <meta name="msapplication-TileColor" content={company.attributes.primaryColor} />
-            <meta name="theme-color" content={company.attributes.primaryColor} />
+            <meta name="msapplication-TileColor" content={company?.attributes.primaryColor} />
+            <meta name="theme-color" content={company?.attributes.primaryColor} />
           </>
         }
         {
@@ -38,12 +38,15 @@ export const Header = ({ company, title }: HeaderProps) => {
           </>
         }
         {
-          getGoogleFonts(company.careers?.style?.body?.font, company.careers?.style?.header?.font)
+          getGoogleFonts(company?.careers?.style?.body?.font, company?.careers?.style?.header?.font)
         }
       </Head>
-      <GoogleTagManager code={company.careers.analytics?.google} />
       {
-        company.careers?.published &&
+        company?.careers?.analytics?.google &&
+        <GoogleTagManager code={company.careers.analytics.google} />
+      }
+      {
+        company?.careers?.published &&
          <CookiesBanner />
       }
     </>
