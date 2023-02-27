@@ -201,14 +201,13 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
+  const [companyInfo, setCompanyInfo] = useState<Company>(null);
   const snackbarRef = useRef(null);
   let jobId: any = useRouter().query?.id as any
-  let companyInfo: Company;
 
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      companyInfo = await getCompanyInfo(wildcard);
       // const translations = await serverSideTranslations(companyInfo?.careers?.languageCode ?? 'en', ["common"]);
       ApplyDynamicStyles(companyInfo);
       const jobDetails = await getJob(jobId, wildcard);
@@ -219,6 +218,11 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
         Router.push(`/jobs?unknown`);
       };
     }
+    async function getCompany(){
+      const company = (await getCompanyInfo(wildcard));
+      setCompanyInfo(company);
+    }
+    getCompany();
     getJobsData();
   }, [jobId])
 
