@@ -27,28 +27,29 @@ const DoYouWorkWithUs: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pa
   return (
     ready &&
     <>
-    <Head>
-      {
+      <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        {
           getGoogleFonts(pageProps.companyInfo.careers?.style?.body?.font, pageProps.companyInfo.careers?.style?.header?.font)
-      }
-    </Head>
-    <DoYouWorkWithUsBanner {...pageProps.companyInfo}/>
+        }
+      </Head>
+      <DoYouWorkWithUsBanner {...pageProps.companyInfo} />
     </>
   )
 };
 
 export const getServerSideProps = async ({ req }: any) => {
-    const wildcard = getWildcardCode(req.headers.host);
-    const companyInfo = await getCompanyInfo(wildcard);
-    const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-    return {
-      props: {
-        _nextI18Next: translations._nextI18Next,
-        pageProps: {
-          companyInfo,
-        }
+  const wildcard = getWildcardCode(req.headers.host);
+  const companyInfo = await getCompanyInfo(wildcard);
+  const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
+  return {
+    props: {
+      _nextI18Next: translations._nextI18Next,
+      pageProps: {
+        companyInfo,
       }
     }
   }
-  
-  export default DoYouWorkWithUs;
+}
+
+export default DoYouWorkWithUs;
