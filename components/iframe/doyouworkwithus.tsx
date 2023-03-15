@@ -22,13 +22,13 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
     }
   }
   return (
-    <section className={`relative flex flex-col items-center w-full background-dynamic pt-8 px-5 br-var ${showWorkmates ? 'pb-10' : 'pb-8'}`}>
-      <h1 className="font-big-title mb-2 !text-white">{t('about.do-you-work.title', { company: companyInfo.attributes.name })}</h1>
-      <p className="font-title !text-white text-center mb-3">{t('about.do-you-work.subtitle')}</p>
+    <section className={`relative flex flex-col items-center w-full background-dynamic desktop:pt-8 mobile:pt-5 px-5 br-var ${showWorkmates ? 'pb-10' : 'desktop:pb-10 mobile:pb-4'}`}>
+      <h1 className="font-big-title desktop:!text-3xl mobile:!text-lg mb-2 !text-white">{t('about.do-you-work.title', { company: companyInfo.attributes.name })}</h1>
+      <p className="font-title desktop:!text-lg mobile:!text-sm !text-white text-center mb-3">{t('about.do-you-work.subtitle')}</p>
       {
         loginProviders ?
-          <div className="flex h-6 desktop:w-1/3 mobile:w-1/2 pl-3 justify-between items-center background-color--white br-var">
-            <input className="w-full h-6 font-hint background-color--white br-var" placeholder="Tu correo aquí" onChange={e => setEmail(e.target.value)} onKeyDown={handleKeyDown} />
+          <div className="flex h-6 desktop:w-1/3 pl-3 justify-between items-center background-color--white br-var">
+            <input className="w-full desktop:!text-lg mobile:!text-sm h-6 font-hint background-color--white br-var" placeholder="Tu correo aquí" onChange={e => setEmail(e.target.value)} onKeyDown={handleKeyDown} />
             <div className={`h-4 w-8 flex justify-center items-center br-var ${email ? 'cursor-pointer' : 'cursor-not-allowed'}`} onClick={goToLogin}>
               <FontAwesomeIcon className="icon-font icon-font--grey-300 ml-1" icon={faCircleArrowRight} />
             </div>
