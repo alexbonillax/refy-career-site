@@ -27,7 +27,7 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
       <p className="font-title !text-white text-center mb-3">{t('about.do-you-work.subtitle')}</p>
       {
         loginProviders ?
-          <div className="flex h-6 w-100 pl-3 justify-between items-center background-color--white br-var">
+          <div className="flex h-6 desktop:w-1/3 mobile:w-1/2 pl-3 justify-between items-center background-color--white br-var">
             <input className="w-full h-6 font-hint background-color--white br-var" placeholder="Tu correo aquí" onChange={e => setEmail(e.target.value)} onKeyDown={handleKeyDown} />
             <div className={`h-4 w-8 flex justify-center items-center br-var ${email ? 'cursor-pointer' : 'cursor-not-allowed'}`} onClick={goToLogin}>
               <FontAwesomeIcon className="icon-font icon-font--grey-300 ml-1" icon={faCircleArrowRight} />
