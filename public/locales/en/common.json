@@ -12,6 +12,7 @@
   "search": "Search",
   "about.workers": "(1)[Less than 10 employees];(2)[Between 10 and 50 employees];(3)[Between 50 and 200 employees];(4)[More than 200 employees];",
   "powered-by": "Powered by",
+  "name": "name",
   "jobs.available": "Latest positions",
   "jobs.find": "Find your next job at {{company}}",
   "jobs.all-locations": "All Locations",

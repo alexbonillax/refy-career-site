@@ -11,6 +11,7 @@ import { useState } from "react";
 
 export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
   const { t } = useTranslation("common");
+  console.log(companyInfo);
   const showWorkmates: boolean = (companyInfo.careers?.referrers?.visible && companyInfo.departments.some(dept => dept.employees?.length > 0));
   const workmates: Profile[] = companyInfo.departments.map(dept => dept.employees).flat();
   const loginProviders = companyInfo.attributes.loginProviders.length > 0;
@@ -28,7 +29,7 @@ export const DoYouWorkWithUsBanner = (companyInfo: Company) => {
       {
         loginProviders ?
           <div className="flex h-6 desktop:w-1/3 pl-3 justify-between items-center background-color--white br-var">
-            <input className="w-full desktop:!text-lg mobile:!text-sm h-6 font-hint background-color--white br-var" placeholder="Tu correo aquí" onChange={e => setEmail(e.target.value)} onKeyDown={handleKeyDown} />
+            <input className="w-full desktop:!text-lg mobile:!text-sm h-6 font-hint background-color--white br-var" placeholder={`${t('name')}@${companyInfo.attributes.domains[0]}`} onChange={e => setEmail(e.target.value)} onKeyDown={handleKeyDown} />
             <div className={`h-4 w-8 flex justify-center items-center br-var ${email ? 'cursor-pointer' : 'cursor-not-allowed'}`} onClick={goToLogin}>
               <FontAwesomeIcon className="icon-font icon-font--grey-300 ml-1" icon={faCircleArrowRight} />
             </div>
