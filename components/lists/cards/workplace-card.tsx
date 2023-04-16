@@ -10,7 +10,6 @@ import { JobsAvailable } from "./components/job-availability";
 
 export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
   const { t } = useTranslation("common");
-  console.log(workplace)
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
       <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
