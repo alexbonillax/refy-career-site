@@ -1,6 +1,6 @@
 import { getCompanyInfo, getTenantCode } from '../../../services'
 import { NextPage } from 'next';
-import { Header, HeaderNoCompany } from '../../../components/header';
+import { Header } from '../../../components/header';
 import { Divider, Navbar } from '../../../components';
 import { getJobDetails, getReferredJobDetails } from '../../../services/getJobDetails';
 import Job from '../../../services/models/job';
@@ -28,7 +28,6 @@ import { BottomSnackbar } from '../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
-import { SSRJobCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
 import { isReferralCode } from '../../../utils/is-referral-code';
 import { RefierCard } from '../../../components/lists/cards/refier-card';
@@ -64,7 +63,7 @@ const getJob = async (jobId: string, tenantCode: string): Promise<Job> => {
   let jobDetails;
   if (isReferralCode(jobId)) {
     jobDetails = await getReferredJobDetails(jobId, tenantCode);
-    jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString()) 
+    jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString())
   } else {
     if (localStorage.getItem(jobId)) {
       jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), tenantCode);
@@ -197,7 +196,7 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
   )
 }
 
-const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}) => {
+const JobDetails: NextPage<{ wildcard: string }> = ({ wildcard }: { wildcard: string }) => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
@@ -208,7 +207,6 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      // const translations = await serverSideTranslations(companyInfo?.careers?.languageCode ?? 'en', ["common"]);
       const jobDetails = await getJob(jobId, wildcard);
       if (jobDetails.id) {
         setData({ jobDetails, canApply: !!jobDetails.referrerUser?.id });
@@ -217,7 +215,7 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
         Router.push(`/jobs?unknown`);
       };
     }
-    async function getCompany(){
+    async function getCompany() {
       const company = (await getCompanyInfo(wildcard));
       setCompanyInfo(company);
       ApplyDynamicStyles(company);
@@ -233,8 +231,8 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
           {
             (data.jobDetails.attributes) &&
             <>
-              <Header company={companyInfo} title={data.jobDetails.attributes.title}/>
-              { companyInfo && <Navbar transparent={true} url='jobs' company={companyInfo} /> }
+              <Header company={companyInfo} title={data.jobDetails.attributes.title} />
+              {companyInfo && <Navbar transparent={true} url='jobs' company={companyInfo} />}
               <JobBanner jobDetails={data.jobDetails} company={companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetailsSection job={data.jobDetails} />
               {
@@ -245,7 +243,7 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
                 (companyInfo?.careers?.referrers?.visible && data.jobDetails.department?.employees?.length > 0) &&
                 <Coworkers employees={data.jobDetails.department.employees} />
               }
-              { companyInfo && <AboutCompany {...companyInfo} /> }
+              {companyInfo && <AboutCompany {...companyInfo} />}
               <Footer />
               <FloatingContainer>
                 <ApplyButton classes='button--floating box-shadow-container--elevated' onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} />
@@ -270,9 +268,12 @@ const JobDetails: NextPage<{wildcard: string}> = ({wildcard}: {wildcard: string}
 
 export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
+  const companyInfo = await getCompanyInfo(wildcard);
+  const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
   return {
     props: {
-      wildcard
+      wildcard,
+      _nextI18Next: translations._nextI18Next,
     }
   }
 };
