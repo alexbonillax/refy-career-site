@@ -48,7 +48,7 @@ export const Posts = ({
         }
 
         {
-          !loading && stories.data.length <= 0 &&
+          !loading && stories.data?.length <= 0 &&
             <p className="font-prose text-center">{t('stories.empty')}</p>
         }
 
