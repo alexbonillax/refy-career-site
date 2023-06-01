@@ -174,12 +174,12 @@ export const PostItem = ({post, companyInfo}: { post: Post, companyInfo: Company
           }
           </div>
         </div>
-        <Divider title=""/>
+        <Divider />
         <div className="py-1 px-2">
           <ReadMore text={post.attributes.comment}/>
         </div>
         {
-          post.attributes.hashtags?.length &&
+          post.attributes.hashtags?.length > 0 &&
             <div className="flex flex-wrap py-1 px-2">
               {
                 post.attributes.hashtags.map((hashtag, i) => (
