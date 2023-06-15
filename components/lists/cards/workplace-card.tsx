@@ -12,11 +12,15 @@ export const WorkplaceCard = ({ workplace }: { workplace: Workplace }) => {
   const { t } = useTranslation("common");
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
-      <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        <CardImage pictures={workplace.attributes.pictures} icon={faBuilding} />
-      </div>
+      <Link href={{ pathname: `/locations/${workplace.id}` }}>
+        <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
+          <CardImage pictures={workplace.attributes.pictures} icon={faBuilding} />
+        </div>
+      </Link>
       <div className={`flex flex-col w-full p-3 mobile:w-full background-color--white`}>
-        <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
+        <Link href={{ pathname: `/locations/${workplace.id}` }}>
+          <p className="font-title font--ellipsis">{workplace.attributes.name}</p>
+        </Link>
         {
           workplace.attributes.shortDescription &&
           <p className="font-subtitle font--ellipsis-3">{workplace.attributes.shortDescription}</p>

@@ -16,17 +16,21 @@ export const JobCard = (job: Job) => {
   const department = job.department;
   const workplaces = job.workplaces?.length > 0;
   const workplaceType = job.attributes?.workplaceType;
-  
+
   useEffect(() => {
     i18next.use(intervalPlural).init(_ => setLoading(false));
   }, []);
   return (
     <div className={`flex flex-col text-center box-shadow-container--card br-var overflow-hidden mobile:flex-col`}>
-      <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
-        <CardImage pictures={[job.attributes?.picture]} icon={faSuitcase} />
-      </div>
+      <Link href={{ pathname: '/jobs/' + job.id }}>
+        <div className="h-30 w-full desktop:min-h-full mobile:h-60 mobile:w-full relative">
+          <CardImage pictures={[job.attributes?.picture]} icon={faSuitcase} />
+        </div>
+      </Link>
       <div className={`flex flex-col p-3 mobile:w-full background-color--white`}>
-        <p className="font-title font--ellipsis">{job.attributes?.title}</p>
+        <Link href={{ pathname: '/jobs/' + job.id }}>
+          <p className="font-title font--ellipsis">{job.attributes?.title}</p>
+        </Link>
         <div className="flex items-center justify-between h-3 mt-1 w-full">
 
           {
@@ -57,7 +61,7 @@ export const JobCard = (job: Job) => {
 
           {
             (!isLoading && workplaceType) &&
-            <div className={`flex font-hint font-hover--underline cursor-pointer w-1/3 ${department || workplaces ? 'justify-end' : ''}`}>
+            <div className={`flex font-hint w-1/3 ${department || workplaces ? 'justify-end' : ''}`}>
               <div className="flex items-center w-3 h-3">
                 <FontAwesomeIcon icon={faHouseLaptop} className="icon-font icon-font--normal icon-font--field-button"></FontAwesomeIcon>
               </div>
