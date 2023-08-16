@@ -38,7 +38,7 @@ const scrollToDescription = (): void => window.scrollTo({ top: document.getEleme
 const applyJob = (referralCode: string) => {
   const code = isReferralCode(referralCode) ? referralCode : localStorage.getItem(referralCode);
   const tenantCode = getTenantCode(window.location.hostname);
-  window.open(`https://${tenantCode}.refyapp.com/careers/jobs/apply/${code}`, '_blank');
+  window.open(`https://app.refyapp.com/companies/${tenantCode}/candidates/apply/${code}`, '_blank');
 }
 
 export const ReferrerSection = ({ jobDetails, company, color }: { jobDetails: Job, company: string, color: string }) => {
