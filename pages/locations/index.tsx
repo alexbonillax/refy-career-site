@@ -72,14 +72,15 @@ export const getServerSideProps = async ({req}: any) => {
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
   let result = SSRCheck(companyInfo, translations);
-  if (companyInfo.workplaces.length <= 0) {
-    result = {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
+  // TODO
+  // if (companyInfo.workplaces.length <= 0) {
+  //   result = {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
   return result
 };
 

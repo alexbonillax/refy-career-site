@@ -1,8 +1,8 @@
 export default interface Workplace {
-  id?: number;
-  areaName: string;
+  id?: number,
   attributes: {
     atsPartnerCode: string;
+    address: string;
     name: string;
     route: string;
     areaId: number;
@@ -13,7 +13,9 @@ export default interface Workplace {
     pictures: string[];
     shortDescription: string;
     description: string;
-    availableJobs: number;
-  };
-  companyId?: number;
+  },
+  stats: {
+    jobsCount: number
+  },
+  companyId?: number
 }

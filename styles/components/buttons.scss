@@ -21,6 +21,21 @@
     line-height: 56px;
   }
 
+  &--outline {
+
+    &-primary {
+      border: 1px solid var(--primary-color);
+      background-color: transparent;
+      color: var(--primary-color);
+    }
+
+    &-white {
+      border: 1px solid $refy-light;
+      background-color: transparent;
+      color: $refy-light;
+    }
+  }
+
   &--underline {
     min-height: 1.5rem;
     padding: 0 0.25rem;

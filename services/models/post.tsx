@@ -17,10 +17,6 @@ export default interface Post {
     createdAt: Date;
     video?: string;
   };
-  overview: {
-    user: PostOverview;
-    posted: boolean;
-  };
-  sharedBy: PostOverview[];
-  author: Profile;
+  userPost: Profile;
+  authorUser: PostOverview;
 }

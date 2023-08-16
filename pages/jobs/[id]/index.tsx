@@ -28,7 +28,6 @@ import { BottomSnackbar } from '../../../components/snackbar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import getWildcardCode from '../../../utils/wildcard';
 import { ApplyDynamicStyles } from '../../../utils/dynamic-styles/apply-styles';
-import { SSRCheck } from '../../../utils/redirects';
 import { Coworkers } from '../../people';
 import { isReferralCode } from '../../../utils/is-referral-code';
 import { RefierCard } from '../../../components/lists/cards/refier-card';
@@ -60,16 +59,16 @@ interface JobBannerProps {
   onClick?: () => void;
 }
 
-const getJob = async (jobId: string, companyId: number): Promise<Job> => {
+const getJob = async (jobId: string, tenantCode: string): Promise<Job> => {
   let jobDetails;
   if (isReferralCode(jobId)) {
-    jobDetails = await getReferredJobDetails(jobId, companyId);
-    jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString()) 
+    jobDetails = await getReferredJobDetails(jobId, tenantCode);
+    jobDetails.referrerUser?.id ? localStorage.setItem(jobDetails.id.toString(), jobId) : localStorage.removeItem(jobDetails.id.toString())
   } else {
     if (localStorage.getItem(jobId)) {
-      jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), companyId);
+      jobDetails = await getReferredJobDetails(localStorage.getItem(jobId), tenantCode);
     } else {
-      jobDetails = await getJobDetails(+jobId, companyId);
+      jobDetails = await getJobDetails(+jobId, tenantCode);
     }
   }
   return jobDetails;
@@ -96,7 +95,7 @@ export const JobBanner = ({ jobDetails, company, onClick }: JobBannerProps) => {
       style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column flex-align-justify-center background-color--blurr-dark">
         <div className="mobile-container flex-column flex-justify-center flex-align-center px-3 mobile:py-40 desktop:h-screen text-center">
-          <p className="font-title font--light">{company.attributes.name}</p>
+          <p className="font-title font--light">{company?.attributes.name}</p>
           <p className="font-big-title font--light mt-3 mb-3">{jobDetails.attributes.title}</p>
           <div className="flex flex-wrap items-center justify-center">
             {
@@ -197,18 +196,18 @@ const ApplyButton = ({ onClick, classes }: { onClick: () => void, classes?: stri
   )
 }
 
-const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pageProps }: { pageProps: { companyInfo: Company } }) => {
+const JobDetails: NextPage<{ wildcard: string }> = ({ wildcard }: { wildcard: string }) => {
   const { t } = useTranslation("common");
   const [data, setData] = useState<JobProps>({ jobDetails: null, canApply: false });
   const [isLoading, setLoading] = useState(true);
+  const [companyInfo, setCompanyInfo] = useState<Company>(null);
   const snackbarRef = useRef(null);
   let jobId: any = useRouter().query?.id as any
 
   useEffect(() => {
     if (!jobId) { return; }
     async function getJobsData() {
-      ApplyDynamicStyles(pageProps.companyInfo);
-      const jobDetails = await getJob(jobId, pageProps.companyInfo.id);
+      const jobDetails = await getJob(jobId, wildcard);
       if (jobDetails.id) {
         setData({ jobDetails, canApply: !!jobDetails.referrerUser?.id });
         setLoading(false);
@@ -216,6 +215,12 @@ const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pagePro
         Router.push(`/jobs?unknown`);
       };
     }
+    async function getCompany() {
+      const company = (await getCompanyInfo(wildcard));
+      setCompanyInfo(company);
+      ApplyDynamicStyles(company);
+    }
+    getCompany();
     getJobsData();
   }, [jobId])
 
@@ -224,21 +229,21 @@ const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pagePro
       {(!isLoading) &&
         <>
           {
-            (data.jobDetails.attributes && pageProps.companyInfo) &&
+            (data.jobDetails.attributes) &&
             <>
-              <Header company={pageProps.companyInfo} title={data.jobDetails.attributes.title} />
-              <Navbar transparent={true} url='jobs' company={pageProps.companyInfo} />
-              <JobBanner jobDetails={data.jobDetails} company={pageProps.companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
+              <Header company={companyInfo} title={data.jobDetails.attributes.title} />
+              {companyInfo && <Navbar transparent={true} url='jobs' company={companyInfo} />}
+              <JobBanner jobDetails={data.jobDetails} company={companyInfo} onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} referralCode={jobId} />
               <JobDetailsSection job={data.jobDetails} />
               {
                 data.canApply &&
-                <ReferrerSection jobDetails={data.jobDetails} company={pageProps.companyInfo.attributes.name} color={pageProps.companyInfo.attributes.primaryColor} />
+                <ReferrerSection jobDetails={data.jobDetails} company={companyInfo?.attributes.name} color={companyInfo?.attributes.primaryColor} />
               }
               {
-                (pageProps.companyInfo.careers?.referrers?.visible && data.jobDetails.department?.employees.length > 0) &&
+                (companyInfo?.careers?.referrers?.visible && data.jobDetails.department?.employees?.length > 0) &&
                 <Coworkers employees={data.jobDetails.department.employees} />
               }
-              <AboutCompany {...pageProps.companyInfo} />
+              {companyInfo && <AboutCompany {...companyInfo} />}
               <Footer />
               <FloatingContainer>
                 <ApplyButton classes='button--floating box-shadow-container--elevated' onClick={() => data.canApply ? applyJob(jobId) : snackbarRef.current.handleClick(t('toast.apply.warning'))} />
@@ -255,7 +260,7 @@ const JobDetails: NextPage<{ pageProps: { companyInfo: Company } }> = ({ pagePro
 
         </>
       }
-      {(isLoading) && <LoadingPage fill={pageProps.companyInfo.attributes?.primaryColor} />}
+      {(isLoading) && <LoadingPage fill={companyInfo?.attributes?.primaryColor} />}
     </>
 
   )
@@ -265,7 +270,12 @@ export const getServerSideProps = async ({ req }: any) => {
   const wildcard = getWildcardCode(req.headers.host);
   const companyInfo = await getCompanyInfo(wildcard);
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
-  return SSRCheck(companyInfo, translations);
+  return {
+    props: {
+      wildcard,
+      _nextI18Next: translations._nextI18Next,
+    }
+  }
 };
 
 export default JobDetails

@@ -11,7 +11,6 @@ import Footer from "../../components/footer";
 import {Header} from "../../components/header";
 import {Logo} from "../../components";
 import {ReadMore} from "../../components";
-
 import {getCompanyInfo} from "../../services";
 import {PostType} from "../../services/enum/post-type";
 import {getPosts} from "../../services/getPosts";
@@ -43,13 +42,13 @@ export const Posts = ({
       </div>
       <div className="mobile-container--stretch flex-column pt-5">
         {
-          !loading && stories.content?.map((post, i) => (
+          !loading && stories.data?.map((post, i) => (
             <PostItem key={i} post={post} companyInfo={companyInfo}/>
           ))
         }
 
         {
-          !loading && stories.content.length <= 0 &&
+          !loading && stories.data?.length <= 0 &&
             <p className="font-prose text-center">{t('stories.empty')}</p>
         }
 
@@ -61,12 +60,12 @@ export const Posts = ({
 };
 
 const HeaderUserPost = (post: Post) => {
-  const userPicUrl = post.overview.user.avatar ? bucketM + post.overview.user.avatar : '';
+  const userPicUrl = post.authorUser.avatar ? bucketM + post.authorUser.avatar : '';
   return (
     <>
       <Logo imgSrc={userPicUrl}/>
       <div className="flex-column pl-1 pr-2">
-        <p className="font-header">{post.overview.user.firstName} {post.overview.user.lastName}</p>
+        <p className="font-header">{post.authorUser.firstName} {post.authorUser.lastName}</p>
         <p className="flex flex-align-center font-value">
           <FontAwesomeIcon icon={faCalendar} className="icon-font icon-font--normal icon-font--grey w-1-5 mr-1"/> {DateToTimeLeftReduced(post.attributes.createdAt)}
         </p>
@@ -167,20 +166,20 @@ export const PostItem = ({post, companyInfo}: { post: Post, companyInfo: Company
         <div className="flex flex-align-center flex-justify-between py-2 px-2">
           <div className="flex flex-align-center font--ellipsis">
             {
-              post.overview.user && post &&
+              post.authorUser && post &&
                 <HeaderUserPost {...post} />
             } {
-            !post.overview.user &&
+            !post.authorUser &&
               <HeaderCompanyPost post={post} companyInfo={companyInfo}/>
           }
           </div>
         </div>
-        <Divider title=""/>
+        <Divider />
         <div className="py-1 px-2">
           <ReadMore text={post.attributes.comment}/>
         </div>
         {
-          post.attributes.hashtags?.length &&
+          post.attributes.hashtags?.length > 0 &&
             <div className="flex flex-wrap py-1 px-2">
               {
                 post.attributes.hashtags.map((hashtag, i) => (
@@ -247,7 +246,7 @@ const Stories: NextPage = ({pageProps}: any) => {
   useEffect(() => {
     async function getJobsData() {
       ApplyDynamicStyles(pageProps.companyInfo);
-      const stories = await getPosts(pageProps.companyInfo.id);
+      const stories = await getPosts(pageProps.companyInfo.attributes.code);
       setData({stories});
       setLoading(false);
     }
@@ -270,14 +269,15 @@ export const getServerSideProps = async ({req}: any) => {
   const translations = await serverSideTranslations(companyInfo.careers?.languageCode ?? 'en', ["common"]);
 
   let result = SSRCheck(companyInfo, translations);
-  if (!companyInfo?.careers?.stories?.visible) {
-    result = {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
+  // TODO
+  // if (!companyInfo?.careers?.stories?.visible) {
+  //   result = {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
   return result
 };
 

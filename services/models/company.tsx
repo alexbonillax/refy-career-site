@@ -18,9 +18,12 @@ export default interface Company {
     primaryColor: string;
     currencyId: number;
     privacyPolicy: string;
+    signupEnabled: boolean;
+    loginProviders: string[];
   };
   benefits: Benefit[];
   careers: {
+    analytics: Analytics;
     style: CareerStyles;
     home: HomeProps;
     departments: SectionProps;
@@ -66,4 +69,8 @@ export interface SectionProps {
   title: string;
   subtitle: string;
   ids: number[];
+}
+
+interface Analytics {
+  google: string;
 }

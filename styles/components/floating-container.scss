@@ -1,7 +1,7 @@
 .floating-container--bottom {
   position: fixed;
   bottom: 50px;
-  z-index: 1000;
+  z-index: 10;
   -webkit-animation: fadein-bottom 0.5s, fadeout-bottom 0.5s 2.5s;
   animation: fadein-bottom 0.5s, fadeout-bottom 0.5s 2.5s;
 }

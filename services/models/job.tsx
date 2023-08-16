@@ -5,14 +5,7 @@ import Workplace from "./workplace";
 export default interface Job {
   id: number;
   type: string;
-  overview: {
-    department: {
-      id: number;
-      name: string;
-    };
-    supervisorUser: Profile;
-    workplaces: Workplace[];
-  };
+  
   attributes: {
     title: string;
     slug: string;

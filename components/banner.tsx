@@ -5,6 +5,7 @@ import { faArrowLeft } from "@fortawesome/pro-regular-svg-icons";
 import { SearchBarAction } from "./input/search-bar-action";
 import { JobsAutosuggest } from "./autosuggest/jobs-autosuggest";
 import Company from "../services/models/company";
+import { useTranslation } from "next-i18next";
 
 interface BannerProps {
   company?: Company;
@@ -31,6 +32,7 @@ export interface BannerBackButton {
 
 export const Banner = ({ company, picture, tagline, title, height, backButton, searchBar, onSearch }: BannerProps) => {
   const picUrl = picture ? bucketXXL + picture : false;
+  const { t } = useTranslation("common");
   return (
     <section id="home-banner" className={`background-color--dark background-center`} style={{ backgroundImage: picUrl ? `url(${picUrl})` : '' }}>
       <div className="relative flex-column background-color--blurr-dark py-10">
@@ -50,8 +52,8 @@ export const Banner = ({ company, picture, tagline, title, height, backButton, s
             <h2 className="font-subtitle font--light my-2">{tagline}</h2>
             {
               searchBar &&
-              // <SearchBarAction placeholder={searchBar} onClick={value => onSearch(value)} />
-              <JobsAutosuggest company={company} onClick={value => onSearch(value)}/>
+              <SearchBarAction placeholder={t('job.banner.search', { company: company.attributes.name })} onClick={value => onSearch(value)} />
+              // <JobsAutosuggest company={company} onClick={value => onSearch(value)}/>
             }
           </div>
         </div>

@@ -9,7 +9,7 @@ import { JobCard } from "./cards";
 import { JobCardLoading } from "./cards/loading-cards/job-loading-card";
 
 export interface JobListProps {
-  jobList?: Page<Job>;
+  jobList?: Job[];
   company: Company;
   workplace?: number;
   loading?: boolean;
@@ -19,9 +19,9 @@ export interface JobListProps {
 
 export const JobCardsList = ({ jobList, company, workplace, loading = true, reduced = false }: JobListProps) => {
   const { t } = useTranslation("common");
-  let jobs = jobList?.content;
+  let jobs = jobList;
   if (workplace) {
-    jobs = jobList?.content.filter(job => job.overview.workplaces.some(wp => wp.id === +workplace));
+    jobs = jobList?.filter(job => job.workplaces.some(wp => wp.id === +workplace));
   }
   return (
     <div className="flex w-full background-color--white">
@@ -32,7 +32,7 @@ export const JobCardsList = ({ jobList, company, workplace, loading = true, redu
         }
         <div className="flex flex-wrap flex-align-justify-center">
           {
-            !loading && jobs && jobs.map((job, i) => (
+            !loading && jobs?.length > 0 && jobs.map((job, i) => (
               <div className="p-1 w-m--100 w-d--33" key={i}>
                 <JobCard {...job} />
               </div>

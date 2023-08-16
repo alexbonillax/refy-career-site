@@ -16,7 +16,7 @@ module.exports = {
             height,
             maxHeight,
             backgroundColor,
-            screens
+            screens,
         },
         minWidth: {
             '12': '3rem',

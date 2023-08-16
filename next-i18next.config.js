@@ -8,7 +8,7 @@ const isBrowser = typeof window !== 'undefined'
 
 module.exports = {
   i18n: {
-    locales: ["en", "es"],
+    locales: ["en", "es", "ca"],
     defaultLocale: "es",
     localePath: path.resolve("./public/locales"), // Warn: dev mode says warning but whitout it PROD doesnt get path on shared components
     defaultNS: "common", // Warn: dev mode says warning but whitout it PROD doesnt get path on shared components

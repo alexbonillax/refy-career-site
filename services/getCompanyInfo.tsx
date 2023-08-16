@@ -1,4 +1,5 @@
 import Company from "./models/company";
-import { post } from "./post";
+import { get } from "./";
 
-export const getCompanyInfo = async (code: string): Promise<Company> => post('companies/get', { code });
+// TODO Split endpoint by page
+export const getCompanyInfo = async (code: string): Promise<Company> => get(`companies/${code}?include=departments,workplaces,values,benefits`);
